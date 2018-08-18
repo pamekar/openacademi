@@ -1,3 +1,4 @@
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp
 <!DOCTYPE html>
 <html lang="en">
 

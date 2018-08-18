@@ -1,3 +1,4 @@
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp
 <meta charset="utf-8">
 <title>
     {{ trans('global.global_title') }}
@@ -23,11 +24,11 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<link href="{{ url('adminlte/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ url($public.'adminlte/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 <link rel="stylesheet"
-      href="{{ url('adminlte/css') }}/select2.min.css"/>
-<link href="{{ url('adminlte/css/AdminLTE.min.css') }}" rel="stylesheet">
-<link href="{{ url('adminlte/css/skins/skin-blue.min.css') }}" rel="stylesheet">
+      href="{{ url($public.'adminlte/css') }}/select2.min.css"/>
+<link href="{{ url($public.'adminlte/css/AdminLTE.min.css') }}" rel="stylesheet">
+<link href="{{ url($public.'adminlte/css/skins/skin-blue.min.css') }}" rel="stylesheet">
 <link rel="stylesheet"
       href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet"
