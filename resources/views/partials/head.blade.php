@@ -1,4 +1,4 @@
-@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp
+@php    $public='';    if(config('app.env') == 'production')    $public ='/public'; @endphp
 <meta charset="utf-8">
 <title>
     {{ trans('global.global_title') }}

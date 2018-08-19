@@ -1,4 +1,4 @@
-@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp
+@php    $public='';    if(config('app.env') == 'production')    $public ='/public'; @endphp
 @inject('request', 'Illuminate\Http\Request')
 <!-- Left side column. contains the sidebar -->
 <aside class="main-sidebar">

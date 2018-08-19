@@ -1,4 +1,4 @@
-@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.app')
+@php    $public='';    if(config('app.env') == 'production')    $public ='/public'; @endphp @extends('layouts.app')
 
 @section('content')
     <div class="row">
