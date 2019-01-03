@@ -43,7 +43,7 @@
 						</span>
 
                     <div class="registration">
-                        <a href="login-registration.html" title="">Register</a> <a href="login-registration.html" title="">Sign in</a>
+                        <a href="{{route('auth.register')}}" title="">Register</a> <a href="{{route('auth.login')}}" title="">Sign in</a>
                     </div>
                 </div><!-- Top Bar -->
 
