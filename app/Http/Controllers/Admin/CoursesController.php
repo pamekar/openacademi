@@ -103,6 +103,7 @@ class CoursesController extends Controller
             return abort(401);
         }
         $request = $this->saveFiles($request);
+        
         $course = Course::findOrFail($id);
         $course->update($request->all());
         $teachers = \Auth::user()->isAdmin() ? array_filter((array)$request->input('teachers')) : [\Auth::user()->id];

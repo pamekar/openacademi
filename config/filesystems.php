@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => env('FILESYSTEM_DRIVER', 's3'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -50,8 +51,8 @@ return [
         
         'media' => [
             'driver'     => 'local',
-            'root'       => public_path('uploads'),
-            'url'        => env('APP_URL') . '/uploads',
+            'root'       => storage_path('app/uploads'),
+            'url'        => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 

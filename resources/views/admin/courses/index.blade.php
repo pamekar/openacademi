@@ -68,7 +68,7 @@
                                 <td>{{ $course->slug }}</td>
                                 <td>{!! $course->description !!}</td>
                                 <td>{{ $course->price }}</td>
-                                <td>@if($course->course_image)<a href="{{ asset('uploads/' . $course->course_image) }}" target="_blank"><img src="{{ asset('uploads/thumb/' . $course->course_image) }}"/></a>@endif</td>
+                                <td>@if($course->course_image)<a href="{{ asset(Storage::url($course->course_image)) }}" target="_blank"><img src="{{  asset(Storage::url($course->course_image_thumbnail)) }}"/></a>@endif</td>
                                 <td>{{ $course->start_date }}</td>
                                 <td>{{ Form::checkbox("published", 1, $course->published == 1 ? true : false, ["disabled"]) }}</td>
                                 @if( request('show_deleted') == 1 )

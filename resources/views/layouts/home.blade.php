@@ -1,136 +1,310 @@
-@php    $public='';    if(config('app.env') == 'production')    $public ='/public'; @endphp
-<!DOCTYPE html>
-<html lang="en">
+@php
+    $public='';
+    if(config('app.env') == 'production')
+        $public ='/public';
+@endphp
+        <!DOCTYPE html>
+<html class="no-js">
 
+<!-- Mirrored from bitlers.com/html/easy-edu/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Jan 2019 10:13:27 GMT -->
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{{config('app.name')}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/bootstrap.min.css")}}"/>
+    <link rel="stylesheet" href="{{asset("$public/css/icons.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/style.css")}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/responsive.css")}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/color.css")}}"/>
 
-    <title>{{ $page_title or 'Quick LMS' }}</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="{{$public}}/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="{{$public}}/css/shop-homepage.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/settings.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/navigation.css")}}">
 </head>
-
 <body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="theme-layout">
+    <header>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="/">Quick LMS</a>
+            <div class="logo"><a href="index-2.html" title=""><img src="{{asset("$public/png/logo.png")}}" alt="" /></a></div><!-- Logo -->
+            <div class="header-wrap">
+                <div class="topbar">
+                    <span>For Free Consultation: <i>+(011) 345 6789</i></span>
+                    <span>
+							Stay Connected: 
+							<span class="socials">
+								<a href="#" title=""><i class="fa fa-facebook"></i></a>
+								<a href="#" title=""><i class="fa fa-twitter"></i></a>
+								<a href="#" title=""><i class="fa fa-linkedin"></i></a>
+							</span>
+						</span>
+
+                    <div class="registration">
+                        <a href="login-registration.html" title="">Register</a> <a href="login-registration.html" title="">Sign in</a>
                     </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="#">About</a>
+                </div><!-- Top Bar -->
+
+                <div class="menubar">
+                    <nav>
+                        <ul>
+                            <li><a href="index-2.html" title="">Home</a>
+                                <ul>
+                                    <li><a href="index-2.html" title="">Homepage Style 1</a></li>
+                                    <li><a href="index2.html" title="">Homepage Style 2</a></li>
+                                </ul>
                             </li>
-                            <li>
-                                <a href="#">Services</a>
+                            <li><a href="#" title="">Pages</a>
+                                <ul>
+                                    <li><a href="blog.html" title="">Blog</a>
+                                        <ul>
+                                            <li><a href="blog.html" title="">Blog Page</a></li>
+                                            <li><a href="blog-details.html" title="">Blog Detail Page</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="events.html" title="">Events</a>
+                                        <ul>
+                                            <li><a href="events.html" title="">Events Page</a></li>
+                                            <li><a href="event-detail.html" title="">Event Detail Page</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="team.html" title="">Team</a>
+                                        <ul>
+                                            <li><a href="team.html" title="">Team Page</a></li>
+                                            <li><a href="team-detail.html" title="">Team Detail Page</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="faqs.html" title="">FAQ'S Page</a></li>
+                                    <li><a href="404.html" title="">Error 404 Page</a></li>
+                                    <li><a href="search-found.html" title="">Search Found Page</a></li>
+                                    <li><a href="search-not-found.html" title="">Search Not Found Page</a></li>
+                                    <li><a href="login-registration.html" title="">Login / Registration Page</a></li>
+                                </ul>
                             </li>
-                            <li>
-                                <a href="#">Contact</a>
+                            <li><a href="courses.html" title="">Courses</a>
+                                <ul>
+                                    <li><a href="courses.html" title="">Courses Page Style 1</a></li>
+                                    <li><a href="courses2.html" title="">Courses Page Style 2</a></li>
+                                    <li><a href="course-detail.html" title="">Courses Detail</a></li>
+                                </ul>
                             </li>
+                            <li><a href="gallery1.html" title="">Gallery Styles</a>
+                                <ul>
+                                    <li><a href="gallery1.html" title="">Gallery Style 1</a></li>
+                                    <li><a href="gallery2.html" title="">Gallery Style 2</a></li>
+                                    <li><a href="gallery3.html" title="">Gallery Style 3</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="about.html" title="">About Us</a></li>
+                            <li><a href="contact.html" title="">Contact Us</a></li>
                         </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
-                </div>
-                <div class="col-lg-6 text-right" style="padding-top: 10px">
-                    @if (Auth::check())
-                        <div style="color:white">
-                            Logged in as {{ Auth::user()->email }}
-                            <form action="{{ route('auth.logout') }}" method="post">
-                                {{ csrf_field() }}
-                                <input type="submit" value="Logout" class="btn btn-info">
-                            </form>
-                        </div>
-                    @else
-                        <form action="{{ route('auth.login') }}" method="post">
-                            {{ csrf_field() }}
-                            <input type="email" name="email" placeholder="Email" />
-                            <input type="password" name="password" placeholder="Password" />
-                            <input type="submit" value="Login" class="btn btn-info">
+                    </nav>
+                    <div class="header-search">
+                        <a class="search-btn" href="#" title=""><i class="icon-magnifier"></i></a>
+                        <form>
+                            <input placeholder="Enter Your Keyword and Press Enter" type="text">
                         </form>
-                    @endif
+                    </div><!-- Header Search -->
                 </div>
-            </div>
+            </div><!-- Header Wrap -->
         </div>
-        <!-- /.container -->
-    </nav>
+    </header><!-- Header -->
 
-    <!-- Page Content -->
-    <div class="container">
+    <div class="responsive-header">
+        <div class="topbar">
+            <span>For Free Consultation: <i>+(011) 345 6789</i></span>
+            <span>
+					Stay Connected: 
+					<span class="socials">
+						<a href="#" title=""><i class="fa fa-facebook"></i></a>
+						<a href="#" title=""><i class="fa fa-twitter"></i></a>
+						<a href="#" title=""><i class="fa fa-linkedin"></i></a>
+					</span>
+				</span>
 
-        <div class="row">
-
-            <div class="col-md-3">
-
-                @yield('sidebar')
-
+            <div class="registration">
+                <a href="login-registration.html" title="">Register</a> <a href="login-registration.html" title="">Sign in</a>
             </div>
+        </div><!-- Top Bar -->
 
-            <div class="col-md-9">
+        <div class="responsive-logobar">
+            <div class="responsive-logo"><a href="index-2.html" title=""><img src="{{asset("$public/png/logo.png")}}" alt="" /></a></div>
+            <a class="menu-button" href="#" title=""><i class="fa fa-bars"></i></a>
+        </div><!-- Responsive Logbar -->
+        <div class="responsive-menu">
+            <a class="close-menu" href="#" title=""><i class="fa fa-remove"></i></a>
+            <ul>
+                <li><a href="index-2.html" title="">Home</a>
+                    <ul>
+                        <li><a href="index-2.html" title="">Homepage Style 1</a></li>
+                        <li><a href="index2.html" title="">Homepage Style 2</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" title="">Pages</a>
+                    <ul>
+                        <li><a href="blog.html" title="">Blog</a>
+                            <ul>
+                                <li><a href="blog.html" title="">Blog Page</a></li>
+                                <li><a href="blog-details.html" title="">Blog Detail Page</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="events.html" title="">Events</a>
+                            <ul>
+                                <li><a href="events.html" title="">Events Page</a></li>
+                                <li><a href="event-detail.html" title="">Event Detail Page</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="team.html" title="">Team</a>
+                            <ul>
+                                <li><a href="team.html" title="">Team Page</a></li>
+                                <li><a href="team-detail.html" title="">Team Detail Page</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="faqs.html" title="">FAQ'S Page</a></li>
+                        <li><a href="404.html" title="">Error 404 Page</a></li>
+                        <li><a href="search-found.html" title="">Search Found Page</a></li>
+                        <li><a href="search-not-found.html" title="">Search Not Found Page</a></li>
+                        <li><a href="login-registration.html" title="">Login / Registration Page</a></li>
+                    </ul>
+                </li>
+                <li><a href="courses.html" title="">Courses</a>
+                    <ul>
+                        <li><a href="courses.html" title="">Courses Page Style 1</a></li>
+                        <li><a href="courses2.html" title="">Courses Page Style 2</a></li>
+                        <li><a href="course-detail.html" title="">Courses Detail</a></li>
+                    </ul>
+                </li>
+                <li><a href="gallery1.html" title="">Gallery Styles</a>
+                    <ul>
+                        <li><a href="gallery1.html" title="">Gallery Style 1</a></li>
+                        <li><a href="gallery2.html" title="">Gallery Style 2</a></li>
+                        <li><a href="gallery3.html" title="">Gallery Style 3</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html" title="">About Us</a></li>
+                <li><a href="contact.html" title="">Contact Us</a></li>
+            </ul>
+        </div>
+    </div><!-- Responsive Header -->
 
+    @yield('main')
+    <footer>
+        <div class="container">
+            <div class="footer-widgets">
                 <div class="row">
+                    <div class="col-md-4">
+                        <div class="widget">
+                            <div class="about-widget">
+                                <div class="widget-logo"><a href="index-2.html" title=""><img src="{{asset("$public/png/logo2-2.png")}}" alt="" /></a></div>
+                                <p>Rem iplsum dolor sit amet, consectetuer adipiscin gelit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat euimod....</p>
+                                <ul>
+                                    <li><span><i class="fa fa-map-marker"></i></span> Washington NY, United States. </li>
+                                    <li><span><i class="fa fa-envelope"></i></span> Support@domain.com </li>
+                                    <li><span><i class="fa fa-phone"></i></span> (123)+ 124 45 67 678  </li>
+                                </ul>
+                            </div>
+                        </div><!-- Widget -->
+                    </div>
+                    <div class="col-md-2">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5><i>EDU</i> Information</h5>
+                                <span>Our Programs</span>
+                            </div>
+                            <ul>
+                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Arts & Social Sciences</a></li>
+                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Sciences</a></li>
+                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Studies & Language</a></li>
+                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Pharmacy</a></li>
+                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Veterinary Science</a></li>
+                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Engineering</a></li>
+                            </ul>
+                        </div><!-- Widget -->
+                    </div>
+                    <div class="col-md-3">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5><i>EDU</i> Gallery Posts</h5>
+                                <span>Education Images</span>
+                            </div>
+                            <div class="edu-gallery">
+                                <div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery1.jpg")}}" data-group="set1" title="Gallery 1"  href="{{asset("$public/jpg/gallery1.jpg")}}" ><img src="{{asset("$public/jpg/gallery1.jpg")}}" alt="" /></a></div>
+                                <div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery2.jpg")}}" data-group="set1" title="Gallery 2"  href="{{asset("$public/jpg/gallery2.jpg")}}" ><img src="{{asset("$public/jpg/gallery2.jpg")}}" alt="" /></a></div>
+                                <div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery3.jpg")}}" data-group="set1" title="Gallery 3"  href="{{asset("$public/jpg/gallery3.jpg")}}" ><img src="{{asset("$public/jpg/gallery3.jpg")}}" alt="" /></a></div>
+                                <div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery4.jpg")}}" data-group="set1" title="Gallery 4"  href="{{asset("$public/jpg/gallery4.jpg")}}" ><img src="{{asset("$public/jpg/gallery4.jpg")}}" alt="" /></a></div>
+                                <div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery5.jpg")}}" data-group="set1" title="Gallery 5"  href="{{asset("$public/jpg/gallery5.jpg")}}" ><img src="{{asset("$public/jpg/gallery5.jpg")}}" alt="" /></a></div>
+                                <div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery6.jpg")}}" data-group="set1" title="Gallery 6"  href="{{asset("$public/jpg/gallery6.jpg")}}" ><img src="{{asset("$public/jpg/gallery6.jpg")}}" alt="" /></a></div>
+                                <div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery7.jpg")}}" data-group="set1" title="Gallery 7"  href="{{asset("$public/jpg/gallery7.jpg")}}" ><img src="{{asset("$public/jpg/gallery7.jpg")}}" alt="" /></a></div>
+                                <div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery8.jpg")}}" data-group="set1" title="Gallery 8"  href="{{asset("$public/jpg/gallery8.jpg")}}" ><img src="{{asset("$public/jpg/gallery8.jpg")}}" alt="" /></a></div>
+                                <div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery9.jpg")}}" data-group="set1" title="Gallery 9"  href="{{asset("$public/jpg/gallery9.jpg")}}" ><img src="{{asset("$public/jpg/gallery9.jpg")}}" alt="" /></a></div>
+                            </div>
 
-                    @yield('main')
-
+                        </div><!-- Widget -->
+                    </div>
+                    <div class="col-md-3">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h5><i>EDU</i> Newsletter</h5>
+                                <span>For any updates</span>
+                            </div>
+                            <div class="newsletter-widget">
+                                <p>Rem iplsum dolor sit amet, consectetuer sed diam nonummy nibh euismod.</p>
+                                <form>
+                                    <input type="text" placeholder="Your Email Address" />
+                                    <button class="button active small">Submit Now</button>
+                                </form>
+                            </div>
+                        </div><!-- Widget -->
+                    </div>
                 </div>
-
             </div>
-
         </div>
+    </footer><!-- Footer -->
 
-    </div>
-    <!-- /.container -->
+    <div class="bottom-footer">
+        <div class="container">
+            <p>COPYRIGHT © 2016 - <a href="#" title="">Easy EDU</a>. ALL RIGHTS RESERVED </p>
+            <ul>
+                <li><a href="index-2.html" title="">Home</a></li>
+                <li><a href="courses.html" title="">Courses</a></li>
+                <li><a href="events.html" title="">Events</a></li>
+                <li><a href="gallery1.html" title="">Gallery</a></li>
+                <li><a href="blog.html" title="">Blog</a></li>
+                <li><a href="contact.html" title="">Contact Us</a></li>
+            </ul>
+        </div>
+    </div><!-- Bottom Footer -->
+</div>
 
-    <div class="container">
 
-        <hr>
+<script src="{{asset("$public/js/jquery.min.js")}}" type="text/javascript"></script>
 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Quick LMS 2017</p>
-                </div>
-            </div>
-        </footer>
+<!-- REVOLUTION JS FILES -->
+<script type="text/javascript" src="{{asset("$public/js/jquery.themepunch.tools.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("$public/js/jquery.themepunch.revolution.min.js")}}"></script>
 
-    </div>
-    <!-- /.container -->
+<!-- SLIDER REVOLUTION 5.0 EXTENSIONS -->
+<script type="text/javascript" src="{{asset("$public/js/revolution.extension.actions.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("$public/js/revolution.extension.carousel.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("$public/js/revolution.extension.kenburn.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("$public/js/revolution.extension.layeranimation.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("$public/js/revolution.extension.migration.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("$public/js/revolution.extension.navigation.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("$public/js/revolution.extension.parallax.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("$public/js/revolution.extension.slideanims.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("$public/js/revolution.extension.video.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("$public/js/revolution.initialize.js")}}"></script>
 
-    <!-- jQuery -->
-    <script src="{{$public}}/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{$public}}/js/bootstrap.min.js"></script>
+<script src="{{asset("$public/js/owl.carousel.min.js")}}"></script>
+<script src="{{asset("$public/js/html5lightbox.js")}}"></script>
+<script src="{{asset("$public/js/counter.js")}}"></script>
+<script src="{{asset("$public/js/isotope.js")}}" type="text/javascript"></script>
+<script src="{{asset("$public/js/script.js")}}" type="text/javascript"></script>
 
 </body>
 
+<!-- Mirrored from bitlers.com/html/easy-edu/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Jan 2019 10:28:39 GMT -->
 </html>
+
