@@ -96,7 +96,7 @@
 								<li><a href="contact.html" title="">Contact Us</a></li>
 							</ul>
 						</nav>
-						<div class="header-search">
+						<div class="nav-search">
 							<a class="search-btn" href="#" title=""><i class="icon-magnifier"></i></a>
 							<form>
 								<input placeholder="Enter Your Keyword and Press Enter" type="text">

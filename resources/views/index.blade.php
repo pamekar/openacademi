@@ -308,9 +308,11 @@
                                         @endphp
                                         <div class="col-md-4 {{$filterClass}}">
                                             <div class="edu-course">
-                                                <div class="edu-img"><img
-                                                            src="{{asset(Storage::url($course->course_image))}}"
-                                                            alt=""/></div>
+                                                <div class="edu-img">
+                                                    <a href="{{ route('courses.show', [$course->slug]) }}" title=""><img
+                                                                src="{{Storage::url($course->course_image)}}"
+                                                                alt=""/></a>
+                                                </div>
                                                 <div class="edu-detail">
                                                     <i>Online Course </i>
                                                     <h3><a href="{{ route('courses.show', [$course->slug]) }}"

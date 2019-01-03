@@ -39,7 +39,7 @@
 /*=============== Fonts ===================*/
 @import url('https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i|Montserrat:400,700|Poppins:300,400,500,600,700');
 /*=============== General Styling ===================*/
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License:none (public domain)
 */
@@ -53,8 +53,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video{
     margin:0;
@@ -65,7 +65,7 @@ time, mark, audio, video{
     vertical-align:baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section{display:block}
 body{line-height:1.2}
 ol, ul{list-style:none}
@@ -156,8 +156,8 @@ section{
 .block.dark{background:#2d2d2d}
 .block.gray{background:#f6f6f6}
 .block.remove-bottom{padding-bottom:0}
-.blackish:before, 
-.whitish:before, 
+.blackish:before,
+.whitish:before,
 .grayish:before,
 .coloured:before{
     background:#000 none repeat scroll 0 0;
@@ -408,17 +408,28 @@ nav{float:left}
 .menubar nav > ul > li > a{
     float:left;
     line-height:10px;
-    padding:45px 20px 55px;
+    padding:25px 20px;
 }
-.header-search{
+.header-search-bar{
+    float:right;
+    padding: 15px 0;
+}
+.header-search-bar input{
+    color: #555555;
+    font-size: 12px;
+}
+.header-search-bar button{
+    margin-bottom: 5px;
+}
+.nav-search{
     float:right;
     width:45px;
     text-align:center;
-    padding:20px 0px;
+    padding:0px;
     position:relative;
 }
-.header-search a{line-height:70px}
-.header-search form{
+.nav-search a{line-height:70px}
+.nav-search form{
     padding:20px;
     position:absolute;
     right:0;
@@ -443,7 +454,7 @@ nav{float:left}
     -o-transition:all 0.5s;
     transition:all 0.5s;
 }
-.header-search.active form{
+.nav-search.active form{
     opacity:1;
     visibility:visible;
     -webkit-transform:scale(1) translateY(0);
@@ -452,7 +463,7 @@ nav{float:left}
     -o-transform:scale(1) translateY(0);
     transform:scale(1) translateY(0);
 }
-.header-search form button{
+.nav-search form button{
     background:none;
     border:0 none;
     height:40px;
@@ -929,7 +940,7 @@ nav > ul ul li.has-children:before{
     float:left;
     width:100%;
 }
-.gap{   
+.gap{
     float:left;
     width:100%;
     height:100px;
@@ -2869,7 +2880,7 @@ blockquote:before{
     width: 100%;
     z-index:1;
 }
-.reg-form-wrapper:before, 
+.reg-form-wrapper:before,
 .reg-form-wrapper:after {
     background:#000;
     content: "";
