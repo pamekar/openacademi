@@ -1022,7 +1022,7 @@ nav > ul ul li.has-children:before{
     float:left;
     width:100%;
     background:#f8f8f8;
-    padding:30px 0;
+    padding:30px 15px;
     text-align:center;
 }
 .edu-detail h3{
@@ -1032,14 +1032,13 @@ nav > ul ul li.has-children:before{
     text-transform:uppercase;
     font-weight:600;
     line-height:24px;
-    padding:0 70px;
     margin-bottom:15px;
 }
 .edu-detail p{
     float:left;
+    text-align: justify;
     width:100%;
-    padding:0 50px;
-    margin-bottom:45px;
+    margin-bottom:25px;
 }
 .course-bar{
     float:left;

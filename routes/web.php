@@ -1,5 +1,8 @@
 <?php
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('faq','HomeController@faq')->name('faq');
+Route::get('courses/{category?}',
+    ['uses' => 'CoursesController@index', 'as' => 'courses.all']);
 Route::get('course/{slug}',
     ['uses' => 'CoursesController@show', 'as' => 'courses.show']);
 Route::post('course/payment',

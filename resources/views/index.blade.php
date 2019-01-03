@@ -289,8 +289,7 @@
                             </div>
 
                             <div class="button-set">
-                                <a class="button active" href="courses.html" title="">View All Classes</a>
-                                <a class="button" href="courses2.html" title="">Search Courses</a>
+                                <a class="button active" href="courses.html" title="">View All Courses</a>
                             </div>
                         </section><!-- FILTER BUTTONS -->
                     </div>
@@ -299,14 +298,7 @@
                             <div class="row">
                                 <div class="masonary">
                                     @foreach($courses as $course)
-                                        @php
-                                            $filterClass='';
-                                            $categories= explode(',',$course->categories);
-                                            foreach ($categories as $category){
-                                                $filterClass .= " course-".($category+32132);
-                                            }
-                                        @endphp
-                                        <div class="col-md-4 {{$filterClass}}">
+                                        <div class="col-md-4 course-{{$course->category}}">
                                             <div class="edu-course">
                                                 <div class="edu-img">
                                                     <a href="{{ route('courses.show', [$course->slug]) }}" title=""><img

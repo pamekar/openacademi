@@ -51,10 +51,10 @@
                 <div class="menubar">
                     <nav>
                         <ul>
-                            <li><a href="index-2.html" title="">Home</a></li>
-                            <li><a href="index-2.html" title="">Courses</a></li>
+                            <li><a href="{{route('home')}}" title="">Home</a></li>
+                            <li><a href="{{route('courses.all')}}" title="">Courses</a></li>
                             <li><a href="index-2.html" title="">Categories</a></li>
-                            <li><a href="index-2.html" title="">FAQ</a></li>
+                            <li><a href="{{route('faq')}}" title="">FAQ</a></li>
                         </ul>
                     </nav>
 

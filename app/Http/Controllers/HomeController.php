@@ -24,8 +24,19 @@ class HomeController extends Controller
                 ->orderBy('id', 'desc')
                 ->get();
         }
-        $courses = Course::where('published', 1)->orderBy('id', 'desc')->get();
+
+        $courses = Course::where('published', 1)
+            ->orderBy('created_at', 'desc')->get();
+
+
         $categories = CourseCategory::select('id', 'title')->get();
-        return view('index', compact('courses', 'purchased_courses','categories'));
+        return view('index',
+            compact('courses', 'purchased_courses', 'categories'));
+    }
+
+    public function faq()
+    {
+        $categories = CourseCategory::select('id', 'title')->get();
+        return view('faq', compact('categories'));
     }
 }

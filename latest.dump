@@ -111,7 +111,9 @@ CREATE TABLE `courses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `categories` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tags` text COLLATE utf8mb4_unicode_ci,
+  `summary` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
   `price` decimal(15,2) DEFAULT NULL,
   `course_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -123,7 +125,7 @@ CREATE TABLE `courses` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `courses_deleted_at_index` (`deleted_at`),
-  KEY `courses_course_categories_id_fk` (`categories`)
+  KEY `courses_course_categories_id_fk` (`category`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -133,7 +135,7 @@ CREATE TABLE `courses` (
 
 LOCK TABLES `courses` WRITE;
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
-INSERT INTO `courses` VALUES (1,'Cecilia Aufderhar','cecilia-aufderhar','1','Ipsam temporibus dolores optio et ut voluptates. Omnis ea recusandae quisquam error assumenda placeat esse esse. Dolor distinctio corrupti eum vel minima rerum et.',20685.00,'public/uploads/51d997519322e3e7080712cc34405839.jpg','public/uploads/thumb/51d997519322e3e7080712cc34405839.jpg','2019-01-15',1,'2018-06-14 05:06:50','2019-01-02 10:11:18',NULL),(2,'Jakayla Schinner','jakayla-schinner','2,1','Nemo odit qui delectus quis sit eligendi velit. Dolor omnis odit doloremque reprehenderit aliquam.',374.50,'public/uploads/ff114a60fd2d65dcbea9679a79976ba7.jpg','public/uploads/thumb/ff114a60fd2d65dcbea9679a79976ba7.jpg','2019-01-25',1,'2018-06-14 05:06:50','2019-01-02 10:14:57',NULL),(3,'Kasandra West','kasandra-west','3,4','Hic natus a tempora officia pariatur explicabo quia assumenda. Tenetur totam pariatur nesciunt aliquam. Nemo possimus eligendi quia harum nostrum.',57022.00,NULL,NULL,NULL,1,'2018-06-14 05:06:50','2018-06-14 05:06:50',NULL),(4,'Dr. Marco Bruen II','dr-marco-bruen-ii','4','Laboriosam possimus nostrum temporibus nihil illo soluta. Repellat soluta tempora quo unde. Unde ut debitis alias maxime.',15183.00,NULL,NULL,NULL,1,'2018-06-14 05:06:50','2018-06-14 05:06:50',NULL),(5,'Dane Bins III','dane-bins-iii','3','Exercitationem blanditiis animi omnis numquam delectus et. Consequatur nihil velit deleniti. Voluptas et assumenda et nisi reprehenderit et voluptas. Earum quas magnam assumenda est cumque itaque.',469.00,NULL,NULL,NULL,1,'2018-06-14 05:06:50','2018-06-14 05:06:50',NULL);
+INSERT INTO `courses` VALUES (1,'Cecilia Aufderhar','cecilia-aufderhar','1',NULL,NULL,'Ipsam temporibus dolores optio et ut voluptates. Omnis ea recusandae quisquam error assumenda placeat esse esse. Dolor distinctio corrupti eum vel minima rerum et.',20685.00,'public/uploads/51d997519322e3e7080712cc34405839.jpg','public/uploads/thumb/51d997519322e3e7080712cc34405839.jpg','2019-01-15',1,'2018-06-14 05:06:50','2019-01-02 10:11:18',NULL),(2,'Jakayla Schinner','jakayla-schinner','2',NULL,NULL,'Nemo odit qui delectus quis sit eligendi velit. Dolor omnis odit doloremque reprehenderit aliquam.',374.50,'public/uploads/ff114a60fd2d65dcbea9679a79976ba7.jpg','public/uploads/thumb/ff114a60fd2d65dcbea9679a79976ba7.jpg','2019-01-25',1,'2018-06-14 05:06:50','2019-01-02 10:14:57',NULL),(3,'Kasandra West','kasandra-west','3',NULL,NULL,'Hic natus a tempora officia pariatur explicabo quia assumenda. Tenetur totam pariatur nesciunt aliquam. Nemo possimus eligendi quia harum nostrum.',57022.00,NULL,NULL,NULL,1,'2018-06-14 05:06:50','2018-06-14 05:06:50',NULL),(4,'Dr. Marco Bruen II','dr-marco-bruen-ii','4',NULL,NULL,'Laboriosam possimus nostrum temporibus nihil illo soluta. Repellat soluta tempora quo unde. Unde ut debitis alias maxime.',15183.00,NULL,NULL,NULL,1,'2018-06-14 05:06:50','2018-06-14 05:06:50',NULL),(5,'Dane Bins III','dane-bins-iii','3',NULL,NULL,'Exercitationem blanditiis animi omnis numquam delectus et. Consequatur nihil velit deleniti. Voluptas et assumenda et nisi reprehenderit et voluptas. Earum quas magnam assumenda est cumque itaque.',469.00,NULL,NULL,NULL,1,'2018-06-14 05:06:50','2018-06-14 05:06:50',NULL);
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -655,4 +657,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-03 11:01:27
+-- Dump completed on 2019-01-03 21:51:52

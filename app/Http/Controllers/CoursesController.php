@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\CourseCategory;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Charge;
@@ -11,10 +12,34 @@ use Stripe\Customer;
 class CoursesController extends Controller
 {
 
+    public function index($category = null)
+    {
+
+        if (isset($category)) {
+
+            $isCategory = CourseCategory::where('slug', $category)->first();
+            if ($isCategory) {
+                $courses = Course::where('published', 1)->where('category',$isCategory->id)->orderBy('id', 'desc')
+                    ->get();
+            }
+            else {
+                abort(404);
+            }
+        } else {
+            $courses = Course::where('published', 1)->orderBy('id', 'desc')
+                ->get();
+        }
+        $categories = CourseCategory::select('id', 'title')->get();
+
+        return view('courses', compact('courses', 'categories'));
+    }
+
     public function show($course_slug)
     {
-        $course = Course::where('slug', $course_slug)->with('publishedLessons')->firstOrFail();
-        $purchased_course = \Auth::check() && $course->students()->where('user_id', \Auth::id())->count() > 0;
+        $course = Course::where('slug', $course_slug)->with('publishedLessons')
+            ->firstOrFail();
+        $purchased_course = \Auth::check()
+            && $course->students()->where('user_id', \Auth::id())->count() > 0;
 
         return view('course', compact('course', 'purchased_course'));
     }
@@ -26,7 +51,8 @@ class CoursesController extends Controller
 
         $course->students()->attach(\Auth::id());
 
-        return redirect()->back()->with('success', 'Payment completed successfully.');
+        return redirect()->back()
+            ->with('success', 'Payment completed successfully.');
     }
 
     private function createStripeCharge($request)
@@ -36,12 +62,12 @@ class CoursesController extends Controller
         try {
             $customer = Customer::create([
                 'email' => $request->get('stripeEmail'),
-                'source'  => $request->get('stripeToken')
+                'source' => $request->get('stripeToken')
             ]);
 
             $charge = Charge::create([
                 'customer' => $customer->id,
-                'amount' => $request->get('amount'),
+                'amount'   => $request->get('amount'),
                 'currency' => "usd"
             ]);
         } catch (\Stripe\Error\Base $e) {
@@ -52,7 +78,8 @@ class CoursesController extends Controller
     public function rating($course_id, Request $request)
     {
         $course = Course::findOrFail($course_id);
-        $course->students()->updateExistingPivot(\Auth::id(), ['rating' => $request->get('rating')]);
+        $course->students()->updateExistingPivot(\Auth::id(),
+            ['rating' => $request->get('rating')]);
 
         return redirect()->back()->with('success', 'Thank you for rating.');
     }
