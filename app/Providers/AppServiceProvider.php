@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\CourseCategory;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -16,6 +18,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        $categories = CourseCategory::select('id', 'title', 'icon', 'slug')
+            ->get();
+
+        View::share(['categories'=> $categories]);
 
     }
 

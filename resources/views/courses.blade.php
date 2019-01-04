@@ -7,7 +7,7 @@
 
 @section('main')
     <div class="pagetop">
-        <img src="jpg/pagetop.jpg" alt=""/>
+        <img src="{{asset("$public/jpg/pagetop.jpg")}}" alt=""/>
         <div class="pagetop-inner">
             <div class="container">
                 <h1>Education Courses</h1>
@@ -80,7 +80,7 @@
                         </div><!-- Featured Courses -->
 
                         <ul class="pagination">
-                            <li><a href="#" title=""><img src="png/arrow2.png" alt=""/></a></li>
+                            <li><a href="#" title=""><img src="{{asset("png/arrow2.png")}}" alt=""/></a></li>
                             <li><a href="#" title="">1</a></li>
                             <li><a class="active" href="#" title="">2</a></li>
                             <li><a href="#" title="">3</a></li>
@@ -88,7 +88,7 @@
                             <li><a href="#" title="">5</a></li>
                             <li> .......</li>
                             <li><a href="#" title="">9</a></li>
-                            <li><a href="#" title=""><img src="png/arrow2.png" alt=""/></a></li>
+                            <li><a href="#" title=""><img src="{{asset("png/arrow2.png")}}" alt=""/></a></li>
                         </ul><!-- Pagination -->
                     </div>
                 </div>
@@ -102,13 +102,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="logos-carousel">
-                            <a href="#" title=""><img src="png/logo1.png" alt=""/></a>
-                            <a href="#" title=""><img src="png/logo2.png" alt=""/></a>
-                            <a href="#" title=""><img src="png/logo3.png" alt=""/></a>
-                            <a href="#" title=""><img src="png/logo4.png" alt=""/></a>
-                            <a href="#" title=""><img src="png/logo5.png" alt=""/></a>
-                            <a href="#" title=""><img src="png/logo1.png" alt=""/></a>
-                            <a href="#" title=""><img src="png/logo2.png" alt=""/></a>
+                            <a href="#" title=""><img src="{{asset("png/logo1.png")}}" alt=""/></a>
+                            <a href="#" title=""><img src="{{asset("png/logo2.png")}}" alt=""/></a>
+                            <a href="#" title=""><img src="{{asset("png/logo3.png")}}" alt=""/></a>
+                            <a href="#" title=""><img src="{{asset("png/logo4.png")}}" alt=""/></a>
+                            <a href="#" title=""><img src="{{asset("png/logo5.png")}}" alt=""/></a>
+                            <a href="#" title=""><img src="{{asset("png/logo1.png")}}" alt=""/></a>
+                            <a href="#" title=""><img src="{{asset("png/logo2.png")}}" alt=""/></a>
                         </div><!-- Logos Carousel -->
                     </div>
                 </div>

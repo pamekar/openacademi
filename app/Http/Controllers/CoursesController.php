@@ -19,17 +19,16 @@ class CoursesController extends Controller
 
             $isCategory = CourseCategory::where('slug', $category)->first();
             if ($isCategory) {
-                $courses = Course::where('published', 1)->where('category',$isCategory->id)->orderBy('id', 'desc')
+                $courses = Course::where('published', 1)
+                    ->where('category', $isCategory->id)->orderBy('id', 'desc')
                     ->get();
-            }
-            else {
+            } else {
                 abort(404);
             }
         } else {
             $courses = Course::where('published', 1)->orderBy('id', 'desc')
                 ->get();
         }
-        $categories = CourseCategory::select('id', 'title')->get();
 
         return view('courses', compact('courses', 'categories'));
     }
@@ -61,7 +60,7 @@ class CoursesController extends Controller
 
         try {
             $customer = Customer::create([
-                'email' => $request->get('stripeEmail'),
+                'email'  => $request->get('stripeEmail'),
                 'source' => $request->get('stripeToken')
             ]);
 

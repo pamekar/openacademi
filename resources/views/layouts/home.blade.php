@@ -53,7 +53,18 @@
                         <ul>
                             <li><a href="{{route('home')}}" title="">Home</a></li>
                             <li><a href="{{route('courses.all')}}" title="">Courses</a></li>
-                            <li><a href="index-2.html" title="">Categories</a></li>
+                            <li>
+                                <a href="javascript:void(0)" title="">Categories</a>
+                                <ul style="min-width: 290px;">
+                                    @foreach($categories as $category)
+                                        <li>
+                                            <a href="{{route('courses.all',['category'=>$category->slug])}}">
+                                                <i class="{{$category->icon}}"></i> {{$category->title}}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
                             <li><a href="{{route('faq')}}" title="">FAQ</a></li>
                         </ul>
                     </nav>
@@ -61,7 +72,7 @@
                     <div class="header-search-bar">
                         <form action="google.com" class="form-inline">
                             <div class="form-group">
-                            <input class="form-control" placeholder="Search for Courses" type="text">
+                                <input class="form-control" placeholder="Search for Courses" type="text">
                             </div>
                             <button class="btn btn-info"><i class="icon-magnifier"></i></button>
                         </form>
