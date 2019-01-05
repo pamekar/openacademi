@@ -289,7 +289,7 @@
                             </div>
 
                             <div class="button-set">
-                                <a class="button active" href="courses.html" title="">View All Courses</a>
+                                <a class="button active" href="{{route('courses.all')}}" title="">View All Courses</a>
                             </div>
                         </section><!-- FILTER BUTTONS -->
                     </div>
@@ -298,7 +298,7 @@
                             <div class="row">
                                 <div class="masonary">
                                     @foreach($courses as $course)
-                                        <div class="col-md-4 course-{{$course->category}}">
+                                        <div class="col-md-4 course-{{$course->category+32132}}">
                                             <div class="edu-course">
                                                 <div class="edu-img">
                                                     <a href="{{ route('courses.show', [$course->slug]) }}" title=""><img

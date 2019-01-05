@@ -56,6 +56,7 @@
                             <li>
                                 <a href="javascript:void(0)" title="">Categories</a>
                                 <ul style="min-width: 290px;">
+                                    <li><a href="{{route('courses.all')}}"><i class="icon-list"></i> All Courses</a></li>
                                     @foreach($categories as $category)
                                         <li>
                                             <a href="{{route('courses.all',['category'=>$category->slug])}}">

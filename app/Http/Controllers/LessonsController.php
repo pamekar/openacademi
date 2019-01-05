@@ -14,7 +14,7 @@ class LessonsController extends Controller
     public function show($course_id, $lesson_slug)
     {
         $lesson = Lesson::where('slug', $lesson_slug)->where('course_id', $course_id)->firstOrFail();
-
+        //dd($lesson); exit;
         if (\Auth::check())
         {
             if ($lesson->students()->where('id', \Auth::id())->count() == 0) {

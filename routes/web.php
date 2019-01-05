@@ -1,6 +1,6 @@
 <?php
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('faq','HomeController@faq')->name('faq');
+Route::get('faq', 'HomeController@faq')->name('faq');
 Route::get('courses/{category?}',
     ['uses' => 'CoursesController@index', 'as' => 'courses.all']);
 Route::get('course/{slug}',
@@ -135,3 +135,14 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
             'Admin\SpatieMediaController@destroy')->name('media.remove');
 
     });
+Route::get('debug/kldjfklfdujkewiojdk', function () {
+    $lessons = \App\Lesson::all();
+    foreach ($lessons as $lesson) {
+        \Illuminate\Support\Facades\DB::table('lessons')
+            ->where('id', $lesson->id)->update([
+                'slug' => strtolower(preg_replace('/\s+/', '-',
+                    $lesson->title))
+            ]);
+    }
+    echo "Executed - " . count($lessons) . " instructions executed";
+});
