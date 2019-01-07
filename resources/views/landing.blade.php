@@ -38,7 +38,7 @@
 						</span>
 
 						<div class="registration">
-							<a href="login-registration.html" title="">Register</a> <a href="login-registration.html" title="">Sign in</a>
+							<a href="#" title=""data-toggle="modal" data-target="#registerModal">Register</a> <a href="#" title="" data-toggle="modal" data-target="#loginModal">Sign in</a>
 						</div>
 					</div><!-- Top Bar -->
 
@@ -194,7 +194,7 @@
 									<ul>
 										<li data-index="rs-1" data-transition="fade" data-slotamount="7"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000" data-title="Slide 1">
 											<!-- MAIN IMAGE -->
-											<img   src="jpg/slider1.jpg"  alt=""  data-bgposition="center center"  data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="4" class="rev-slidebg" data-no-retina>
+											<img   src="{{asset("$public/jpg/slider1.jpg")}}"  alt=""  data-bgposition="center center"  data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="4" class="rev-slidebg" data-no-retina>
 											<!-- LAYER NR. 1 -->
 											<div class="tp-caption layer1 tp-resizeme"
 											id="slide-1-layer-1"
@@ -273,7 +273,7 @@
  										</li>
 										<li data-index="rs-2" data-transition="fade" data-slotamount="7"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000" data-title="Slide 2">
 											<!-- MAIN IMAGE -->
-											<img   src="jpg/slider2.jpg"  alt=""  data-bgposition="center center"  data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="4" class="rev-slidebg" data-no-retina>
+											<img   src="{{asset("$public/jpg/slider2.jpg")}}"  alt=""  data-bgposition="center center"  data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="4" class="rev-slidebg" data-no-retina>
 											<!-- LAYER NR. 1 -->
 											<div class="tp-caption layer1 tp-resizeme"
 											id="slide-2-layer-1"
@@ -539,39 +539,39 @@
 								<div class="row">
 									<div class="col-md-4">
 										<div class="edu-course">
-											<div class="edu-img"><img src="jpg/course1.jpg" alt="" /></div>
+											<div class="edu-img"><img src="{{asset("$public/jpg/course1.jpg")}}" alt="" /></div>
 											<div class="edu-detail">
 												<h3><a href="course-detail.html" title="">Objectives Should Be Stated Clearly</a></h3>
 												<p>Vestibulum at magna tellus. Vivamus sag ittis et nunc ut in orci aliquam, ac vulputa leo vehicula sagittis et nunc.</p>
 												<div class="course-bar">
 													<span>$450.00</span>
-													<div class="admin-name"><i>Carla Simpson</i> <img src="jpg/admin1.jpg" alt="" /></div>
+													<div class="admin-name"><i>Carla Simpson</i> <img src="{{asset("$public/jpg/admin1.jpg")}}" alt="" /></div>
 												</div>
 											</div>
 										</div><!-- Edu Course -->
 									</div>
 									<div class="col-md-4">
 										<div class="edu-course">
-											<div class="edu-img"><img src="jpg/course2.jpg" alt="" /></div>
+											<div class="edu-img"><img src="{{asset("$public/jpg/course2.jpg")}}" alt="" /></div>
 											<div class="edu-detail">
 												<h3><a href="course-detail.html" title="">Elizabethan Theater is adipiscing elit</a></h3>
 												<p>Vestibulum at magna tellus. Vivamus sag ittis et nunc ut in orci aliquam, ac vulputa leo vehicula sagittis et nunc.</p>
 												<div class="course-bar">
 													<span>$290.00</span>
-													<div class="admin-name"><i>Jane Taylor</i> <img src="jpg/admin2.jpg" alt="" /></div>
+													<div class="admin-name"><i>Jane Taylor</i> <img src="{{asset("$public/jpg/admin2.jpg")}}" alt="" /></div>
 												</div>
 											</div>
 										</div><!-- Edu Course -->
 									</div>
 									<div class="col-md-4">
 										<div class="edu-course">
-											<div class="edu-img"><img src="jpg/course3.jpg" alt="" /></div>
+											<div class="edu-img"><img src="{{asset("$public/jpg/course3.jpg")}}" alt="" /></div>
 											<div class="edu-detail">
 												<h3><a href="course-detail.html" title="">Informatic Course Be Stated Clearly</a></h3>
 												<p>Vestibulum at magna tellus. Vivamus sag ittis et nunc ut in orci aliquam, ac vulputa leo vehicula sagittis et nunc.</p>
 												<div class="course-bar">
 													<span>$381.00</span>
-													<div class="admin-name"><i>Gwen Jones</i> <img src="jpg/admin3.jpg" alt="" /></div>
+													<div class="admin-name"><i>Gwen Jones</i> <img src="{{asset("$public/jpg/admin3.jpg")}}" alt="" /></div>
 												</div>
 											</div>
 										</div><!-- Edu Course -->
@@ -691,7 +691,7 @@
 								<div class="row">
 									<div class="col-md-4">
 										<div class="staff">
-											<div class="staff-img"><img src="jpg/staff1.jpg" alt="" /></div>
+											<div class="staff-img"><img src="{{asset("$public/jpg/staff1.jpg")}}" alt="" /></div>
 											<div class="staff-detail">
 												<h4><a href="team-detail.html" title="">Jeremy Remark</a></h4>
 												<span>Multi Teacher</span>
@@ -706,7 +706,7 @@
 									</div>
 									<div class="col-md-4">
 										<div class="staff">
-											<div class="staff-img"><img src="jpg/staff2.jpg" alt="" /></div>
+											<div class="staff-img"><img src="{{asset("$public/jpg/staff2.jpg")}}" alt="" /></div>
 											<div class="staff-detail">
 												<h4><a href="team-detail.html" title="">Maria Lehman</a></h4>
 												<span>IT Expert & Teacher</span>
@@ -721,7 +721,7 @@
 									</div>
 									<div class="col-md-4">
 										<div class="staff">
-											<div class="staff-img"><img src="jpg/staff3.jpg" alt="" /></div>
+											<div class="staff-img"><img src="{{asset("$public/jpg/staff3.jpg")}}" alt="" /></div>
 											<div class="staff-detail">
 												<h4><a href="team-detail.html" title="">Arnold Chesku</a></h4>
 												<span>Accounting and Finance</span>
@@ -754,7 +754,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="edu-event">
-							<div class="event-img"><img src="jpg/upcoming-event.jpg" alt="" /></div>
+							<div class="event-img"><img src="{{asset("$public/jpg/upcoming-event.jpg")}}" alt="" /></div>
 							<div class="event-detail">
 								<div class="event-date"><span>15</span> September</div>
 								<div class="event-description">
@@ -787,7 +787,7 @@
 								<div class="row">
 									<div class="col-md-4">
 										<div class="edu-post">
-											<div class="post-img"><img src="jpg/post1.jpg" alt="" /></div>
+											<div class="post-img"><img src="{{asset("$public/jpg/post1.jpg")}}" alt="" /></div>
 											<div class="post-detail">
 												<span>02 November 2016</span>
 												<h3><a href="blog-details.html" title="">The Surprising Reason College Tuition Is Crazy Expensive</a></h3>
@@ -801,7 +801,7 @@
 									</div>
 									<div class="col-md-4">
 										<div class="edu-post">
-											<div class="post-img"><img src="jpg/post2.jpg" alt="" /></div>
+											<div class="post-img"><img src="{{asset("$public/jpg/post2.jpg")}}" alt="" /></div>
 											<div class="post-detail">
 												<span>02 November 2016</span>
 												<h3><a href="blog-details.html" title="">Atiam Ornare Condimentum Massa Sceleri Sque</a></h3>
@@ -815,7 +815,7 @@
 									</div>
 									<div class="col-md-4">
 										<div class="edu-post">
-											<div class="post-img"><img src="jpg/post3.jpg" alt="" /></div>
+											<div class="post-img"><img src="{{asset("$public/jpg/post3.jpg")}}" alt="" /></div>
 											<div class="post-detail">
 												<span>02 November 2016</span>
 												<h3><a href="blog-details.html" title="">Neque porro quisquam est dolorem ipsum dolor</a></h3>
@@ -899,15 +899,15 @@
 									<span>Education Images</span>
 								</div>
 								<div class="edu-gallery">
-									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery1.jpg" data-group="set1" title="Gallery 1"  href="jpg/gallery1.jpg" ><img src="jpg/gallery1.jpg" alt="" /></a></div>
-									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery2.jpg" data-group="set1" title="Gallery 2"  href="jpg/gallery2.jpg" ><img src="jpg/gallery2.jpg" alt="" /></a></div>
-									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery3.jpg" data-group="set1" title="Gallery 3"  href="jpg/gallery3.jpg" ><img src="jpg/gallery3.jpg" alt="" /></a></div>
-									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery4.jpg" data-group="set1" title="Gallery 4"  href="jpg/gallery4.jpg" ><img src="jpg/gallery4.jpg" alt="" /></a></div>
-									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery5.jpg" data-group="set1" title="Gallery 5"  href="jpg/gallery5.jpg" ><img src="jpg/gallery5.jpg" alt="" /></a></div>
-									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery6.jpg" data-group="set1" title="Gallery 6"  href="jpg/gallery6.jpg" ><img src="jpg/gallery6.jpg" alt="" /></a></div>
-									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery7.jpg" data-group="set1" title="Gallery 7"  href="jpg/gallery7.jpg" ><img src="jpg/gallery7.jpg" alt="" /></a></div>
-									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery8.jpg" data-group="set1" title="Gallery 8"  href="jpg/gallery8.jpg" ><img src="jpg/gallery8.jpg" alt="" /></a></div>
-									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="images/resource/gallery9.jpg" data-group="set1" title="Gallery 9"  href="jpg/gallery9.jpg" ><img src="jpg/gallery9.jpg" alt="" /></a></div>
+									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="{{asset("$public/images/resource/gallery1.jpg")}}" data-group="set1" title="Gallery 1"  href="{{asset("/gallery1.jpg")}}" ><img src="{{asset("$public/jpg/gallery1.jpg")}}" alt="" /></a></div>
+									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="{{asset("$public/images/resource/gallery2.jpg")}}" data-group="set1" title="Gallery 2"  href="{{asset("/gallery2.jpg")}}" ><img src="{{asset("$public/jpg/gallery2.jpg")}}" alt="" /></a></div>
+									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="{{asset("$public/images/resource/gallery3.jpg")}}" data-group="set1" title="Gallery 3"  href="{{asset("/gallery3.jpg")}}" ><img src="{{asset("$public/jpg/gallery3.jpg")}}" alt="" /></a></div>
+									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="{{asset("$public/images/resource/gallery4.jpg")}}" data-group="set1" title="Gallery 4"  href="{{asset("/gallery4.jpg")}}" ><img src="{{asset("$public/jpg/gallery4.jpg")}}" alt="" /></a></div>
+									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="{{asset("$public/images/resource/gallery5.jpg")}}" data-group="set1" title="Gallery 5"  href="{{asset("/gallery5.jpg")}}" ><img src="{{asset("$public/jpg/gallery5.jpg")}}" alt="" /></a></div>
+									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="{{asset("$public/images/resource/gallery6.jpg")}}" data-group="set1" title="Gallery 6"  href="{{asset("/gallery6.jpg")}}" ><img src="{{asset("$public/jpg/gallery6.jpg")}}" alt="" /></a></div>
+									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="{{asset("$public/images/resource/gallery7.jpg")}}" data-group="set1" title="Gallery 7"  href="{{asset("/gallery7.jpg")}}" ><img src="{{asset("$public/jpg/gallery7.jpg")}}" alt="" /></a></div>
+									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="{{asset("$public/images/resource/gallery8.jpg")}}" data-group="set1" title="Gallery 8"  href="{{asset("/gallery8.jpg")}}" ><img src="{{asset("$public/jpg/gallery8.jpg")}}" alt="" /></a></div>
+									<div class="col-md-4"><a class="html5lightbox" data-thumbnail="{{asset("$public/images/resource/gallery9.jpg")}}" data-group="set1" title="Gallery 9"  href="{{asset("/gallery9.jpg")}}" ><img src="{{asset("$public/jpg/gallery9.jpg")}}" alt="" /></a></div>
 								</div>
 
 							</div><!-- Widget -->

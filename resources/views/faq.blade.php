@@ -8,7 +8,7 @@
 @section('main')
 
     <div class="pagetop">
-        <img src="jpg/pagetop.jpg" alt=""/>
+        <img src="{{asset("$public/jpg/pagetop.jpg")}}" alt=""/>
         <div class="pagetop-inner">
             <div class="container">
                 <h1>FAQ'S Page</h1>

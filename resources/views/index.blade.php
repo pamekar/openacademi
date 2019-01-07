@@ -311,7 +311,7 @@
                                                            title="">{{$course->title}}</a></h3>
                                                     <div class="admin-name"> Eric Lee</div>
                                                     <div class="course-bar">
-                                                        <span>&#8358;{{ $course->price }}</span>
+                                                        <span>&#8358;{{ number_format($course->price/100) }}</span>
                                                         <div class="stars">
                                                             @for ($star = 1; $star <= 5; $star++)
                                                                 @if ($course->rating >= $star)

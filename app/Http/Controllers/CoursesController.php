@@ -11,6 +11,10 @@ use Stripe\Customer;
 
 class CoursesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index','show']);
+    }
 
     public function index($category = null)
     {
@@ -29,6 +33,7 @@ class CoursesController extends Controller
             $courses = Course::where('published', 1)->orderBy('id', 'desc')
                 ->get();
         }
+
 
         return view('courses', compact('courses', 'categories'));
     }

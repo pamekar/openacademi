@@ -2145,6 +2145,8 @@ blockquote:before{
     display:table;
     float:left;
     margin-bottom:20px;
+    background-color: #ffffff;
+    border-bottom: 0.5px solid #dddddd;
     width:100%;
 }
 .sidebar-post > img{
@@ -2160,18 +2162,19 @@ blockquote:before{
 }
 .post-inner > h3{
     float:left;
-    font-size:13px;
-    font-weight:500;
-    letter-spacing:0.3px;
-    line-height:21px;
-    margin:0 0 10px;
+    font-family:montserrat;
+    font-weight: 400;
+    font-size:11.5px;
+    letter-spacing:1px;
     width:100%;
 }
 .post-inner > span{
     float:left;
-    font-family:montserrat;
-    font-size:11px;
-    letter-spacing:1px;
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:0.3px;
+    line-height:15px;
+    margin:0 0 10px;
     width:100%;
 }
 .sidebar .widget li{

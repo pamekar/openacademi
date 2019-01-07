@@ -36,7 +36,6 @@ class HomeController extends Controller
 
     public function faq()
     {
-        $categories = CourseCategory::select('id', 'title')->get();
-        return view('faq', compact('categories'));
+        return view('faq');
     }
 }

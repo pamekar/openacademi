@@ -15,7 +15,7 @@
     <meta name="keywords" content=""/>
 
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/_bootstrap.min.css")}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/bootstrap.min.css")}}"/>
     <link rel="stylesheet" href="{{asset("$public/css/icons.css")}}">
     <link rel="stylesheet" type="text/css" href="{{asset("$public/css/style.css")}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset("$public/css/responsive.css")}}"/>
@@ -29,7 +29,7 @@
 <div class="theme-layout">
     <header>
         <div class="container">
-            <div class="logo"><a href="index-2.html" title=""><img src="{{asset("$public/png/logo.png")}}" alt=""/></a>
+            <div class="logo"><a href="{{route('home')}}" title=""><img src="{{asset("$public/png/logo.png")}}" alt=""/></a>
             </div><!-- Logo -->
             <div class="header-wrap">
                 <div class="topbar">
@@ -43,8 +43,14 @@
 						</span>
 
                     <div class="registration">
-                        <a href="{{route('auth.register')}}" title="">Register</a> <a href="{{route('auth.login')}}"
-                                                                                      title="">Sign in</a>
+                        @guest
+                            <a href="{{route('auth.register')}}" title="">Register</a>
+                            <a href="{{route('auth.login')}}" title="">Sign in</a>
+                        @endguest
+                        @auth
+                                <a href="{{route('auth.register')}}" title="">Dashboard</a>
+                                <a href="{{route('auth.logout')}}" title="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        @endauth
                     </div>
                 </div><!-- Top Bar -->
 
@@ -56,7 +62,8 @@
                             <li>
                                 <a href="javascript:void(0)" title="">Categories</a>
                                 <ul style="min-width: 290px;">
-                                    <li><a href="{{route('courses.all')}}"><i class="icon-list"></i> All Courses</a></li>
+                                    <li><a href="{{route('courses.all')}}"><i class="icon-list"></i> All Courses</a>
+                                    </li>
                                     @foreach($categories as $category)
                                         <li>
                                             <a href="{{route('courses.all',['category'=>$category->slug])}}">
@@ -206,40 +213,49 @@
                             </div>
                             <div class="edu-gallery">
                                 <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="images/resource/gallery1.jpg" )}}"
-                                    data-group="set1" title="Gallery 1" href="{{asset("$public/jpg/gallery1.jpg")}}"
+                                                         data-thumbnail="{{asset("$public/images/resource/gallery1.jpg")}}"
+                                                         data-group="set1" title="Gallery 1"
+                                                         href="{{asset("$public/jpg/gallery1.jpg")}}"
                                     ><img src="{{asset("$public/jpg/gallery1.jpg")}}" alt=""/></a></div>
                                 <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="images/resource/gallery2.jpg" )}}"
-                                    data-group="set1" title="Gallery 2" href="{{asset("$public/jpg/gallery2.jpg")}}"
+                                                         data-thumbnail="{{asset("$public/images/resource/gallery2.jpg")}}"
+                                                         data-group="set1" title="Gallery 2"
+                                                         href="{{asset("$public/jpg/gallery2.jpg")}}"
                                     ><img src="{{asset("$public/jpg/gallery2.jpg")}}" alt=""/></a></div>
                                 <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="images/resource/gallery3.jpg" )}}"
-                                    data-group="set1" title="Gallery 3" href="{{asset("$public/jpg/gallery3.jpg")}}"
+                                                         data-thumbnail="{{asset("$public/images/resource/gallery3.jpg")}}"
+                                                         data-group="set1" title="Gallery 3"
+                                                         href="{{asset("$public/jpg/gallery3.jpg")}}"
                                     ><img src="{{asset("$public/jpg/gallery3.jpg")}}" alt=""/></a></div>
                                 <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="images/resource/gallery4.jpg" )}}"
-                                    data-group="set1" title="Gallery 4" href="{{asset("$public/jpg/gallery4.jpg")}}"
+                                                         data-thumbnail="{{asset("$public/images/resource/gallery4.jpg")}}"
+                                                         data-group="set1" title="Gallery 4"
+                                                         href="{{asset("$public/jpg/gallery4.jpg")}}"
                                     ><img src="{{asset("$public/jpg/gallery4.jpg")}}" alt=""/></a></div>
                                 <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="images/resource/gallery5.jpg" )}}"
-                                    data-group="set1" title="Gallery 5" href="{{asset("$public/jpg/gallery5.jpg")}}"
+                                                         data-thumbnail="{{asset("$public/images/resource/gallery5.jpg")}}"
+                                                         data-group="set1" title="Gallery 5"
+                                                         href="{{asset("$public/jpg/gallery5.jpg")}}"
                                     ><img src="{{asset("$public/jpg/gallery5.jpg")}}" alt=""/></a></div>
                                 <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="images/resource/gallery6.jpg" )}}"
-                                    data-group="set1" title="Gallery 6" href="{{asset("$public/jpg/gallery6.jpg")}}"
+                                                         data-thumbnail="{{asset("$public/images/resource/gallery6.jpg")}}"
+                                                         data-group="set1" title="Gallery 6"
+                                                         href="{{asset("$public/jpg/gallery6.jpg")}}"
                                     ><img src="{{asset("$public/jpg/gallery6.jpg")}}" alt=""/></a></div>
                                 <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="images/resource/gallery7.jpg" )}}"
-                                    data-group="set1" title="Gallery 7" href="{{asset("$public/jpg/gallery7.jpg")}}"
+                                                         data-thumbnail="{{asset("$public/images/resource/gallery7.jpg")}}"
+                                                         data-group="set1" title="Gallery 7"
+                                                         href="{{asset("$public/jpg/gallery7.jpg")}}"
                                     ><img src="{{asset("$public/jpg/gallery7.jpg")}}" alt=""/></a></div>
                                 <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="images/resource/gallery8.jpg" )}}"
-                                    data-group="set1" title="Gallery 8" href="{{asset("$public/jpg/gallery8.jpg")}}"
+                                                         data-thumbnail="{{asset("$public/images/resource/gallery8.jpg")}}"
+                                                         data-group="set1" title="Gallery 8"
+                                                         href="{{asset("$public/jpg/gallery8.jpg")}}"
                                     ><img src="{{asset("$public/jpg/gallery8.jpg")}}" alt=""/></a></div>
                                 <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="images/resource/gallery9.jpg" )}}"
-                                    data-group="set1" title="Gallery 9" href="{{asset("$public/jpg/gallery9.jpg")}}"
+                                                         data-thumbnail="{{asset("$public/images/resource/gallery9.jpg")}}"
+                                                         data-group="set1" title="Gallery 9"
+                                                         href="{{asset("$public/jpg/gallery9.jpg")}}"
                                     ><img src="{{asset("$public/jpg/gallery9.jpg")}}" alt=""/></a></div>
                             </div>
 
@@ -280,7 +296,91 @@
     </div><!-- Bottom Footer -->
 </div>
 
+<div id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="text-center mt-5 mb-1">
+                    <div class="avatar avatar-lg">
+                        <img src="assets/images/logo/primary.svg" class="avatar-img rounded-circle" alt="LearnPlus">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mb-5 navbar-light">
+                    <!-- Brand -->
+                    <a href="student-dashboard.html" class="navbar-brand m-0">
+                        LearnPlus
+                    </a>
+                </div>
+                <div class="card navbar-shadow">
+                    <div class="card-header text-center">
+                        <h4 class="card-title">Login</h4>
+                        <p class="card-subtitle">Access your account</p>
+                    </div>
+                    <div class="card-body">
+
+                        <a href="" class="btn btn-light btn-block">
+                            <span class="fab fa-google mr-2"></span>
+                            Continue with Google
+                        </a>
+
+                        <div class="page-separator">
+                            <div class="page-separator__text">or</div>
+                        </div>
+
+                        <form action="student-dashboard.html" novalidate="" method="get">
+                            <div class="form-group">
+                                <label class="form-label" for="email">Your email address:</label>
+                                <div class="input-group input-group-merge">
+                                    <input id="email" required="" class="form-control form-control-prepended"
+                                           placeholder="Your email address" type="email">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="far fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="password">Your password:</label>
+                                <div class="input-group input-group-merge">
+                                    <input id="password" required="" class="form-control form-control-prepended"
+                                           placeholder="Your password" type="password">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="far fa-key"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            </div>
+                            <div class="text-center">
+                                <a href="#" class="text-black-70" style="text-decoration: underline;">Forgot
+                                    Password?</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center text-black-50">
+                        Not yet a student? <a href="guest-signup.html">Sign up</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<form id="logout-form" action="{{ url('/logout') }}"
+      method="POST" style="display: none;"
+>{{ csrf_field() }}</form>
 <script src="{{asset("$public/js/jquery.min.js")}}" type="text/javascript"></script>
 
 <!-- REVOLUTION JS FILES -->
@@ -304,9 +404,9 @@
 <script src="{{asset("$public/js/counter.js")}}"></script>
 <script src="{{asset("$public/js/isotope.js")}}" type="text/javascript"></script>
 <script src="{{asset("$public/js/script.js")}}" type="text/javascript"></script>
+<script src="{{asset("$public/js/bootstrap.min.js")}}" type="text/javascript"></script>
 
 </body>
-
 <!-- Mirrored from bitlers.com/html/easy-edu/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Jan 2019 10:28:39 GMT -->
 </html>
 

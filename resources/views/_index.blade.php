@@ -39,7 +39,7 @@
             <div class="thumbnail">
                 <img src="http://placehold.it/320x150" alt="">
                 <div class="caption">
-                    <h4 class="pull-right">&#8358;{{ $course->price }}</h4>
+                    <h4 class="pull-right">&#8358;{{ number_format($course->price/100) }}</h4>
                     <h4><a href="{{ route('courses.show', [$course->slug]) }}">{{ $course->title }}</a>
                     </h4>
                     <p>{{ $course->description }}</p>

@@ -19,10 +19,14 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+
+        $public = config('app.env') == 'production' ? '/public' : '';
+
+
         $categories = CourseCategory::select('id', 'title', 'icon', 'slug')
             ->get();
 
-        View::share(['categories'=> $categories]);
+        View::share(['categories' => $categories, 'public'=> $public]);
 
     }
 
@@ -37,9 +41,10 @@ class AppServiceProvider extends ServiceProvider
         /**
          * Added missing method for package to work
          */
-        \Illuminate\Support\Collection::macro('lists', function ($a, $b = null) {
-            return collect($this->items)->pluck($a, $b);
-        });
+        \Illuminate\Support\Collection::macro('lists',
+            function ($a, $b = null) {
+                return collect($this->items)->pluck($a, $b);
+            });
 
     }
 }

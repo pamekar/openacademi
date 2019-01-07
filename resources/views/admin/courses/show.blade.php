@@ -34,7 +34,7 @@
                         </tr>
                         <tr>
                             <th>@lang('global.courses.fields.price')</th>
-                            <td>{{ $course->price }}</td>
+                            <td>{{ number_format($course->price/100) }}</td>
                         </tr>
                         <tr>
                             <th>@lang('global.courses.fields.course-image')</th>

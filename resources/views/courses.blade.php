@@ -69,7 +69,7 @@
                                                        title="">{{$course->title}}</a></h3>
                                                 <p>{{$course->summary}}</p>
                                                 <div class="course-bar">
-                                                    <span>&#8358;{{ $course->price }}</span>
+                                                    <span>&#8358;{{ number_format($course->price/100) }}</span>
                                                     <div class="admin-name"><i>Carla Simpson</i></div>
                                                 </div>
                                             </div>
