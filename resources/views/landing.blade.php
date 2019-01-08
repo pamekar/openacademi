@@ -10,11 +10,11 @@
 	<meta name="keywords" content="" />
 
 	<!-- Styles -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css")}} />
 	<link rel="stylesheet" href="css/icons.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
-	<link rel="stylesheet" type="text/css" href="css/responsive.css" />
-	<link rel="stylesheet" type="text/css" href="css/color.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css")}} />
+	<link rel="stylesheet" type="text/css" href="css/responsive.css")}} />
+	<link rel="stylesheet" type="text/css" href="css/color.css")}} />
 
 	<!-- REVOLUTION STYLE SHEETS -->
 	<link rel="stylesheet" type="text/css" href="css/settings.css">

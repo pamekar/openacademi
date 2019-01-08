@@ -48,7 +48,7 @@
                             <a href="{{route('auth.login')}}" title="">Sign in</a>
                         @endguest
                         @auth
-                                <a href="{{route('auth.register')}}" title="">Dashboard</a>
+                                <a href="{{route('dashboard')}}" title="">Dashboard</a>
                                 <a href="{{route('auth.logout')}}" title="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                         @endauth
                     </div>
@@ -296,88 +296,6 @@
     </div><!-- Bottom Footer -->
 </div>
 
-<div id="loginModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-
-                <div class="text-center mt-5 mb-1">
-                    <div class="avatar avatar-lg">
-                        <img src="assets/images/logo/primary.svg" class="avatar-img rounded-circle" alt="LearnPlus">
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center mb-5 navbar-light">
-                    <!-- Brand -->
-                    <a href="student-dashboard.html" class="navbar-brand m-0">
-                        LearnPlus
-                    </a>
-                </div>
-                <div class="card navbar-shadow">
-                    <div class="card-header text-center">
-                        <h4 class="card-title">Login</h4>
-                        <p class="card-subtitle">Access your account</p>
-                    </div>
-                    <div class="card-body">
-
-                        <a href="" class="btn btn-light btn-block">
-                            <span class="fab fa-google mr-2"></span>
-                            Continue with Google
-                        </a>
-
-                        <div class="page-separator">
-                            <div class="page-separator__text">or</div>
-                        </div>
-
-                        <form action="student-dashboard.html" novalidate="" method="get">
-                            <div class="form-group">
-                                <label class="form-label" for="email">Your email address:</label>
-                                <div class="input-group input-group-merge">
-                                    <input id="email" required="" class="form-control form-control-prepended"
-                                           placeholder="Your email address" type="email">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="far fa-envelope"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="password">Your password:</label>
-                                <div class="input-group input-group-merge">
-                                    <input id="password" required="" class="form-control form-control-prepended"
-                                           placeholder="Your password" type="password">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <span class="far fa-key"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <button type="submit" class="btn btn-primary btn-block">Login</button>
-                            </div>
-                            <div class="text-center">
-                                <a href="#" class="text-black-70" style="text-decoration: underline;">Forgot
-                                    Password?</a>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="card-footer text-center text-black-50">
-                        Not yet a student? <a href="guest-signup.html">Sign up</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</div>
 <form id="logout-form" action="{{ url('/logout') }}"
       method="POST" style="display: none;"
 >{{ csrf_field() }}</form>

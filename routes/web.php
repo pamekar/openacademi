@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -46,7 +47,11 @@ Route::get('password/reset/{token}',
     'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')
     ->name('auth.password.reset');
-
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('dashboard', function () {
+        return view('dashboard.student.index');
+    })->name('dashboard');
+});
 Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     function () {
         Route::get('/home', 'Admin\DashboardController@index');
