@@ -268,7 +268,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="title">
-                            <h2>Explore All Courses</h2>
+                            <h2>Our Featured Courses</h2>
                             <span>Choose Your Courses</span>
                             <p>Vestibulum at magna tellus. Vivamus sagittis et nunc ut in orci aliquam, ac vulputa leo
                                 vehicula. Mauris porttit magna tellus. Vivamus sagittis et nunc.</p>
@@ -279,11 +279,20 @@
                             <div class="option-isotop">
                                 <ul id="filter" class="option-set filters-nav" data-option-key="filter">
                                     <li><a href="#" class="selected" data-option-value="*">All Courses</a></li>
+
+                                    @php
+                                        $courseCategories=[];
+                                       foreach($courses as $course){
+                                            array_push($courseCategories,$course->category);
+                                       }
+                                    @endphp
                                     @foreach($categories as $category)
-                                        <li>
-                                            <a href="#" data-option-value=".course-{{$category->id+32132}}">
-                                                {{$category->title}}</a>
-                                        </li>
+                                        @if(in_array($category->id,$courseCategories))
+                                            <li>
+                                                <a href="#" data-option-value=".course-{{$category->id+32132}}">
+                                                    {{$category->title}}</a>
+                                            </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div>

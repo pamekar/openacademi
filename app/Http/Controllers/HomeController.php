@@ -25,11 +25,11 @@ class HomeController extends Controller
                 ->get();
         }
 
-        $courses = Course::where('published', 1)
-            ->orderBy('created_at', 'desc')->get();
-
-
         $categories = CourseCategory::select('id', 'title')->get();
+
+        $courses = Course::where('published', 1)
+            ->orderBy('created_at', 'desc')->inRandomOrder()->limit(10)->get();
+
         return view('index',
             compact('courses', 'purchased_courses', 'categories'));
     }
