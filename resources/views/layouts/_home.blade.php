@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{ $page_title or 'Quick LMS' }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{$public}}/css/bootstrap.min.css")}} rel="stylesheet">
