@@ -55,7 +55,7 @@
                     </button>
 
                     <!-- Brand -->
-                    <a href="fixed-student-dashboard.html" class="navbar-brand">
+                    <a href="{{route('home')}}" class="navbar-brand">
                         <img src="{{asset("$public/assets/images/logo/white.svg")}}" class="mr-2" alt="LearnPlus"/>
                         <span class="d-none d-xs-md-block">LearnPlus</span>
                     </a>
@@ -111,7 +111,8 @@
                                                 </span>
                                             <span class="d-flex">
                                                     <span class="avatar avatar-xs mr-2">
-                                                        <img src="{{asset("$public/assets/images/people/110/woman-5.jpg")}}" alt="people"
+                                                        <img src="{{asset("$public/assets/images/people/110/woman-5.jpg")}}"
+                                                             alt="people"
                                                              class="avatar-img rounded-circle">
                                                     </span>
                                                     <span class="flex d-flex flex-column">
@@ -131,7 +132,8 @@
                                                 </span>
                                             <span class="d-flex">
                                                     <span class="avatar avatar-xs mr-2">
-                                                        <img src="{{asset("$public/assets/images/people/110/woman-5.jpg")}}" alt="people"
+                                                        <img src="{{asset("$public/assets/images/people/110/woman-5.jpg")}}"
+                                                             alt="people"
                                                              class="avatar-img rounded-circle">
                                                     </span>
                                                     <span class="flex d-flex flex-column">
@@ -211,7 +213,8 @@
                         <!-- User dropdown -->
                         <li class="nav-item dropdown ml-1 ml-md-3">
                             <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#"
-                               role="button"><img src="{{asset("$public/assets/images/people/50/guy-6.jpg")}}" alt="Avatar"
+                               role="button"><img src="{{asset("$public/assets/images/people/50/guy-6.jpg")}}"
+                                                  alt="Avatar"
                                                   class="rounded-circle" width="40"></a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="fixed-student-account-edit.html">
@@ -220,7 +223,8 @@
                                 <a class="dropdown-item" href="fixed-student-profile.html">
                                     <i class="material-icons">person</i> Public Profile
                                 </a>
-                                <a class="dropdown-item" href="guest-login.html">
+                                <a class="dropdown-item" href="{{route('auth.logout')}}" title=""
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="material-icons">lock</i> Logout
                                 </a>
                             </div>
@@ -576,28 +580,31 @@
       'default': 'student-dashboard.html'
     }" sidebar-variant="bg-transparent border-0"></app>
 </div>
+<form id="logout-form" action="{{ url('/logout') }}"
+      method="POST" style="display: none;"
+>{{ csrf_field() }}</form>
 <!-- jQuery -->
-<script src="{{asset("$public/assets/vendor/jquery.min.js")}}"> </script>
+<script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
 
 <!-- Bootstrap -->
-<script src="{{asset("$public/assets/vendor/popper.min.js")}}"> </script>
-<script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"> </script>
+<script src="{{asset("$public/assets/vendor/popper.min.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"></script>
 
 <!-- Perfect Scrollbar -->
-<script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"> </script>
+<script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
 
 <!-- MDK -->
-<script src="{{asset("$public/assets/vendor/dom-factory.js")}}"> </script>
-<script src="{{asset("$public/assets/vendor/material-design-kit.js")}}"> </script>
+<script src="{{asset("$public/assets/vendor/dom-factory.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/material-design-kit.js")}}"></script>
 
 <!-- App JS -->
-<script src="{{asset("$public/assets/js/app.js")}}"> </script>
+<script src="{{asset("$public/assets/js/app.js")}}"></script>
 
 <!-- Highlight.js -->
-<script src="{{asset("$public/assets/js/hljs.js")}}"> </script>
+<script src="{{asset("$public/assets/js/hljs.js")}}"></script>
 
 <!-- App Settings (safe to remove) -->
-<script src="{{asset("$public/assets/js/app-settings.js")}}"> </script>
+<script src="{{asset("$public/assets/js/app-settings.js")}}"></script>
 
 
 </body>
