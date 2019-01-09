@@ -17,7 +17,8 @@
         "spatie/laravel-medialibrary": "^3.0",
         "stripe/stripe-php": "^3.21",
         "unisharp/laravel-filemanager": "dev-master",
-        "league/flysystem-aws-s3-v3": "~1.0"
+        "league/flysystem-aws-s3-v3": "~1.0",
+        "tcg/voyager": "^1.1"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
