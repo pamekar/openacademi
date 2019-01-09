@@ -14,7 +14,7 @@ use Hash;
  * @property string $password
  * @property string $remember_token
 */
-class User extends Authenticatable
+class User extends \TCG\Voyager\Models\User
 {
     use Notifiable;
     protected $fillable = ['name', 'email', 'password','categories', 'remember_token'];
@@ -31,7 +31,7 @@ class User extends Authenticatable
     }
     
     
-    public function role()
+    public function drole()
     {
         return $this->belongsToMany(Role::class, 'role_user');
     }
