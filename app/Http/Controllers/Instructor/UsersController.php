@@ -38,7 +38,7 @@ class UsersController extends Controller
         if (! Gate::allows('user_create')) {
             return abort(401);
         }
-        $roles = \App\Role::get()->pluck('title', 'id');
+        $roles = \App\Position::get()->pluck('title', 'id');
 
         return view('admin.users.create', compact('roles'));
     }
@@ -74,7 +74,7 @@ class UsersController extends Controller
         if (! Gate::allows('user_edit')) {
             return abort(401);
         }
-        $roles = \App\Role::get()->pluck('title', 'id');
+        $roles = \App\Position::get()->pluck('title', 'id');
 
         $user = User::findOrFail($id);
 
@@ -114,7 +114,7 @@ class UsersController extends Controller
         if (! Gate::allows('user_view')) {
             return abort(401);
         }
-        $roles = \App\Role::get()->pluck('title', 'id');$courses = \App\Course::whereHas('teachers',
+        $roles = \App\Position::get()->pluck('title', 'id');$courses = \App\Course::whereHas('teachers',
                     function ($query) use ($id) {
                         $query->where('id', $id);
                     })->get();

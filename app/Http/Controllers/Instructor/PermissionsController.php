@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Instructor;
 
-use App\Permission;
+use App\Authorization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -23,7 +23,7 @@ class PermissionsController extends Controller
         }
 
 
-                $permissions = Permission::all();
+                $permissions = Authorization::all();
 
         return view('admin.permissions.index', compact('permissions'));
     }
@@ -52,7 +52,7 @@ class PermissionsController extends Controller
         if (! Gate::allows('permission_create')) {
             return abort(401);
         }
-        $permission = Permission::create($request->all());
+        $permission = Authorization::create($request->all());
 
 
 
@@ -71,7 +71,7 @@ class PermissionsController extends Controller
         if (! Gate::allows('permission_edit')) {
             return abort(401);
         }
-        $permission = Permission::findOrFail($id);
+        $permission = Authorization::findOrFail($id);
 
         return view('admin.permissions.edit', compact('permission'));
     }
@@ -88,7 +88,7 @@ class PermissionsController extends Controller
         if (! Gate::allows('permission_edit')) {
             return abort(401);
         }
-        $permission = Permission::findOrFail($id);
+        $permission = Authorization::findOrFail($id);
         $permission->update($request->all());
 
 
@@ -108,12 +108,12 @@ class PermissionsController extends Controller
         if (! Gate::allows('permission_view')) {
             return abort(401);
         }
-        $roles = \App\Role::whereHas('permission',
+        $roles = \App\Position::whereHas('permission',
                     function ($query) use ($id) {
                         $query->where('id', $id);
                     })->get();
 
-        $permission = Permission::findOrFail($id);
+        $permission = Authorization::findOrFail($id);
 
         return view('admin.permissions.show', compact('permission', 'roles'));
     }
@@ -130,7 +130,7 @@ class PermissionsController extends Controller
         if (! Gate::allows('permission_delete')) {
             return abort(401);
         }
-        $permission = Permission::findOrFail($id);
+        $permission = Authorization::findOrFail($id);
         $permission->delete();
 
         return redirect()->route('admin.permissions.index');
@@ -147,7 +147,7 @@ class PermissionsController extends Controller
             return abort(401);
         }
         if ($request->input('ids')) {
-            $entries = Permission::whereIn('id', $request->input('ids'))->get();
+            $entries = Authorization::whereIn('id', $request->input('ids'))->get();
 
             foreach ($entries as $entry) {
                 $entry->delete();

@@ -26,7 +26,7 @@ class RoleSeedPivot extends Seeder
         ];
 
         foreach ($items as $id => $item) {
-            $role = \App\Role::find($id);
+            $role = \App\Position::find($id);
 
             foreach ($item as $key => $ids) {
                 $role->{$key}()->sync($ids);

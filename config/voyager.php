@@ -96,7 +96,7 @@ return [
 
     'database' => [
         'tables' => [
-            'hidden' => ['migrations', 'data_rows', 'data_types', 'menu_items', 'password_resets', 'permission_role', 'settings'],
+            'hidden' => ['migrations', 'data_rows', 'data_types', 'menu_items', 'password_resets', 'authorization_position', 'settings'],
         ],
     ],
 

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Role;
+use App\Position;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
 
         
         if (! app()->runningInConsole()) {
-            $roles = Role::with('permission')->get();
+            $roles = Position::with('permission')->get();
 
             foreach ($roles as $role) {
                 foreach ($role->permission as $permission) {

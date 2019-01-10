@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -8,10 +9,10 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App
  * @property string $title
-*/
-class Permission extends Model
+ */
+class Authorization extends Model
 {
     protected $fillable = ['title'];
-    
-    
+    protected $perPage = 25;
+
 }

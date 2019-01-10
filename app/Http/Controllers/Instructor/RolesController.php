@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Instructor;
 
-use App\Role;
+use App\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -23,7 +23,7 @@ class RolesController extends Controller
         }
 
 
-                $roles = Role::all();
+                $roles = Position::all();
 
         return view('admin.roles.index', compact('roles'));
     }
@@ -38,7 +38,7 @@ class RolesController extends Controller
         if (! Gate::allows('role_create')) {
             return abort(401);
         }
-        $permissions = \App\Permission::get()->pluck('title', 'id');
+        $permissions = \App\Authorization::get()->pluck('title', 'id');
 
         return view('admin.roles.create', compact('permissions'));
     }
@@ -54,7 +54,7 @@ class RolesController extends Controller
         if (! Gate::allows('role_create')) {
             return abort(401);
         }
-        $role = Role::create($request->all());
+        $role = Position::create($request->all());
         $role->permission()->sync(array_filter((array)$request->input('permission')));
 
 
@@ -74,9 +74,9 @@ class RolesController extends Controller
         if (! Gate::allows('role_edit')) {
             return abort(401);
         }
-        $permissions = \App\Permission::get()->pluck('title', 'id');
+        $permissions = \App\Authorization::get()->pluck('title', 'id');
 
-        $role = Role::findOrFail($id);
+        $role = Position::findOrFail($id);
 
         return view('admin.roles.edit', compact('role', 'permissions'));
     }
@@ -93,7 +93,7 @@ class RolesController extends Controller
         if (! Gate::allows('role_edit')) {
             return abort(401);
         }
-        $role = Role::findOrFail($id);
+        $role = Position::findOrFail($id);
         $role->update($request->all());
         $role->permission()->sync(array_filter((array)$request->input('permission')));
 
@@ -114,12 +114,12 @@ class RolesController extends Controller
         if (! Gate::allows('role_view')) {
             return abort(401);
         }
-        $permissions = \App\Permission::get()->pluck('title', 'id');$users = \App\User::whereHas('role',
+        $permissions = \App\Authorization::get()->pluck('title', 'id');$users = \App\User::whereHas('role',
                     function ($query) use ($id) {
                         $query->where('id', $id);
                     })->get();
 
-        $role = Role::findOrFail($id);
+        $role = Position::findOrFail($id);
 
         return view('admin.roles.show', compact('role', 'users'));
     }
@@ -136,7 +136,7 @@ class RolesController extends Controller
         if (! Gate::allows('role_delete')) {
             return abort(401);
         }
-        $role = Role::findOrFail($id);
+        $role = Position::findOrFail($id);
         $role->delete();
 
         return redirect()->route('admin.roles.index');
@@ -153,7 +153,7 @@ class RolesController extends Controller
             return abort(401);
         }
         if ($request->input('ids')) {
-            $entries = Role::whereIn('id', $request->input('ids'))->get();
+            $entries = Position::whereIn('id', $request->input('ids'))->get();
 
             foreach ($entries as $entry) {
                 $entry->delete();

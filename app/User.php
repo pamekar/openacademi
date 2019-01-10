@@ -3,7 +3,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class User
@@ -31,15 +31,15 @@ class User extends \TCG\Voyager\Models\User
     }
     
     
-    public function drole()
+    public function position()
     {
-        return $this->belongsToMany(Role::class, 'role_user');
+        return $this->belongsToMany(Position::class, 'position_user');
     }
 
 
     public function isAdmin()
     {
-        return $this->role()->where('role_id', 1)->first();
+        return $this->position()->where('role_id', 1)->first();
     }
 
     public function lessons()
