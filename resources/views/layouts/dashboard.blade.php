@@ -334,6 +334,13 @@
 
         <div class="page">
             @yield('content')
+            <div class="container page__container">
+                <div class="footer">
+                    Copyright &copy; 2016 - <a
+                            href="http://themeforest.net/item/learnplus-learning-management-application/15287372?ref=mosaicpro">Purchase
+                        LearnPlus</a>
+                </div>
+            </div>
         </div>
     </div>
     <!-- // END Header Layout Content -->
@@ -583,6 +590,7 @@
 <form id="logout-form" action="{{ url('/logout') }}"
       method="POST" style="display: none;"
 >{{ csrf_field() }}</form>
+<script src="{{asset("$public/js/app.js")}}"></script>
 <!-- jQuery -->
 <script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
 
