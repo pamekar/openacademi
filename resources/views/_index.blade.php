@@ -23,6 +23,7 @@
                     <div class="ratings">
                         <p>Progress: {{ Auth::user()->lessons()->where('course_id', $course->id)->count() }}
                             of {{ $course->lessons->count() }} lessons</p>
+                        {{$course->lessons->count()}}
                     </div>
                 </div>
             </div>
