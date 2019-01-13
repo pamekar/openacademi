@@ -311,7 +311,7 @@
                                             <div class="edu-course">
                                                 <div class="edu-img">
                                                     <a href="{{ route('courses.show', [$course->slug]) }}" title=""><img
-                                                                src="{{Storage::url($course->course_image)}}"
+                                                                src="{{$course->course_image}}"
                                                                 alt=""/></a>
                                                 </div>
                                                 <div class="edu-detail">

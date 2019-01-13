@@ -1,14 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Course;
 use App\CourseCategory;
 use App\Http\Controllers\Api\AuthController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class HomeController extends Controller
 {
+    protected $user;
+
+    public function __construct()
+    {
+        $this->user =JWTAuth::parseToken()->toUser();
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -16,25 +24,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $purchased_courses = null;
-
-        $auth = new AuthController();
-        $auth->me();
-        $purchased_courses = Course::whereHas('students',
+        $my_courses = null;
+        $my_courses = Course::whereHas('students',
             function ($query) {
-                $query->where('id', Auth::id());
+                $query->where('id', $this->user->id);
             })
-            ->with('lessons')
             ->orderBy('id', 'desc')
             ->get();
 
-        $categories = CourseCategory::select('id', 'title')->get();
+     /*   $courses = Course::where('published', 1)
+            ->orderBy('created_at', 'desc')->inRandomOrder()->limit(10)->get();*/
 
-        $courses = Course::where('published', 1)
-            ->orderBy('created_at', 'desc')->inRandomOrder()->limit(10)->get();
-
-        return view('index',
-            compact('courses', 'purchased_courses', 'categories'));
+     return response()->json(['my_courses'=>$my_courses]);
     }
 
     public function faq()

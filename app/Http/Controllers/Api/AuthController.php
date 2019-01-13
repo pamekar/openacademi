@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Namshi\JOSE\JWT;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -51,10 +52,9 @@ class AuthController extends Controller
         if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        User::where('email', $credentials['email'])
-            ->update(['api_token' => $token]);
-        return $this->respondWithToken($token);
 
+        //return $this->respondWithToken($token);
+        return $token;
     }
 
     /**
@@ -64,7 +64,13 @@ class AuthController extends Controller
      */
     public function me()
     {
+        //return response()->json(JWTAuth::user());
         return response()->json(JWTAuth::user());
+    }
+
+    public function user()
+    {
+        return JWTAuth::parseToken()->toUser();
     }
 
     /**
@@ -99,7 +105,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'access_token' => $token,
-            'user'         => $this->guard()->user(),
+            'user'         => JWTAuth::user(),
             'token_type'   => 'bearer',
             'expires_in'   => JWTAuth::factory()->getTTL() * 60
         ]);

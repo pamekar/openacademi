@@ -55,7 +55,7 @@
                             </div><!-- About Course -->
                             <div class="single-post-img">
                                 <span class="course-price">&#8358;{{number_format($course->price/100)}}</span>
-                                <img src="{{Storage::url($course->course_image)}}" alt=""/>
+                                <img src="{{$course->course_image}}" alt=""/>
                             </div>
 
                             <div>

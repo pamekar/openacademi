@@ -34,7 +34,6 @@ class CoursesController extends Controller
                 ->get();
         }
 
-
         return view('courses', compact('courses', 'categories'));
     }
 
@@ -44,6 +43,7 @@ class CoursesController extends Controller
             ->firstOrFail();
         $purchased_course = \Auth::check()
             && $course->students()->where('user_id', \Auth::id())->count() > 0;
+
 
         return view('course', compact('course', 'purchased_course'));
     }

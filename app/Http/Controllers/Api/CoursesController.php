@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Stripe\Customer;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CoursesController extends Controller
 {
+    public function __construct()
+    {
+        $this->user =JWTAuth::parseToken()->toUser();
+    }
+
     public function index($category = null)
     {
 
@@ -32,6 +38,19 @@ class CoursesController extends Controller
 
 
         return view('courses', compact('courses', 'categories'));
+    }
+
+    public function getPurchased()
+    {
+        $courses = null;
+        $courses = Course::whereHas('students',
+            function ($query) {
+                $query->where('id', $this->user->id);
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return response()->json(['courses'=>$courses]);
     }
 
     public function show($course_slug)
