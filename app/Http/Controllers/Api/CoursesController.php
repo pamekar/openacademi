@@ -15,7 +15,7 @@ class CoursesController extends Controller
 {
     public function __construct()
     {
-        $this->user =JWTAuth::parseToken()->toUser();
+        $this->user = JWTAuth::parseToken()->toUser();
     }
 
     public function index($category = null)
@@ -40,17 +40,40 @@ class CoursesController extends Controller
         return view('courses', compact('courses', 'categories'));
     }
 
-    public function getPurchased()
+    public function getAll(Request $request)
     {
-        $courses = null;
-        $courses = Course::whereHas('students',
-            function ($query) {
-                $query->where('id', $this->user->id);
-            })
-            ->orderBy('id', 'desc')
-            ->get();
+        $isDashboard = $request->dashboard;
+        $count = $request->input('count', 8);
+        if ($isDashboard) {
+            $courses = Course::where('published', 1)->orderBy('id', 'desc')
+                ->limit($count)
+                ->get();
+        }
 
-        return response()->json(['courses'=>$courses]);
+        return response()->json(['courses' => $courses]);
+    }
+
+    public function getPurchased(Request $request)
+    {
+        $isDashboard = $request->dashboard;
+        $count = $request->count;
+        if ($isDashboard) {
+            $courses = Course::whereHas('students',
+                function ($query) {
+                    $query->where('id', $this->user->id);
+                })
+                ->orderBy('updated_at', 'desc')->limit($count)
+                ->get();
+        } else {
+            $courses = Course::whereHas('students',
+                function ($query) {
+                    $query->where('id', $this->user->id);
+                })
+                ->orderBy('updated_at', 'desc')
+                ->get();
+        }
+
+        return response()->json(['courses' => $courses]);
     }
 
     public function show($course_slug)

@@ -1,39 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import axios from 'axios';
-import {routes} from './router.js';
+import App from './App.vue'
+import Breadcrumb from './components/BreadcrumbComponent.vue'
+import axios from 'axios'
+import routes from './routes.js'
+import functions from './functions.js'
 
 Vue.use(VueRouter);
 Vue.use(axios);
 
-function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0){
-            var cookie = c.substring(nameEQ.length, c.length);
-            return cookie;
-        }
-    }
-    return null;
-}
-
-window.axios = require('axios');
-window.axios.defaults.headers.common = {
-    'Authorization': 'Bearer ' + readCookie('jwt_token')
-};
-
-import Index from './views/IndexComponent.vue'
+functions.setupAxios();
 
 const router = new VueRouter({
     mode: 'history',
     routes
 });
 
-new Vue({
+Vue.component('breadcrumb-component', Breadcrumb);
+
+let app = new Vue({
     el: '#app',
-    components: {'app': Index},
+    render: h => h(App),
     router,
 });

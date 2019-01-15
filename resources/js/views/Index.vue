@@ -1,13 +1,13 @@
 <template>
-    <div class="container page__container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">Home</li>
-            <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-        <h1 class="h2">Dashboard</h1>
+    <div>
 
-        <div class="row">
-            <div class="col-lg-8 col-md-7">
+        <breadcrumb-component
+                :breadcrumbs="breadcrumbs"
+                :title="page_title"
+        ></breadcrumb-component>
+
+        <div class="row sd">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
                         <div class="media align-items-center">
@@ -16,8 +16,7 @@
                                 <p class="card-subtitle">Your recent courses</p>
                             </div>
                             <div class="media-right">
-                                <a class="btn btn-sm btn-primary" href="#">My
-                                    courses</a>
+                                <router-link to="/courses/purchased" class="btn btn-sm btn-primary">My courses</router-link>
                             </div>
                         </div>
                     </div>
@@ -36,11 +35,11 @@
                                     <a href="#" class="text-body"><strong>{{ course.title }}</strong></a>
                                     <div class="d-flex align-items-center">
                                         <div class="progress" style="width: 100px;">
-                                            <div :class="'progress-bar bg-'+getLessonsProgress(course.completed_lessons,course.total_lessons).color" role="progressbar"
-                                                 :style="'width:'+getLessonsProgress(course.completed_lessons,course.total_lessons).score+'%'" :aria-valuenow="course.completed_lessons" aria-valuemin="0"
+                                            <div :class="'progress-bar bg-'+getLessonsProgress(course).color" role="progressbar"
+                                                 :style="'width:'+getLessonsProgress(course).score+'%'" :aria-valuenow="course.completed_lessons" aria-valuemin="0"
                                                  :aria-valuemax="course.total_lessons"></div>
                                         </div>
-                                        <small class="text-muted ml-2">{{getLessonsProgress(course.completed_lessons, course.total_lessons).score}}%</small>
+                                        <small class="text-muted ml-2">{{getLessonsProgress(course).score}}%</small>
                                     </div>
                                 </div>
                                 <div class="dropdown ml-3">
@@ -128,7 +127,25 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-8 col-md-7">
+            <div class="col-md-6">
+
+                <div class="card-header mb-3" style="padding: .75rem 1.25rem;">
+                    <div class="media align-items-center">
+                        <div class="media-body"><h4 class="card-title">Featured Courses</h4>
+                            <p class="card-subtitle">Learn a new course today</p></div>
+                        <div class="media-right">
+                            <router-link to="/courses/all" class="btn btn-sm btn-primary">View more</router-link>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <courses-component
+                            v-for="course in allCourses"
+                            :course="course"
+                            :courseWidth="courseListWidth"
+                            :key="course.id"
+                    ></courses-component>
+                </div>
 
             </div>
         </div>
@@ -138,37 +155,61 @@
 </template>
 
 <script>
+    import Courses from '../components/CoursesComponent.vue'
+
     export default {
         data() {
             return {
                 purchasedCourses: [],
+                allCourses: [],
+                courseListWidth: "col-md-6",
+                breadcrumbs: [
+                    {
+                        title: "Home"
+                    },
+                    {
+                        title: "Dashboard"
+                    }
+                ],
+                page_title: "Dashboard"
             };
         },
 
         created() {
             this.getPurchasedCourses();
+            this.getAllCourses();
         },
 
         methods: {
             // drg >> fetch purchased courses
             getPurchasedCourses(page = 1) {
-                window.axios.get("api/courses/purchased")
+                window.axios.get("api/courses/purchased?count=4&dashboard=1")
                     .then(({data}) => {
                         this.purchasedCourses = data.courses;
                     });
             },
-            getLessonsProgress(completed, total) {
+            getAllCourses(page = 1) {
+                window.axios.get("/api/courses/all?count=4&dashboard=1")
+                    .then(({data}) => {
+                        this.allCourses = data.courses;
+                    });
+            },
+            // drg >> compute lesson progress
+            getLessonsProgress(course) {
+                let completed = course.completed_lessons;
+                let total = course.total_lessons;
                 let progress = (completed / total) * 100;
                 let color = "warning";
 
                 if (progress > 100) {
                     progress = 100;
                     color = "success";
-                } else if (progress > 70 && progress < 100) {
+                } else if (progress >= 70 && progress < 100) {
                     color = "primary";
-                } else if (progress > 30 && progress < 70) {
+                } else if (progress >= 50 && progress < 70) {
                     color = "info";
-
+                } else if (progress >= 30 && progress < 50) {
+                    color = "secondary";
                 }
 
                 return {score: progress, color: color};
@@ -187,7 +228,10 @@
             }
         },
         mounted() {
-            console.log('Component mounted now.')
+            console.log('Dashboard Component mounted now.')
+        },
+        components: {
+            'courses-component': Courses,
         }
     }
 </script>
