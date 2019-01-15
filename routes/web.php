@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('faq', 'HomeController@faq')->name('faq');
+
 Route::get('courses/{category?}',
     ['uses' => 'CoursesController@index', 'as' => 'courses.all']);
 Route::get('course/{slug}',
@@ -47,12 +46,22 @@ Route::get('password/reset/{token}',
     'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')
     ->name('auth.password.reset');
+
+Route::get('/', 'HomeController@index')->name('home')->middleware('guest');
+Route::get('/', 'HomeController@index')->name('home')->middleware('guest');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('faq', 'HomeController@faq')->name('faq');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', function () {
         return view('dashboard.student.index');
     })->name('dashboard');
 });
-Route::group(['middleware' => ['instructor'], 'prefix' => 'instructor', 'as' => 'instructor.'],
+Route::group([
+    'middleware' => ['instructor'],
+    'prefix'     => 'instructor',
+    'as'         => 'instructor.'
+],
     function () {
         Route::get('/home', 'Instructor\DashboardController@index');
         Route::resource('permissions', 'Instructor\PermissionsController');
@@ -84,7 +93,7 @@ Route::group(['middleware' => ['instructor'], 'prefix' => 'instructor', 'as' => 
             'as'   => 'courses.perma_del'
         ]);
         Route::resource('lessons', 'Instructor\LessonsController');
-        Route::post(    'lessons_mass_destroy', [
+        Route::post('lessons_mass_destroy', [
             'uses' => 'Instructor\LessonsController@massDestroy',
             'as'   => 'lessons.mass_destroy'
         ]);

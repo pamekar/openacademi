@@ -12,11 +12,11 @@
                     <div class="card-header">
                         <div class="media align-items-center">
                             <div class="media-body">
-                                <h4 class="card-title">Courses</h4>
+                                <h4 class="card-title">My Courses</h4>
                                 <p class="card-subtitle">Your recent courses</p>
                             </div>
                             <div class="media-right">
-                                <router-link to="/courses/purchased" class="btn btn-sm btn-primary">My courses</router-link>
+                                <router-link to="/courses/purchased" class="btn btn-sm btn-primary">View more</router-link>
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                             <div class="d-flex align-items-center">
                                 <a href="#"
                                    class="avatar avatar-4by3 avatar-sm mr-3">
-                                    <img :src="course.course_image" width="64" height="40" alt="course"
+                                    <img :src="course.course_image" width="64" height="40" :alt="course.title"
                                          class="avatar-img rounded">
                                 </a>
                                 <div class="flex">
@@ -183,7 +183,7 @@
         methods: {
             // drg >> fetch purchased courses
             getPurchasedCourses(page = 1) {
-                window.axios.get("api/courses/purchased?count=4&dashboard=1")
+                window.axios.get("/api/courses/purchased?count=4&dashboard=1")
                     .then(({data}) => {
                         this.purchasedCourses = data.courses;
                     });
@@ -214,18 +214,6 @@
 
                 return {score: progress, color: color};
             },
-            getProgressColor() {
-                let colors = [
-                    "primary",
-                    "success",
-                    "info",
-                    "warning",
-                    "danger"
-                ];
-
-                let randomColor = colors[Math.floor(Math.random() * colors.length)];
-                return randomColor;
-            }
         },
         mounted() {
             console.log('Dashboard Component mounted now.')
