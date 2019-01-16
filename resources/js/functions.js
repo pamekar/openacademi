@@ -1,3 +1,5 @@
+import NProgress from 'nprogress'
+import jquery from 'jquery'
 const functions = {
     readCookie: function (name) {
         var nameEQ = name + "=";
@@ -9,11 +11,41 @@ const functions = {
         }
         return null;
     },
-    setupAxios: function(){
+    setupAxios: function () {
         window.axios = require('axios');
         window.axios.defaults.headers.common = {
             'Authorization': 'Bearer ' + this.readCookie('jwt_token')
         };
+        // drg >> add a request interceptor
+        axios.interceptors.request.use(function (config) {
+            // drg >> display progress bar on every ajax request
+            NProgress.start();
+            return config;
+        }, function (error) {
+            console.error(error);
+            return Promise.reject(error);
+        });
+
+// drg >> add a response interceptor
+        axios.interceptors.response.use(function (response) {
+            NProgress.done();
+            return response;
+        }, function (error) {
+            console.error(error);
+            return Promise.reject(error);
+        });
+    
+        jquery(document).ajaxComplete(function (event, request, settings) {
+            console.log(2);
+            NProgress.done();
+        });
+    
+        jquery(document).ajaxStart(function () {
+            console.log(2);
+            NProgress.start();
+        });
+    
+    
     }
 };
 

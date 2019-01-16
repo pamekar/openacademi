@@ -66,7 +66,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
-                                <a href="{{ route('auth.login') }}">Existing user? Log in here</a>
+                                <a href="{{ route('login') }}">Existing user? Log in here</a>
                             </div>
                         </div>
                     </form>

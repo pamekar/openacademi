@@ -48,9 +48,35 @@ class CoursesController extends Controller
             $courses = Course::where('published', 1)->orderBy('id', 'desc')
                 ->limit($count)
                 ->get();
+        } else {
+            $courses = Course::where('published', 1)->orderBy('id', 'desc')
+                ->paginate($count);
         }
 
-        return response()->json(['courses' => $courses]);
+        return response()->json($courses);
+    }
+
+    public function getCategories(Request $request, $slug)
+    {
+
+        $count = $request->input('count', 8);
+
+        $isCategory = CourseCategory::where('slug', $slug)->first();
+
+        $courses = Course::where('published', 1)
+            ->where('category', $isCategory->id)->orderBy('id', 'desc')
+            ->paginate($count);
+
+        return response()->json([
+            'courses' => $courses,
+            'category' => $isCategory->title
+        ]);
+    }
+
+    public function listCategories()
+    {
+        $categories = CourseCategory::select('slug as param', 'title')->get();
+        return response()->json($categories);
     }
 
     public function getPurchased(Request $request)
@@ -103,7 +129,7 @@ class CoursesController extends Controller
 
         try {
             $customer = Customer::create([
-                'email'  => $request->get('stripeEmail'),
+                'email' => $request->get('stripeEmail'),
                 'source' => $request->get('stripeToken')
             ]);
 

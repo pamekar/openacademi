@@ -13,6 +13,8 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::group(['middleware' => 'jwt.auth'], function ($router) {
         Route::get('courses/purchased', 'CoursesController@getPurchased');
+        Route::get('courses/categories/{slug}', 'CoursesController@getCategories');
+        Route::get('courses/categories', 'CoursesController@listCategories');
         Route::get('courses/all', 'CoursesController@getAll');
     });
 });

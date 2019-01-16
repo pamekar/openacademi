@@ -64,13 +64,13 @@
                     @if (Auth::check())
                         <div style="color:white">
                             Logged in as {{ Auth::user()->email }}
-                            <form action="{{ route('auth.logout') }}" method="post">
+                            <form action="{{ route('logout') }}" method="post">
                                 {{ csrf_field() }}
                                 <input type="submit" value="Logout" class="btn btn-info">
                             </form>
                         </div>
                     @else
-                        <form action="{{ route('auth.login') }}" method="post">
+                        <form action="{{ route('login') }}" method="post">
                             {{ csrf_field() }}
                             <input type="email" name="email" placeholder="Email" />
                             <input type="password" name="password" placeholder="Password" />

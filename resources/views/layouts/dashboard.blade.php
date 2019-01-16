@@ -24,8 +24,6 @@
     <!-- App CSS -->
     <link type="text/css" href="{{asset("$public/assets/css/app.css")}}" rel="stylesheet">
     <link type="text/css" href="{{asset("$public/assets/css/app.rtl.css")}}" rel="stylesheet">
-
-
 </head>
 
 <body class=" fixed-layout">
@@ -47,7 +45,7 @@
         <div class="mdk-header__content">
 
             <!-- Navbar -->
-            <nav id="default-navbar" class="navbar navbar-expand navbar-dark bg-primary m-0">
+            <nav id="default-navbar" class="navbar navbar-expand navbar-dark bg-primar m-0">
                 <div class="container">
                     <!-- Toggle sidebar -->
                     <button class="navbar-toggler d-block" data-toggle="sidebar" type="button">
@@ -223,7 +221,7 @@
                                 <a class="dropdown-item" href="fixed-student-profile.html">
                                     <i class="material-icons">person</i> Public Profile
                                 </a>
-                                <a class="dropdown-item" href="{{route('auth.logout')}}" title=""
+                                <a class="dropdown-item" href="{{route('logout')}}" title=""
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="material-icons">lock</i> Logout
                                 </a>
@@ -245,103 +243,15 @@
     <!-- Header Layout Content -->
     <div class="mdk-header-layout__content d-flex flex-column">
 
-        <div class="page__header">
-            <div class="navbar bg-dark navbar-dark navbar-expand-sm d-none2 d-md-flex2">
-                <div class="container">
-
-                    <div class="navbar-collapse collapse" id="navbarsExample03">
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item dropdown active">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Student</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item active" href="fixed-student-dashboard.html">Dashboard</a>
-                                    <a class="dropdown-item" href="fixed-student-browse-courses.html">Browse Courses</a>
-                                    <a class="dropdown-item" href="fixed-student-view-course.html">View Course</a>
-                                    <a class="dropdown-item" href="fixed-student-take-course.html">Take Course</a>
-                                    <a class="dropdown-item" href="fixed-student-take-quiz.html">Take a Quiz</a>
-                                    <a class="dropdown-item" href="fixed-student-quiz-results.html">Quiz Results</a>
-                                    <a class="dropdown-item" href="fixed-student-my-courses.html">My Courses</a>
-                                    <a class="dropdown-item" href="fixed-student-billing.html">Billing</a>
-                                    <a class="dropdown-item" href="fixed-student-pay.html">Payment</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Instructor</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="fixed-instructor-dashboard.html">Dashboard</a>
-                                    <a class="dropdown-item" href="fixed-instructor-courses.html">Course Manager</a>
-                                    <a class="dropdown-item" href="fixed-instructor-quizzes.html">Quiz Manager</a>
-                                    <a class="dropdown-item" href="fixed-instructor-profile.html">Public Profile</a>
-                                    <a class="dropdown-item" href="fixed-instructor-earnings.html">Earnings</a>
-                                    <a class="dropdown-item" href="fixed-instructor-statement.html">Statement</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="fixed-student-account-edit.html">Edit Account</a>
-                                    <a class="dropdown-item" href="fixed-student-messages.html">Messages</a>
-                                    <a class="dropdown-item" href="fixed-student-invoice.html">Invoice</a>
-                                    <a class="dropdown-item" href="guest-login.html">Logout</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Components</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="fixed-ui-avatars.html">Avatars</a>
-                                    <a class="dropdown-item" href="fixed-ui-forms.html">Forms</a>
-                                    <a class="dropdown-item" href="fixed-ui-loaders.html">Loaders</a>
-                                    <a class="dropdown-item" href="fixed-ui-tables.html">Tables</a>
-                                    <a class="dropdown-item" href="fixed-ui-cards.html">Cards</a>
-                                    <a class="dropdown-item" href="fixed-ui-tabs.html">Tabs</a>
-                                    <a class="dropdown-item" href="fixed-ui-icons.html">Icons</a>
-                                    <a class="dropdown-item" href="fixed-ui-buttons.html">Buttons</a>
-                                    <a class="dropdown-item" href="fixed-ui-alerts.html">Alerts</a>
-                                    <a class="dropdown-item" href="fixed-ui-badges.html">Badges</a>
-                                    <!-- <a class="dropdown-item" href="fixed-ui-modals.html">- Modals</a> -->
-                                    <a class="dropdown-item" href="fixed-ui-progress.html">Progress</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Plugins</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="fixed-ui-charts.html">Charts</a>
-                                    <a class="dropdown-item" href="fixed-ui-drag.html">Drag &amp; Drop</a>
-                                    <a class="dropdown-item" href="fixed-ui-calendar.html">Calendar</a>
-                                    <a class="dropdown-item" href="fixed-ui-nestable.html">Nestable</a>
-                                    <a class="dropdown-item" href="fixed-ui-tree.html">Tree</a>
-                                    <a class="dropdown-item" href="fixed-ui-maps-vector.html">Vector Maps</a>
-                                    <a class="dropdown-item" href="fixed-ui-sweet-alert.html">Sweet Alert</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Layouts</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="student-dashboard.html">Fluid</a>
-                                    <a class="dropdown-item active" href="fixed-student-dashboard.html">Fixed</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarsExample03" type="button">
-                        <span class="material-icons">menu</span>
-                    </button>
-
-                </div>
+        @yield('content')
+    <div class="page">
+        <div class="container page__container">
+            <div class="footer">
+                Copyright &copy; {{date('Y')}} - <a
+                        href="{{route('home')}}">{{config('app.name')}}</a>
             </div>
         </div>
-
-        <div class="page">
-            @yield('content')
-            <div class="container page__container">
-                <div class="footer">
-                    Copyright &copy; 2016 - <a
-                            href="http://themeforest.net/item/learnplus-learning-management-application/15287372?ref=mosaicpro">Purchase
-                        LearnPlus</a>
-                </div>
-            </div>
-        </div>
+    </div>
     </div>
     <!-- // END Header Layout Content -->
 
@@ -613,7 +523,6 @@
 
 <!-- App Settings (safe to remove) -->
 <script src="{{asset("$public/assets/js/app-settings.js")}}"></script>
-
 
 </body>
 

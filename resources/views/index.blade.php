@@ -360,7 +360,7 @@
                         </div>
 
                         <div class="register-video">
-                            <a class="button active" href="{{route('auth.register')}}" title="">Register Now</a>
+                            <a class="button active" href="{{route('register')}}" title="">Register Now</a>
                             <div class="video-img">
                                 <img src="{{asset("$public/jpg/video.jpg")}}" alt=""/>
                                 <a class="html5lightbox"

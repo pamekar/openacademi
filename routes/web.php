@@ -18,45 +18,29 @@ Route::post('lesson/{slug}/test',
     ['uses' => 'LessonsController@test', 'as' => 'lessons.test']);
 
 // Authentication Routes...
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
-Route::post('login', 'Auth\LoginController@login')->name('auth.login');
-Route::post('logout', 'Auth\LoginController@logout')->name('auth.logout');
-
-// Registration Routes...
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')
-    ->name('auth.register');
-Route::post('register', 'Auth\RegisterController@register')
-    ->name('auth.register');
 
 // Change Password Routes...
+
 Route::get('change_password',
     'Auth\ChangePasswordController@showChangePasswordForm')
-    ->name('auth.change_password');
+    ->name('change_password');
 Route::patch('change_password', 'Auth\ChangePasswordController@changePassword')
-    ->name('auth.change_password');
+    ->name('change_password');
 
-// Password Reset Routes...
-Route::get('password/reset',
-    'Auth\ForgotPasswordController@showLinkRequestForm')
-    ->name('auth.password.reset');
-Route::post('password/email',
-    'Auth\ForgotPasswordController@sendResetLinkEmail')
-    ->name('auth.password.reset');
-Route::get('password/reset/{token}',
-    'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset')
-    ->name('auth.password.reset');
+// drg >> application routes
 
-Route::get('/', 'HomeController@index')->name('home')->middleware('guest');
-Route::get('/', 'HomeController@index')->name('home')->middleware('guest');
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('faq', 'HomeController@faq')->name('faq');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('dashboard', function () {
+    Route::get('/dashboard', function () {
         return view('dashboard.student.index');
     })->name('dashboard');
+
 });
+
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::group([
     'middleware' => ['instructor'],
     'prefix'     => 'instructor',
@@ -166,3 +150,27 @@ Route::get('debug/kldjfklfdujkewiojdk', function () {
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+
+// Password Reset Routes...
+Route::get('password/reset',
+    'Auth\ForgotPasswordController@showLinkRequestForm')
+    ->name('password.reset');
+Route::post('password/email',
+    'Auth\ForgotPasswordController@sendResetLinkEmail')
+    ->name('password.reset');
+Route::get('password/reset/{token}',
+    'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')
+    ->name('password.reset');
+
+
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')
+    ->name('register');
+Route::post('register', 'Auth\RegisterController@register')
+    ->name('register');

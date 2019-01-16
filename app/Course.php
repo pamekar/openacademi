@@ -37,7 +37,7 @@ class Course extends Model
             'published'
         ];
 
-    protected $appends = ['total_lessons','completed_lessons'];
+    protected $appends = ['total_lessons','completed_lessons','rating'];
 
     /**
      * Set attribute to money format

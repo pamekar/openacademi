@@ -44,12 +44,12 @@
 
                     <div class="registration">
                         @guest
-                            <a href="{{route('auth.register')}}" title="">Register</a>
-                            <a href="{{route('auth.login')}}" title="">Sign in</a>
+                            <a href="{{route('register')}}" title="">Register</a>
+                            <a href="{{route('login')}}" title="">Sign in</a>
                         @endguest
                         @auth
                                 <a href="{{route('dashboard')}}" title="">Dashboard</a>
-                                <a href="{{route('auth.logout')}}" title="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                <a href="{{route('logout')}}" title="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                         @endauth
                     </div>
                 </div><!-- Top Bar -->

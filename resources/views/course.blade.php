@@ -50,7 +50,7 @@
 
                                 </div>
                                 <a class="button active "
-                                   href="{{ route('auth.register') }}?redirect_url={{ route('courses.show', [$course->slug]) }}">Enroll
+                                   href="{{ route('register') }}?redirect_url={{ route('courses.show', [$course->slug]) }}">Enroll
                                     For This</a>
                             </div><!-- About Course -->
                             <div class="single-post-img">

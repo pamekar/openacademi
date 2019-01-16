@@ -47,7 +47,7 @@
             </form>
             @endif
         @else
-            <a href="{{ route('auth.register') }}?redirect_url={{ route('courses.show', [$course->slug]) }}"
+            <a href="{{ route('register') }}?redirect_url={{ route('courses.show', [$course->slug]) }}"
                class="btn btn-primary">Buy course (&#8358;{{ number_format($course->price/100) }})</a>
         @endif
     </p>

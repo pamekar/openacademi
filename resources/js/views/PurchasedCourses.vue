@@ -2,7 +2,7 @@
     <div>
         <breadcrumb-component
                 :breadcrumbs="breadcrumbs"
-                :title="page_title"
+                :title="pageTitle"
         ></breadcrumb-component>
 
         <div class="row">
@@ -21,15 +21,16 @@
         data() {
             return {
                 purchasedCourses: [],
-                breadcrumbs: [
+                breadcrumbs:      [
                     {
-                        title: "Home"
+                        title: "Dashboard",
+                        link:  "dashboard"
                     },
                     {
                         title: "My Courses"
                     }
                 ],
-                page_title: "My Courses"
+                pageTitle:       "My Courses"
             }
         },
         created() {
@@ -41,9 +42,9 @@
         components: {
             'purchased-courses-component': PurchasedCourses
         },
-        methods: {
+        methods:    {
             getPurchasedCourses(page = 1) {
-                window.axios.get("/api/courses/purchased?count=8")
+                axios.get("/api/courses/purchased?count=8")
                     .then(({data}) => {
                         this.purchasedCourses = data.courses;
                     });

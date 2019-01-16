@@ -15,7 +15,7 @@
             <div class="page-separator__text">or</div>
         </div>
 
-        <form action="{{route('auth.login')}}" novalidate method="post">
+        <form action="{{route('login')}}" novalidate method="post">
             {{csrf_field()}}
             <div class="form-group">
                 <label class="form-label" for="email">Your email address:</label>
@@ -55,12 +55,12 @@
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
             </div>
             <div class="text-center">
-                <a href="{{route('auth.password.reset')}}" class="text-black-70" style="text-decoration: underline;">Forgot Password?</a>
+                <a href="{{route('password.reset')}}" class="text-black-70" style="text-decoration: underline;">Forgot Password?</a>
             </div>
         </form>
     </div>
     <div class="card-footer text-center text-black-50">
-        Not yet a student? <a href="{{'auth.register'}}">Sign up</a>
+        Not yet a student? <a href="{{'register'}}">Sign up</a>
     </div>
 
 @endsection

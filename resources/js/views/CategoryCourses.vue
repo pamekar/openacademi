@@ -15,9 +15,9 @@
         </div>
         <paginate
                 :page-count="pageCount"
-                :click-handler="getAllCourses"
-                :prev-text="'Prev'"
-                :next-text="'Next'"
+                :click-handler="getCategoryCourses"
+                prev-text="Prev"
+                next-text="Next"
                 container-class="pagination justify-content-center pagination-sm"
                 active-class="page-item active"
                 disabled-class="page-item disabled"
@@ -40,20 +40,23 @@
             return {
                 allCourses:      [],
                 courseListWidth: "col-lg-3 col-md-4, col-sm-6",
-                pageTitle:       "Courses",
+                pageTitle:       "",
                 pageCount:       1,
                 breadcrumbs:     [
                     {
-                        title: "Dashboard", link: 'dashboard'
+                        title: "Dashboard", link: "dashboard"
                     },
                     {
-                        title: "Courses"
+                        title: "Courses", link: "all-courses"
+                    },
+                    {
+                        title: ""
                     }
                 ],
             }
         },
         created() {
-            this.getAllCourses();
+            this.getCategoryCourses();
         },
         mounted() {
             console.log('Dashboard Component mounted now.');
@@ -63,14 +66,23 @@
             'paginate':          Paginate
         },
         methods:    {
-            getAllCourses(page = 1) {
-                axios.get("/api/courses/all?count=12&page=" + page)
+            getCategoryCourses(page = 1) {
+                axios.get("/api/courses/categories/" + this.$route.params.slug + "?count=12&page=" + page)
                     .then(({data}) => {
-                        this.allCourses = data.data;
-                        this.pageCount=data.last_page;
+                        this.allCourses = data.courses.data;
+                        this.pageTitle = data.category + " Courses";
+                        this.pageCount = data.courses.last_page;
+                        this.breadcrumbs[2].title = data.category;
                     });
             },
 
+        },
+        props:      ['slug'],
+        watch:      {
+            '$route'(to, from) {
+                // react to route changes...
+                this.getCategoryCourses();
+            }
         }
     }
 </script>

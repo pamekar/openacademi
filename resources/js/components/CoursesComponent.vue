@@ -2,13 +2,11 @@
     <div :class="courseWidth">
         <div class="card ">
             <div class="card-header text-center">
-                <h4 class="card-title mb-0"><a href="#">{{ course.title }}</a></h4>
-                <div class="rating">
-                    <i class="material-icons">star</i>
-                    <i class="material-icons">star</i>
-                    <i class="material-icons">star</i>
-                    <i class="material-icons">star</i>
-                    <i class="material-icons">star_border</i>
+                <h4 class="card-title mb-0">
+                    <router-link :to="{name:'course',params:{'slug':course.slug}}">{{ course.title }}</router-link>
+                </h4>
+                <div class="text-center">
+                    <star-rating :rating="Number(course.rating)" :increment="0.01" :read-only="true" :star-size="18" style="margin: auto"></star-rating>
                 </div>
             </div>
             <a href="#">
@@ -26,16 +24,16 @@
 
 <script>
     export default {
-
-        data() {
-            return {
-                acourse: [],
-            };
-        },
-        //props:['course'];
         props: {
-            course: Object,
+            course:      Object,
             courseWidth: String
         }
     }
 </script>
+
+<style>
+    .vue-star-rating {
+        margin: auto;
+    }
+</style>
+

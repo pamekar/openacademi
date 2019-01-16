@@ -15,7 +15,7 @@
             <div class="page-separator__text">or</div>
         </div>
 
-        <form action="{{route('auth.register')}}" novalidate method="post">
+        <form action="{{route('register')}}" novalidate method="post">
             {{csrf_field()}}
             <div class="form-group">
                 <label class="form-label" for="name">Your username:</label>
@@ -74,7 +74,7 @@
         </form>
     </div>
     <div class="card-footer text-center text-black-50">
-        Existing user? <a href="{{route('auth.login')}}">Login here!</a>
+        Existing user? <a href="{{route('login')}}">Login here!</a>
     </div>
 
 @endsection
