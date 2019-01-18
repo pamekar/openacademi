@@ -16,7 +16,7 @@
         </div>
         <paginate
                 :page-count="pageCount"
-                :click-handler="getCategoryCourses"
+                :click-handler="getTagCourses"
                 prev-text="Prev"
                 next-text="Next"
                 container-class="pagination justify-content-center pagination-sm"
@@ -41,7 +41,7 @@
             return {
                 allCourses:      [],
                 courseListWidth: "col-lg-3 col-md-4, col-sm-6",
-                pageTitle:       "",
+                pageTitle:       "Courses <span class=' badge badge-primary'>"+this.tag+"</span>",
                 pageCount:       1,
                 breadcrumbs:     [
                     {
@@ -51,13 +51,13 @@
                         title: "Courses", link: "all-courses"
                     },
                     {
-                        title: ""
+                        title: this.tag
                     }
                 ],
             }
         },
         created() {
-            this.getCategoryCourses();
+            this.getTagCourses();
         },
         mounted() {
             console.log('Dashboard Component mounted now.');
@@ -67,22 +67,20 @@
             'paginate':          Paginate
         },
         methods:    {
-            getCategoryCourses(page = 1) {
-                axios.get("/api/courses/categories/" + this.$route.params.slug + "?count=12&page=" + page)
+            getTagCourses(page = 1) {
+                axios.get("/api/courses/tags/" + this.$route.params.tag + "?count=12&page=" + page)
                     .then(({data}) => {
-                        this.allCourses = data.courses.data;
-                        this.pageTitle = data.category + " Courses";
-                        this.pageCount = data.courses.last_page;
-                        this.breadcrumbs[2].title = data.category;
+                        this.allCourses = data.data;
+                        this.pageCount = data.last_page;
                     });
             },
 
         },
-        props:      ['slug'],
+        props:['tag'],
         watch:      {
             '$route'(to, from) {
                 // react to route changes...
-                this.getCategoryCourses();
+                this.getTagCourses();
             }
         }
     }

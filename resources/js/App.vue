@@ -27,15 +27,15 @@
                 menuCategories: [],
                 menuItems:      [
                     {
-                        title:'Home',
-                        dropdown:[
+                        title:    'Home',
+                        dropdown: [
                             {
-                                title:'Home Page',
-                                route:'home'
+                                title: 'Home Page',
+                                route: 'home'
                             },
                             {
-                                title:'Dashboard',
-                                route:'dashboard'
+                                title: 'Dashboard',
+                                route: 'dashboard'
                             }
                         ]
                     },
@@ -91,3 +91,25 @@
         }
     }
 </script>
+
+<style>
+    .course-price {
+        font-size: 17px;
+        font-weight: 600;
+        right: 0;
+        padding: 12px 25px 13px 15px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        position: absolute;
+        bottom: 150px;
+        background-color: rgba(246, 247, 249, 0.7);
+    }
+
+    .course-price:before {
+        border-top-width: 24px
+    }
+
+    .course-price:after {
+        border-bottom-width: 24px
+    }
+</style>

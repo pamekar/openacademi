@@ -40,7 +40,7 @@ class CoursesController extends Controller
         return view('courses', compact('courses', 'categories'));
     }
 
-    public function getAll(Request $request)
+    public function getAllCourses(Request $request)
     {
         $isDashboard = $request->dashboard;
         $count = $request->input('count', 8);
@@ -49,37 +49,53 @@ class CoursesController extends Controller
                 ->limit($count)
                 ->get();
         } else {
-            $courses = Course::where('published', 1)->orderBy('id', 'desc')
+            // drg >> It has to be in random order because of the categories we're dealing with
+            $courses = Course::where('published', 1)->inRandomOrder()
                 ->paginate($count);
         }
 
         return response()->json($courses);
     }
 
-    public function getCategories(Request $request, $slug)
+    public function getCategoryCourses(Request $request, $slug)
     {
 
         $count = $request->input('count', 8);
 
         $isCategory = CourseCategory::where('slug', $slug)->first();
 
-        $courses = Course::where('published', 1)
-            ->where('category', $isCategory->id)->orderBy('id', 'desc')
-            ->paginate($count);
+        $courses = [];
+        if ($isCategory) {
+            $courses = Course::where('published', 1)
+                ->where('category', $isCategory->id)->orderBy('id', 'desc')
+                ->paginate($count);
+        }
 
         return response()->json([
-            'courses' => $courses,
+            'courses'  => $courses,
             'category' => $isCategory->title
         ]);
     }
 
-    public function listCategories()
+    public function getTagCourses(Request $request, $tag)
+    {
+
+        $count = $request->input('count', 8);
+
+        $courses = Course::where('published', 1)
+            ->where('tags', 'like', "%$tag%")->orderBy('id', 'desc')
+            ->paginate($count);
+
+        return response()->json($courses);
+    }
+
+    public function getCategories()
     {
         $categories = CourseCategory::select('slug as param', 'title')->get();
         return response()->json($categories);
     }
 
-    public function getPurchased(Request $request)
+    public function getPurchasedCourses(Request $request)
     {
         $isDashboard = $request->dashboard;
         $count = $request->count;
@@ -129,7 +145,7 @@ class CoursesController extends Controller
 
         try {
             $customer = Customer::create([
-                'email' => $request->get('stripeEmail'),
+                'email'  => $request->get('stripeEmail'),
                 'source' => $request->get('stripeToken')
             ]);
 

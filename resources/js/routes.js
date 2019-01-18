@@ -1,10 +1,11 @@
-import NProgress from 'nprogress'
+import NProgress from './uiux/js/nprogress.js'
 import VueRouter from 'vue-router'
 import Course from './views/Course.vue';
 import Courses from './views/Courses.vue';
+import CategoryCourses from './views/CategoryCourses.vue';
 import Index from './views/Index.vue';
 import PurchasedCourses from './views/PurchasedCourses.vue';
-import CategoryCourses from './views/CategoryCourses.vue';
+import TagCourses from './views/TagCourses.vue';
 
 const Error404 = {
     template: "",
@@ -41,6 +42,12 @@ const routes = [
         path:      '/courses/categories/:slug',
         name:      'category-courses',
         component: CategoryCourses,
+        props:     true
+    },
+    {
+        path:      '/courses/tags/:tag',
+        name:      'tag-courses',
+        component: TagCourses,
         props:     true
     },
     {

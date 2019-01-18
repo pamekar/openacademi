@@ -1,4 +1,4 @@
-import NProgress from 'nprogress'
+import NProgress from './uiux/js/nprogress.js'
 import jquery from 'jquery'
 const functions = {
     readCookie: function (name) {
@@ -23,6 +23,7 @@ const functions = {
             return config;
         }, function (error) {
             console.error(error);
+            NProgress.failed();
             return Promise.reject(error);
         });
 
@@ -32,6 +33,7 @@ const functions = {
             return response;
         }, function (error) {
             console.error(error);
+            NProgress.failed();
             return Promise.reject(error);
         });
     

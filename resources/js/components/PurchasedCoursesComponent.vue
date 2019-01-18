@@ -14,9 +14,7 @@
                     </div>
                 </div>
             </div>
-            <div class="progress rounded-0">
-                <div :class="'progress-bar bg-'+getLessonsProgress(course).color" role="progressbar" :style="'width:'+getLessonsProgress(course).score+'%'" :aria-valuenow="course.completed_lessons" aria-valuemin="0" :aria-valuemax="course.total_lessons"></div>
-            </div>
+            <progress-component></progress-component>
             <div class="card-footer bg-white">
                 <a href="#" class="btn btn-primary btn-sm">Continue <i class="material-icons btn__icon--right">play_circle_outline</i></a>
             </div>

@@ -37,7 +37,7 @@ class Course extends Model
             'published'
         ];
 
-    protected $appends = ['total_lessons','completed_lessons','rating'];
+    protected $appends = ['total_lessons', 'completed_lessons', 'rating','course_cat'];
 
     /**
      * Set attribute to money format
@@ -47,6 +47,16 @@ class Course extends Model
     public function setPriceAttribute($input)
     {
         $this->attributes['price'] = $input ? $input : null;
+    }
+
+    public function course_category()
+    {
+        return $this->belongsTo('App\CourseCategory','category');
+    }
+
+    public function getCourseCatAttribute(){
+
+        return $this->course_category->title;
     }
 
     /**
@@ -141,6 +151,11 @@ class Course extends Model
             });
         }
         return $query;
+    }
+
+    public function getPriceAttribute($price)
+    {
+        return $price / 100;
     }
 
     public function getRatingAttribute()

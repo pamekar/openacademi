@@ -20,7 +20,7 @@ class HomeController extends Controller
                 function ($query) {
                     $query->where('id', \Auth::id());
                 })
-                ->with('lessons')
+                ->with('lessons')->with('course_category')
                 ->orderBy('id', 'desc')
                 ->get();
         }

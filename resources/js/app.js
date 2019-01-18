@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import './uiux/nprogress.css'
+import './uiux/css/nprogress.css'
 import App from './App.vue'
 import StarRating from 'vue-star-rating'
 import Breadcrumb from './components/BreadcrumbComponent.vue'

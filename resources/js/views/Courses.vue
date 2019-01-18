@@ -11,6 +11,7 @@
                     :course="course"
                     :courseWidth="courseListWidth"
                     :key="course.id"
+                    :tags="course.tags.split(';',2)"
             ></courses-component>
         </div>
         <paginate
@@ -62,15 +63,19 @@
             'courses-component': Courses,
             'paginate':          Paginate
         },
+        computed:   {
+            getTags(tags) {
+                return str.split(';', tags);
+            }
+        },
         methods:    {
             getAllCourses(page = 1) {
                 axios.get("/api/courses/all?count=12&page=" + page)
                     .then(({data}) => {
                         this.allCourses = data.data;
-                        this.pageCount=data.last_page;
+                        this.pageCount = data.last_page;
                     });
             },
-
         }
     }
 </script>

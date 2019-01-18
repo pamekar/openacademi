@@ -15,7 +15,6 @@ return [
 
     'default' => env('FILESYSTEM_DRIVER', 's3'),
 
-
     /*
     |--------------------------------------------------------------------------
     | Default Cloud Filesystem Disk
@@ -27,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => 's3',
+    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
 
     /*
     |--------------------------------------------------------------------------
@@ -46,20 +45,13 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root'   => storage_path('app'),
-        ],
-        
-        'media' => [
-            'driver'     => 'local',
-            'root'       => storage_path('app/uploads'),
-            'url'        => env('APP_URL') . '/storage',
-            'visibility' => 'public',
+            'root' => storage_path('app'),
         ],
 
         'public' => [
-            'driver'     => 'local',
-            'root'       => storage_path('app/public'),
-            'url'        => env('APP_URL') . '/storage',
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
 
