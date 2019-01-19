@@ -41,7 +41,7 @@
             return {
                 allCourses:      [],
                 courseListWidth: "col-lg-3 col-md-4, col-sm-6",
-                pageTitle:       "Courses <span class=' badge badge-primary'>"+this.tag+"</span>",
+                pageTitle:       'Courses <span class="badge badge-primary badge-lg">' + this.tag + '</span>',
                 pageCount:       1,
                 breadcrumbs:     [
                     {
@@ -76,7 +76,7 @@
             },
 
         },
-        props:['tag'],
+        props:      ['tag'],
         watch:      {
             '$route'(to, from) {
                 // react to route changes...

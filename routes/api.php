@@ -12,8 +12,11 @@ Route::group(['namespace' => 'Api'], function () {
     });*/
 
     Route::group(['middleware' => 'jwt.auth'], function ($router) {
-        Route::get('courses/purchased', 'CoursesController@getPurchasedCourses');
-        Route::get('courses/categories/{slug}', 'CoursesController@getCategoryCourses');
+        Route::get('course/{slug}', 'CoursesController@getCourse');
+        Route::get('courses/purchased',
+            'CoursesController@getPurchasedCourses');
+        Route::get('courses/categories/{slug}',
+            'CoursesController@getCategoryCourses');
         Route::get('courses/tags/{tag}', 'CoursesController@getTagCourses');
         Route::get('courses/categories', 'CoursesController@getCategories');
         Route::get('courses/all', 'CoursesController@getAllCourses');

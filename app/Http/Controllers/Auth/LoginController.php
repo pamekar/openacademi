@@ -72,8 +72,9 @@ class LoginController extends Controller
     {
         $frontend = new AuthController();
         $token = $frontend->login($request);
+        $expire = $request->remember ? 12 * 30 * 24 * 3600 : 0;
 
-        Cookie::queue('jwt_token', $token, time() + (30 * 24 * 3600)    , '', '',
+        Cookie::queue('jwt_token', $token, $expire, '', '',
             false, false);
     }
 }

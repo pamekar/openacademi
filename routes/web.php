@@ -140,11 +140,17 @@ Route::get('debug/kldjfklfdujkewiojdk', function () {
     foreach ($lessons as $lesson) {
         \Illuminate\Support\Facades\DB::table('lessons')
             ->where('id', $lesson->id)->update([
-                'slug' => strtolower(preg_replace('/\s+/', '-',
-                    $lesson->title))
+                'duration' => mt_rand(2, 20) * 60 + mt_rand(0, 59)
             ]);
     }
     echo "Executed - " . count($lessons) . " instructions executed";
+});
+
+Route::get('sjkdhnsd', function () {
+    $duration = \App\Lesson::where('course_id', 50)->where('published', 1)
+        ->sum('duration');
+
+    echo $duration;
 });
 
 Route::group(['prefix' => 'admin'], function () {

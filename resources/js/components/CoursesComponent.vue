@@ -6,7 +6,7 @@
                     <router-link :to="{name:'course',params:{'slug':course.slug}}">{{ course.title }}</router-link>
                 </h4>
                 <div class="text-center">
-                    <star-rating :rating="Number(course.rating)" :increment="0.01" :read-only="true" :star-size="18" style="margin: auto"></star-rating>
+                    <star-rating :rating="Number(course.rating.split(';')[0])" :increment="0.01" :read-only="true" :star-size="18" style="margin: auto"></star-rating>
                 </div>
             </div>
 
@@ -19,7 +19,7 @@
                 <small class="text-muted">{{course.course_cat}}</small>
                 <br>
                 {{ course.summary }}<br>
-                <router-link :to="{name:'tag-courses',params:{'tag':tag}}" v-for="tag in tags">
+                <router-link :to="{name:'tag-courses',params:{'tag':tag}}" v-for="tag in tags" :key="tag">
                     <span class="badge badge-primary mr-1" >
                     {{tag}}</span>
                 </router-link>

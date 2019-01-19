@@ -27,8 +27,6 @@
 </head>
 
 <body class=" fixed-layout">
-
-
 <div class="preloader">
     <div class="sk-double-bounce">
         <div class="sk-child sk-double-bounce1"></div>

@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </div>
-            <progress-component></progress-component>
+            <progress-component :course="course"></progress-component>
             <div class="card-footer bg-white">
                 <a href="#" class="btn btn-primary btn-sm">Continue <i class="material-icons btn__icon--right">play_circle_outline</i></a>
             </div>
@@ -24,37 +24,18 @@
 </template>
 
 <script>
-    export default {
+    import ProgressComponent from './ProgressComponent.vue'
 
+    export default {
         data() {
-            return {
-                acourse: [],
-            };
+            return {};
         },
-        props: {
+        components: {
+            'progress-component': ProgressComponent
+        },
+        props:      {
             course: Object,
         },
-        methods: {
-            // drg >> compute lesson progress
-            getLessonsProgress(course) {
-                let completed = course.completed_lessons;
-                let total = course.total_lessons;
-                let progress = (completed / total) * 100;
-                let color = "warning";
-
-                if (progress > 100) {
-                    progress = 100;
-                    color = "success";
-                } else if (progress >= 70 && progress < 100) {
-                    color = "primary";
-                } else if (progress >= 50 && progress < 70) {
-                    color = "info";
-                } else if (progress >= 30 && progress < 50) {
-                    color = "secondary";
-                }
-
-                return {score: progress, color: color};
-            },
-        }
+        methods:    {}
     }
 </script>

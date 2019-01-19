@@ -95,6 +95,19 @@ class CoursesController extends Controller
         return response()->json($categories);
     }
 
+    public function getCourse($slug)
+    {
+        $course = Course::where('slug', $slug)->with('publishedLessons')
+            ->firstOrFail()->append('duration');
+        $purchased_course = \Auth::check()
+            && $course->students()->where('user_id', \Auth::id())->count() > 0;
+
+        return response()->json([
+            'course'    => $course,
+            'purchased' => $purchased_course
+        ]);
+    }
+
     public function getPurchasedCourses(Request $request)
     {
         $isDashboard = $request->dashboard;
@@ -112,20 +125,12 @@ class CoursesController extends Controller
                     $query->where('id', $this->user->id);
                 })
                 ->orderBy('updated_at', 'desc')
-                ->get();
+                ->get()->append('total_lessons')->toArray();
         }
 
-        return response()->json(['courses' => $courses]);
-    }
-
-    public function show($course_slug)
-    {
-        $course = Course::where('slug', $course_slug)->with('publishedLessons')
-            ->firstOrFail();
-        $purchased_course = \Auth::check()
-            && $course->students()->where('user_id', \Auth::id())->count() > 0;
-
-        return view('course', compact('course', 'purchased_course'));
+        return response()->json([
+            'courses' => $courses
+        ]);
     }
 
     public function payment(Request $request)

@@ -7,124 +7,42 @@
 
         <div class="row">
             <div class="col-md-8">
+
                 <div class="card">
-                    <div class="embed-responsive embed-responsive-16by9">
+                    <div>
+                        <img :src="course.course_image" :alt="course.slug" width="100%"/>
+                    </div>
+                    <div class="embed-responsive embed-responsive-16by9" v-if="course.course_image_type == 'video'">
                         <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0" allowfullscreen=""></iframe>
                     </div>
                     <div class="card-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta eius enim inventoreus optio ratione veritatis. Beatae deserunt illum ipsam magniima mollitia officiis quia tempora!
+                        {{course.description}}
                     </div>
                 </div>
 
                 <!-- Lessons -->
-                <ul class="card list-group list-group-fit">
-                    <li class="list-group-item">
-                        <div class="media">
-                            <div class="media-left">
-                                <div class="text-muted">1.</div>
-                            </div>
-                            <div class="media-body">
-                                <a href="#">Installation</a>
-                            </div>
-                            <div class="media-right">
-                                <small class="text-muted-light">2:03</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item active">
-                        <div class="media">
-                            <div class="media-left">2.</div>
-                            <div class="media-body">
-                                <a class="text-white" href="#">The MVC architectural pattern</a>
-                            </div>
-                            <div class="media-right">
-                                <small>25:01</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="media">
-                            <div class="media-left">
-                                <div class="text-muted">3.</div>
-                            </div>
-                            <div class="media-body">
-                                <a href="#">Database Models</a>
-                            </div>
-                            <div class="media-right">
-                                <small class="text-muted-light">12:10</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="media">
-                            <div class="media-left">
-                                <div class="text-muted">4.</div>
-                            </div>
-                            <div class="media-body">
-                                <div class="text-muted-light">Database Access</div>
-                            </div>
-                            <div class="media-right">
-                                <small class="badge badge-primary ">PRO</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="media">
-                            <div class="media-left">
-                                <div class="text-muted">5.</div>
-                            </div>
-                            <div class="media-body">
-                                <div class="text-muted-light">Eloquent Basics</div>
-                            </div>
-                            <div class="media-right">
-                                <small class="badge badge-primary ">PRO</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="media">
-                            <div class="media-left">
-                                <div class="text-muted">6.</div>
-                            </div>
-                            <div class="media-body">
-                                <div class="text-muted-light">Take Quiz</div>
-                            </div>
-                            <div class="media-right">
-                                <small class="badge badge-primary ">PRO</small>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                <lessons-list-component :lessons="course.published_lessons" :purchased="purchased"></lessons-list-component>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body text-center">
                         <p>
                             <a href="fixed-student-cart.html" class="btn btn-success btn-block flex-column">
-                                Get All Courses
-                                <strong>$9 / month</strong>
+                                Purchase this course
+                                <strong>&#8358; {{course.price.toLocaleString('en', {maximumSignificantDigits: 2})}}</strong>
                             </a>
                         </p>
-                        <p class="text-muted-light">or</p>
-                        <a href="fixed-student-cart.html" class="btn btn-white btn-block">
-                            Purchase this course
-                            for $25
-                        </a>
                     </div>
                 </div>
-                <div class="card">
+                <div class="car d">
                     <div class="card-header">
                         <h4 class="card-title">Ratings</h4>
                     </div>
                     <div class="card-body">
-                        <div class="rating">
-                            <i class="material-icons">star</i>
-                            <i class="material-icons">star</i>
-                            <i class="material-icons">star</i>
-                            <i class="material-icons">star</i>
-                            <i class="material-icons">star_border</i>
+                        <div>
+                            <star-rating :rating="Number(course.rating.split(';')[0])" :increment="0.01" :read-only="true" :star-size="24"></star-rating>
                         </div>
-                        <small class="text-muted">20 ratings</small>
+                        <small class="text-muted">{{course.rating.split(';')[1]}} ratings</small>
                     </div>
                 </div>
                 <div class="card">
@@ -135,7 +53,7 @@
                                     <i class="material-icons text-muted-light">assessment</i>
                                 </div>
                                 <div class="media-body">
-                                    Beginner
+                                    {{course.course_cat}}
                                 </div>
                             </div>
                         </li>
@@ -145,7 +63,10 @@
                                     <i class="material-icons text-muted-light">schedule</i>
                                 </div>
                                 <div class="media-body">
-                                    2 <small class="text-muted">hrs</small> &nbsp; 26 <small class="text-muted">min</small>
+
+                                    {{Math.floor(course.duration / 3600)}}
+                                    <small class="text-muted">hrs</small> &nbsp; {{course.duration % 60}}
+                                    <small class="text-muted">min</small>
                                 </div>
                             </div>
                         </li>
@@ -180,41 +101,49 @@
     </div>
 </template>
 <script>
-    import Courses from '../components/CoursesComponent.vue'
+    import LessonsListComponent from '../components/LessonsListComponent.vue'
 
     export default {
         data() {
             return {
-                allCourses: [],
+                course:          [],
                 courseListWidth: "col-lg-3 col-md-4, col-sm-6",
-                breadcrumbs: [
+                breadcrumbs:     [
                     {
-                        title: "Home"
+                        title: "Dashboard", link: 'dashboard'
                     },
                     {
-                        title: "Courses"
+                        title: "Courses", link:'all-courses'
+                    },
+                    {
+                        title: ""
                     }
                 ],
-                pageTitle: "Courses"
+                pageTitle:       "Courses",
+                purchased:  ""
             }
         },
         created() {
-            this.getAllCourses();
+            this.getCourse();
         },
         mounted() {
             console.log('Dashboard Component mounted now.')
         },
         components: {
-            'courses-component': Courses
+            'lessons-list-component': LessonsListComponent
         },
-        methods: {
-            getAllCourses(page = 1) {
-                axios.get("/api/courses/all?count=12&dashboard=1")
+        methods:    {
+            getCourse() {
+                axios.get("/api/course/" + this.$route.params.slug)
                     .then(({data}) => {
-                        this.allCourses = data.courses;
+                        this.course = data.course;
+                        this.pageTitle=data.course.title;
+                        this.purchased=data.purchased;
+                        this.breadcrumbs[2].title = data.course.title;
                     });
             },
-
-        }
+        },
+        props:      ['slug'],
+        computed:   {}
     }
 </script>

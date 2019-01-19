@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -37,7 +38,13 @@ class Course extends Model
             'published'
         ];
 
-    protected $appends = ['total_lessons', 'completed_lessons', 'rating','course_cat'];
+    protected $appends
+        = [
+            'total_lessons',
+            'completed_lessons',
+            'rating',
+            'course_cat'
+        ];
 
     /**
      * Set attribute to money format
@@ -51,10 +58,11 @@ class Course extends Model
 
     public function course_category()
     {
-        return $this->belongsTo('App\CourseCategory','category');
+        return $this->belongsTo('App\CourseCategory', 'category');
     }
 
-    public function getCourseCatAttribute(){
+    public function getCourseCatAttribute()
+    {
 
         return $this->course_category->title;
     }
@@ -99,6 +107,12 @@ class Course extends Model
             : Auth::user();
         $count = $user->lessons()->where('course_id', $this->id)->count();
         return $count;
+    }
+
+    public function getDurationAttribute(){
+        $duration=Lesson::where('course_id', $this->id)->where('published', 1)
+            ->sum('duration');
+        return $duration;
     }
 
     /**
@@ -160,9 +174,15 @@ class Course extends Model
 
     public function getRatingAttribute()
     {
-        return number_format(\DB::table('course_student')
-            ->where('course_id', $this->attributes['id'])->average('rating'),
-            2);
+        $ratings = DB::table('course_student')
+            ->where('course_id', $this->id)->where('rating', '>', 0)
+            ->pluck('rating')->toArray();
+
+        $count=sizeof($ratings);
+        $sum=array_sum($ratings);
+        $average=number_format($sum/$count,2);
+        return "$average;$count";
+
     }
 
 }

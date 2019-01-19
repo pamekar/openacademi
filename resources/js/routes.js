@@ -2,6 +2,7 @@ import NProgress from './uiux/js/nprogress.js'
 import VueRouter from 'vue-router'
 import Course from './views/Course.vue';
 import Courses from './views/Courses.vue';
+import Lesson from './views/Lesson.vue';
 import CategoryCourses from './views/CategoryCourses.vue';
 import Index from './views/Index.vue';
 import PurchasedCourses from './views/PurchasedCourses.vue';
@@ -43,6 +44,11 @@ const routes = [
         name:      'category-courses',
         component: CategoryCourses,
         props:     true
+    },
+    {
+        path:      '/lesson/:slug',
+        name:      'lesson',
+        component: Lesson
     },
     {
         path:      '/courses/tags/:tag',
