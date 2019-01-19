@@ -6,6 +6,7 @@ use App\Course;
 use App\CourseCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Stripe\Customer;
@@ -115,17 +116,17 @@ class CoursesController extends Controller
         if ($isDashboard) {
             $courses = Course::whereHas('students',
                 function ($query) {
-                    $query->where('id', $this->user->id);
+                    $query->where('id', Auth::user()->id);
                 })
                 ->orderBy('updated_at', 'desc')->limit($count)
                 ->get();
         } else {
             $courses = Course::whereHas('students',
                 function ($query) {
-                    $query->where('id', $this->user->id);
+                    $query->where('id', Auth::user()->id);
                 })
                 ->orderBy('updated_at', 'desc')
-                ->get()->append('total_lessons')->toArray();
+                ->get();
         }
 
         return response()->json([

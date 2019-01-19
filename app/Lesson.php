@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 
@@ -39,6 +41,7 @@ class Lesson extends Model implements HasMedia
             'published',
             'course_id'
         ];
+    protected $appends=['is_completed'];
 
 
     /**
@@ -59,6 +62,16 @@ class Lesson extends Model implements HasMedia
     public function setPositionAttribute($input)
     {
         $this->attributes['position'] = $input ? $input : null;
+    }
+
+    public function getIsCompletedAttribute(){
+        $isCompleted = Auth::user()->lessons()->where('lesson_id', $this->id)->count();
+        return $isCompleted;
+    }
+
+    public function getLessonImageAttribute($value)
+    {
+        return Storage::url($value);
     }
 
     public function course()

@@ -15,7 +15,7 @@
                 let progress = (completed / total) * 100;
                 let color = "warning";
 
-                if (progress > 100) {
+                if (progress >= 100) {
                     progress = 100;
                     color = "success";
                 } else if (progress >= 70 && progress < 100) {

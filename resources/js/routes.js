@@ -46,7 +46,7 @@ const routes = [
         props:     true
     },
     {
-        path:      '/lesson/:slug',
+        path:      '/lesson/:id/:slug',
         name:      'lesson',
         component: Lesson
     },

@@ -20,5 +20,6 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('courses/tags/{tag}', 'CoursesController@getTagCourses');
         Route::get('courses/categories', 'CoursesController@getCategories');
         Route::get('courses/all', 'CoursesController@getAllCourses');
+        Route::get('lesson/{id}/{slug}', 'LessonsController@show');
     });
 });

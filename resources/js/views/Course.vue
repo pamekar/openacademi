@@ -21,10 +21,10 @@
                 </div>
 
                 <!-- Lessons -->
-                <lessons-list-component :lessons="course.published_lessons" :purchased="purchased"></lessons-list-component>
+                <lessons-list-component :lessons="course.published_lessons" :purchased="purchased" :id="course.id"></lessons-list-component>
             </div>
             <div class="col-md-4">
-                <div class="card">
+                <div class="card" v-if="!purchased">
                     <div class="card-body text-center">
                         <p>
                             <a href="fixed-student-cart.html" class="btn btn-success btn-block flex-column">
@@ -34,7 +34,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="car d">
+                <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Ratings</h4>
                     </div>

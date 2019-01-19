@@ -103,9 +103,7 @@ class Course extends Model
 
     public function getCompletedLessonsAttribute()
     {
-        $user = JWTAuth::user() ? JWTAuth::parseToken()->toUser()
-            : Auth::user();
-        $count = $user->lessons()->where('course_id', $this->id)->count();
+        $count = Auth::user()->lessons()->where('course_id', $this->id)->count();
         return $count;
     }
 

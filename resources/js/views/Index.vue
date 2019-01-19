@@ -26,13 +26,12 @@
 
                         <li class="list-group-item" style="z-index: initial;" v-for="course in purchasedCourses">
                             <div class="d-flex align-items-center">
-                                <a href="#"
-                                   class="avatar avatar-4by3 avatar-sm mr-3">
+                                <router-link :to="{name:'course',params:{'slug':course.slug}}" class="avatar avatar-4by3 avatar-sm mr-3">
                                     <img :src="course.course_image" width="64" height="40" :alt="course.title"
                                          class="avatar-img rounded">
-                                </a>
+                                </router-link>
                                 <div class="flex">
-                                    <a href="#" class="text-body"><strong>{{ course.title }}</strong></a>
+                                    <router-link :to="{name:'course',params:{'slug':course.slug}}" class="text-body"><strong>{{ course.title }}</strong></router-link>
                                     <div class="d-flex align-items-center">
                                         <div class="progress" style="width: 100px;">
                                             <div :class="'progress-bar bg-'+getLessonsProgress(course).color" role="progressbar"
@@ -48,8 +47,7 @@
                                         <i class="material-icons">more_vert</i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item"
-                                           href="#">Continue</a>
+                                        <router-link :to="{name:'course',params:{'slug':course.slug}}" class="dropdown-item">Continue</router-link>
                                     </div>
                                 </div>
                             </div>
