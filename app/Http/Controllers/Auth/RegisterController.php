@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Api\AuthController;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -90,8 +92,19 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
+        $this->frontendLogin($request);
+
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());
     }
 
+    private function frontendLogin(Request $request)
+    {
+        $frontend = new AuthController();
+        $token = $frontend->login($request);
+        $expire = $request->remember ? 12 * 30 * 24 * 3600 : 0;
+
+        Cookie::queue('jwt_token', $token, $expire, '', '',
+            false, false);
+    }
 }

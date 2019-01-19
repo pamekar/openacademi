@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login</title>
+    <title>@yield('title','Authentication')</title>
 
     <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
     <meta name="robots" content="noindex">
@@ -26,9 +26,6 @@
     <link type="text/css" href="{{asset("$public/assets/css/app.rtl.css")}}" rel="stylesheet">
 
 
-
-
-
 </head>
 
 <body class="login">
@@ -38,7 +35,8 @@
     <div class="col-sm-8 col-md-6 col-lg-4 mx-auto" style="min-width: 300px;">
         <div class="text-center mt-5 mb-1">
             <div class="avatar avatar-lg">
-                <img src="{{asset("$public/assets/images/logo/primary.svg")}}" class="avatar-img rounded-circle" alt="LearnPlus" />
+                <img src="{{asset("$public/assets/images/logo/primary.svg")}}" class="avatar-img rounded-circle"
+                     alt="LearnPlus"/>
             </div>
         </div>
         <div class="d-flex justify-content-center mb-5 navbar-light">
@@ -55,30 +53,27 @@
 
 
 <!-- jQuery -->
-<script src="{{asset("$public/assets/vendor/jquery.min.js")}}"> </script>
+<script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
 
 <!-- Bootstrap -->
-<script src="{{asset("$public/assets/vendor/popper.min.js")}}"> </script>
-<script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"> </script>
+<script src="{{asset("$public/assets/vendor/popper.min.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"></script>
 
 <!-- Perfect Scrollbar -->
-<script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"> </script>
+<script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
 
 <!-- MDK -->
-<script src="{{asset("$public/assets/vendor/dom-factory.js")}}"> </script>
-<script src="{{asset("$public/assets/vendor/material-design-kit.js")}}"> </script>
+<script src="{{asset("$public/assets/vendor/dom-factory.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/material-design-kit.js")}}"></script>
 
 <!-- App JS -->
-<script src="{{asset("$public/assets/js/app.js")}}"> </script>
+<script src="{{asset("$public/assets/js/app.js")}}"></script>
 
 <!-- Highlight.js -->
-<script src="{{asset("$public/assets/js/hljs.js")}}"> </script>
+<script src="{{asset("$public/assets/js/hljs.js")}}"></script>
 
 <!-- App Settings (safe to remove) -->
-<script src="{{asset("$public/assets/js/app-settings.js")}}"> </script>
-
-
-
+<script src="{{asset("$public/assets/js/app-settings.js")}}"></script>
 
 
 </body>

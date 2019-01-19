@@ -7,7 +7,7 @@
         ></breadcrumb-component>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="media align-items-center">
@@ -56,7 +56,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-6">
+            <!--<div class="col-md-6">
 
                 <div class="card">
                     <div class="card-header">
@@ -127,7 +127,7 @@
 
                     </ul>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="row">
             <div class="col-md-12">

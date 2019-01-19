@@ -1052,15 +1052,6 @@ module.exports = function bind(fn, thisArg) {
                 param: "slug",
                 route: "category-courses",
                 dropdown: []
-            }, {
-                title: "Quiz Results",
-                route: "error"
-            }, {
-                title: "Account",
-                dropdown: [{
-                    title: "Edit Account",
-                    route: "error"
-                }]
             }]
         };
     },
@@ -18925,7 +18916,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
               _c("div", { staticClass: "media align-items-center" }, [
@@ -19091,9 +19082,7 @@ var render = function() {
               0
             )
           ])
-        ]),
-        _vm._v(" "),
-        _vm._m(2)
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -19106,7 +19095,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "media align-items-center" }, [
-                _vm._m(3),
+                _vm._m(2),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -19167,162 +19156,6 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "material-icons" }, [_vm._v("more_vert")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("div", { staticClass: "media align-items-center" }, [
-            _c("div", { staticClass: "media-body" }, [
-              _c("h4", { staticClass: "card-title" }, [_vm._v("Quizzes")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "card-subtitle" }, [
-                _vm._v("Your Performance")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "media-right" }, [
-              _c(
-                "a",
-                { staticClass: "btn btn-sm btn-primary", attrs: { href: "#" } },
-                [_vm._v("Quiz results")]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("ul", { staticClass: "list-group list-group-fit mb-0" }, [
-          _c("li", { staticClass: "list-group-item" }, [
-            _c("div", { staticClass: "media align-items-center" }, [
-              _c("div", { staticClass: "media-body" }, [
-                _c("a", { staticClass: "text-body", attrs: { href: "#" } }, [
-                  _c("strong", [
-                    _vm._v(
-                      "Title of\n                                    quiz goes here?"
-                    )
-                  ])
-                ]),
-                _c("br"),
-                _vm._v(" "),
-                _c("div", { staticClass: "d-flex align-items-center" }, [
-                  _c(
-                    "small",
-                    { staticClass: "text-black-50 text-uppercase mr-2" },
-                    [_vm._v("Course")]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("Basics of HTML")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "media-right text-center d-flex align-items-center"
-                },
-                [
-                  _c("span", { staticClass: "text-black-50 mr-3" }, [
-                    _vm._v("Good")
-                  ]),
-                  _vm._v(" "),
-                  _c("h4", { staticClass: "mb-0" }, [_vm._v("5.8")])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _c("div", { staticClass: "media align-items-center" }, [
-              _c("div", { staticClass: "media-body" }, [
-                _c("a", { staticClass: "text-body", attrs: { href: "#" } }, [
-                  _c("strong", [
-                    _vm._v(
-                      "Directives\n                                    & Routing"
-                    )
-                  ])
-                ]),
-                _c("br"),
-                _vm._v(" "),
-                _c("div", { staticClass: "d-flex align-items-center" }, [
-                  _c(
-                    "small",
-                    { staticClass: "text-black-50 text-uppercase mr-2" },
-                    [_vm._v("Course")]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("Angular in Steps")
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "media-right text-center d-flex align-items-center"
-                },
-                [
-                  _c("span", { staticClass: "text-black-50 mr-3" }, [
-                    _vm._v("Great")
-                  ]),
-                  _vm._v(" "),
-                  _c("h4", { staticClass: "mb-0 text-success" }, [
-                    _vm._v("9.8")
-                  ])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _c("div", { staticClass: "media align-items-center" }, [
-              _c("div", { staticClass: "media-body" }, [
-                _c("a", { staticClass: "text-body", attrs: { href: "#" } }, [
-                  _c("strong", [
-                    _vm._v(
-                      "Responsive\n                                    & Retina"
-                    )
-                  ])
-                ]),
-                _c("br"),
-                _vm._v(" "),
-                _c("div", { staticClass: "d-flex align-items-center" }, [
-                  _c(
-                    "small",
-                    { staticClass: "text-black-50 text-uppercase mr-2" },
-                    [_vm._v("Course")]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("Bootstrap Foundations")
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "media-right text-center d-flex align-items-center"
-                },
-                [
-                  _c("span", { staticClass: "text-black-50 mr-3" }, [
-                    _vm._v("Failed")
-                  ]),
-                  _vm._v(" "),
-                  _c("h4", { staticClass: "mb-0 text-danger" }, [_vm._v("2.8")])
-                ]
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
   },
   function() {
     var _vm = this

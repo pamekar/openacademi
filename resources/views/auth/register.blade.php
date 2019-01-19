@@ -1,4 +1,5 @@
 @extends('layouts.auth')
+@section('title','Register')
 @section('content')
     <div class="card-header text-center">
         <h4 class="card-title">Register</h4>

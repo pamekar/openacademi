@@ -52,7 +52,8 @@
                         param:    "slug",
                         route:    "category-courses",
                         dropdown: []
-                    }, {
+                    },
+                    /*{
                         title: "Quiz Results",
                         route: "error"
                     },
@@ -64,7 +65,7 @@
                                 route: "error"
                             }
                         ]
-                    }
+                    }*/
                 ]
             }
         },
