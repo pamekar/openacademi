@@ -48,15 +48,13 @@ class CoursesController extends Controller
         return view('course', compact('course', 'purchased_course'));
     }
 
-    public function payment(Request $request)
+    public function payment($course_id)
     {
-        $course = Course::findOrFail($request->get('course_id'));
-        $this->createStripeCharge($request);
-
+        $course = Course::findOrFail($course_id);
         $course->students()->attach(\Auth::id());
 
-        return redirect()->back()
-            ->with('success', 'Payment completed successfully.');
+        //$this->createStripeCharge($request);
+        //return redirect()->back()->with('success', 'Payment completed successfully.');
     }
 
     private function createStripeCharge($request)

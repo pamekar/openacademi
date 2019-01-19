@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+@php
+    $notification = session('notification');
+@endphp
+        <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -242,14 +245,14 @@
     <div class="mdk-header-layout__content d-flex flex-column">
 
         @yield('content')
-    <div class="page">
-        <div class="container page__container">
-            <div class="footer">
-                Copyright &copy; {{date('Y')}} - <a
-                        href="{{route('home')}}">{{config('app.name')}}</a>
+        <div class="page">
+            <div class="container page__container">
+                <div class="footer">
+                    Copyright &copy; {{date('Y')}} - <a
+                            href="{{route('home')}}">{{config('app.name')}}</a>
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- // END Header Layout Content -->
 
@@ -506,6 +509,21 @@
 <script src="{{asset("$public/assets/vendor/popper.min.js")}}"></script>
 <script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"></script>
 
+
+@if(isset($notification))
+    <script src="{{asset("$public/js/bootstrap-notify.min.js")}}"></script>
+    <script>
+        $.notify({
+            // options
+            message: '{{$notification->message}}',
+        }, {
+            // settings
+            type:            '{{$notification->type}}',
+        });
+
+
+    </script>
+@endif
 <!-- Perfect Scrollbar -->
 <script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
 

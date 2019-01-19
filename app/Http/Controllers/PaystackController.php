@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Invoice_line;
+use App\Course;
 use App\Payment;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -12,70 +12,99 @@ use Illuminate\Support\Facades\DB;
 class PaystackController extends Controller
 {
     //
-    public function initializePayment(Request $request)
+    public function calcTransactionCharge($amount)
+    {
+
+        $waiver = 100;
+        $siteCommision = 0;
+        $gatewayCommission = 1;
+
+        for (
+            $charge = 0.015; $siteCommision < $gatewayCommission;
+            $charge += 0.0000005
+        ) {
+            if ($amount < 2500) {
+                $siteCommision = $amount * $charge;
+                $gatewayCommission = ($siteCommision + $amount) * 0.015;
+            } else {
+                $siteCommision = $amount * $charge + $waiver;
+                $gatewayCommission = ($siteCommision + $amount) * 0.015
+                    + $waiver;
+            }
+            if ($siteCommision > 2500) {
+                $siteCommision = 2500;
+                break;
+            }
+        }
+
+        return $siteCommision;
+    }
+
+    public function initializePayment($slug)
     {
         $result = array();
 
         $client = new Client();
-        $invoice = session('invoice');
 
-        if (!$this->isDoublePayment($invoice->invoices)) {
-            $data = session('userData');
-            $email = Auth::user()->email ?: "null@null.null";
-            $reference = md5(Auth::user()->name . date('YmdHis')
-                . str_random());
-            $metadata = [
-                'student'  => $invoice->student,
-                'amount'   => $invoice->amount,
-                'charge'   => $invoice->charge,
-                'invoices' => $invoice->invoices
-            ];
+        $isCourse = Course::where('slug', $slug)->first();
 
-            $postdata = [
-                'first_name'   => $data->user_meta->first_name,
-                'last_name'    => $data->user_meta->last_name,
-                'email'        => $email,
-                'amount'       => $invoice->amount + $invoice->charge,
-                "reference"    => $reference,
-                "callback_url" => url(config('paystack.callbackUrl')),
-                "metadata"     => (object)$metadata
-            ];
+        if ($isCourse) {
+            if (!$this->isDoublePayment($isCourse->id)) {
+                $data = session('userData');
+                $email = Auth::user()->email ?: "null@null.null";
+                $amount = $isCourse->price * 100;
+                $charge = $this->calcTransactionCharge($amount);
+                $reference = md5(Auth::user()->name . $isCourse->slug
+                    . date('YmdHis') . str_random());
+                $metadata = [
+                    'user'   => Auth::user()->id,
+                    'amount' => $amount,
+                    'charge' => $charge,
+                    'course' => $isCourse->id,
+                    'slug'   => $slug
+                ];
 
-            $url = config('paystack.paymentUrl') . "transaction/initialize";
+                $postdata = [
+                    'first_name'   => Auth::user()->first_name,
+                    'last_name'    => Auth::user()->last_name,
+                    'email'        => $email,
+                    'amount'       => $amount + $charge,
+                    "reference"    => $reference,
+                    "callback_url" => url(config('paystack.callbackUrl')),
+                    "metadata"     => (object)$metadata
+                ];
 
-            $headers = [
-                'Authorization' => 'Bearer ' . config('paystack.secretKey'),
-                'Content-Type'  => 'application/json',
-                'Accept'        => 'application/json'
-            ];
+                $url = config('paystack.paymentUrl') . "transaction/initialize";
 
-            $result = $client->post($url, [
-                'body'    => json_encode($postdata),
-                'headers' => $headers,
-            ]);
+                $headers = [
+                    'Authorization' => 'Bearer ' . config('paystack.secretKey'),
+                    'Content-Type'  => 'application/json',
+                    'Accept'        => 'application/json'
+                ];
 
-            $response = json_decode($result->getBody(), true);
-            $authorization_url = $response['data']['authorization_url'];
+                $result = $client->post($url, [
+                    'body'    => json_encode($postdata),
+                    'headers' => $headers,
+                ]);
 
-            return redirect($authorization_url);
+                $response = json_decode($result->getBody(), true);
+                $authorization_url = $response['data']['authorization_url'];
+
+                return redirect($authorization_url);
+            }
         }
 
-        $status = [
-            'type'    => 'danger',
-            'message' => "Oops! We couldn't initiate a payment. We detected that a payment has already been made."
-        ];
-        $request->session()->flash('notification', (object)$status);
         return redirect()->back();
     }
 
-    public function isDoublePayment($invoices)
+    public function isDoublePayment($course)
     {
-        $payment = is_array($invoices)
+        $payment = is_array($course)
             ? Payment::where('user_id', Auth::user()->name)
-                ->whereIn('invoice_id', $invoices)
+                ->whereIn('course_id', $course)
                 ->first()
             : Payment::where('user_id', Auth::user()->name)
-                ->where('invoice_id', $invoices)
+                ->where('course_id', $course)
                 ->first();
 
         return $payment;
@@ -90,6 +119,7 @@ class PaystackController extends Controller
         $reference = $request->reference;
         $url = config('paystack.paymentUrl') . "transaction/verify/$reference";
 
+        $course_slug = '';
 
         $headers = [
             'Authorization' => 'Bearer ' . config('paystack.secretKey'),
@@ -108,46 +138,28 @@ class PaystackController extends Controller
                 if ($result['data']) {
                     //something came in
                     if ($result['data']['status'] == 'success') {
-                        $invoices = $result['data']['metadata']['invoices'];
                         $amount = $result['data']['metadata']['amount'];
                         $charge = $result['data']['metadata']['charge'];
-                        $student = $result['data']['metadata']['student'];
+                        $user = $result['data']['metadata']['user'];
+                        $course = $result['data']['metadata']['course'];
+                        $course_slug = $result['data']['metadata']['slug'];
 
-                        if (!$this->isDoublePayment($invoices)) {
-                            $total = $this->totalInvoice($invoices);
-                            if ($total == $amount / 100) {
-                                foreach ($invoices as $invoice) {
-                                    DB::table('payments')->insert([
-                                        'payment_id' => $reference,
-                                        'invoice_id' => $invoice,
-                                        'user_id'    => $student,
-                                        'gateway'    => 'paystack',
-                                        'amount'     => $this->totalInvoice($invoice)
-                                            * 100,
-                                        'status'     => 'successful'
-                                    ]);
-                                }
-                                $status = [
-                                    'type'    => 'success',
-                                    'message' => 'Your payment has been processed successfully'
-                                ];
-                            }
-                        } else {
-                            $status = [
-                                'type'    => 'danger',
-                                'message' => "Oops! We couldn't initiate a payment. We detected that a payment has already been made."
-                            ];
-                        }
-
-                    } else {
-                        // the transaction was not successful, do not deliver value'
-                        // print_r($result);  //uncomment this line to inspect the result, to check why it failed.
-                        $status = [
-                            'type'    => 'success',
-                            'message' => "Transaction was not successful: Last gateway response was: "
-                                . $result['data']['gateway_response']
-                        ];
+                        DB::table('payments')->insert([
+                            'reference' => $reference,
+                            'user_id'   => $user,
+                            'course_id' => $course,
+                            'amount'    => $amount,
+                            'charge'    => $charge,
+                            'status'    => 'successful'
+                        ]);
+                        $courseTransaction = new CoursesController();
+                        $courseTransaction->payment($course);
                     }
+                    $status = [
+                        'type'    => 'success',
+                        'message' => 'Your payment has been processed successfully'
+                    ];
+
                 } else {
                     $status = [
                         'type'    => 'success',
@@ -165,11 +177,10 @@ class PaystackController extends Controller
             die("Something went wrong while executing curl. Uncomment the var_dump line above this line to see what the issue is. Please check your CURL command to make sure everything is ok");
         }
 
-        $redirectUrl = Auth::user()->user_type == 'undergraduate'
-            ? 'undergraduate/fees/history' : 'home';
-        return redirect($redirectUrl)->with('notification',
+        return redirect("/dashboard#/course/$course_slug")->with('notification',
             (object)$status);
     }
+
     function totalInvoice($invoices)
     {
         $invoiceLines = is_array($invoices)

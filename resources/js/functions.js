@@ -46,9 +46,7 @@ const functions = {
             console.log(2);
             NProgress.start();
         });
-    
-    
-    }
+    },
 };
 
 export default functions;

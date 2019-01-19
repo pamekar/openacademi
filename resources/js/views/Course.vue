@@ -27,7 +27,7 @@
                 <div class="card" v-if="!purchased">
                     <div class="card-body text-center">
                         <p>
-                            <a href="fixed-student-cart.html" class="btn btn-success btn-block flex-column">
+                            <a :href="'/course/payment/initialize/'+course.slug" class="btn btn-success btn-block flex-column">
                                 Purchase this course
                                 <strong>&#8358; {{course.price.toLocaleString('en', {maximumSignificantDigits: 2})}}</strong>
                             </a>

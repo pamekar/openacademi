@@ -17,6 +17,10 @@ Route::get('lesson/{course_id}/{slug}',
 Route::post('lesson/{slug}/test',
     ['uses' => 'LessonsController@test', 'as' => 'lessons.test']);
 
+Route::get('/course/payment/initialize/{slug}',
+    'PaystackController@initializePayment');
+
+Route::get('/course/payment/verify','PaystackController@verifyPayment');
 // Authentication Routes...
 
 // Change Password Routes...

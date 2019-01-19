@@ -19426,7 +19426,9 @@ var render = function() {
                       "a",
                       {
                         staticClass: "btn btn-success btn-block flex-column",
-                        attrs: { href: "fixed-student-cart.html" }
+                        attrs: {
+                          href: "/course/payment/initialize/" + _vm.course.slug
+                        }
                       },
                       [
                         _vm._v(
