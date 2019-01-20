@@ -20,8 +20,8 @@ class User extends \TCG\Voyager\Models\User implements JWTSubject
 {
     use Notifiable;
     protected $fillable = ['name', 'email', 'password','categories', 'remember_token'];
-    
-    
+
+
     /**
      * Hash password
      * @param $input
@@ -31,17 +31,15 @@ class User extends \TCG\Voyager\Models\User implements JWTSubject
         if ($input)
             $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
     }
-    
-    
-    public function position()
+
+    public function isInstructor()
     {
-        return $this->belongsToMany(Position::class, 'position_user');
+        return $this->hasRole('instructor');
     }
 
-
-    public function isAdmin()
+    public function isStudent()
     {
-        return $this->position()->where('role_id', 1)->first();
+        return $this->hasRole('student');
     }
 
     public function lessons()

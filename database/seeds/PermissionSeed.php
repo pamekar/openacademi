@@ -62,7 +62,7 @@ class PermissionSeed extends Seeder
         ];
 
         foreach ($items as $item) {
-            \App\Authorization::create($item);
+            \App\Permission::create($item);
         }
     }
 }

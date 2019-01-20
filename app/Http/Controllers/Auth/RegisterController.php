@@ -88,7 +88,7 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        $user->position()->sync([3]);
+        $user->role()->sync([3]);
 
         $this->guard()->login($user);
 

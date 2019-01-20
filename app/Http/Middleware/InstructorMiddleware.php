@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class AdminMiddleware
+class InstructorMiddleware
 {
     /**
      * Handle an incoming request.
@@ -20,7 +20,7 @@ class AdminMiddleware
         if (!Auth::check()) {
             return redirect('/');
         }
-        if (Auth::user()->role()->where('title', 'Student')->count() > 0) {
+        if (!Auth::user()->isInstructor()) {
             return redirect('/');
         }
 

@@ -20,7 +20,7 @@ Route::post('lesson/{slug}/test',
 Route::get('/course/payment/initialize/{slug}',
     'PaystackController@initializePayment');
 
-Route::get('/course/payment/verify','PaystackController@verifyPayment');
+Route::get('/course/payment/verify', 'PaystackController@verifyPayment');
 // Authentication Routes...
 
 // Change Password Routes...
@@ -35,10 +35,10 @@ Route::patch('change_password', 'Auth\ChangePasswordController@changePassword')
 
 Route::get('faq', 'HomeController@faq')->name('faq');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'isStudent']], function () {
     Route::get('/user', function () {
         return view('dashboard.student.index');
-    })->name('dashboard');
+    })->name('user');
 
 });
 
@@ -46,12 +46,13 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group([
-    'middleware' => ['instructor'],
-    'prefix'     => 'instructor',
+    'middleware' => ['auth','isInstructor'],
+    'prefix'     => 'dashboard',
     'as'         => 'instructor.'
 ],
-    function () {
-        Route::get('/home', 'Instructor\DashboardController@index');
+    function ()
+    {
+        Route::get('/', 'Instructor\DashboardController@index');
         Route::resource('permissions', 'Instructor\PermissionsController');
         Route::post('permissions_mass_destroy', [
             'uses' => 'Instructor\PermissionsController@massDestroy',

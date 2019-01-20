@@ -12,8 +12,8 @@ class CreateCombined596eec0af366bRoleUserTable extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('position_user')) {
-            Schema::create('position_user', function (Blueprint $table) {
+        if(! Schema::hasTable('role_user')) {
+            Schema::create('role_user', function (Blueprint $table) {
                 $table->integer('role_id')->unsigned()->nullable();
                 $table->foreign('role_id', 'fk_p_54416_54417_user_rol_596eec0af3746')->references('id')->on('roles')->onDelete('cascade');
                 $table->integer('user_id')->unsigned()->nullable();
@@ -30,6 +30,6 @@ class CreateCombined596eec0af366bRoleUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('position_user');
+        Schema::dropIfExists('role_user');
     }
 }

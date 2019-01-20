@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  * @property string $title
  */
-class Authorization extends Model
+class Permission extends Model
 {
     protected $fillable = ['title'];
     protected $perPage = 25;

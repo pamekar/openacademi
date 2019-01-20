@@ -46341,19 +46341,19 @@ INSERT INTO `positions` (`id`, `title`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `position_user`
+-- Table structure for table `role_user`
 --
 
-CREATE TABLE `position_user` (
+CREATE TABLE `role_user` (
   `position_id` int(10) UNSIGNED DEFAULT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `position_user`
+-- Dumping data for table `role_user`
 --
 
-INSERT INTO `position_user` (`position_id`, `user_id`) VALUES
+INSERT INTO `role_user` (`position_id`, `user_id`) VALUES
 (1, 1),
 (3, 2),
 (3, 3);

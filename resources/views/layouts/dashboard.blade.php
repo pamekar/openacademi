@@ -501,7 +501,7 @@
 <form id="logout-form" action="{{ url('/logout') }}"
       method="POST" style="display: none;"
 >{{ csrf_field() }}</form>
-<script src="{{asset("$public/js/app.js")}}"></script>
+<script src="{{asset("$public/student/js/app.js")}}"></script>
 <!-- jQuery -->
 <script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
 
