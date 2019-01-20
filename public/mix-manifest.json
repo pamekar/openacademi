@@ -1,4 +1,10 @@
 {
   "/js/app.js": "/js/app.js",
-  "/css/app.css": "/css/app.css"
+  "/css/app.css": "/css/app.css",
+  "/student/js/app.js": "/student/js/app.js",
+  "/student/css/app.css": "/student/css/app.css",
+  "/instructor/css/iapp.css": "/instructor/css/iapp.css",
+  "/instructor/js/iapp.js": "/instructor/js/iapp.js",
+  "/instructor/css/app.css": "/instructor/css/app.css",
+  "/instructor/js/app.js": "/instructor/js/app.js"
 }

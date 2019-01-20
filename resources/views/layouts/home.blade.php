@@ -48,7 +48,7 @@
                             <a href="{{route('login')}}" title="">Sign in</a>
                         @endguest
                         @auth
-                                <a href="{{route('dashboard')}}" title="">Dashboard</a>
+                                <a href="{{route('user')}}" title="">Dashboard</a>
                                 <a href="{{route('logout')}}" title="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                         @endauth
                     </div>

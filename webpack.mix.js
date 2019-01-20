@@ -11,16 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/student/app.js', 'public/student/js')
+    .sass('resources/sass/student/app.scss', 'public/student/css');
+mix.js('resources/js/instructor/app.js', 'public/instructor/js')
+    .sass('resources/sass/instructor/app.scss', 'public/instructor/css');
 
-mix.options({
-    vue: {
-        preLoaders: {
-
-        },
-        postLoaders: {
-
-        }
-    }
-});

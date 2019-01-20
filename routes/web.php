@@ -36,7 +36,7 @@ Route::patch('change_password', 'Auth\ChangePasswordController@changePassword')
 Route::get('faq', 'HomeController@faq')->name('faq');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', function () {
+    Route::get('/user', function () {
         return view('dashboard.student.index');
     })->name('dashboard');
 
