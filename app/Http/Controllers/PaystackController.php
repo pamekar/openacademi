@@ -177,7 +177,7 @@ class PaystackController extends Controller
             die("Something went wrong while executing curl. Uncomment the var_dump line above this line to see what the issue is. Please check your CURL command to make sure everything is ok");
         }
 
-        return redirect("/dashboard#/course/$course_slug")->with('notification',
+        return redirect("/user#/course/$course_slug")->with('notification',
             (object)$status);
     }
 

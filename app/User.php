@@ -19,7 +19,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends \TCG\Voyager\Models\User implements JWTSubject
 {
     use Notifiable;
-    protected $fillable = ['name', 'email', 'password','categories', 'remember_token'];
+    protected $fillable = ['name', 'email', 'password','categories', 'remember_token','role_id'];
 
 
     /**
@@ -30,6 +30,10 @@ class User extends \TCG\Voyager\Models\User implements JWTSubject
     {
         if ($input)
             $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
+    }
+
+    public function setRoleIDAttribute(){
+
     }
 
     public function isInstructor()

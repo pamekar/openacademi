@@ -22,7 +22,7 @@
                 <label class="form-label" for="email">Your email address:</label>
                 <div class="input-group input-group-merge">
                     <input name="email" id="email" type="email" required="" class="form-control form-control-prepended @if($errors->has('email') ) is-invalid @endif"
-                           placeholder="Your email address" {{old('email')}}>
+                           placeholder="Your email address" value="{{old('email')}}">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-envelope"></span>
