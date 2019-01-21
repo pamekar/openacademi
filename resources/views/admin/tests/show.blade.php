@@ -46,7 +46,7 @@
 
             <p>&nbsp;</p>
 
-            <a href="{{ route('admin.tests.index') }}" class="btn btn-default">@lang('global.app_back_to_list')</a>
+            <a href="{{ route('instructor.tests.index') }}" class="btn btn-default">@lang('global.app_back_to_list')</a>
         </div>
     </div>
 @stop

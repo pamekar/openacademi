@@ -5,15 +5,15 @@
     <h3 class="page-title">@lang('global.courses.title')</h3>
     @can('course_create')
     <p>
-        <a href="{{ route('admin.courses.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
+        <a href="{{ route('instructor.courses.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
         
     </p>
     @endcan
 
     <p>
         <ul class="list-inline">
-            <li><a href="{{ route('admin.courses.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">All</a></li> |
-            <li><a href="{{ route('admin.courses.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
+            <li><a href="{{ route('instructor.courses.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">All</a></li> |
+            <li><a href="{{ route('instructor.courses.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
         </ul>
     </p>
     
@@ -91,10 +91,10 @@
                                 @else
                                 <td>
                                     @can('course_view')
-                                    <a href="{{ route('admin.lessons.index',['course_id' => $course->id]) }}" class="btn btn-xs btn-primary">@lang('global.lessons.title')</a>
+                                    <a href="{{ route('instructor.lessons.index',['course_id' => $course->id]) }}" class="btn btn-xs btn-primary">@lang('global.lessons.title')</a>
                                     @endcan
                                     @can('course_edit')
-                                    <a href="{{ route('admin.courses.edit',[$course->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('instructor.courses.edit',[$course->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('course_delete')
 {!! Form::open(array(
@@ -123,7 +123,7 @@
 @section('javascript') 
     <script>
         @can('course_delete')
-            @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('admin.courses.mass_destroy') }}'; @endif
+            @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('instructor.courses.mass_destroy') }}'; @endif
         @endcan
 
     </script>

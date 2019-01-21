@@ -27,7 +27,7 @@
                 
                 @can('permission_access')
                 <li class="{{ $request->segment(2) == 'permissions' ? 'active active-sub' : '' }}">
-                        <a href="{{ route('admin.permissions.index') }}">
+                        <a href="{{ route('instructor.permissions.index') }}">
                             <i class="fa fa-briefcase"></i>
                             <span class="title">
                                 @lang('global.permissions.title')
@@ -37,7 +37,7 @@
                 @endcan
                 @can('role_access')
                 <li class="{{ $request->segment(2) == 'roles' ? 'active active-sub' : '' }}">
-                        <a href="{{ route('admin.roles.index') }}">
+                        <a href="{{ route('instructor.roles.index') }}">
                             <i class="fa fa-briefcase"></i>
                             <span class="title">
                                 @lang('global.roles.title')
@@ -47,7 +47,7 @@
                 @endcan
                 @can('user_access')
                 <li class="{{ $request->segment(2) == 'users' ? 'active active-sub' : '' }}">
-                        <a href="{{ route('admin.users.index') }}">
+                        <a href="{{ route('instructor.users.index') }}">
                             <i class="fa fa-user"></i>
                             <span class="title">
                                 @lang('global.users.title')
@@ -60,43 +60,43 @@
             @endcan
             @can('course_access')
             <li class="{{ $request->segment(2) == 'courses' ? 'active' : '' }}">
-                <a href="{{ route('admin.courses.index') }}">
+                <a href="{{ route('instructor.courses.index') }}">
                     <i class="fa fa-gears"></i>
                     <span class="title">@lang('global.courses.title')</span>
                 </a>
             </li>
             @endcan
-            
+
             @can('lesson_access')
             <li class="{{ $request->segment(2) == 'lessons' ? 'active' : '' }}">
-                <a href="{{ route('admin.lessons.index') }}">
+                <a href="{{ route('instructor.lessons.index') }}">
                     <i class="fa fa-gears"></i>
                     <span class="title">@lang('global.lessons.title')</span>
                 </a>
             </li>
             @endcan
-            
+
             @can('question_access')
             <li class="{{ $request->segment(2) == 'questions' ? 'active' : '' }}">
-                <a href="{{ route('admin.questions.index') }}">
+                <a href="{{ route('instructor.questions.index') }}">
                     <i class="fa fa-question"></i>
                     <span class="title">@lang('global.questions.title')</span>
                 </a>
             </li>
             @endcan
-            
+
             @can('questions_option_access')
             <li class="{{ $request->segment(2) == 'questions_options' ? 'active' : '' }}">
-                <a href="{{ route('admin.questions_options.index') }}">
+                <a href="{{ route('instructor.questions_options.index') }}">
                     <i class="fa fa-gears"></i>
                     <span class="title">@lang('global.questions-options.title')</span>
                 </a>
             </li>
             @endcan
-            
+
             @can('test_access')
             <li class="{{ $request->segment(2) == 'tests' ? 'active' : '' }}">
-                <a href="{{ route('admin.tests.index') }}">
+                <a href="{{ route('instructor.tests.index') }}">
                     <i class="fa fa-gears"></i>
                     <span class="title">@lang('global.tests.title')</span>
                 </a>

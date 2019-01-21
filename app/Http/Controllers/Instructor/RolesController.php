@@ -6,8 +6,8 @@ use App\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreRolesRequest;
-use App\Http\Requests\Admin\UpdateRolesRequest;
+use App\Http\Requests\Instructor\StoreRolesRequest;
+use App\Http\Requests\Instructor\UpdateRolesRequest;
 
 class RolesController extends Controller
 {
@@ -59,7 +59,7 @@ class RolesController extends Controller
 
 
 
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('instructor.roles.index');
     }
 
 
@@ -99,7 +99,7 @@ class RolesController extends Controller
 
 
 
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('instructor.roles.index');
     }
 
 
@@ -139,7 +139,7 @@ class RolesController extends Controller
         $role = Position::findOrFail($id);
         $role->delete();
 
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('instructor.roles.index');
     }
 
     /**

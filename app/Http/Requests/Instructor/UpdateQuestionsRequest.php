@@ -1,9 +1,9 @@
 <?php
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Instructor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreQuestionsOptionsRequest extends FormRequest
+class UpdateQuestionsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,9 @@ class StoreQuestionsOptionsRequest extends FormRequest
     public function rules()
     {
         return [
-            'option_text' => 'required',
+            
+            'question' => 'required',
+            'score' => 'max:2147483647|required',
         ];
     }
 }

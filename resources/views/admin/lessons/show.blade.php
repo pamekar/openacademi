@@ -119,10 +119,10 @@
                                 @else
                                 <td>
                                     @can('test_view')
-                                    <a href="{{ route('admin.tests.show',[$test->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    <a href="{{ route('instructor.tests.show',[$test->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
                                     @endcan
                                     @can('test_edit')
-                                    <a href="{{ route('admin.tests.edit',[$test->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('instructor.tests.edit',[$test->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('test_delete')
 {!! Form::open(array(
@@ -149,7 +149,7 @@
 
             <p>&nbsp;</p>
 
-            <a href="{{ route('admin.lessons.index') }}" class="btn btn-default">@lang('global.app_back_to_list')</a>
+            <a href="{{ route('instructor.lessons.index') }}" class="btn btn-default">@lang('global.app_back_to_list')</a>
         </div>
     </div>
 @stop

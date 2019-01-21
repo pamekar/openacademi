@@ -5,15 +5,15 @@
     <h3 class="page-title">@lang('global.questions.title')</h3>
     @can('question_create')
     <p>
-        <a href="{{ route('admin.questions.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
+        <a href="{{ route('instructor.questions.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
         
     </p>
     @endcan
 
     <p>
         <ul class="list-inline">
-            <li><a href="{{ route('admin.questions.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">All</a></li> |
-            <li><a href="{{ route('admin.questions.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
+            <li><a href="{{ route('instructor.questions.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">All</a></li> |
+            <li><a href="{{ route('instructor.questions.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
         </ul>
     </p>
     
@@ -73,10 +73,10 @@
                                 @else
                                 <td>
                                     @can('question_view')
-                                    <a href="{{ route('admin.questions.show',[$question->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    <a href="{{ route('instructor.questions.show',[$question->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
                                     @endcan
                                     @can('question_edit')
-                                    <a href="{{ route('admin.questions.edit',[$question->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('instructor.questions.edit',[$question->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('question_delete')
 {!! Form::open(array(
@@ -105,7 +105,7 @@
 @section('javascript') 
     <script>
         @can('question_delete')
-            @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('admin.questions.mass_destroy') }}'; @endif
+            @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('instructor.questions.mass_destroy') }}'; @endif
         @endcan
 
     </script>

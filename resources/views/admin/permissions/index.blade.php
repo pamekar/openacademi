@@ -5,7 +5,7 @@
     <h3 class="page-title">@lang('global.permissions.title')</h3>
     @can('permission_create')
     <p>
-        <a href="{{ route('admin.permissions.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
+        <a href="{{ route('instructor.permissions.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
         
     </p>
     @endcan
@@ -42,10 +42,10 @@
                                 <td>{{ $permission->title }}</td>
                                                                 <td>
                                     @can('permission_view')
-                                    <a href="{{ route('admin.permissions.show',[$permission->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    <a href="{{ route('instructor.permissions.show',[$permission->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
                                     @endcan
                                     @can('permission_edit')
-                                    <a href="{{ route('admin.permissions.edit',[$permission->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('instructor.permissions.edit',[$permission->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('permission_delete')
 {!! Form::open(array(
@@ -74,7 +74,7 @@
 @section('javascript') 
     <script>
         @can('permission_delete')
-            window.route_mass_crud_entries_destroy = '{{ route('admin.permissions.mass_destroy') }}';
+            window.route_mass_crud_entries_destroy = '{{ route('instructor.permissions.mass_destroy') }}';
         @endcan
 
     </script>

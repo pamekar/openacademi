@@ -1,9 +1,9 @@
 <?php
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Instructor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRolesRequest extends FormRequest
+class StorePermissionsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class StoreRolesRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'permission' => 'required',
-            'permission.*' => 'exists:permissions,id',
         ];
     }
 }

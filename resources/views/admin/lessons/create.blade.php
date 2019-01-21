@@ -91,7 +91,7 @@
                     {!! Form::file('downloadable_files[]', [
                         'multiple',
                         'class' => 'form-control file-upload',
-                        'data-url' => route('admin.media.upload'),
+                        'data-url' => route('instructor.media.upload'),
                         'data-bucket' => 'downloadable_files',
                         'data-filekey' => 'downloadable_files',
                         ]) !!}

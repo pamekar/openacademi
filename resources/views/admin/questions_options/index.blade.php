@@ -5,15 +5,15 @@
     <h3 class="page-title">@lang('global.questions-options.title')</h3>
     @can('questions_option_create')
     <p>
-        <a href="{{ route('admin.questions_options.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
+        <a href="{{ route('instructor.questions_options.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
         
     </p>
     @endcan
 
     <p>
         <ul class="list-inline">
-            <li><a href="{{ route('admin.questions_options.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">All</a></li> |
-            <li><a href="{{ route('admin.questions_options.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
+            <li><a href="{{ route('instructor.questions_options.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">All</a></li> |
+            <li><a href="{{ route('instructor.questions_options.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
         </ul>
     </p>
     
@@ -73,10 +73,10 @@
                                 @else
                                 <td>
                                     @can('questions_option_view')
-                                    <a href="{{ route('admin.questions_options.show',[$questions_option->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    <a href="{{ route('instructor.questions_options.show',[$questions_option->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
                                     @endcan
                                     @can('questions_option_edit')
-                                    <a href="{{ route('admin.questions_options.edit',[$questions_option->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('instructor.questions_options.edit',[$questions_option->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('questions_option_delete')
 {!! Form::open(array(
@@ -105,7 +105,7 @@
 @section('javascript') 
     <script>
         @can('questions_option_delete')
-            @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('admin.questions_options.mass_destroy') }}'; @endif
+            @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('instructor.questions_options.mass_destroy') }}'; @endif
         @endcan
 
     </script>

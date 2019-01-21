@@ -50,10 +50,10 @@
                                 </td>
                                                                 <td>
                                     @can('role_view')
-                                    <a href="{{ route('admin.roles.show',[$role->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    <a href="{{ route('instructor.roles.show',[$role->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
                                     @endcan
                                     @can('role_edit')
-                                    <a href="{{ route('admin.roles.edit',[$role->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('instructor.roles.edit',[$role->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('role_delete')
 {!! Form::open(array(
@@ -80,7 +80,7 @@
 
             <p>&nbsp;</p>
 
-            <a href="{{ route('admin.permissions.index') }}" class="btn btn-default">@lang('global.app_back_to_list')</a>
+            <a href="{{ route('instructor.permissions.index') }}" class="btn btn-default">@lang('global.app_back_to_list')</a>
         </div>
     </div>
 @stop

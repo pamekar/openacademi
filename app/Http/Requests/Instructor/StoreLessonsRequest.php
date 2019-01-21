@@ -1,9 +1,9 @@
 <?php
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Instructor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCoursesRequest extends FormRequest
+class StoreLessonsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,7 @@ class StoreCoursesRequest extends FormRequest
     public function rules()
     {
         return [
-            'teachers.*' => 'exists:users,id',
             'title' => 'required',
-            'start_date' => 'date_format:'.config('app.date_format'),
         ];
     }
 }

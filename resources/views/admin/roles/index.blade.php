@@ -5,7 +5,7 @@
     <h3 class="page-title">@lang('global.roles.title')</h3>
     @can('role_create')
     <p>
-        <a href="{{ route('admin.roles.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
+        <a href="{{ route('instructor.roles.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
         
     </p>
     @endcan
@@ -48,10 +48,10 @@
                                 </td>
                                                                 <td>
                                     @can('role_view')
-                                    <a href="{{ route('admin.roles.show',[$role->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    <a href="{{ route('instructor.roles.show',[$role->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
                                     @endcan
                                     @can('role_edit')
-                                    <a href="{{ route('admin.roles.edit',[$role->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('instructor.roles.edit',[$role->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('role_delete')
 {!! Form::open(array(
@@ -80,7 +80,7 @@
 @section('javascript') 
     <script>
         @can('role_delete')
-            window.route_mass_crud_entries_destroy = '{{ route('admin.roles.mass_destroy') }}';
+            window.route_mass_crud_entries_destroy = '{{ route('instructor.roles.mass_destroy') }}';
         @endcan
 
     </script>

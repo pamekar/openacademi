@@ -7,8 +7,8 @@ use App\QuestionsOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreQuestionsRequest;
-use App\Http\Requests\Admin\UpdateQuestionsRequest;
+use App\Http\Requests\Instructor\StoreQuestionsRequest;
+use App\Http\Requests\Instructor\UpdateQuestionsRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
 
 class QuestionsController extends Controller
@@ -78,7 +78,7 @@ class QuestionsController extends Controller
             }
         }
 
-        return redirect()->route('admin.questions.index');
+        return redirect()->route('instructor.questions.index');
     }
 
 
@@ -118,7 +118,7 @@ class QuestionsController extends Controller
 
 
 
-        return redirect()->route('admin.questions.index');
+        return redirect()->route('instructor.questions.index');
     }
 
 
@@ -158,7 +158,7 @@ class QuestionsController extends Controller
         $question = Question::findOrFail($id);
         $question->delete();
 
-        return redirect()->route('admin.questions.index');
+        return redirect()->route('instructor.questions.index');
     }
 
     /**
@@ -195,7 +195,7 @@ class QuestionsController extends Controller
         $question = Question::onlyTrashed()->findOrFail($id);
         $question->restore();
 
-        return redirect()->route('admin.questions.index');
+        return redirect()->route('instructor.questions.index');
     }
 
     /**
@@ -212,6 +212,6 @@ class QuestionsController extends Controller
         $question = Question::onlyTrashed()->findOrFail($id);
         $question->forceDelete();
 
-        return redirect()->route('admin.questions.index');
+        return redirect()->route('instructor.questions.index');
     }
 }

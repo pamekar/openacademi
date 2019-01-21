@@ -7,8 +7,8 @@ use App\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreLessonsRequest;
-use App\Http\Requests\Admin\UpdateLessonsRequest;
+use App\Http\Requests\Instructor\StoreLessonsRequest;
+use App\Http\Requests\Instructor\UpdateLessonsRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
 
 class LessonsController extends Controller
@@ -79,7 +79,7 @@ class LessonsController extends Controller
             $file->save();
         }
 
-        return redirect()->route('admin.lessons.index', ['course_id' => $request->course_id]);
+        return redirect()->route('instructor.lessons.index', ['course_id' => $request->course_id]);
     }
 
 
@@ -128,7 +128,7 @@ class LessonsController extends Controller
         }
         $lesson->updateMedia($media, 'downloadable_files');
 
-        return redirect()->route('admin.lessons.index', ['course_id' => $request->course_id]);
+        return redirect()->route('instructor.lessons.index', ['course_id' => $request->course_id]);
     }
 
 
@@ -165,7 +165,7 @@ class LessonsController extends Controller
         $lesson = Lesson::findOrFail($id);
         $lesson->delete();
 
-        return redirect()->route('admin.lessons.index');
+        return redirect()->route('instructor.lessons.index');
     }
 
     /**
@@ -202,7 +202,7 @@ class LessonsController extends Controller
         $lesson = Lesson::onlyTrashed()->findOrFail($id);
         $lesson->restore();
 
-        return redirect()->route('admin.lessons.index');
+        return redirect()->route('instructor.lessons.index');
     }
 
     /**
@@ -219,6 +219,6 @@ class LessonsController extends Controller
         $lesson = Lesson::onlyTrashed()->findOrFail($id);
         $lesson->forceDelete();
 
-        return redirect()->route('admin.lessons.index');
+        return redirect()->route('instructor.lessons.index');
     }
 }

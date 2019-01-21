@@ -185,3 +185,7 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')
     ->name('register');
 Route::post('register', 'Auth\RegisterController@register')
     ->name('register');
+
+Route::get('authorization', function(){
+    dd(Auth::user()->can('course_access'));
+});

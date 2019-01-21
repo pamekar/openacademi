@@ -6,8 +6,8 @@ use App\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreTestsRequest;
-use App\Http\Requests\Admin\UpdateTestsRequest;
+use App\Http\Requests\Instructor\StoreTestsRequest;
+use App\Http\Requests\Instructor\UpdateTestsRequest;
 
 class TestsController extends Controller
 {
@@ -66,7 +66,7 @@ class TestsController extends Controller
         }
         $test = Test::create($request->all());
 
-        return redirect()->route('admin.tests.index');
+        return redirect()->route('instructor.tests.index');
     }
 
 
@@ -106,7 +106,7 @@ class TestsController extends Controller
         $test = Test::findOrFail($id);
         $test->update($request->all());
 
-        return redirect()->route('admin.tests.index');
+        return redirect()->route('instructor.tests.index');
     }
 
 
@@ -141,7 +141,7 @@ class TestsController extends Controller
         $test = Test::findOrFail($id);
         $test->delete();
 
-        return redirect()->route('admin.tests.index');
+        return redirect()->route('instructor.tests.index');
     }
 
     /**
@@ -178,7 +178,7 @@ class TestsController extends Controller
         $test = Test::onlyTrashed()->findOrFail($id);
         $test->restore();
 
-        return redirect()->route('admin.tests.index');
+        return redirect()->route('instructor.tests.index');
     }
 
     /**
@@ -195,6 +195,6 @@ class TestsController extends Controller
         $test = Test::onlyTrashed()->findOrFail($id);
         $test->forceDelete();
 
-        return redirect()->route('admin.tests.index');
+        return redirect()->route('instructor.tests.index');
     }
 }

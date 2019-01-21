@@ -6,8 +6,8 @@ use App\QuestionsOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreQuestionsOptionsRequest;
-use App\Http\Requests\Admin\UpdateQuestionsOptionsRequest;
+use App\Http\Requests\Instructor\StoreQuestionsOptionsRequest;
+use App\Http\Requests\Instructor\UpdateQuestionsOptionsRequest;
 
 class QuestionsOptionsController extends Controller
 {
@@ -65,7 +65,7 @@ class QuestionsOptionsController extends Controller
 
 
 
-        return redirect()->route('admin.questions_options.index');
+        return redirect()->route('instructor.questions_options.index');
     }
 
 
@@ -104,7 +104,7 @@ class QuestionsOptionsController extends Controller
 
 
 
-        return redirect()->route('admin.questions_options.index');
+        return redirect()->route('instructor.questions_options.index');
     }
 
 
@@ -139,7 +139,7 @@ class QuestionsOptionsController extends Controller
         $questions_option = QuestionsOption::findOrFail($id);
         $questions_option->delete();
 
-        return redirect()->route('admin.questions_options.index');
+        return redirect()->route('instructor.questions_options.index');
     }
 
     /**
@@ -176,7 +176,7 @@ class QuestionsOptionsController extends Controller
         $questions_option = QuestionsOption::onlyTrashed()->findOrFail($id);
         $questions_option->restore();
 
-        return redirect()->route('admin.questions_options.index');
+        return redirect()->route('instructor.questions_options.index');
     }
 
     /**
@@ -193,6 +193,6 @@ class QuestionsOptionsController extends Controller
         $questions_option = QuestionsOption::onlyTrashed()->findOrFail($id);
         $questions_option->forceDelete();
 
-        return redirect()->route('admin.questions_options.index');
+        return redirect()->route('instructor.questions_options.index');
     }
 }

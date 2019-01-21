@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Position;
 use App\Role;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +36,8 @@ class AuthServiceProvider extends ServiceProvider
 
             foreach ($roles as $role) {
                 foreach ($role->permission as $permission) {
-                    $permissionArray[$permission->title][] = $role->id;
+
+                    $permissionArray[$permission->key][] = $role->id;
                 }
             }
 

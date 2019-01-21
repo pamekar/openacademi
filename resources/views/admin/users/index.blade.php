@@ -5,7 +5,7 @@
     <h3 class="page-title">@lang('global.users.title')</h3>
     @can('user_create')
     <p>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
+        <a href="{{ route('instructor.users.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
         
     </p>
     @endcan
@@ -50,10 +50,10 @@
                                 </td>
                                                                 <td>
                                     @can('user_view')
-                                    <a href="{{ route('admin.users.show',[$user->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    <a href="{{ route('instructor.users.show',[$user->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
                                     @endcan
                                     @can('user_edit')
-                                    <a href="{{ route('admin.users.edit',[$user->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('instructor.users.edit',[$user->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('user_delete')
 {!! Form::open(array(
@@ -82,7 +82,7 @@
 @section('javascript') 
     <script>
         @can('user_delete')
-            window.route_mass_crud_entries_destroy = '{{ route('admin.users.mass_destroy') }}';
+            window.route_mass_crud_entries_destroy = '{{ route('instructor.users.mass_destroy') }}';
         @endcan
 
     </script>

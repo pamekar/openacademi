@@ -6,8 +6,8 @@ use App\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StorePermissionsRequest;
-use App\Http\Requests\Admin\UpdatePermissionsRequest;
+use App\Http\Requests\Instructor\StorePermissionsRequest;
+use App\Http\Requests\Instructor\UpdatePermissionsRequest;
 
 class PermissionsController extends Controller
 {
@@ -56,7 +56,7 @@ class PermissionsController extends Controller
 
 
 
-        return redirect()->route('admin.permissions.index');
+        return redirect()->route('instructor.permissions.index');
     }
 
 
@@ -93,7 +93,7 @@ class PermissionsController extends Controller
 
 
 
-        return redirect()->route('admin.permissions.index');
+        return redirect()->route('instructor.permissions.index');
     }
 
 
@@ -133,7 +133,7 @@ class PermissionsController extends Controller
         $permission = Permission::findOrFail($id);
         $permission->delete();
 
-        return redirect()->route('admin.permissions.index');
+        return redirect()->route('instructor.permissions.index');
     }
 
     /**

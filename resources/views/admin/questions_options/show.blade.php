@@ -30,7 +30,7 @@
 
             <p>&nbsp;</p>
 
-            <a href="{{ route('admin.questions_options.index') }}" class="btn btn-default">@lang('global.app_back_to_list')</a>
+            <a href="{{ route('instructor.questions_options.index') }}" class="btn btn-default">@lang('global.app_back_to_list')</a>
         </div>
     </div>
 @stop

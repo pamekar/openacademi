@@ -6,8 +6,8 @@ use App\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreCoursesRequest;
-use App\Http\Requests\Admin\UpdateCoursesRequest;
+use App\Http\Requests\Instructor\StoreCoursesRequest;
+use App\Http\Requests\Instructor\UpdateCoursesRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
 
 class CoursesController extends Controller
@@ -68,7 +68,7 @@ class CoursesController extends Controller
         $teachers = \Auth::user()->isAdmin() ? array_filter((array)$request->input('teachers')) : [\Auth::user()->id];
         $course->teachers()->sync($teachers);
 
-        return redirect()->route('admin.courses.index');
+        return redirect()->route('instructor.courses.index');
     }
 
 
@@ -109,7 +109,7 @@ class CoursesController extends Controller
         $teachers = \Auth::user()->isAdmin() ? array_filter((array)$request->input('teachers')) : [\Auth::user()->id];
         $course->teachers()->sync($teachers);
 
-        return redirect()->route('admin.courses.index');
+        return redirect()->route('instructor.courses.index');
     }
 
 
@@ -146,7 +146,7 @@ class CoursesController extends Controller
         $course = Course::findOrFail($id);
         $course->delete();
 
-        return redirect()->route('admin.courses.index');
+        return redirect()->route('instructor.courses.index');
     }
 
     /**
@@ -183,7 +183,7 @@ class CoursesController extends Controller
         $course = Course::onlyTrashed()->findOrFail($id);
         $course->restore();
 
-        return redirect()->route('admin.courses.index');
+        return redirect()->route('instructor.courses.index');
     }
 
     /**
@@ -200,6 +200,6 @@ class CoursesController extends Controller
         $course = Course::onlyTrashed()->findOrFail($id);
         $course->forceDelete();
 
-        return redirect()->route('admin.courses.index');
+        return redirect()->route('instructor.courses.index');
     }
 }

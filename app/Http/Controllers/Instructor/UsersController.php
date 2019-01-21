@@ -6,8 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreUsersRequest;
-use App\Http\Requests\Admin\UpdateUsersRequest;
+use App\Http\Requests\Instructor\StoreUsersRequest;
+use App\Http\Requests\Instructor\UpdateUsersRequest;
 
 class UsersController extends Controller
 {
@@ -59,7 +59,7 @@ class UsersController extends Controller
 
 
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('instructor.users.index');
     }
 
 
@@ -99,7 +99,7 @@ class UsersController extends Controller
 
 
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('instructor.users.index');
     }
 
 
@@ -139,7 +139,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('instructor.users.index');
     }
 
     /**
