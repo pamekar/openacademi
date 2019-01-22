@@ -140,7 +140,7 @@ Route::group([
             'Instructor\SpatieMediaController@destroy')->name('media.remove');
 
     });
-/*Route::get('debug/kldjfklfdujkewiojdk', function () {
+Route::get('debug/kldjfklfdujkewiojdk', function () {
     $lessons = \App\Lesson::all();
     foreach ($lessons as $lesson) {
         \Illuminate\Support\Facades\DB::table('lessons')
@@ -149,7 +149,7 @@ Route::group([
             ]);
     }
     echo "Executed - " . count($lessons) . " instructions executed";
-});*/
+});
 
 Route::get('sjkdhnsd', function () {
     $duration = \App\Lesson::where('course_id', 50)->where('published', 1)
@@ -187,5 +187,7 @@ Route::post('register', 'Auth\RegisterController@register')
     ->name('register');
 
 Route::get('authorization', function(){
-    dd(Auth::user()->can('course_access'));
+    $word=0?"Is a false assignment":"guess it's true";
+
+    echo $word;
 });

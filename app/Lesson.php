@@ -41,7 +41,7 @@ class Lesson extends Model implements HasMedia
             'published',
             'course_id'
         ];
-    protected $appends=['is_completed'];
+    protected $appends = ['is_completed'];
 
 
     /**
@@ -64,14 +64,19 @@ class Lesson extends Model implements HasMedia
         $this->attributes['position'] = $input ? $input : null;
     }
 
-    public function getIsCompletedAttribute(){
-        $isCompleted = Auth::user()->lessons()->where('lesson_id', $this->id)->count();
+    public function getIsCompletedAttribute()
+    {
+        $isCompleted = Auth::user()->lessons()->where('lesson_id', $this->id)
+            ->count();
         return $isCompleted;
     }
 
     public function getLessonImageAttribute($value)
     {
-        return Storage::url($value);
+        if ($this->lesson_image_type == 'image') {
+            return Storage::url($value);
+        }
+        return $value;
     }
 
     public function course()

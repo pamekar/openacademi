@@ -18,6 +18,25 @@ class CourseSeed extends Seeder
     {
         $faker = \Faker\Factory::create();
 
+        $userSelection = [
+            ["female", "avatar1.jpg"],
+            ["female", "avatar2.jpg"],
+            ["female", "avatar3.jpg"],
+            ["female", "avatar4.jpg"],
+            ["female", "avatar5.jpg"],
+            ["female", "avatar6.jpg"],
+            ["female", "avatar7.jpg"],
+            ["female", "avatar8.jpg"],
+            ["male", "avatar9.jpg"],
+            ["male", "avatar10.jpg"],
+            ["male", "avatar11.jpg"],
+            ["male", "avatar12.jpg"],
+            ["male", "avatar13.jpg"],
+            ["male", "avatar14.jpg"],
+            ["male", "avatar15.jpg"],
+            ["male", "avatar16.jpg"]
+        ];
+
         $courseImages = [
             "course1.jpg",
             "course2.jpg",
@@ -39,6 +58,20 @@ class CourseSeed extends Seeder
             "single-course.jpg",
             "single-post.jpg"
         ];
+        $lessonVideos = [
+            "https://player.vimeo.com/video/312593611",
+            "https://player.vimeo.com/video/312583178",
+            "https://player.vimeo.com/video/78969465",
+            "https://player.vimeo.com/video/78969465",
+            "https://player.vimeo.com/video/78969465",
+            "https://player.vimeo.com/video/18442704?color=ff0000&portrait=0",
+            "https://player.vimeo.com/video/26079113",
+            "https://player.vimeo.com/video/31476981",
+            "https://player.vimeo.com/video/132703683",
+            "https://player.vimeo.com/video/97745587",
+            "https://player.vimeo.com/video/112587083?color=ccb668&title=0&byline=0&portrait=0"
+        ];
+
         $testImages = [
             "post1.jpg",
             "post2.jpg",
@@ -271,28 +304,59 @@ class CourseSeed extends Seeder
 
         ];
 
-        /*foreach (range(1, 2132) as $index) {
-            \App\User::create([
-                'name'           => $faker->userName,
+        foreach (range(1, 2132) as $index) {
+            $userType = $faker->randomElement($userSelection);
+            $userName = $faker->userName;
+            $student = DB::table('users')->insertGetId([
+                'name'           => $userName,
+                'role_id'        => 3,
                 'email'          => $faker->unique()->safeEmail,
                 'password'       => Hash::make('tarzan'),
                 'type'           => 'student',
                 'categories'     => md5($faker->randomElement($categories)[1])
                     . ";" . md5($faker->randomElement($categories)[1]),
                 'remember_token' => str_random(10),
+                'photo'          => $userType[1]
+            ]);
+            DB::table('students')->insert([
+                'user_id'     => $student,
+                'first_name'  => $faker->firstName($userType[0]),
+                'last_name'   => $faker->lastName,
+                'location'    => $faker->city,
+                'description' => $faker->realText(160),
+                'instagram'   => $userName,
+                'twitter'     => $userName,
+                'facebook'    => $userName,
+                'linkedin'    => $userName,
             ]);
         }
         foreach (range(1, 53) as $index) {
-            \App\User::create([
-                'name'           => $faker->userName,
+            $userType = $faker->randomElement($userSelection);
+            $userName = $faker->userName;
+            $instructor = DB::table('users')->insertGetId([
+                'role_id'        => 2,
+                'name'           => $userName,
                 'email'          => $faker->unique()->safeEmail,
                 'password'       => Hash::make('tarzan'),
                 'type'           => 'teacher',
                 'categories'     => md5($faker->randomElement($categories)[1])
                     . ";" . md5($faker->randomElement($categories)[1]),
                 'remember_token' => str_random(10),
+                'photo'          => $userType[1]
             ]);
-        }*/
+            DB::table('instructors')->insert([
+                'user_id'     => $instructor,
+                'first_name'  => $faker->firstName($userType[0]),
+                'last_name'   => $faker->lastName,
+                'location'    => $faker->city,
+                'description' => $faker->realText(160),
+                'instagram'   => $userName,
+                'twitter'     => $userName,
+                'facebook'    => $userName,
+                'linkedin'    => $userName,
+            ]);
+
+        }
         $truthify = [
             0,
             0,
@@ -362,6 +426,8 @@ class CourseSeed extends Seeder
             0,
             0
         ];
+
+        $paystack = new \App\Http\Controllers\PaystackController();
         foreach ($categories as $category) {
             $newCategory = DB::table('course_categories')->insertGetId([
                 'title'       => $category[0],
@@ -375,23 +441,6 @@ class CourseSeed extends Seeder
                 $tags = $category['tags'];
                 $tagCount = (int)count($tags) / 3;
                 $randomTags = $faker->randomElements($tags, $tagCount);
-
-                $newCourse = DB::table('courses')->insertGetId([
-                    'title'        => $course,
-                    'slug'         => strtolower(preg_replace('/\s+/', '-',
-                        $course)),
-                    'category'     => $newCategory,
-                    'tags'         => implode(';', $randomTags),
-                    'summary'      => $faker->realText(60),
-                    'description'  => $faker->paragraphs(5, true),
-                    'price'        => (mt_rand(100, 1000) / 100) * 100000,
-                    'course_image' => "public/uploads/"
-                        . $faker->randomElement($courseImages),
-                    'published'    => $faker->randomElement($truthify),
-                    'start_date'   => $faker->dateTimeBetween('-3 years',
-                        'now'),
-                    'created_at'   => $faker->dateTimeBetween('-3 years', 'now')
-                ]);
                 $students = \App\User::where('categories', 'like',
                     '%' . md5($category[1]) . '%')->where('type', 'student')
                     ->inRandomOrder()
@@ -399,6 +448,33 @@ class CourseSeed extends Seeder
                 $teacher = \App\User::where('categories', 'like',
                     '%' . md5($category[1]) . '%')->where('type', 'teacher')
                     ->inRandomOrder()->value('id');
+                $price = (mt_rand(100, 1000) / 100) * 100000;
+                $charge = $paystack->calcTransactionCharge($price / 100) * 100;
+                $image = $faker->randomElement([0, 1]) ? [
+                    'image',
+                    "public/uploads/" . $faker->randomElement($lessonImages)
+                ]
+                    : ['video', $faker->randomElement($lessonVideos)];
+                $newCourse = DB::table('courses')->insertGetId([
+                    'title'             => $course,
+                    'user_id'           => $teacher,
+                    'slug'              => strtolower(preg_replace('/\s+/', '-',
+                        $course)),
+                    'category'          => $newCategory,
+                    'tags'              => implode(';', $randomTags),
+                    'summary'           => $faker->realText(60),
+                    'description'       => $faker->paragraphs(5, true),
+                    'price'             => $price,
+                    'course_image'      => "public/uploads/"
+                        . $faker->randomElement($courseImages),
+                    'course_image_main' => $image[1],
+                    'course_image_type' => $image[0],
+                    'published'         => $faker->randomElement($truthify),
+                    'start_date'        => $faker->dateTimeBetween('-1 years',
+                        'now'),
+                    'created_at'        => $faker->dateTimeBetween('-1 years',
+                        'now')
+                ]);
 
                 // drg >> attach teacher to course
                 DB::table('course_user')->insert([
@@ -413,6 +489,18 @@ class CourseSeed extends Seeder
                         'user_id'   => $student,
                         'rating'    => mt_rand(3, 5)
                     ]);
+
+                    // drg >> Add Payment for course
+                    DB::table('payments')->insert([
+                        'user_id'    => $student,
+                        'course_id'  => $newCourse,
+                        'amount'     => $price,
+                        'charge'     => $charge,
+                        'reference'  => md5("$student  _  $newCourse _ $price"),
+                        'status'     => 'successful',
+                        'created_at' => $faker->dateTimeBetween('-5 months',
+                            '10 days')
+                    ]);
                 }
 
                 // drg >> attach lessons to course
@@ -421,18 +509,29 @@ class CourseSeed extends Seeder
                     $title = $faker->words(3, true);
                     $freeLesson = $i <= 1 ? true
                         : $faker->randomElement($falsify);
+                    $publishedLesson = $i <= 1 ? true
+                        : $faker->randomElement($truthify);
+                    $image = $faker->randomElement([0, 1]) ? [
+                        'image',
+                        "public/uploads/" . $faker->randomElement($lessonImages)
+                    ]
+                        : ['video', $faker->randomElement($lessonVideos)];
                     $newLesson = DB::table('lessons')->insertGetId([
-                        'course_id'    => $newCourse,
-                        'title'        => $title,
-                        'slug'         => strtolower(preg_replace('/\s+/', '-',
+                        'user_id'           => $teacher,
+                        'course_id'         => $newCourse,
+                        'title'             => $title,
+                        'slug'              => strtolower(preg_replace('/\s+/',
+                            '-',
                             $title)),
-                        'lesson_image' => "public/uploads/"
-                            . $faker->randomElement($lessonImages),
-                        'short_text'   => $faker->realText(60),
-                        'full_text'    => $faker->paragraphs(7, true),
-                        'position'     => $i,
-                        'free_lesson'  => $freeLesson,
-                        'published'    => $faker->randomElement($truthify),
+                        'lesson_image'      => $image[1],
+                        'lesson_image_type' => $image[0],
+                        'short_text'        => $faker->realText(60),
+                        'full_text'         => $faker->paragraphs(7, true),
+                        'position'          => $i,
+                        'free_lesson'       => $freeLesson,
+                        'published'         => $publishedLesson,
+                        'created_at'        => $faker->dateTimeBetween('-1 years',
+                            'now')
                     ]);
 
                     // drg >> attach students to lesson
@@ -454,19 +553,22 @@ class CourseSeed extends Seeder
                                 'title'       => $faker->words(3,
                                     true),
                                 'description' => $faker->realText(),
-                                'published'   => $faker->randomElement($truthify)
+                                'published'   => 1
                             ]);
-                        $questionCount = mt_rand(5, 15);
+                        $questionCount = mt_rand(4, 15);
+                        $totalScore = 0;
                         for ($j = 0; $j < $questionCount; $j++) {
+                            $score = $faker->randomElement([
+                                1,
+                                2,
+                                5
+                            ]);
                             $question = DB::table('questions')->insertGetId([
+                                'user_id'        => $teacher,
                                 'question'       => $faker->realText(),
                                 'question_image' => "public/uploads/"
                                     . $faker->randomElement($testImages),
-                                'score'          => $faker->randomElement([
-                                    1,
-                                    2,
-                                    5
-                                ]),
+                                'score'          => $score,
                             ]);
                             DB::table('question_test')->insert([
                                 'question_id' => $question,
@@ -479,7 +581,22 @@ class CourseSeed extends Seeder
                                     'option_text' => $faker->realText(50),
                                     'correct'     => $k === $correctOption
                                 ]);
+
                             }
+                            $totalScore += $score;
+                        }
+
+                        foreach ($lessonStudents as $student) {
+                            $testScore = (mt_rand(40, 100) / 100)
+                                * $totalScore;
+                            $test_result = DB::table('tests_results')->insert([
+                                'test_id'     => $test,
+                                'user_id'     => $student,
+                                'test_result' => $testScore,
+                                'created_at'  => $faker->dateTimeBetween('-1 years',
+                                    'now')
+                            ]);
+
                         }
 
                     }

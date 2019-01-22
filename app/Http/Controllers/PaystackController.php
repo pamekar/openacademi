@@ -14,7 +14,6 @@ class PaystackController extends Controller
     //
     public function calcTransactionCharge($amount)
     {
-
         $waiver = 100;
         $siteCommision = 0;
         $gatewayCommission = 1;
@@ -53,7 +52,7 @@ class PaystackController extends Controller
                 $data = session('userData');
                 $email = Auth::user()->email ?: "null@null.null";
                 $amount = $isCourse->price * 100;
-                $charge = $this->calcTransactionCharge($amount);
+                $charge = $this->calcTransactionCharge($isCourse->price)*100;
                 $reference = md5(Auth::user()->name . $isCourse->slug
                     . date('YmdHis') . str_random());
                 $metadata = [

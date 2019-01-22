@@ -27178,7 +27178,7 @@ module.exports = Vue;
             if (progress >= 100) {
                 progress = 100;
                 color = "success";
-            } else if (progress >= 70 && progress < 100) {
+            } else if (progress >= 70 && progress <= 100) {
                 color = "primary";
             } else if (progress >= 50 && progress < 70) {
                 color = "info";
@@ -29668,13 +29668,15 @@ var render = function() {
           [
             _c("div", { staticClass: "card" }, [
               _c("div", [
-                _c("img", {
-                  attrs: {
-                    src: _vm.course.course_image,
-                    alt: _vm.course.slug,
-                    width: "100%"
-                  }
-                })
+                _vm.course.course_image_type == "image"
+                  ? _c("img", {
+                      attrs: {
+                        src: _vm.course.course_image_main,
+                        alt: _vm.course.slug,
+                        width: "100%"
+                      }
+                    })
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _vm.course.course_image_type == "video"
@@ -29685,8 +29687,7 @@ var render = function() {
                       _c("iframe", {
                         staticClass: "embed-responsive-item",
                         attrs: {
-                          src:
-                            "https://player.vimeo.com/video/97243285?title=0&byline=0&portrait=0",
+                          src: _vm.course.course_image_main,
                           allowfullscreen: ""
                         }
                       })
@@ -30093,13 +30094,15 @@ var render = function() {
         _c("div", { staticClass: "col-md-8" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", [
-              _c("img", {
-                attrs: {
-                  src: _vm.lesson.lesson_image,
-                  alt: _vm.lesson.slug,
-                  width: "100%"
-                }
-              })
+              _vm.lesson.lesson_image_type == "image"
+                ? _c("img", {
+                    attrs: {
+                      src: _vm.lesson.lesson_image,
+                      alt: _vm.lesson.slug,
+                      width: "100%"
+                    }
+                  })
+                : _vm._e()
             ]),
             _vm._v(" "),
             _vm.lesson.lesson_image_type == "video"
@@ -30140,11 +30143,14 @@ var render = function() {
                         "a",
                         {
                           staticClass: "btn btn-success btn-block flex-column",
-                          attrs: { href: "fixed-student-cart.html" }
+                          attrs: {
+                            href:
+                              "/course/payment/initialize/" + _vm.course.slug
+                          }
                         },
                         [
                           _vm._v(
-                            "\n                            Purchase this course\n                            "
+                            "\n                        Purchase this course\n                            "
                           ),
                           _c("strong", [
                             _vm._v(
