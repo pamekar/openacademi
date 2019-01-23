@@ -93,6 +93,14 @@ class Course extends Model
         return Storage::url($value);
     }
 
+    public function getCourseImageMainAttribute($value)
+    {
+        if ($this->course_image_type == 'image') {
+            return Storage::url($value);
+        }
+        return $value;
+    }
+
     public function getTotalLessonsAttribute()
     {
         $count = Lesson::where('course_id', $this->id)->where('published', 1)

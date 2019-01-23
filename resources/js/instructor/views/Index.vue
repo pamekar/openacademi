@@ -211,7 +211,7 @@
                     color = "secondary";
                 }
 
-                return {score: progress, color: color};
+                return {score: Math.floor(progress), color: color};
             },
         },
         mounted() {

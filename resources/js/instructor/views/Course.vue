@@ -10,10 +10,10 @@
 
                 <div class="card">
                     <div>
-                        <img :src="course.course_image" :alt="course.slug" width="100%"/>
+                        <img :src="course.course_image_main" :alt="course.slug" width="100%"  v-if="course.course_image_type == 'image'"/>
                     </div>
                     <div class="embed-responsive embed-responsive-16by9" v-if="course.course_image_type == 'video'">
-                        <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0" allowfullscreen=""></iframe>
+                        <iframe class="embed-responsive-item" :src="course.course_image_main" allowfullscreen=""></iframe>
                     </div>
                     <div class="card-body">
                         {{course.description}}

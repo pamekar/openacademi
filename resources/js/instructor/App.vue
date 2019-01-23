@@ -1,33 +1,66 @@
 <template>
     <div>
-        <div class="page__header">
-            <navbar-component :menu="menuItems"></navbar-component>
-        </div>
+        <div class="mdk-header-layout js-mdk-header-layout">
 
-        <div class="page">
-            <div class="container page__container">
-                <transition :name="transitionName">
-                    <router-view></router-view>
-                </transition>
+            <!-- Header -->
+
+
+            <!-- // END Header -->
+
+            <!-- Header Layout Content -->
+            <!-- // END Header Layout Content -->
+
+
+            <div id="header" class="mdk-header bg-dark js-mdk-header m-0" data-fixed data-effects="waterfall">
+                <header-component></header-component>
+            </div>
+
+            <div class="mdk-header-layout__content d-flex flex-column">
+
+                <div class="page__header d-none d-sm-block">
+                    <navbar-component :menu="navItems"></navbar-component>
+                </div>
+
+                <div class="page">
+                    <div class="container page__container">
+                        <transition :name="transitionName">
+                            <router-view></router-view>
+                        </transition>
+                    </div>
+
+                </div>
+
+                <div class="page">
+                    <div class="container page__container">
+                        <div class="footer">
+                            Copyright &copy;  - <a
+                                href="#"></a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
-
+        <sidebar-component :menu="navItems"></sidebar-component>
     </div>
 </template>
 
 <script>
     import Navbar from './components/NavbarComponent.vue'
-
+    import Sidebar from './components/SidebarComponent.vue'
+    import Header from './components/HeaderComponent.vue'
+    
     export default {
         name:       'App',
         data() {
             return {
                 transitionName: "",
                 menuCategories: [],
-                menuItems:      [
+                navItems:       [
                     {
                         title:    'Home',
+                        category: 'Welcome',
+                        icon:     'fa fa-home',
                         dropdown: [
                             {
                                 title: 'Home Page',
@@ -41,32 +74,39 @@
                     },
                     {
                         title: "My Courses",
+                        category:'Courses',
+                        icon:'fa fa-book',
                         route: "purchased-courses"
                     },
                     {
                         title: "All Courses",
+                        icon:'fa fa-book-reader',
                         route: "all-courses"
                     },
                     {
                         title:    "Categories",
+                        icon:'fa fa-list-ul',
                         param:    "slug",
                         route:    "category-courses",
                         dropdown: []
                     },
-                    /*{
+                    {
                         title: "Quiz Results",
+                        icon:"fa fa-queston"
                         route: "error"
                     },
                     {
                         title:    "Account",
+                        icon:"fa fa-user-cog",
                         dropdown: [
                             {
                                 title: "Edit Account",
                                 route: "error"
                             }
                         ]
-                    }*/
+                    }
                 ]
+                
             }
         },
         created() {
@@ -76,7 +116,7 @@
             getCategories() {
                 axios.get("/api/courses/categories")
                     .then(({data}) => {
-                        this.menuItems[3].dropdown = data
+                        this.navItems[3].dropdown = data
                     });
             }
         },
@@ -88,7 +128,9 @@
             }
         },
         components: {
-            'navbar-component': Navbar
+            'navbar-component':  Navbar,
+            'header-component':  Header,
+            'sidebar-component': Sidebar,
         }
     }
 </script>
