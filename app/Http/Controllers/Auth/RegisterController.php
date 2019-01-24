@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\APIController;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
@@ -99,7 +99,7 @@ class RegisterController extends Controller
 
     private function frontendLogin(Request $request)
     {
-        $frontend = new AuthController();
+        $frontend = new APIController();
         $token = $frontend->login($request);
         $expire = $request->remember ? 12 * 30 * 24 * 3600 : 0;
 

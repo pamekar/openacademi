@@ -9,7 +9,6 @@ import PurchasedCourses from './views/PurchasedCourses.vue';
 import TagCourses from './views/TagCourses.vue';
 
 const Error404 = {
-    template: "",
     beforeRouteEnter(to, from, next) {
         window.location('/error/404');
     },
@@ -30,36 +29,24 @@ const routes = [
         component: Index
     },
     {
-        path:      '/course/:slug',
-        name:      'course',
+        path:      '/courses',
+        name:      'show-courses',
         component: Course
     },
     {
-        path:      '/courses/all',
-        name:      'all-courses',
+        path:      '/lessons',
+        name:      'show-lessons',
+        component: Course
+    },
+    {
+        path:      '/tests',
+        name:      'show-tests',
         component: Courses
     },
     {
-        path:      '/courses/categories/:slug',
-        name:      'category-courses',
-        component: CategoryCourses,
-        props:     true
-    },
-    {
-        path:      '/lesson/:id/:slug',
-        name:      'lesson',
-        component: Lesson
-    },
-    {
-        path:      '/courses/tags/:tag',
-        name:      'tag-courses',
-        component: TagCourses,
-        props:     true
-    },
-    {
-        path:      '/courses/purchased',
-        name:      'purchased-courses',
-        component: PurchasedCourses
+        path:      '/questions',
+        name:      'show-questions',
+        component: Courses
     },
     {
         path:      '/dashboard',
@@ -72,7 +59,7 @@ const routes = [
     },
     {
         path:     '*',
-        redirect: '/error404'
+        redirect: '/404'
     },
 ];
 

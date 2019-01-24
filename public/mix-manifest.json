@@ -6,5 +6,7 @@
   "/instructor/css/iapp.css": "/instructor/css/iapp.css",
   "/instructor/js/iapp.js": "/instructor/js/iapp.js",
   "/instructor/css/app.css": "/instructor/css/app.css",
-  "/instructor/js/app.js": "/instructor/js/app.js"
+  "/instructor/js/app.js": "/instructor/js/app.js",
+  "/teacher/js/app.js": "/teacher/js/app.js",
+  "/teacher/css/app.css": "/teacher/css/app.css"
 }

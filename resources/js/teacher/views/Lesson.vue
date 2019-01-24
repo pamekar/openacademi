@@ -1,5 +1,9 @@
 <template>
     <div>
+        <vue-headful
+                :title="pageTitle + ' - OpenAcademi'"
+                :description="course.summary"
+        ></vue-headful>
         <breadcrumb-component
                 :breadcrumbs="breadcrumbs"
                 :title="pageTitle"
@@ -10,21 +14,19 @@
 
                 <div class="card">
                     <div>
-                        <img :src="course.course_image_main" :alt="course.slug" width="100%"  v-if="course.course_image_type == 'image'"/>
+                        <img :src="lesson.lesson_image" :alt="lesson.slug" width="100%" v-if="lesson.lesson_image_type == 'image'"/>
                     </div>
-                    <div class="embed-responsive embed-responsive-16by9" v-if="course.course_image_type == 'video'">
-                        <iframe class="embed-responsive-item" :src="course.course_image_main" allowfullscreen=""></iframe>
+                    <div class="embed-responsive embed-responsive-16by9" v-if="lesson.lesson_image_type == 'video'">
+                        <iframe class="embed-responsive-item" :src="lesson.lesson_image" allowfullscreen=""></iframe>
                     </div>
                     <div class="card-body">
-                        {{course.description}}
+                        {{lesson.full_text}}
                     </div>
                 </div>
-
-                <!-- Lessons -->
-                <lessons-list-component :lessons="course.published_lessons" :purchased="purchased" :id="course.id"></lessons-list-component>
             </div>
             <div class="col-md-4">
                 <div class="card" v-if="!purchased">
+
                     <div class="card-body text-center">
                         <p>
                             <a :href="'/course/payment/initialize/'+course.slug" class="btn btn-success btn-block flex-column">
@@ -34,6 +36,14 @@
                         </p>
                     </div>
                 </div>
+                <!-- Lessons -->
+                <div class="card" v-if="purchased">
+                    <div class="card-body">
+                        <progress-component :course="course"></progress-component>
+                        <small class="text-muted">Lessons: {{course.completed_lessons}} of {{course.total_lessons}}</small>
+                    </div>
+                </div>
+                <lessons-list-component :lessons="course.published_lessons" :purchased="purchased" :id="course.id"></lessons-list-component>
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Ratings</h4>
@@ -102,48 +112,62 @@
 </template>
 <script>
     import LessonsListComponent from '../components/LessonsListComponent.vue'
+    import ProgressComponent from '../components/ProgressComponent.vue'
 
     export default {
         data() {
             return {
-                course:          [],
-                courseListWidth: "col-lg-3 col-md-4, col-sm-6",
-                breadcrumbs:     [
+                lesson:      [],
+                course:      [],
+                breadcrumbs: [
                     {
                         title: "Dashboard", link: 'dashboard'
                     },
                     {
-                        title: "Courses", link:'all-courses'
+                        title: "Courses", link: 'all-courses'
+                    },
+                    {
+                        title: "", link: 'course', params: {}
                     },
                     {
                         title: ""
                     }
                 ],
-                pageTitle:       "Courses",
-                purchased:  ""
+                pageTitle:   "Courses",
+                purchased:   ""
             }
         },
         created() {
-            this.getCourse();
+            this.getLesson();
         },
         mounted() {
             console.log('Dashboard Component mounted now.')
         },
         components: {
-            'lessons-list-component': LessonsListComponent
+            'lessons-list-component': LessonsListComponent,
+            'progress-component':     ProgressComponent
         },
         methods:    {
-            getCourse() {
-                axios.get("/api/course/" + this.$route.params.slug)
+            getLesson() {
+                axios.get("/api/lesson/" + this.$route.params.id + "/" + this.$route.params.slug)
                     .then(({data}) => {
+                        this.lesson = data.lesson;
                         this.course = data.course;
-                        this.pageTitle=data.course.title;
-                        this.purchased=data.purchased;
+                        this.pageTitle = data.lesson.title;
+                        this.purchased = data.purchased_course;
                         this.breadcrumbs[2].title = data.course.title;
+                        this.breadcrumbs[2].params = {slug: data.course.slug};
+                        this.breadcrumbs[3].title = data.lesson.title;
                     });
             },
         },
+        computed:   {},
         props:      ['slug'],
-        computed:   {}
+        watch:      {
+            '$route'(to, from) {
+                // react to route changes...
+                this.getLesson();
+            }
+        }
     }
 </script>

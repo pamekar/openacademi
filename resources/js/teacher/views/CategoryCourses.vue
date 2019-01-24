@@ -1,5 +1,9 @@
 <template>
     <div>
+        <vue-headful
+                :title="pageTitle + ' - OpenAcademi'"
+                :description="pageTitle+ ' Category Courses'"
+        ></vue-headful>
         <breadcrumb-component
                 :breadcrumbs="breadcrumbs"
                 :title="pageTitle"

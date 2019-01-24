@@ -59,6 +59,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'isInstructor' => \App\Http\Middleware\InstructorMiddleware::class,
         'isStudent' => \App\Http\Middleware\StudentMiddleware::class,
+        'checkLoggedIn' => \App\Http\Middleware\CheckLoggedIn::class,
         'jwt'             => Authenticate::class
     ];
 }

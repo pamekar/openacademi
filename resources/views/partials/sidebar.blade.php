@@ -102,11 +102,6 @@
                 </a>
             </li>
             @endcan
-            
-
-            
-
-            
 
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
                 <a href="{{ route('change_password') }}">
@@ -127,3 +122,5 @@
 {!! Form::open(['route' => 'logout', 'style' => 'display:none;', 'id' => 'logout']) !!}
 <button type="submit">@lang('global.logout')</button>
 {!! Form::close() !!}
+
+

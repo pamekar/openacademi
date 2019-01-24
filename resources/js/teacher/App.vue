@@ -1,52 +1,52 @@
 <template>
-    <div>
-        <div class="mdk-header-layout js-mdk-header-layout">
 
-            <!-- Header -->
+    <div class="mdk-header-layout js-mdk-header-layout">
 
-
-            <!-- // END Header -->
-
-            <!-- Header Layout Content -->
-            <!-- // END Header Layout Content -->
+        <!-- Header -->
 
 
-            <div id="header" class="mdk-header bg-dark js-mdk-header m-0" data-fixed data-effects="waterfall">
-                <header-component></header-component>
-            </div>
+        <!-- // END Header -->
 
-            <div class="mdk-header-layout__content d-flex flex-column">
+        <!-- Header Layout Content -->
+        <!-- // END Header Layout Content -->
 
-                <div class="page__header d-none d-sm-block">
-                    <navbar-component :menu="navItems"></navbar-component>
-                </div>
 
-                <div class="page">
-                    <div class="container page__container">
+        <div id="header" data-fixed class="mdk-header js-mdk-header mb-0">
+            <header-component></header-component>
+        </div>
+
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page" style="transform: translate3d(0px, 0px, 0px);">
+
+                    <div class="container-fluid page__container">
+
                         <transition :name="transitionName">
                             <router-view></router-view>
                         </transition>
-                    </div>
-
-                </div>
-
-                <div class="page">
-                    <div class="container page__container">
-                        <div class="footer">
-                            Copyright &copy;  - <a
-                                href="#"></a>
+                        <div class="page">
+                            <div class="container page__container">
+                                <div class="footer">
+                                    Copyright &copy;  - <a
+                                        href="#"></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+                    <sidebar-component :menu="sidebarItems"></sidebar-component>
+                </div>
             </div>
-
         </div>
-        <sidebar-component :menu="sidebarItems"></sidebar-component>
     </div>
+
+
+
 </template>
 
 <script>
-    import Navbar from './components/NavbarComponent.vue'
     import Sidebar from './components/SidebarComponent.vue'
     import Header from './components/HeaderComponent.vue'
 
@@ -56,56 +56,6 @@
             return {
                 transitionName: "",
                 menuCategories: [],
-                navItems:       [
-                    {
-                        title:    'Home',
-                        category: 'Welcome',
-                        icon:     'home',
-                        dropdown: [
-                            {
-                                title: 'Home Page',
-                                route: 'home'
-                            },
-                            {
-                                title: 'Dashboard',
-                                route: 'dashboard'
-                            }
-                        ]
-                    },
-                    {
-                        title:    "My Courses",
-                        category: 'Courses',
-                        icon:     'school',
-                        route:    "purchased-courses"
-                    },
-                    {
-                        title: "All Courses",
-                        icon:  'library_books',
-                        route: "all-courses"
-                    },
-                    {
-                        title:    "Categories",
-                        icon:     'apps',
-                        param:    "slug",
-                        route:    "category-courses",
-                        dropdown: []
-                    },
-                    {
-                        title: "Quiz Results",
-                        icon:  "poll",
-                        route: "error"
-                    },
-                    {
-                        title:    "Account",
-                        icon:     "account_box",
-                        dropdown: [
-                            {
-                                title: "Edit Account",
-                                route: "error"
-                            }
-                        ]
-                    }
-                ],
                 sidebarItems:   [
                     {
                         category: 'Welcome',
@@ -180,7 +130,7 @@
             getCategories() {
                 axios.get("/api/courses/categories")
                     .then(({data}) => {
-                     //   this.navItems[3].dropdown = data
+                        this.sidebarItems[1].menus[2].dropdown = data
                     });
             }
         },
@@ -192,7 +142,6 @@
             }
         },
         components: {
-            'navbar-component':  Navbar,
             'header-component':  Header,
             'sidebar-component': Sidebar,
         }

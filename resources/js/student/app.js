@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueHeadful from 'vue-headful';
 import './uiux/css/nprogress.css'
 import App from './App.vue'
 import StarRating from 'vue-star-rating'
@@ -14,7 +15,7 @@ Vue.use(axios);
 functions.setupAxios();
 
 Vue.component('star-rating', StarRating);
-
+Vue.component('vue-headful', VueHeadful);
 Vue.component('breadcrumb-component', Breadcrumb);
 
 let app = new Vue({

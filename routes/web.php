@@ -47,12 +47,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group([
     'middleware' => ['auth','isInstructor'],
-    'prefix'     => 'dashboard',
     'as'         => 'instructor.'
 ],
     function ()
     {
-
+        Route::get('/instructor', function () {
+            return view('dashboard.instructor.index');
+        })->name('instructor');
     });
 Route::get('debug/kldjfklfdujkewiojdk', function () {
     $lessons = \App\Lesson::all();

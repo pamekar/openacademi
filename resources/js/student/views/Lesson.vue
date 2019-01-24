@@ -1,5 +1,9 @@
 <template>
     <div>
+        <vue-headful
+                :title="pageTitle + ' - OpenAcademi'"
+                :description="course.summary"
+        ></vue-headful>
         <breadcrumb-component
                 :breadcrumbs="breadcrumbs"
                 :title="pageTitle"
@@ -10,7 +14,7 @@
 
                 <div class="card">
                     <div>
-                        <img :src="lesson.lesson_image" :alt="lesson.slug" width="100%"  v-if="lesson.lesson_image_type == 'image'"/>
+                        <img :src="lesson.lesson_image" :alt="lesson.slug" width="100%" v-if="lesson.lesson_image_type == 'image'"/>
                     </div>
                     <div class="embed-responsive embed-responsive-16by9" v-if="lesson.lesson_image_type == 'video'">
                         <iframe class="embed-responsive-item" :src="lesson.lesson_image" allowfullscreen=""></iframe>
@@ -26,7 +30,7 @@
                     <div class="card-body text-center">
                         <p>
                             <a :href="'/course/payment/initialize/'+course.slug" class="btn btn-success btn-block flex-column">
-                            Purchase this course
+                                Purchase this course
                                 <strong>&#8358; {{course.price.toLocaleString('en', {maximumSignificantDigits: 2})}}</strong>
                             </a>
                         </p>

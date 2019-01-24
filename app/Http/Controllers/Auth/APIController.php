@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Namshi\JOSE\JWT;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class AuthController extends Controller
+class APIController extends Controller
 {
     /**
      * Create a new AuthController instance.
