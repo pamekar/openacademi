@@ -1,12 +1,20 @@
 import NProgress from './uiux/js/nprogress.js'
 import VueRouter from 'vue-router'
+import Index from './views/Index.vue';
+import AddCourse from './views/AddCourse.vue';
+import AddLesson from './views/AddLesson.vue';
+import AddQuiz from './views/AddQuiz.vue';
+import AddQuestion from './views/AddQuestion.vue';
 import Course from './views/Course.vue';
 import Courses from './views/Courses.vue';
 import Lesson from './views/Lesson.vue';
-import CategoryCourses from './views/CategoryCourses.vue';
-import Index from './views/Index.vue';
-import PurchasedCourses from './views/PurchasedCourses.vue';
-import TagCourses from './views/TagCourses.vue';
+import Lessons from './views/Lessons.vue';
+import Options from './views/Options.vue';
+import Question from './views/Question.vue';
+import Questions from './views/Questions.vue';
+import Quiz from './views/Quiz.vue';
+import Quizes from './views/Quizes.vue';
+
 
 const Error404 = {
     beforeRouteEnter(to, from, next) {
@@ -29,24 +37,64 @@ const routes = [
         component: Index
     },
     {
+        path:      '/course/:slug',
+        name:      'view-course',
+        component: Course
+    },
+    {
         path:      '/courses',
         name:      'show-courses',
-        component: Course
+        component: Courses
+    },
+    {
+        path:      '/course/add',
+        name:      'add-course',
+        component: AddCourse
+    },
+    {
+        path:      '/lesson/:slug',
+        name:      'view-lesson',
+        component: Lesson
     },
     {
         path:      '/lessons',
         name:      'show-lessons',
-        component: Course
+        component: Lessons
     },
     {
-        path:      '/tests',
-        name:      'show-tests',
-        component: Courses
+        path:      '/lesson/add',
+        name:      'add-lesson',
+        component: AddLesson
+    },
+    {
+        path:      '/quiz/:slug',
+        name:      'view-quiz',
+        component: Quiz
+    },
+    {
+        path:      '/quizes',
+        name:      'show-quizes',
+        component: Quizes
+    },
+    {
+        path:      '/quiz/add',
+        name:      'add-quiz',
+        component: AddQuiz
+    },
+    {
+        path:      '/question/:slug',
+        name:      'view-question',
+        component: Question
     },
     {
         path:      '/questions',
         name:      'show-questions',
-        component: Courses
+        component: Questions
+    },
+    {
+        path:      '/question/add',
+        name:      'add-question',
+        component: AddQuestion
     },
     {
         path:      '/dashboard',

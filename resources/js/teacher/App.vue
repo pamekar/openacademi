@@ -43,7 +43,6 @@
     </div>
 
 
-
 </template>
 
 <script>
@@ -78,45 +77,62 @@
                         menus:
                                   [
                                       {
-                                          title:    "My Courses",
-                                          category: 'Courses',
-                                          icon:     'school',
-                                          route:    "purchased-courses"
-                                      },
-                                      {
-                                          title: "All Courses",
+                                          title: "My Courses",
                                           icon:  'library_books',
-                                          route: "all-courses"
+                                          route: "show-courses",
                                       },
                                       {
-                                          title:    "Categories",
-                                          icon:     'apps',
-                                          param:    "slug",
-                                          route:    "category-courses",
-                                          dropdown: []
+                                          title: "Add New Course",
+                                          icon:  'library_add',
+                                          route: "add-course"
                                       },
                                       {
-                                          title: "Quiz Results",
-                                          icon:  "poll",
-                                          route: "error"
-                                      }
+                                          title: "My Lessons",
+                                          icon:  'collections_bookmark',
+                                          route: "show-lessons"
+                                      },
                                   ]
                     },
                     {
-                        category: 'Management',
+                        category: 'Quizes',
                         menus:
                                   [
-
                                       {
-                                          title:    "Account",
-                                          icon:     "account_box",
-                                          dropdown: [
-                                              {
-                                                  title: "Edit Account",
-                                                  route: "error"
-                                              }
-                                          ]
-                                      }
+                                          title: "My Quizes",
+                                          icon:  'dvr',
+                                          route: "show-quizes",
+                                      },
+                                      {
+                                          title: "Questions",
+                                          icon:  'help',
+                                          route: "show-questions",
+                                      },
+                                      {
+                                          title: "Add New Quiz",
+                                          icon:  "add_box",
+                                          route: "add-quiz"
+                                      },
+                                  ]
+                    },
+                    {
+                        category: 'Account',
+                        menus:
+                                  [
+                                      {
+                                          title: "Messages",
+                                          icon:  'message',
+                                          route: "messages"
+                                      },
+                                      {
+                                          title: "Edit Account",
+                                          icon:  'account_box',
+                                          route: "account"
+                                      },
+                                      {
+                                          title: "Logout",
+                                          icon:  'lock_open',
+                                          route: "logout"
+                                      },
                                   ]
                     }
                 ]
