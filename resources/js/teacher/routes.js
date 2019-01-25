@@ -106,6 +106,11 @@ const routes = [
         component: Error404
     },
     {
+        path:      '/logout',
+        name:      'logout',
+        component: Error404
+    },
+    {
         path:     '*',
         redirect: '/404'
     },

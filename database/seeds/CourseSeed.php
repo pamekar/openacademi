@@ -330,7 +330,8 @@ class CourseSeed extends Seeder
                 'linkedin'    => $userName,
             ]);
         }
-        foreach (range(1, 53) as $index) {
+        $catCount=count($categories);
+        for ($i = 0; $i < $catCount*2; $i++) {
             $userType = $faker->randomElement($userSelection);
             $userName = $faker->userName;
             $instructor = DB::table('users')->insertGetId([
@@ -339,8 +340,7 @@ class CourseSeed extends Seeder
                 'email'          => $faker->unique()->safeEmail,
                 'password'       => Hash::make('tarzan'),
                 'type'           => 'teacher',
-                'categories'     => md5($faker->randomElement($categories)[1])
-                    . ";" . md5($faker->randomElement($categories)[1]),
+                'categories'     => md5($categories[$i%$catCount][1]),
                 'remember_token' => str_random(10),
                 'photo'          => $userType[1]
             ]);
@@ -484,10 +484,34 @@ class CourseSeed extends Seeder
 
                 // drg >> attach students to course 
                 foreach ($students as $student) {
+                    $rating = mt_rand(3, 5);
+                    switch ($newCourse % 7) {
+                        case 1:
+                            $rating = mt_rand(3, 5);
+                            break;
+                        case 2:
+                            $rating = mt_rand(2, 3);
+                            break;
+                        case 3:
+                            $rating = mt_rand(4, 5);
+                            break;
+                        case 4:
+                            $rating = mt_rand(1, 3);
+                            break;
+                        case 5:
+                            $rating = mt_rand(2, 5);
+                            break;
+                        case 6:
+                            $rating = mt_rand(2, 4);
+                            break;
+                        default:
+                            $rating = mt_rand(3, 4);
+                            break;
+                    }
                     DB::table('course_student')->insert([
                         'course_id' => $newCourse,
                         'user_id'   => $student,
-                        'rating'    => mt_rand(3, 5)
+                        'rating'    => $rating
                     ]);
 
                     // drg >> Add Payment for course
@@ -527,6 +551,8 @@ class CourseSeed extends Seeder
                         'lesson_image_type' => $image[0],
                         'short_text'        => $faker->realText(60),
                         'full_text'         => $faker->paragraphs(7, true),
+                        'duration'          => mt_rand(2, 20) * 60 + mt_rand(0,
+                                59),
                         'position'          => $i,
                         'free_lesson'       => $freeLesson,
                         'published'         => $publishedLesson,

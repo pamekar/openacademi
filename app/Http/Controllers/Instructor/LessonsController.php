@@ -22,16 +22,18 @@ class LessonsController extends Controller
      */
     public function index(Request $request)
     {
-        if (! Gate::allows('lesson_access')) {
+        if (!Gate::allows('lesson_access')) {
             return abort(401);
         }
 
-        $lessons = Lesson::whereIn('course_id', Course::ofTeacher()->pluck('id'));
+        $lessons = Lesson::whereIn('course_id',
+            Course::ofTeacher()->pluck('id'));
         if ($request->input('course_id')) {
-            $lessons = $lessons->where('course_id', $request->input('course_id'));
+            $lessons = $lessons->where('course_id',
+                $request->input('course_id'));
         }
         if (request('show_deleted') == 1) {
-            if (! Gate::allows('lesson_delete')) {
+            if (!Gate::allows('lesson_delete')) {
                 return abort(401);
             }
             $lessons = $lessons->onlyTrashed()->get();
@@ -39,7 +41,7 @@ class LessonsController extends Controller
             $lessons = $lessons->get();
         }
 
-        return view('admin.lessons.index', compact('lessons'));
+        return response()->json($lessons);
     }
 
     /**
@@ -49,68 +51,79 @@ class LessonsController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('lesson_create')) {
+        if (!Gate::allows('lesson_create')) {
             return abort(401);
         }
-        $courses = \App\Course::ofTeacher()->get()->pluck('title', 'id')->prepend('Please select', '');
+        $courses = \App\Course::ofTeacher()->get()->pluck('title', 'id')
+            ->prepend('Please select', '');
 
-        return view('admin.lessons.create', compact('courses'));
+        return response()->json($courses);
     }
 
     /**
      * Store a newly created Lesson in storage.
      *
-     * @param  \App\Http\Requests\StoreLessonsRequest  $request
+     * @param  \App\Http\Requests\StoreLessonsRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreLessonsRequest $request)
     {
-        if (! Gate::allows('lesson_create')) {
+        if (!Gate::allows('lesson_create')) {
             return abort(401);
         }
         $request = $this->saveFiles($request);
         $lesson = Lesson::create($request->all()
-            + ['position' => Lesson::where('course_id', $request->course_id)->max('position') + 1]);
+            + [
+                'position' => Lesson::where('course_id', $request->course_id)
+                        ->max('position') + 1
+            ]);
 
-        foreach ($request->input('downloadable_files_id', []) as $index => $id) {
-            $model          = config('laravel-medialibrary.media_model');
-            $file           = $model::find($id);
+        foreach ($request->input('downloadable_files_id', []) as $index => $id)
+        {
+            $model = config('laravel-medialibrary.media_model');
+            $file = $model::find($id);
             $file->model_id = $lesson->id;
             $file->save();
         }
 
-        return redirect()->route('instructor.lessons.index', ['course_id' => $request->course_id]);
+        return redirect()->route('instructor.lessons.index',
+            ['course_id' => $request->course_id]);
     }
 
 
     /**
      * Show the form for editing Lesson.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        if (! Gate::allows('lesson_edit')) {
+        if (!Gate::allows('lesson_edit')) {
             return abort(401);
         }
-        $courses = \App\Course::ofTeacher()->get()->pluck('title', 'id')->prepend('Please select', '');
+        $courses = \App\Course::ofTeacher()->get()->pluck('title', 'id')
+            ->prepend('Please select', '');
 
         $lesson = Lesson::findOrFail($id);
 
-        return view('admin.lessons.edit', compact('lesson', 'courses'));
+        return response()->json(['courses' => $courses, 'lesson' => $lesson]);
+
     }
 
     /**
      * Update Lesson in storage.
      *
-     * @param  \App\Http\Requests\UpdateLessonsRequest  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateLessonsRequest $request
+     * @param  int                                     $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateLessonsRequest $request, $id)
     {
-        if (! Gate::allows('lesson_edit')) {
+        if (!Gate::allows('lesson_edit')) {
             return abort(401);
         }
         $request = $this->saveFiles($request);
@@ -119,47 +132,54 @@ class LessonsController extends Controller
 
 
         $media = [];
-        foreach ($request->input('downloadable_files_id', []) as $index => $id) {
-            $model          = config('laravel-medialibrary.media_model');
-            $file           = $model::find($id);
+        foreach ($request->input('downloadable_files_id', []) as $index => $id)
+        {
+            $model = config('laravel-medialibrary.media_model');
+            $file = $model::find($id);
             $file->model_id = $lesson->id;
             $file->save();
             $media[] = $file;
         }
         $lesson->updateMedia($media, 'downloadable_files');
 
-        return redirect()->route('instructor.lessons.index', ['course_id' => $request->course_id]);
+        return redirect()->route('instructor.lessons.index',
+            ['course_id' => $request->course_id]);
     }
 
 
     /**
      * Display Lesson.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        if (! Gate::allows('lesson_view')) {
+        if (!Gate::allows('lesson_view')) {
             return abort(401);
         }
-        $courses = \App\Course::get()->pluck('title', 'id')->prepend('Please select', '');$tests = \App\Test::where('lesson_id', $id)->get();
+        $courses = \App\Course::get()->pluck('title', 'id')
+            ->prepend('Please select', '');
+        $tests = \App\Test::where('lesson_id', $id)->get();
 
         $lesson = Lesson::findOrFail($id);
 
-        return view('admin.lessons.show', compact('lesson', 'tests'));
+        return response()->json(['course' => $courses, 'lesson' => $lesson]);
+
     }
 
 
     /**
      * Remove Lesson from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        if (! Gate::allows('lesson_delete')) {
+        if (!Gate::allows('lesson_delete')) {
             return abort(401);
         }
         $lesson = Lesson::findOrFail($id);
@@ -175,7 +195,7 @@ class LessonsController extends Controller
      */
     public function massDestroy(Request $request)
     {
-        if (! Gate::allows('lesson_delete')) {
+        if (!Gate::allows('lesson_delete')) {
             return abort(401);
         }
         if ($request->input('ids')) {
@@ -191,12 +211,13 @@ class LessonsController extends Controller
     /**
      * Restore Lesson from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        if (! Gate::allows('lesson_delete')) {
+        if (!Gate::allows('lesson_delete')) {
             return abort(401);
         }
         $lesson = Lesson::onlyTrashed()->findOrFail($id);
@@ -208,12 +229,13 @@ class LessonsController extends Controller
     /**
      * Permanently delete Lesson from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function perma_del($id)
     {
-        if (! Gate::allows('lesson_delete')) {
+        if (!Gate::allows('lesson_delete')) {
             return abort(401);
         }
         $lesson = Lesson::onlyTrashed()->findOrFail($id);

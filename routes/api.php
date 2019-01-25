@@ -16,95 +16,99 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
             Route::get('lesson/{id}/{slug}', 'LessonsController@show');
 
         });
-    Route::group(['namespace' => 'Instructor', 'middleware' => 'jwt.auth'],
+    Route::group([
+        'prefix'     => 'instructor',
+        'namespace'  => 'Instructor',
+        'middleware' => 'jwt.auth'
+    ],
         function () {
-            Route::get('/', 'Instructor\DashboardController@index');
-            Route::resource('permissions', 'Instructor\PermissionsController');
+            Route::get('/', 'DashboardController@index');
+            Route::resource('permissions', 'PermissionsController');
             Route::post('permissions_mass_destroy', [
-                'uses' => 'Instructor\PermissionsController@massDestroy',
+                'uses' => 'PermissionsController@massDestroy',
                 'as'   => 'permissions.mass_destroy'
             ]);
-            Route::resource('roles', 'Instructor\RolesController');
+            Route::resource('roles', 'RolesController');
             Route::post('roles_mass_destroy', [
-                'uses' => 'Instructor\RolesController@massDestroy',
+                'uses' => 'RolesController@massDestroy',
                 'as'   => 'roles.mass_destroy'
             ]);
-            Route::resource('users', 'Instructor\UsersController');
+            Route::resource('users', 'UsersController');
             Route::post('users_mass_destroy', [
-                'uses' => 'Instructor\UsersController@massDestroy',
+                'uses' => 'UsersController@massDestroy',
                 'as'   => 'users.mass_destroy'
             ]);
-            Route::resource('courses', 'Instructor\CoursesController');
+            Route::resource('courses', 'CoursesController');
             Route::post('courses_mass_destroy', [
-                'uses' => 'Instructor\CoursesController@massDestroy',
+                'uses' => 'CoursesController@massDestroy',
                 'as'   => 'courses.mass_destroy'
             ]);
             Route::post('courses_restore/{id}', [
-                'uses' => 'Instructor\CoursesController@restore',
+                'uses' => 'CoursesController@restore',
                 'as'   => 'courses.restore'
             ]);
             Route::delete('courses_perma_del/{id}', [
-                'uses' => 'Instructor\CoursesController@perma_del',
+                'uses' => 'CoursesController@perma_del',
                 'as'   => 'courses.perma_del'
             ]);
-            Route::resource('lessons', 'Instructor\LessonsController');
+            Route::resource('lessons', 'LessonsController');
             Route::post('lessons_mass_destroy', [
-                'uses' => 'Instructor\LessonsController@massDestroy',
+                'uses' => 'LessonsController@massDestroy',
                 'as'   => 'lessons.mass_destroy'
             ]);
             Route::post('lessons_restore/{id}', [
-                'uses' => 'Instructor\LessonsController@restore',
+                'uses' => 'LessonsController@restore',
                 'as'   => 'lessons.restore'
             ]);
             Route::delete('lessons_perma_del/{id}', [
-                'uses' => 'Instructor\LessonsController@perma_del',
+                'uses' => 'LessonsController@perma_del',
                 'as'   => 'lessons.perma_del'
             ]);
-            Route::resource('questions', 'Instructor\QuestionsController');
+            Route::resource('questions', 'QuestionsController');
             Route::post('questions_mass_destroy', [
-                'uses' => 'Instructor\QuestionsController@massDestroy',
+                'uses' => 'QuestionsController@massDestroy',
                 'as'   => 'questions.mass_destroy'
             ]);
             Route::post('questions_restore/{id}', [
-                'uses' => 'Instructor\QuestionsController@restore',
+                'uses' => 'QuestionsController@restore',
                 'as'   => 'questions.restore'
             ]);
             Route::delete('questions_perma_del/{id}', [
-                'uses' => 'Instructor\QuestionsController@perma_del',
+                'uses' => 'QuestionsController@perma_del',
                 'as'   => 'questions.perma_del'
             ]);
             Route::resource('questions_options',
-                'Instructor\QuestionsOptionsController');
+                'QuestionsOptionsController');
             Route::post('questions_options_mass_destroy', [
-                'uses' => 'Instructor\QuestionsOptionsController@massDestroy',
+                'uses' => 'QuestionsOptionsController@massDestroy',
                 'as'   => 'questions_options.mass_destroy'
             ]);
             Route::post('questions_options_restore/{id}', [
-                'uses' => 'Instructor\QuestionsOptionsController@restore',
+                'uses' => 'QuestionsOptionsController@restore',
                 'as'   => 'questions_options.restore'
             ]);
             Route::delete('questions_options_perma_del/{id}', [
-                'uses' => 'Instructor\QuestionsOptionsController@perma_del',
+                'uses' => 'QuestionsOptionsController@perma_del',
                 'as'   => 'questions_options.perma_del'
             ]);
-            Route::resource('tests', 'Instructor\TestsController');
+            Route::resource('tests', 'TestsController');
             Route::post('tests_mass_destroy', [
-                'uses' => 'Instructor\TestsController@massDestroy',
+                'uses' => 'TestsController@massDestroy',
                 'as'   => 'tests.mass_destroy'
             ]);
             Route::post('tests_restore/{id}', [
-                'uses' => 'Instructor\TestsController@restore',
+                'uses' => 'TestsController@restore',
                 'as'   => 'tests.restore'
             ]);
             Route::delete('tests_perma_del/{id}', [
-                'uses' => 'Instructor\TestsController@perma_del',
+                'uses' => 'TestsController@perma_del',
                 'as'   => 'tests.perma_del'
             ]);
             Route::post('/spatie/media/upload',
-                'Instructor\SpatieMediaController@create')
+                'SpatieMediaController@create')
                 ->name('media.upload');
             Route::post('/spatie/media/remove',
-                'Instructor\SpatieMediaController@destroy')
+                'SpatieMediaController@destroy')
                 ->name('media.remove');
 
         });

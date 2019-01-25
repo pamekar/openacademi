@@ -56,7 +56,8 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
-            $this->frontendLogin($request);
+            $frontend = new APIController();
+            $frontend->login($request);
             return $this->sendLoginResponse($request);
         }
 

@@ -33,7 +33,6 @@ const functions = {
             return response;
         }, function (error) {
             console.error(error);
-            NProgress.failed();
             return Promise.reject(error);
         });
     

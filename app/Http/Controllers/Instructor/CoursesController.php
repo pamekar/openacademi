@@ -34,7 +34,7 @@ class CoursesController extends Controller
             $courses = Course::ofTeacher()->get();
         }
 
-        return view('admin.courses.index', compact('courses'));
+        return response()->json($courses);
     }
 
     /**
@@ -87,7 +87,7 @@ class CoursesController extends Controller
 
         $course = Course::findOrFail($id);
 
-        return view('admin.courses.edit', compact('course', 'teachers'));
+        return response()->json($course);
     }
 
     /**
@@ -124,11 +124,12 @@ class CoursesController extends Controller
         if (! Gate::allows('course_view')) {
             return abort(401);
         }
-        $teachers = \App\User::get()->pluck('name', 'id');$lessons = \App\Lesson::where('course_id', $id)->get();$tests = \App\Test::where('course_id', $id)->get();
+        $teachers = \App\User::get()->pluck('name', 'id');
+        $lessons = \App\Lesson::where('course_id', $id)->get();$tests = \App\Test::where('course_id', $id)->get();
 
         $course = Course::findOrFail($id);
 
-        return view('admin.courses.show', compact('course', 'lessons', 'tests'));
+        return response()->json(['course'=>$course]);
     }
 
 

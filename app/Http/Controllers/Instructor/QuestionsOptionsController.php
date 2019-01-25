@@ -32,7 +32,8 @@ class QuestionsOptionsController extends Controller
             $questions_options = QuestionsOption::all();
         }
 
-        return view('admin.questions_options.index', compact('questions_options'));
+        return response()->json($questions_options);
+
     }
 
     /**
@@ -47,7 +48,8 @@ class QuestionsOptionsController extends Controller
         }
         $questions = \App\Question::get()->pluck('question', 'id')->prepend('Please select', '');
 
-        return view('admin.questions_options.create', compact('questions'));
+        return response()->json($questions);
+
     }
 
     /**
@@ -62,8 +64,6 @@ class QuestionsOptionsController extends Controller
             return abort(401);
         }
         $questions_option = QuestionsOption::create($request->all());
-
-
 
         return redirect()->route('instructor.questions_options.index');
     }
@@ -84,7 +84,8 @@ class QuestionsOptionsController extends Controller
 
         $questions_option = QuestionsOption::findOrFail($id);
 
-        return view('admin.questions_options.edit', compact('questions_option', 'questions'));
+        return response()->json(['questions'=>$questions,'questions_options'=>$questions_option]);
+
     }
 
     /**
@@ -101,8 +102,6 @@ class QuestionsOptionsController extends Controller
         }
         $questions_option = QuestionsOption::findOrFail($id);
         $questions_option->update($request->all());
-
-
 
         return redirect()->route('instructor.questions_options.index');
     }
@@ -121,7 +120,8 @@ class QuestionsOptionsController extends Controller
         }
         $questions_option = QuestionsOption::findOrFail($id);
 
-        return view('admin.questions_options.show', compact('questions_option'));
+        return response()->json($questions_option);
+
     }
 
 

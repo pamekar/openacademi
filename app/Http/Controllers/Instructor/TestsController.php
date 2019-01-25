@@ -18,13 +18,13 @@ class TestsController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('test_access')) {
+        if (!Gate::allows('test_access')) {
             return abort(401);
         }
 
 
         if (request('show_deleted') == 1) {
-            if (! Gate::allows('test_delete')) {
+            if (!Gate::allows('test_delete')) {
                 return abort(401);
             }
             $tests = Test::onlyTrashed()->get();
@@ -32,7 +32,7 @@ class TestsController extends Controller
             $tests = Test::all();
         }
 
-        return view('admin.tests.index', compact('tests'));
+        return response()->json($tests);
     }
 
     /**
@@ -42,26 +42,29 @@ class TestsController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('test_create')) {
+        if (!Gate::allows('test_create')) {
             return abort(401);
         }
         $courses = \App\Course::ofTeacher()->get();
         $courses_ids = $courses->pluck('id');
         $courses = $courses->pluck('title', 'id')->prepend('Please select', '');
-        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)->get()->pluck('title', 'id')->prepend('Please select', '');
+        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)->get()
+            ->pluck('title', 'id')->prepend('Please select', '');
 
-        return view('admin.tests.create', compact('courses', 'lessons'));
+        return response()->json(['courses' => $courses, 'lessons' => $lessons]);
+
     }
 
     /**
      * Store a newly created Test in storage.
      *
-     * @param  \App\Http\Requests\StoreTestsRequest  $request
+     * @param  \App\Http\Requests\StoreTestsRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTestsRequest $request)
     {
-        if (! Gate::allows('test_create')) {
+        if (!Gate::allows('test_create')) {
             return abort(401);
         }
         $test = Test::create($request->all());
@@ -73,34 +76,40 @@ class TestsController extends Controller
     /**
      * Show the form for editing Test.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        if (! Gate::allows('test_edit')) {
+        if (!Gate::allows('test_edit')) {
             return abort(401);
         }
         $courses = \App\Course::ofTeacher()->get();
         $courses_ids = $courses->pluck('id');
         $courses = $courses->pluck('title', 'id')->prepend('Please select', '');
-        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)->get()->pluck('title', 'id')->prepend('Please select', '');
+        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)->get()
+            ->pluck('title', 'id')->prepend('Please select', '');
 
         $test = Test::findOrFail($id);
-
-        return view('admin.tests.edit', compact('test', 'courses', 'lessons'));
+        return response()->json([
+            'test'    => $test,
+            'courses' => $courses,
+            'lessons' => $lessons
+        ]);
     }
 
     /**
      * Update Test in storage.
      *
-     * @param  \App\Http\Requests\UpdateTestsRequest  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateTestsRequest $request
+     * @param  int                                   $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateTestsRequest $request, $id)
     {
-        if (! Gate::allows('test_edit')) {
+        if (!Gate::allows('test_edit')) {
             return abort(401);
         }
         $test = Test::findOrFail($id);
@@ -113,29 +122,31 @@ class TestsController extends Controller
     /**
      * Display Test.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        if (! Gate::allows('test_view')) {
+        if (!Gate::allows('test_view')) {
             return abort(401);
         }
         $test = Test::findOrFail($id);
 
-        return view('admin.tests.show', compact('test'));
+        return response()->json($test);
     }
 
 
     /**
      * Remove Test from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        if (! Gate::allows('test_delete')) {
+        if (!Gate::allows('test_delete')) {
             return abort(401);
         }
         $test = Test::findOrFail($id);
@@ -151,7 +162,7 @@ class TestsController extends Controller
      */
     public function massDestroy(Request $request)
     {
-        if (! Gate::allows('test_delete')) {
+        if (!Gate::allows('test_delete')) {
             return abort(401);
         }
         if ($request->input('ids')) {
@@ -167,12 +178,13 @@ class TestsController extends Controller
     /**
      * Restore Test from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        if (! Gate::allows('test_delete')) {
+        if (!Gate::allows('test_delete')) {
             return abort(401);
         }
         $test = Test::onlyTrashed()->findOrFail($id);
@@ -184,12 +196,13 @@ class TestsController extends Controller
     /**
      * Permanently delete Test from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function perma_del($id)
     {
-        if (! Gate::allows('test_delete')) {
+        if (!Gate::allows('test_delete')) {
             return abort(401);
         }
         $test = Test::onlyTrashed()->findOrFail($id);

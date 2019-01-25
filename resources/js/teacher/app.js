@@ -10,6 +10,7 @@ import Breadcrumb from './components/BreadcrumbComponent.vue';
 import axios from 'axios';
 import router from './routes.js';
 import functions from './functions.js';
+import store from './courseStore';
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
@@ -25,4 +26,5 @@ let app = new Vue({
     el:     '#app',
     render: h => h(App),
     router,
+    store:  store
 });

@@ -51,6 +51,10 @@ class User extends \TCG\Voyager\Models\User implements JWTSubject
         return $this->belongsToMany('App\Lesson', 'lesson_student');
     }
 
+    public function payments(){
+        return $this->hasMany('App\Payment');
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

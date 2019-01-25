@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Namshi\JOSE\JWT;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -53,8 +54,12 @@ class APIController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        //return $this->respondWithToken($token);
-        return $token;
+
+        $expire = $request->remember ? 12 * 30 * 24 * 3600 : 0;
+
+        Cookie::queue('jwt_token', $token, $expire, '', '',
+            false, false);
+        return true;
     }
 
     /**

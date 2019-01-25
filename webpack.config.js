@@ -3,8 +3,8 @@ let glob = require('glob');
 let webpack = require('webpack');
 let Mix = require('laravel-mix').config;
 let webpackPlugins = require('laravel-mix').plugins;
-let dotenv = require('dotenv');
-const VueLoaderPlugin = require('vue-loader/lib/plugin.js');
+let dotenv = require('dotenv')
+
 /*
  |--------------------------------------------------------------------------
  | Load Environment Variables
@@ -91,81 +91,83 @@ let plugins = [];
 
 if (Mix.options.extractVueStyles) {
     var vueExtractTextPlugin = Mix.vueExtractTextPlugin();
-
+    
     plugins.push(vueExtractTextPlugin);
 }
 
 let rules = [
     {
-
-        test: /\.vue$/,
-        loader: 'vue-loader',
+        test:    /\.vue$/,
+        loader:  'vue-loader',
         options: {
             loaders: Mix.options.extractVueStyles ? {
-                js: 'babel-loader' + Mix.babelConfig(),
-                scss: vueExtractTextPlugin.extract({
-                    use: 'css-loader!sass-loader',
+                js:     'babel-loader' + Mix.babelConfig(),
+                scss:   vueExtractTextPlugin.extract({
+                    use:      'css-loader!sass-loader',
                     fallback: 'vue-style-loader'
                 }),
-                sass: vueExtractTextPlugin.extract({
-                    use: 'css-loader!sass-loader?indentedSyntax',
+                sass:   vueExtractTextPlugin.extract({
+                    use:      'css-loader!sass-loader?indentedSyntax',
                     fallback: 'vue-style-loader'
                 }),
-                less: vueExtractTextPlugin.extract({
-                    use: 'css-loader!less-loader',
+                less:   vueExtractTextPlugin.extract({
+                    use:      'css-loader!less-loader',
                     fallback: 'vue-style-loader'
                 }),
                 stylus: vueExtractTextPlugin.extract({
-                    use: 'css-loader!stylus-loader?paths[]=node_modules',
+                    use:      'css-loader!stylus-loader?paths[]=node_modules',
                     fallback: 'vue-style-loader'
                 }),
-                css: vueExtractTextPlugin.extract({
-                    use: 'css-loader',
+                css:    vueExtractTextPlugin.extract({
+                    use:      'css-loader',
                     fallback: 'vue-style-loader'
                 })
             } : {
-                js: 'babel-loader' + Mix.babelConfig(),
-                scss: 'vue-style-loader!css-loader!sass-loader',
-                sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
-                less: 'vue-style-loader!css-loader!less-loader',
+                js:     'babel-loader' + Mix.babelConfig(),
+                scss:   'vue-style-loader!css-loader!sass-loader',
+                sass:   'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+                less:   'vue-style-loader!css-loader!less-loader',
                 stylus: 'vue-style-loader!css-loader!stylus-loader?paths[]=node_modules'
             },
-
+            
             postcss: Mix.options.postCss,
-
+            
             preLoaders: Mix.options.vue.preLoaders,
-
+            
             postLoaders: Mix.options.vue.postLoaders
         }
     },
-
+    
     {
-        test: /\.jsx?$/,
+        test:    /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader' + Mix.babelConfig()
+        loader:  'babel-loader' + Mix.babelConfig()
     },
-
+    
+    {test: /\.jsx$/, loader: 'babel',}, {test: /vue-tables-2.*?js$/, loader: 'babel'},
+    
+    
     {
-        test: /\.css$/,
+        test:    /\.css$/,
         loaders: ['style-loader', 'css-loader']
     },
-
+    
     {
-        test: /\.html$/,
+        test:    /\.html$/,
         loaders: ['html-loader']
     },
-
+    
     {
-        test: /\.(png|jpe?g|gif)$/,
+        test:    /\.(png|jpe?g|gif)$/,
         loaders: [
             {
-                loader: 'file-loader',
+                loader:  'file-loader',
                 options: {
-                    name: path => {
+                    name:       path => {
                         if (!/node_modules|bower_components/.test(path)) {
                             return 'images/[name].[ext]?[hash]';
                         }
-
+                        
                         return 'images/vendor/' + path
                             .replace(/\\/g, '/')
                             .replace(
@@ -176,21 +178,21 @@ let rules = [
                 }
             },
             {
-                loader: 'img-loader',
+                loader:  'img-loader',
                 options: Mix.options.imgLoaderOptions
             }
         ]
     },
-
+    
     {
-        test: /\.(woff2?|ttf|eot|svg|otf)$/,
-        loader: 'file-loader',
+        test:    /\.(woff2?|ttf|eot|svg|otf)$/,
+        loader:  'file-loader',
         options: {
-            name: path => {
+            name:       path => {
                 if (!/node_modules|bower_components/.test(path)) {
                     return 'fonts/[name].[ext]?[hash]';
                 }
-
+                
                 return 'fonts/vendor/' + path
                     .replace(/\\/g, '/')
                     .replace(
@@ -200,12 +202,12 @@ let rules = [
             publicPath: Mix.options.resourceRoot
         }
     },
-
+    
     {
-        test: /\.(cur|ani)$/,
-        loader: 'file-loader',
+        test:    /\.(cur|ani)$/,
+        loader:  'file-loader',
         options: {
-            name: '[name].[ext]?[hash]',
+            name:       '[name].[ext]?[hash]',
             publicPath: Mix.options.resourceRoot
         }
     }
@@ -215,16 +217,16 @@ let extensions = ['*', '.js', '.jsx', '.vue'];
 
 if (Mix.ts) {
     rules.push({
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
+        test:    /\.tsx?$/,
+        loader:  'ts-loader',
         exclude: /node_modules/,
     });
-
+    
     extensions.push('.ts', '.tsx');
 }
 
 let sassRule = {
-    test: /\.s[ac]ss$/,
+    test:    /\.s[ac]ss$/,
     loaders: ['style-loader', 'css-loader', 'sass-loader']
 };
 
@@ -237,7 +239,7 @@ rules.push(sassRule);
 if (Mix.preprocessors) {
     Mix.preprocessors.forEach(preprocessor => {
         rules.push(preprocessor.rules());
-
+        
         plugins.push(preprocessor.extractPlugin);
     });
 }
@@ -258,7 +260,7 @@ module.exports.module = {rules};
 
 module.exports.resolve = {
     extensions,
-
+    
     alias: {
         'vue$': 'vue/dist/vue.common.js'
     }
@@ -277,11 +279,11 @@ module.exports.resolve = {
  */
 
 module.exports.stats = {
-    hash: false,
-    version: false,
-    timings: false,
+    hash:     false,
+    version:  false,
+    timings:  false,
     children: false,
-    errors: false
+    errors:   false
 };
 
 process.noDeprecation = true;
@@ -314,13 +316,13 @@ module.exports.devtool = Mix.options.sourcemaps;
  |
  */
 module.exports.devServer = {
-    headers: {
+    headers:            {
         "Access-Control-Allow-Origin": "*"
     },
     historyApiFallback: true,
-    noInfo: true,
-    compress: true,
-    quiet: true
+    noInfo:             true,
+    compress:           true,
+    quiet:              true
 };
 
 
@@ -337,20 +339,20 @@ module.exports.devServer = {
 
 plugins.push(
     new webpack.ProvidePlugin(Mix.autoload || {}),
-
+    
     new webpackPlugins.FriendlyErrorsWebpackPlugin({clearConsole: Mix.options.clearConsole}),
-
+    
     new webpackPlugins.StatsWriterPlugin({
-        filename: 'mix-manifest.json',
+        filename:  'mix-manifest.json',
         transform: Mix.manifest.transform.bind(Mix.manifest),
     }),
-
+    
     new webpack.LoaderOptionsPlugin({
         minimize: Mix.inProduction,
-        options: {
+        options:  {
             postcss: Mix.options.postCss,
             context: __dirname,
-            output: {path: './'}
+            output:  {path: './'}
         }
     })
 );
@@ -359,8 +361,8 @@ if (Mix.browserSync) {
     plugins.push(
         new webpackPlugins.BrowserSyncPlugin(
             Object.assign({
-                host: 'localhost',
-                port: 3000,
+                host:  'localhost',
+                port:  3000,
                 proxy: 'app.dev',
                 files: [
                     'app/**/*.php',
@@ -379,7 +381,7 @@ if (Mix.browserSync) {
 if (Mix.options.notifications) {
     plugins.push(
         new webpackPlugins.WebpackNotifierPlugin({
-            title: 'Laravel Mix',
+            title:        'Laravel Mix',
             alwaysNotify: true,
             contentImage: Mix.Paths.root('node_modules/laravel-mix/icons/laravel.png')
         })
@@ -393,7 +395,7 @@ if (Mix.copy.length) {
 if (Mix.entry().hasExtractions()) {
     plugins.push(
         new webpack.optimize.CommonsChunkPlugin({
-            names: Mix.entry().getExtractions(),
+            names:     Mix.entry().getExtractions(),
             minChunks: Infinity
         })
     );
@@ -412,14 +414,14 @@ if (Mix.options.versioning) {
 
 if (Mix.options.purifyCss) {
     let PurifyCSSPlugin = require('purifycss-webpack');
-
+    
     // By default, we'll scan all Blade and Vue files in our project.
     let paths = glob.sync(Mix.Paths.root('resources/views/**/*.blade.php')).concat(
         Mix.entry().scripts.reduce((carry, js) => {
             return carry.concat(glob.sync(js.base + '/**/*.vue'));
         }, [])
     );
-
+    
     plugins.push(new PurifyCSSPlugin(
         Object.assign({paths}, Mix.options.purifyCss, {minimize: Mix.inProduction})
     ));
@@ -435,11 +437,11 @@ plugins.push(
     new webpack.DefinePlugin(
         Mix.definitions({
             NODE_ENV: Mix.inProduction
-                ? 'production'
-                : ( process.env.NODE_ENV || 'development' )
+                          ? 'production'
+                          : ( process.env.NODE_ENV || 'development' )
         })
     ),
-
+    
     new webpackPlugins.WebpackOnBuildPlugin(
         stats => global.events.fire('build', stats)
     )
@@ -448,8 +450,6 @@ plugins.push(
 if (!Mix.entry().hasScripts()) {
     plugins.push(new webpackPlugins.MockEntryPlugin(Mix.output().path));
 }
-// drg >> include the vue-loader plugin
-plugins.push(new VueLoaderPlugin());
 
 module.exports.plugins = plugins;
 

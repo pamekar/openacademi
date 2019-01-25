@@ -35,26 +35,20 @@ Route::patch('change_password', 'Auth\ChangePasswordController@changePassword')
 
 Route::get('faq', 'HomeController@faq')->name('faq');
 
-Route::group(['middleware' => ['auth', 'isStudent']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/user', function () {
-        return view('dashboard.student.index');
+        if(\Illuminate\Support\Facades\Auth::user()->isStudent()) {
+            return view('dashboard.student.index');
+        }elseif(\Illuminate\Support\Facades\Auth::user()->isInstructor()) {
+            return view('dashboard.instructor.index');
+        }
+        return redirect('/');
     })->name('user');
 
 });
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::group([
-    'middleware' => ['auth','isInstructor'],
-    'as'         => 'instructor.'
-],
-    function ()
-    {
-        Route::get('/instructor', function () {
-            return view('dashboard.instructor.index');
-        })->name('instructor');
-    });
 Route::get('debug/kldjfklfdujkewiojdk', function () {
     $lessons = \App\Lesson::all();
     foreach ($lessons as $lesson) {
