@@ -15,9 +15,7 @@
 
                         <div class="form-group mb-0">
                             <label class="form-label">Description</label>
-                            <div style="height: 150px;" data-toggle="quill" data-quill-placeholder="Quill WYSIWYG editor" data-quill-modules-toolbar='[["bold", "italic"], ["link", "blockquote", "code", "image"], [{"list": "ordered"}, {"list": "bullet"}]]'>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque necessitatibus distinctio adipisci eius, unde dignissimos maxime doloribus quisquam non harum?</p>
-                            </div>
+                            <ckeditor :editor="editor" style="min-height: 150px;" v-model="editorData" :config="editorConfig" tag-name="text-area" name="description"></ckeditor>
                         </div>
 
                     </div>
@@ -167,5 +165,41 @@
 
 
 <script>
-    export default {}
+    import CKEditor from '@ckeditor/ckeditor5-vue';
+    import InlineEditor from '@ckeditor/ckeditor5-build-inline';
+
+    export default {
+        data() {
+            return {
+                editor:       InlineEditor,
+                editorData:   '<p>Content of the editor.</p>',
+                editorConfig: {
+                    toolbar: [
+                        {name: 'document', groups: ['document', 'mode', 'doctools']},
+                        {name: 'clipboard', groups: ['clipboard', 'undo']},
+                        {name: 'forms', groups: ['forms']},
+                        {name: 'styles', groups: ['styles']},
+                        '/',
+                        {name: 'basicstyles', groups: ['basicstyles', 'cleanup']},
+                        {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph']},
+                        {name: 'links', groups: ['links']},
+                        {name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing']},
+                        {name: 'insert', groups: ['insert']},
+                        {name: 'colors', groups: ['colors']},
+                        {name: 'tools', groups: ['tools']},
+                        {name: 'others', groups: ['others']},
+                        {name: 'about', groups: ['about']}
+                    ],
+                    removeButtons: "Save,Print,NewPage,Templates,PasteFromWord,SelectAll,Form,Checkbox,TextField,Radio,Textarea,Select,Button,ImageButton,HiddenField,RemoveFormat,Strike,Subscript,CreateDiv,Blockquote,Outdent,Indent,BidiLtr,BidiRtl,Language,Anchor,Flash,Smiley,SpecialChar,PageBreak,Iframe,HorizontalRule,BGColor,TextColor,ShowBlocks,About"
+                }
+            }
+        },
+        mounted() {
+
+        },
+        components: {
+            ckeditor: CKEditor.component,
+        }
+
+    }
 </script>

@@ -14,7 +14,7 @@ import store from './courseStore';
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
-Vue.use(axios);
+
 
 functions.setupAxios();
 

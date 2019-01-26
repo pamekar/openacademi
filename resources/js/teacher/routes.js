@@ -5,6 +5,10 @@ import AddCourse from './views/AddCourse.vue';
 import AddLesson from './views/AddLesson.vue';
 import AddQuiz from './views/AddQuiz.vue';
 import AddQuestion from './views/AddQuestion.vue';
+import EditCourse from './views/EditCourse.vue';
+import EditLesson from './views/EditLesson.vue';
+import EditQuiz from './views/EditQuiz.vue';
+import EditQuestion from './views/EditQuestion.vue';
 import Course from './views/Course.vue';
 import Courses from './views/Courses.vue';
 import Lesson from './views/Lesson.vue';
@@ -14,6 +18,7 @@ import Question from './views/Question.vue';
 import Questions from './views/Questions.vue';
 import Quiz from './views/Quiz.vue';
 import Quizes from './views/Quizes.vue';
+import Account from './views/Account.vue';
 
 
 const Error404 = {
@@ -37,7 +42,7 @@ const routes = [
         component: Index
     },
     {
-        path:      '/course/:slug',
+        path:      '/course/:id',
         name:      'view-course',
         component: Course
     },
@@ -50,6 +55,11 @@ const routes = [
         path:      '/course/add',
         name:      'add-course',
         component: AddCourse
+    },
+    {
+        path:      '/course/:id/edit',
+        name:      'edit-course',
+        component: EditCourse
     },
     {
         path:      '/lesson/:slug',
@@ -95,6 +105,10 @@ const routes = [
         path:      '/question/add',
         name:      'add-question',
         component: AddQuestion
+    },{
+        path:      'account/',
+        name:      'account',
+        component: Account
     },
     {
         path:      '/dashboard',

@@ -6,7 +6,7 @@
                     <router-link :to="{name:'course',params:{'slug':course.slug}}">{{ course.title }}</router-link>
                 </h4>
                 <div class="text-center">
-                    <star-rating :rating="Number(course.rating.split(';')[0])" :increment="0.01" :read-only="true" :star-size="18" style="margin: auto"></star-rating>
+                    <star-rating :rating="Number(course.rating.split(';')[0])" :increment="0.01" :read-only="true" :star-size="18"></star-rating>
                 </div>
             </div>
 

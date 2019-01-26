@@ -23,11 +23,14 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-inline": "^11.2.0",
+    "@ckeditor/ckeditor5-vue": "^1.0.0-beta.1",
     "babel-loader": "^8.0.0-beta.6",
     "bootstrap-vue": "^2.0.0-rc.11",
     "fs": "0.0.1-security",
     "laravel-vue-whoops": "^0.2.5",
     "nprogress": "^0.2.0",
+    "summernote": "^0.8.11",
     "vue-headful": "^2.0.1",
     "vue-loader": "^14.2.3",
     "vue-router": "^3.0.2",

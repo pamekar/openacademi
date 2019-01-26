@@ -26,6 +26,7 @@ class Course extends Model
 {
     use SoftDeletes;
 
+
     protected $fillable
         = [
             'title',
@@ -165,7 +166,7 @@ class Course extends Model
 
     public function scopeOfTeacher($query)
     {
-        if (!Auth::user()->isInstructor()) {
+        if (Auth::user()->isInstructor()) {
             return $query->whereHas('teachers', function ($q) {
                 $q->where('user_id', Auth::user()->id);
             });

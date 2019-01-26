@@ -19,7 +19,7 @@ class CoursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($limit=6)
     {
         if (! Gate::allows('course_access')) {
             return abort(401);
@@ -29,9 +29,9 @@ class CoursesController extends Controller
             if (! Gate::allows('course_delete')) {
                 return abort(401);
             }
-            $courses = Course::onlyTrashed()->ofTeacher()->get();
+            $courses = Course::onlyTrashed()->ofTeacher()->paginate($limit);
         } else {
-            $courses = Course::ofTeacher()->get();
+            $courses = Course::ofTeacher()->paginate($limit);
         }
 
         return response()->json($courses);

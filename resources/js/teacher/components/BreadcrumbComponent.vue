@@ -10,8 +10,8 @@
             <div class="flex mb-2 mb-sm-0">
                 <h1 class="h2" v-html="title"></h1>
             </div>
-            <router-link :to="{name:button.link}" v-if="button.link && !button.params" :class="button.class" v-if="button">{{button.title}}</router-link>
-            <router-link :to="{name:button.link, params:button.params}" v-if="button.link && button.params" :class="button.class" v-if="button">{{button.title}}</router-link>
+            <router-link :to="{name:button.link}" v-if="button && button.link && !button.params" :class="button.class">{{button.title}}</router-link>
+            <router-link :to="{name:button.link, params:button.params}" v-if="button && button.link && button.params" :class="button.class">{{button.title}}</router-link>
         </div>
     </div>
 </template>

@@ -121,7 +121,7 @@
                                       {
                                           title: "Messages",
                                           icon:  'message',
-                                          route: "messages"
+                                          route: "dashboard"
                                       },
                                       {
                                           title: "Edit Account",
