@@ -140,15 +140,10 @@
             }
         },
         created() {
-            this.getCategories();
+
         },
         methods:    {
-            getCategories() {
-                axios.get("/api/courses/categories")
-                    .then(({data}) => {
-                        this.sidebarItems[1].menus[2].dropdown = data
-                    });
-            }
+
         },
         watch:      {
             '$route'(to, from) {

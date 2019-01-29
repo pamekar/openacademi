@@ -10,7 +10,7 @@
         </div>
         
         <div class="panel-body">
-            @if (Auth::user()->isAdmin())
+            @if (Auth::user()->isInstructor())
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('teachers', 'Teachers', ['class' => 'control-label']) !!}

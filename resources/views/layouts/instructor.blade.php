@@ -25,6 +25,7 @@
 
     <!-- App CSS -->
     <link type="text/css" href="{{asset("$public/assets/css/app.css")}}" rel="stylesheet">
+    <link type="text/css" href="{{asset("$public/assets/css/nestable.css")}}" rel="stylesheet">
 </head>
 
 <body class="layout-fluid">
@@ -40,17 +41,15 @@
       method="POST" style="display: none;"
 >{{ csrf_field() }}</form>
 
-<script src="{{asset("$public/teacher/js/app.js")}}"></script>
-<!-- jQuery -->
-<script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
-
 <!-- Bootstrap -->
+<script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
 <script src="{{asset("$public/assets/vendor/popper.min.js")}}"></script>
 <script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"></script>
 
-
+<script src="{{asset("$public/assets/vendor/jquery.nestable.js")}}"></script>
+<script src="{{asset("$public/assets/js/nestable.js")}}"></script>
+<script src="{{asset("$public/js/bootstrap-notify.min.js")}}"></script>
 @if(isset($notification))
-    <script src="{{asset("$public/js/bootstrap-notify.min.js")}}"></script>
     <script>
         $.notify({
             // options
@@ -63,13 +62,13 @@
 
     </script>
 @endif
+<script src="{{asset("$public/teacher/js/app.js")}}"></script>
 <!-- Perfect Scrollbar -->
 <script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
 
 <!-- MDK -->
 <script src="{{asset("$public/assets/vendor/dom-factory.js")}}"></script>
 <script src="{{asset("$public/assets/vendor/material-design-kit.js")}}"></script>
-
 <!-- App JS -->
 <script src="{{asset("$public/assets/js/app.js")}}"></script>
 
@@ -173,6 +172,8 @@
 <!-- List.js -->
 <script src="{{asset("$public/assets/vendor/list.min.js")}}"></script>
 <script src="{{asset("$public/assets/js/list.js")}}"></script>
+
+
 </body>
 
 </html>

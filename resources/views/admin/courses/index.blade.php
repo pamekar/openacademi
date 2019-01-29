@@ -31,7 +31,7 @@
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
 
-                        @if (Auth::user()->isAdmin())
+                        @if (Auth::user()->isInstructor())
                             <th>@lang('global.courses.fields.teachers')</th>
                         @endif
                         <th>@lang('global.courses.fields.title')</th>
@@ -57,7 +57,7 @@
                                     @if ( request('show_deleted') != 1 )<td></td>@endif
                                 @endcan
 
-                                @if (Auth::user()->isAdmin())
+                                @if (Auth::user()->isInstructor())
                                 <td>
                                     @foreach ($course->teachers as $singleTeachers)
                                         <span class="label label-info label-many">{{ $singleTeachers->name }}</span>

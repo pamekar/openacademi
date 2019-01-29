@@ -41,7 +41,7 @@ class Lesson extends Model implements HasMedia
             'published',
             'course_id'
         ];
-    protected $appends = ['is_completed'];
+    protected $appends = ['is_completed', 'last_updated'];
 
 
     /**
@@ -79,6 +79,11 @@ class Lesson extends Model implements HasMedia
         return $value;
     }
 
+    public function getLessonImagePreviewAttribute($value)
+    {
+        return Storage::url($value);
+    }
+
     public function course()
     {
         return $this->belongsTo(Course::class, 'course_id')->withTrashed();
@@ -98,6 +103,37 @@ class Lesson extends Model implements HasMedia
     {
         return $this->belongsToMany('App\User', 'lesson_student')
             ->withTimestamps();
+    }
+
+    function getLastUpdatedAttribute()
+    {
+        $now = new \DateTime();
+        $ago = new \DateTime($this->updated_at);
+        $diff = $now->diff($ago);
+
+        $diff->w = floor($diff->d / 7);
+        $diff->d -= $diff->w * 7;
+
+        $string = array(
+            'y' => 'year',
+            'm' => 'month',
+            'w' => 'week',
+            'd' => 'day',
+            'h' => 'hour',
+            'i' => 'minute',
+            's' => 'second',
+        );
+        foreach ($string as $k => &$v) {
+            if ($diff->$k) {
+                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+            } else {
+                unset($string[$k]);
+            }
+        }
+
+        //  if (!$full)
+        $string = array_slice($string, 0, 1);
+        return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 
 }

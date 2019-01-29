@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Instructor;
 
 use App\Course;
+use App\CourseCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -52,6 +53,12 @@ class CoursesController extends Controller
         return view('admin.courses.create', compact('teachers'));
     }
 
+    public function getCategories()
+    {
+        $categories = CourseCategory::select('id', 'title')->get();
+        return response()->json($categories);
+    }
+
     /**
      * Store a newly created Course in storage.
      *
@@ -65,7 +72,7 @@ class CoursesController extends Controller
         }
         $request = $this->saveFiles($request);
         $course = Course::create($request->all());
-        $teachers = \Auth::user()->isAdmin() ? array_filter((array)$request->input('teachers')) : [\Auth::user()->id];
+        $teachers = \Auth::user()->isInstructor() ? array_filter((array)$request->input('teachers')) : [\Auth::user()->id];
         $course->teachers()->sync($teachers);
 
         return redirect()->route('instructor.courses.index');
@@ -85,7 +92,7 @@ class CoursesController extends Controller
         }
         $teachers = \App\User::whereHas('role', function ($q) { $q->where('role_id', 2); } )->get()->pluck('name', 'id');
 
-        $course = Course::findOrFail($id);
+        $course = Course::with('lessons')->findOrFail($id);
 
         return response()->json($course);
     }
@@ -106,10 +113,15 @@ class CoursesController extends Controller
         
         $course = Course::findOrFail($id);
         $course->update($request->all());
-        $teachers = \Auth::user()->isAdmin() ? array_filter((array)$request->input('teachers')) : [\Auth::user()->id];
+        $teachers = \Auth::user()->isInstructor() ? array_filter((array)$request->input('teachers')) : [\Auth::user()->id];
         $course->teachers()->sync($teachers);
 
-        return redirect()->route('instructor.courses.index');
+        $status = [
+            'type'    => 'success',
+            'message' => "$course->title has been updated successfully"
+        ];
+
+        return response()->json($status);
     }
 
 

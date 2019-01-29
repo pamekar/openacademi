@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
                 <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" value="" id="remember" required="" name="remember" type="checkbox">
+                    <input class="custom-control-input" id="remember" required="" name="remember" type="checkbox">
                     <label class="custom-control-label" for="remember">
                         Remember
                     </label>

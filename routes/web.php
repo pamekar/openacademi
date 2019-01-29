@@ -37,9 +37,9 @@ Route::get('faq', 'HomeController@faq')->name('faq');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/user', function () {
-        if(\Illuminate\Support\Facades\Auth::user()->isStudent()) {
+        if (\Illuminate\Support\Facades\Auth::user()->isStudent()) {
             return view('dashboard.student.index');
-        }elseif(\Illuminate\Support\Facades\Auth::user()->isInstructor()) {
+        } elseif (\Illuminate\Support\Facades\Auth::user()->isInstructor()) {
             return view('dashboard.instructor.index');
         }
         return redirect('/');
@@ -51,10 +51,29 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('debug/kldjfklfdujkewiojdk', function () {
     $lessons = \App\Lesson::all();
+    $courseImages = [
+        "course1.jpg",
+        "course2.jpg",
+        "course3.jpg",
+        "course4.jpg",
+        "course5.jpg",
+        "course6.jpg",
+        "course7.jpg",
+        "course8.jpg",
+        "course9.jpg",
+        "course10.jpg",
+        "course11.jpg",
+        "course12.jpg",
+        "course13.jpg",
+        "course14.jpg",
+        "course15.jpg"
+    ];
+
     foreach ($lessons as $lesson) {
         \Illuminate\Support\Facades\DB::table('lessons')
             ->where('id', $lesson->id)->update([
-                'duration' => mt_rand(2, 20) * 60 + mt_rand(0, 59)
+                'lesson_image_preview' => "public/uploads/"
+                    . $courseImages[array_rand($courseImages)]
             ]);
     }
     echo "Executed - " . count($lessons) . " instructions executed";
@@ -95,8 +114,8 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')
 Route::post('register', 'Auth\RegisterController@register')
     ->name('register');
 
-Route::get('authorization', function(){
-    $word=0?"Is a false assignment":"guess it's true";
+Route::get('authorization', function () {
+    $word = 0 ? "Is a false assignment" : "guess it's true";
 
     echo $word;
 });

@@ -13,6 +13,7 @@
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
     "@babel/preset-env": "^7.3.1",
+    "@voerro/vue-tagsinput": "^1.11.1",
     "axios": "^0.15.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bootstrap-sass": "^3.3.7",

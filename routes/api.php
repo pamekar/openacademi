@@ -39,6 +39,7 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
                 'as'   => 'users.mass_destroy'
             ]);
             Route::resource('courses', 'CoursesController');
+            Route::get('course/categories', 'CoursesController@getCategories');
             Route::post('courses_mass_destroy', [
                 'uses' => 'CoursesController@massDestroy',
                 'as'   => 'courses.mass_destroy'

@@ -83,7 +83,7 @@
     </div>
 </template>
 <script>
-    import {mapState} from 'vuex';
+    import {mapState, mapActions} from 'vuex';
     import Courses from '../components/CoursesComponent.vue';
     import Paginate from 'vuejs-paginate'
 
@@ -96,7 +96,7 @@
         },
         methods:    {
             getCourses(page = 1) {
-                this.$store.dispatch('fetchCourses', page);
+                this.$store.dispatch('courses/fetch_all', page);
             }
         },
         components: {
@@ -104,7 +104,11 @@
             'paginate':          Paginate
         },
         computed:   {
-            ...mapState(['courses','pageCount'])
+            ...mapState(
+                {
+                    courses:   state => state.courses.courses,
+                    pageCount: state => state.courses.pageCount
+                })
         }
     }
 </script>
