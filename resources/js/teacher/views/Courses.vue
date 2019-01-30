@@ -59,7 +59,6 @@
                     v-for="course in courses"
                     :course="course"
                     :key="course.id"
-                    :tags="course.tags.split(';',2)"
             ></courses-component>
         </div>
 
@@ -92,7 +91,7 @@
             return {}
         },
         mounted() {
-            this.$store.dispatch('fetchCourses');
+            this.$store.dispatch('courses/fetch_all');
         },
         methods:    {
             getCourses(page = 1) {

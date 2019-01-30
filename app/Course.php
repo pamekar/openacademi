@@ -32,10 +32,15 @@ class Course extends Model
             'title',
             'slug',
             'description',
+            'category',
+            'tags',
+            'summary',
             'price',
             'course_image',
+            'course_image_type',
             'course_image_thumbnail',
             'start_date',
+            'end_date',
             'published'
         ];
 
@@ -54,7 +59,12 @@ class Course extends Model
      */
     public function setPriceAttribute($input)
     {
-        $this->attributes['price'] = $input ? $input : null;
+        $this->attributes['price'] = $input ? $input * 100 : null;
+    }
+
+    public function getTagsAttribute($tags)
+    {
+        return explode(';', $tags);
     }
 
     public function course_category()
@@ -112,12 +122,14 @@ class Course extends Model
 
     public function getCompletedLessonsAttribute()
     {
-        $count = Auth::user()->lessons()->where('course_id', $this->id)->count();
+        $count = Auth::user()->lessons()->where('course_id', $this->id)
+            ->count();
         return $count;
     }
 
-    public function getDurationAttribute(){
-        $duration=Lesson::where('course_id', $this->id)->where('published', 1)
+    public function getDurationAttribute()
+    {
+        $duration = Lesson::where('course_id', $this->id)->where('published', 1)
             ->sum('duration');
         return $duration;
     }
@@ -205,9 +217,10 @@ class Course extends Model
             ->where('course_id', $this->id)->where('rating', '>', 0)
             ->pluck('rating')->toArray();
 
-        $count=sizeof($ratings);
-        $sum=array_sum($ratings);
-        $average=number_format($sum/$count,2);
+        $count = sizeof($ratings);
+        $sum = array_sum($ratings);
+        $average = $count !== 0 && $sum !== 0 ? number_format($sum / $count, 2)
+            : 0;
         return "$average;$count";
 
     }

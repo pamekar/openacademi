@@ -27276,7 +27276,8 @@ function listToStyles (parentId, list) {
     getCategories() {
       axios.get("/api/courses/categories").then(({
         data
-      }) => {//   this.navItems[3].dropdown = data
+      }) => {
+        this.navItems[3].dropdown = data;
       });
     }
 
@@ -27817,7 +27818,6 @@ function listToStyles (parentId, list) {
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -27880,8 +27880,6 @@ function listToStyles (parentId, list) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_LessonsListComponent_vue__ = __webpack_require__(148);
-//
-//
 //
 //
 //
@@ -30535,13 +30533,10 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(_vm.course.description) +
-                    "\n                "
-                )
-              ])
+              _c("div", {
+                staticClass: "card-body",
+                domProps: { innerHTML: _vm._s(_vm.course.description) }
+              })
             ]),
             _vm._v(" "),
             _c("lessons-list-component", {
@@ -31873,11 +31868,7 @@ var render = function() {
         _vm._l(_vm.allCourses, function(course) {
           return _c("courses-component", {
             key: course.id,
-            attrs: {
-              course: course,
-              courseWidth: _vm.courseListWidth,
-              tags: course.tags.split(";", 2)
-            }
+            attrs: { course: course, courseWidth: _vm.courseListWidth }
           })
         }),
         1
@@ -32659,7 +32650,7 @@ var render = function() {
             _vm._v("\n            " + _vm._s(_vm.course.summary)),
             _c("br"),
             _vm._v(" "),
-            _vm._l(_vm.tags, function(tag) {
+            _vm._l(_vm.course.tags, function(tag) {
               return _c(
                 "router-link",
                 {
@@ -33021,11 +33012,7 @@ var render = function() {
         _vm._l(_vm.allCourses, function(course) {
           return _c("courses-component", {
             key: course.id,
-            attrs: {
-              course: course,
-              courseWidth: _vm.courseListWidth,
-              tags: course.tags.split(";", 2)
-            }
+            attrs: { course: course, courseWidth: _vm.courseListWidth }
           })
         }),
         1

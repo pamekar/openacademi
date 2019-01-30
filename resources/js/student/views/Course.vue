@@ -19,9 +19,7 @@
                     <div class="embed-responsive embed-responsive-16by9" v-if="course.course_image_type == 'video'">
                         <iframe class="embed-responsive-item" :src="course.course_image_main" allowfullscreen=""></iframe>
                     </div>
-                    <div class="card-body">
-                        {{course.description}}
-                    </div>
+                    <div class="card-body" v-html="course.description"></div>
                 </div>
 
                 <!-- Lessons -->

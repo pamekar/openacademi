@@ -19,7 +19,7 @@
                 <small class="text-muted">{{course.course_cat}}</small>
                 <br>
                 {{ course.summary }}<br>
-                <router-link :to="{name:'tag-courses',params:{'tag':tag}}" v-for="tag in tags" :key="tag">
+                <router-link :to="{name:'tag-courses',params:{'tag':tag}}" v-for="tag in course.tags" :key="tag">
                     <span class="badge badge-primary mr-1" >
                     {{tag}}</span>
                 </router-link>

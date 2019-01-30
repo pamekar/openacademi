@@ -180,7 +180,7 @@
             getCategories() {
                 axios.get("/api/courses/categories")
                     .then(({data}) => {
-                     //   this.navItems[3].dropdown = data
+                        this.navItems[3].dropdown = data
                     });
             }
         },

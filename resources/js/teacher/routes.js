@@ -42,6 +42,11 @@ const routes = [
         component: Index
     },
     {
+        path:      '/course/add',
+        name:      'add-course',
+        component: AddCourse
+    },
+    {
         path:      '/course/:id',
         name:      'view-course',
         component: Course
@@ -50,11 +55,6 @@ const routes = [
         path:      '/courses',
         name:      'show-courses',
         component: Courses
-    },
-    {
-        path:      '/course/add',
-        name:      'add-course',
-        component: AddCourse
     },
     {
         path:      '/course/:id/edit',
