@@ -45,8 +45,8 @@
                     </div>
                     <div class="card-body">
                         <input type="text" class="form-control" value="https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0"/>
-                    </div>-->
-                </div>
+                    </div>
+                </div>-->
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Meta</h4>

@@ -30505,17 +30505,17 @@ var render = function() {
           { staticClass: "col-md-8" },
           [
             _c("div", { staticClass: "card" }, [
-              _c("div", [
-                _vm.course.course_image_type == "image"
-                  ? _c("img", {
+              _vm.course.course_image_type == "image"
+                ? _c("div", [
+                    _c("img", {
                       attrs: {
                         src: _vm.course.course_image_main,
                         alt: _vm.course.slug,
                         width: "100%"
                       }
                     })
-                  : _vm._e()
-              ]),
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _vm.course.course_image_type == "video"
                 ? _c(

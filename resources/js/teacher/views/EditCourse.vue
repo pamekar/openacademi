@@ -53,11 +53,14 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0" allowfullscreen=""></iframe>
+                    <div v-if="course.course_image_type == 'image'">
+                        <img :src="course.course_image_main" :alt="course.slug" width="100%"  />
+                    </div>
+                    <div class="embed-responsive embed-responsive-16by9" v-if="course.course_image_type == 'video'">
+                        <iframe class="embed-responsive-item" :src="course.course_image_main" allowfullscreen=""></iframe>
                     </div>
                     <div class="card-body">
-                        <input type="text" class="form-control" value="https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0"/>
+                        <input type="text" class="form-control" value=""/>
                     </div>
                 </div>
                 <div class="card">
@@ -154,10 +157,6 @@
                 })
         },
         methods:    {
-            reorderLessons: function (event) {
-                console.log(event.target.tagname);
-                console.log('hippie');
-            },
             editCourse:     function () {
                 this.$store.dispatch('courses/edit', this.course);
             }

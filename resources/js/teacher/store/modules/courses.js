@@ -1,5 +1,5 @@
-// initial state
-// shape: [{ id, quantity }]
+import router from '../../routes'
+
 
 const endpoint = '/api/instructor';
 
@@ -21,7 +21,7 @@ const actions = {
         dispatch('fetch_categories');
     },
     fetch_empty({commit}) {
-        commit('SET_EMPTY',[]);
+        commit('SET_EMPTY', []);
     },
     fetch_all({commit}, page = 1) {
         axios.get(`${endpoint}/courses?page=${page}`)
@@ -44,10 +44,10 @@ const actions = {
             start_date:  course.start_date,
             end_date:    course.end_date,
             published:   course.published,
-        
+            
         })
             .then(({data}) => {
-            
+                
                 jQuery.notify({
                     // options
                     message: data.message,
@@ -55,8 +55,7 @@ const actions = {
                     // settings
                     type: data.type,
                 });
-                console.log();
-                dispatch('fetch', course.id)
+                router.push({name: 'edit-course', params: {id: data.course_id}});
             });
     },
     edit({dispatch}, course) {

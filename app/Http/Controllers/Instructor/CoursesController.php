@@ -83,8 +83,9 @@ class CoursesController extends Controller
         $course->teachers()->sync($teachers);
 
         $status = [
-            'type'    => 'success',
-            'message' => "$course->title has been added successfully"
+            'type'      => 'success',
+            'message'   => "$course->title has been added successfully",
+            'course_id' => $course->id
         ];
 
         return response()->json($status);
