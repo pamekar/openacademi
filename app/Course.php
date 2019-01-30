@@ -96,7 +96,7 @@ class Course extends Model
 
     public function getCourseImageAttribute($value)
     {
-        if ( sizeof($this->course_image) >= 1) {
+        if ( sizeof($value) >= 1) {
             return Storage::url($value);
         }
         return $value;
@@ -104,7 +104,7 @@ class Course extends Model
 
     public function getCourseImageThumbnailAttribute($value)
     {
-        if ( sizeof($this->course_image_thumbnail) >= 1) {
+        if ( sizeof($value) >= 1) {
             return Storage::url($value);
         }
         return $value;
@@ -113,7 +113,7 @@ class Course extends Model
     public function getCourseImageMainAttribute($value)
     {
         if ($this->course_image_type == 'image'
-            && sizeof($this->course_image_main) >= 1
+            && sizeof($value) >= 1
         ) {
             return Storage::url($value);
         }
