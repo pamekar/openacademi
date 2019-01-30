@@ -73,7 +73,7 @@ class Lesson extends Model implements HasMedia
 
     public function getLessonImageAttribute($value)
     {
-        if ($this->lesson_image_type == 'image') {
+        if ($this->lesson_image_type == 'image' && sizeof($this->lesson_image) >= 1) {
             return Storage::url($value);
         }
         return $value;
@@ -81,7 +81,10 @@ class Lesson extends Model implements HasMedia
 
     public function getLessonImagePreviewAttribute($value)
     {
-        return Storage::url($value);
+        if ( sizeof($this->lesson_image_preview) >= 1) {
+            return Storage::url($value);
+        }
+        return $value;
     }
 
     public function course()
