@@ -80,8 +80,8 @@ class LoginController extends Controller
         $this->guard()->logout();
         $request->session()->invalidate();
 
-        $frontend = new APIController();
-        $frontend->logout();
+        //$frontend = new APIController();
+        //$frontend->logout();
 
         return $this->loggedOut($request) ?: redirect('/');
     }

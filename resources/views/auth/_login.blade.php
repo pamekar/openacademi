@@ -1,81 +1,67 @@
-@extends('layouts.auth')
-
+@extends('layouts._auth')
+@section('title','Login')
 @section('content')
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ ucfirst(config('app.name')) }} Login</div>
-                <div class="panel-body">
-                    
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> There were problems with input:
-                            <br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+    <div class="card-header text-center">
+        <h4 class="card-title">Login</h4>
+        <p class="card-subtitle">Access your account</p>
+    </div>
+    <div class="card-body">
+
+        <a href="" class="btn btn-light btn-block">
+            <span class="fab fa-google mr-2"></span>
+            Continue with Google
+        </a>
+
+        <div class="page-separator">
+            <div class="page-separator__text">or</div>
+        </div>
+
+        <form action="{{route('login')}}" novalidate method="post">
+            {{csrf_field()}}
+            <div class="form-group">
+                <label class="form-label" for="email">Your email address:</label>
+                <div class="input-group input-group-merge">
+                    <input name="email" id="email" type="email" required="" class="form-control form-control-prepended @if($errors->has('email') ) is-invalid @endif"
+                           placeholder="Your email address" value="{{old('email')}}">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="far fa-envelope"></span>
                         </div>
-                    @endif
-
-                    <form class="form-horizontal"
-                          role="form"
-                          method="POST"
-                          action="{{ url('login') }}">
-                        <input type="hidden"
-                               name="_token"
-                               value="{{ csrf_token() }}">
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Email</label>
-
-                            <div class="col-md-6">
-                                <input type="email"
-                                       class="form-control"
-                                       name="email"
-                                       value="{{ old('email') }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password"
-                                       class="form-control"
-                                       name="password">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <a href="{{ route('password.reset') }}">Forgot your password?</a>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <label>
-                                    <input type="checkbox"
-                                           name="remember"> Remember me
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit"
-                                        class="btn btn-primary"
-                                        style="margin-right: 15px;">
-                                    Login
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="invalid-feedback">{{$errors->first('email') }}</div>
                 </div>
             </div>
-        </div>
+            <div class="form-group">
+                <label class="form-label" for="password">Your password:</label>
+                <div class="input-group input-group-merge">
+                    <input name="password" id="password" type="password" required class="form-control form-control-prepended @if($errors->has('password') ) is-invalid @endif"
+                           placeholder="Your password">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fa fa-key"></span>
+                        </div>
+                    </div>
+                    <div class="invalid-feedback">{{$errors->first('password') }}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" id="remember" required="" name="remember" type="checkbox">
+                    <label class="custom-control-label" for="remember">
+                        Remember
+                    </label>
+                </div>
+            </div>
+            <div class="form-group ">
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </div>
+            <div class="text-center">
+                <a href="{{route('password.reset')}}" class="text-black-70" style="text-decoration: underline;">Forgot Password?</a>
+            </div>
+        </form>
     </div>
+    <div class="card-footer text-center text-black-50">
+        Not yet a student? <a href="{{'register'}}">Sign up</a>
+    </div>
+
 @endsection

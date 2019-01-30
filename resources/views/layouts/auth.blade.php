@@ -1,81 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
+<!-- Mirrored from brandio.io/envato/iofrm/html/login16.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Jan 2019 20:31:11 GMT -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title','Authentication')</title>
-
-    <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
-    <meta name="robots" content="noindex">
-
-    <!-- Perfect Scrollbar -->
-    <link type="text/css" href="{{asset("$public/assets/vendor/perfect-scrollbar.css")}}" rel="stylesheet">
-
-    <!-- Material Design Icons -->
-    <link type="text/css" href="{{asset("$public/assets/css/material-icons.css")}}" rel="stylesheet">
-    <link type="text/css" href="{{asset("$public/assets/css/material-icons.rtl.css")}}" rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
-    <link type="text/css" href="{{asset("$public/assets/css/fontawesome.css")}}" rel="stylesheet">
-    <link type="text/css" href="{{asset("$public/assets/css/fontawesome.rtl.css")}}" rel="stylesheet">
-
-    <!-- App CSS -->
-    <link type="text/css" href="{{asset("$public/assets/css/app.css")}}" rel="stylesheet">
-    <link type="text/css" href="{{asset("$public/assets/css/app.rtl.css")}}" rel="stylesheet">
-
-
+    <link rel="stylesheet" type="text/css" href="{{asset("$public/auth/css/bootstrap.min.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{asset("$public/auth/css/fontawesome-all.min.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{asset("$public/auth/css/iofrm-style.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{asset("$public/auth/css/iofrm-theme16.css")}}">
 </head>
-
-<body class="login">
-
-
-<div class="d-flex align-items-center" style="min-height: 100vh">
-    <div class="col-sm-8 col-md-6 col-lg-4 mx-auto" style="min-width: 300px;">
-        <div class="text-center mt-5 mb-1">
-            <div class="avatar avatar-lg">
-                <img src="{{asset("$public/assets/images/logo/primary.svg")}}" class="avatar-img rounded-circle"
-                     alt="LearnPlus"/>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center mb-5 navbar-light">
-            <!-- Brand -->
-            <a href="student-dashboard.html" class="navbar-brand m-0">
-                LearnPlus
+<body>
+    <div class="form-body without-side">
+        <div class="website-logo">
+            <a href="{{url('')}}">
+                <div class="logo">
+                    <img class="logo-size" src="{{asset("$public/auth/svg/logo-light.svg")}}" alt="">
+                </div>
             </a>
         </div>
-        <div class="card navbar-shadow">
-            @yield('content')
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    <img src="{{asset("$public/auth/svg/graphic3.svg")}}" alt="">
+                </div>
+            </div>
+            <div class="form-holder">
+                @yield('content')
+            </div>
         </div>
     </div>
-</div>
-
-
-<!-- jQuery -->
-<script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
-
-<!-- Bootstrap -->
-<script src="{{asset("$public/assets/vendor/popper.min.js")}}"></script>
-<script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"></script>
-
-<!-- Perfect Scrollbar -->
-<script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
-
-<!-- MDK -->
-<script src="{{asset("$public/assets/vendor/dom-factory.js")}}"></script>
-<script src="{{asset("$public/assets/vendor/material-design-kit.js")}}"></script>
-
-<!-- App JS -->
-<script src="{{asset("$public/assets/js/app.js")}}"></script>
-
-<!-- Highlight.js -->
-<script src="{{asset("$public/assets/js/hljs.js")}}"></script>
-
-<!-- App Settings (safe to remove) -->
-<script src="{{asset("$public/assets/js/app-settings.js")}}"></script>
-
-
+<script src="{{asset("$public/auth/js/jquery.min.js")}}"></script>
+<script src="{{asset("$public/auth/js/popper.min.js")}}"></script>
+<script src="{{asset("$public/auth/js/bootstrap.min.js")}}"></script>
+<script src="{{asset("$public/auth/js/main.js")}}"></script>
 </body>
+
 
 </html>
