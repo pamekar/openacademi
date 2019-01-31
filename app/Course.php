@@ -96,7 +96,7 @@ class Course extends Model
 
     public function getCourseImageAttribute($value)
     {
-        if ( sizeof($value) >= 1) {
+        if ( !empty($value) ) {
             return Storage::url($value);
         }
         return $value;
@@ -104,7 +104,7 @@ class Course extends Model
 
     public function getCourseImageThumbnailAttribute($value)
     {
-        if ( sizeof($value) >= 1) {
+        if ( !empty($value) ) {
             return Storage::url($value);
         }
         return $value;
@@ -113,7 +113,7 @@ class Course extends Model
     public function getCourseImageMainAttribute($value)
     {
         if ($this->course_image_type == 'image'
-            && sizeof($value) >= 1
+            && !empty($value) 
         ) {
             return Storage::url($value);
         }
@@ -225,7 +225,7 @@ class Course extends Model
             ->where('course_id', $this->id)->where('rating', '>', 0)
             ->pluck('rating')->toArray();
 
-        $count = sizeof($ratings);
+        $count = count($ratings);
         $sum = array_sum($ratings);
         $average = $count !== 0 && $sum !== 0 ? number_format($sum / $count, 2)
             : 0;
