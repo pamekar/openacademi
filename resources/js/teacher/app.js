@@ -13,6 +13,26 @@ import router from './routes.js';
 import functions from './functions.js';
 import store from './store/index.js';
 
+import vUploader from 'v-uploader';
+var csrf_token = document.querySelector('meta[name=csrf-token]').getAttribute('content');
+
+// v-uploader plugin global config
+const uploaderConfig = {
+    // file uploader service url
+    uploadFileUrl: '/upload?_token='+csrf_token,
+    // file delete service url
+    deleteFileUrl: 'http://xxx/upload/deleteUploadFile',
+    // set the way to show upload message(upload fail message)
+    showMessage: (vue, message) => {
+        //using v-dialogs to show message
+        vue.$vDialog.alert(message, null, {messageType: 'error'});
+    }
+};
+
+
+// install plugin with options
+Vue.use(vUploader, uploaderConfig);
+
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
 

@@ -32,12 +32,14 @@
     "laravel-vue-whoops": "^0.2.5",
     "nprogress": "^0.2.0",
     "summernote": "^0.8.11",
+    "v-uploader": "^1.8.0",
     "vue-headful": "^2.0.1",
     "vue-input-tag": "^2.0.3",
     "vue-loader": "^14.2.3",
     "vue-numeric": "^2.3.0",
     "vue-router": "^3.0.2",
     "vue-star-rating": "^1.6.1",
+    "vue2-timepicker": "^0.1.4",
     "vuejs-paginate": "^2.1.0",
     "vuex": "^3.1.0"
   }

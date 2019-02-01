@@ -22,7 +22,8 @@
         "stripe/stripe-php": "^3.21",
         "tcg/voyager": "^1.1",
         "tymon/jwt-auth": "dev-develop",
-        "unisharp/laravel-filemanager": "dev-master"
+        "unisharp/laravel-filemanager": "dev-master",
+        "vimeo/laravel": "^5.2"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

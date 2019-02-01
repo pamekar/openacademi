@@ -62,6 +62,11 @@ const routes = [
         component: EditCourse
     },
     {
+        path:      '/lesson/add',
+        name:      'add-lesson',
+        component: AddLesson
+    },
+    {
         path:      '/lesson/:slug',
         name:      'view-lesson',
         component: Lesson
@@ -72,9 +77,9 @@ const routes = [
         component: Lessons
     },
     {
-        path:      '/lesson/add',
-        name:      'add-lesson',
-        component: AddLesson
+        path:      '/quiz/add',
+        name:      'add-quiz',
+        component: AddQuiz
     },
     {
         path:      '/quiz/:slug',
@@ -87,14 +92,14 @@ const routes = [
         component: Quizes
     },
     {
-        path:      '/quiz/add',
-        name:      'add-quiz',
-        component: AddQuiz
-    },
-    {
         path:      '/question/:slug',
         name:      'view-question',
         component: Question
+    },
+    {
+        path:      '/question/add',
+        name:      'add-question',
+        component: AddQuestion
     },
     {
         path:      '/questions',
@@ -102,10 +107,6 @@ const routes = [
         component: Questions
     },
     {
-        path:      '/question/add',
-        name:      'add-question',
-        component: AddQuestion
-    },{
         path:      'account/',
         name:      'account',
         component: Account

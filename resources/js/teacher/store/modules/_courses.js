@@ -41,7 +41,7 @@ const actions = {
     fetch_list({commit}){
         // drg >> this action fetches all the courses as a list
         axios.get(`${endpoint}/courses`)
-            .then(response => commit('SET_LIST', response.data)).catch();
+            .then(response => commit('SET_COURSES', response.data)).catch();
     },
     add({}, course) {
         axios.post(`${endpoint}/courses`, {
@@ -124,9 +124,6 @@ const mutations = {
         state.pageCount = 0;
         state.pageTitle = '';
         state.purchased = '';
-    },
-    SET_LIST(state, courses) {
-        state.courses = courses;
     }
 };
 

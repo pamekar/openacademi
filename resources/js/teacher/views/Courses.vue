@@ -1,5 +1,14 @@
 <template>
     <div>
+        <vue-headful
+                :title="pageTitle + ' - OpenAcademi'"
+                :description="'all courses created by user'"
+        ></vue-headful>
+        <breadcrumb-component
+                :breadcrumbs="breadcrumbs"
+                :title="pageTitle"
+                :button="{title:'Add Course',link:'add-course',class:'btn btn-success'}"
+        ></breadcrumb-component>
         <div class="card card-body border-left-3 border-left-primary navbar-shadow mb-4">
             <form action="#">
                 <div class="d-flex flex-wrap2 align-items-center mb-headings">
@@ -11,9 +20,7 @@
                                     <label for="custom-select" class="form-label">Category</label><br>
                                     <select id="custom-select" class="form-control custom-select" style="width: 200px;">
                                         <option selected>All categories</option>
-                                        <option value="1">Vue.js</option>
-                                        <option value="2">Node.js</option>
-                                        <option value="3">GitHub</option>
+                                        <option :value="category.id" v-for="category in categories">{{category.title}}</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -35,7 +42,7 @@
                 </div>
 
                 <div class="d-flex flex-column flex-sm-row align-items-sm-center" style="white-space: nowrap;">
-                    <small class="flex text-muted text-uppercase mr-3 mb-2 mb-sm-0">Displaying 4 out of 10 courses</small>
+                    <small class="flex text-muted text-uppercase mr-3 mb-2 mb-sm-0">Displaying {{pageFrom}} to {{pageTo}} of {{pageTotal}} courses</small>
                     <div class="w-auto ml-sm-auto table d-flex align-items-center mb-0">
                         <small class="text-muted text-uppercase mr-3 d-none d-sm-block">Sort by</small>
                         <a href="#" class="sort desc small text-uppercase">Course</a>
@@ -88,7 +95,20 @@
 
     export default {
         data() {
-            return {}
+            return {
+                breadcrumbs: [
+                    {
+                        title: "Dashboard", link: 'dashboard'
+                    },
+                    {
+                        title: "Courses", link: 'show-courses'
+                    },
+                    {
+                        title: ""
+                    }
+                ],
+                pageTitle:   'My courses'
+            }
         },
         mounted() {
             this.$store.dispatch('courses/fetch_all');
@@ -106,7 +126,11 @@
             ...mapState(
                 {
                     courses:   state => state.courses.courses,
-                    pageCount: state => state.courses.pageCount
+                    categories:   state => state.courses.categories,
+                    pageCount: state => state.courses.pageCount,
+                    pageFrom:  state => state.courses.pageFrom,
+                    pageTo:    state => state.courses.pageTo,
+                    pageTotal: state => state.courses.pageTotal,
                 })
         }
     }

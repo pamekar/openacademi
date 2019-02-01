@@ -114,8 +114,11 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')
 Route::post('register', 'Auth\RegisterController@register')
     ->name('register');
 
-Route::get('authorization', function () {
-    $word = 0 ? "Is a false assignment" : "guess it's true";
+Route::post('upload', function () {
 
-    echo $word;
+    return response()->json([
+        "success" => true,
+        "error"   => null,
+        "url"     => "http://test.dev:8000/assets/images/people/50/guy-6.jpg"
+    ], 200);
 });

@@ -196,6 +196,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         TCG\Voyager\VoyagerServiceProvider::class,
         \Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Vimeo\Laravel\VimeoServiceProvider::class
 
     ],
 
@@ -254,5 +255,5 @@ return [
         'Html'         => Collective\Html\HtmlFacade::class,
 
     ],
-
+    'Vimeo' => Vimeo\Laravel\Facades\Vimeo::class,
 ];

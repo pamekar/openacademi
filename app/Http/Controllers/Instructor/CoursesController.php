@@ -21,13 +21,16 @@ class CoursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($limit = 6)
+    public function index()
     {
+        $limit = 6;
         if (!Gate::allows('course_access')) {
             return abort(401);
         }
 
-        if (request('show_deleted') == 1) {
+        if (!request('page')) {
+            $courses = Course::ofTeacher()->get();
+        } elseif (request('show_deleted') == 1) {
             if (!Gate::allows('course_delete')) {
                 return abort(401);
             }

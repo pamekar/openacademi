@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <vue-headful
                 :title="pageTitle + ' - OpenAcademi'"
                 :description="course.summary"
@@ -58,6 +57,7 @@
                         <div class="form-group">
                             <label class="form-label" for="category">Category</label>
                             <select id="category" class="custom-select form-control" v-model="course.category" required>
+                                <option :value="null" disabled>Choose a category</option>
                                 <option :value="category.id" v-for="category in categories">{{category.title}}</option>
                             </select>
                         </div>
@@ -119,7 +119,7 @@
                 pageTitle:    'Add New Course',
                 course:       {
                     title:       '',
-                    category:    '',
+                    category:    null,
                     tags:        [],
                     summary:     '',
                     description: "<h3>Description</h3><p>Write Content ...</p><h3>What you'll learn</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul><h3>Requirements</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul>",

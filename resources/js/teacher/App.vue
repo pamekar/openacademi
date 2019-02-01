@@ -91,6 +91,11 @@
                                           icon:  'collections_bookmark',
                                           route: "show-lessons"
                                       },
+                                      {
+                                          title: "Add New Lesson",
+                                          icon:  'add_box',
+                                          route: "add-lesson"
+                                      },
                                   ]
                     },
                     {
@@ -109,7 +114,7 @@
                                       },
                                       {
                                           title: "Add New Quiz",
-                                          icon:  "add_box",
+                                          icon:  "add_to_queue",
                                           route: "add-quiz"
                                       },
                                   ]
