@@ -30,6 +30,7 @@ class Lesson extends Model implements HasMedia
 
     protected $fillable
         = [
+            'user_id',
             'title',
             'slug',
             'lesson_image',
@@ -38,8 +39,11 @@ class Lesson extends Model implements HasMedia
             'position',
             'downloadable_files',
             'free_lesson',
+            'lesson_image_type',
+            'lesson_image_preview',
             'published',
-            'course_id'
+            'course_id',
+            'duration'
         ];
     protected $appends = ['is_completed', 'last_updated'];
 
@@ -64,6 +68,16 @@ class Lesson extends Model implements HasMedia
         $this->attributes['position'] = $input ? $input : null;
     }
 
+    public function setFreeLessonAttribute($value)
+    {
+        return $value ? 1 : 0;
+    }
+
+    public function setPublishedAttribute($value)
+    {
+        return $value ? 1 : 0;
+    }
+
     public function getIsCompletedAttribute()
     {
         $isCompleted = Auth::user()->lessons()->where('lesson_id', $this->id)
@@ -81,7 +95,7 @@ class Lesson extends Model implements HasMedia
 
     public function getLessonImagePreviewAttribute($value)
     {
-        if ( !empty($value)) {
+        if (!empty($value)) {
             return Storage::url($value);
         }
         return $value;

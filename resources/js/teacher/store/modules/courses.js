@@ -38,11 +38,6 @@ const actions = {
         axios.get(`${endpoint}/course/categories`)
             .then(response => commit('SET_CATEGORIES', response.data));
     },
-    fetch_list({commit}){
-        // drg >> this action fetches all the courses as a list
-        axios.get(`${endpoint}/courses`)
-            .then(response => commit('SET_LIST', response.data)).catch();
-    },
     add({}, course) {
         axios.post(`${endpoint}/courses`, {
             // drg >> slug is not added to the list of objects, because it's auto generated
@@ -125,9 +120,6 @@ const mutations = {
         state.pageTitle = '';
         state.purchased = '';
     },
-    SET_LIST(state, courses) {
-        state.courses = courses;
-    }
 };
 
 export default {

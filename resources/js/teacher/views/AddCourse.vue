@@ -80,7 +80,7 @@
                             <input id="end" type="date" class="form-control" placeholder="Start Date" data-toggle="flatpickr" v-model="course.end_date" required>
                         </div>
                         <div class="flex">
-                            <label class="form-label" for="purchased">Publish your course</label><br>
+                            <label class="form-label" for="purchased">Publish your lesson</label><br>
                             <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
                                 <input type="checkbox" id="purchased" class="custom-control-input" v-model="course.published">
                                 <label class="custom-control-label" for="purchased">Yes</label>

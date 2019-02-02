@@ -77,6 +77,11 @@ const routes = [
         component: Lessons
     },
     {
+        path:      '/lesson/:id/edit',
+        name:      'edit-lesson',
+        component: EditLesson
+    },
+    {
         path:      '/quiz/add',
         name:      'add-quiz',
         component: AddQuiz

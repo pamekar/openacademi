@@ -27,12 +27,14 @@
 
                             <div class="form-group mb-0">
                                 <label class="form-label">Description</label>
-                                <ckeditor :editor="editor" v-model="course.description"></ckeditor>
+                                <div class="card">
+                                    <ckeditor :editor="editor" v-model="course.description"></ckeditor>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label" for="title">Tags</label>
-                                <input-tags id="tags"  placeholder="Add a tag" v-model="course.tags" validate="text" :limit="3"></input-tags>
+                                <input-tags id="tags" placeholder="Add a tag" v-model="course.tags" validate="text" :limit="3"></input-tags>
                             </div>
                         </form>
                     </div>
@@ -54,7 +56,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div v-if="course.course_image_type == 'image'">
-                        <img :src="course.course_image_main" :alt="course.slug" width="100%"  />
+                        <img :src="course.course_image_main" :alt="course.slug" width="100%"/>
                     </div>
                     <div class="embed-responsive embed-responsive-16by9" v-if="course.course_image_type == 'video'">
                         <iframe class="embed-responsive-item" :src="course.course_image_main" allowfullscreen=""></iframe>
@@ -156,7 +158,7 @@
                 })
         },
         methods:    {
-            editCourse:     function () {
+            editCourse: function () {
                 this.$store.dispatch('courses/edit', this.course);
             }
         }

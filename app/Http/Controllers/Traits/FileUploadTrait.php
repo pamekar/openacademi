@@ -23,11 +23,11 @@ trait FileUploadTrait
 
         foreach ($request->all() as $key => $value) {
             if ($request->hasFile($key)) {
+                $file = $request->file($key);
                 if ($request->has($key . '_max_width')
                     && $request->has($key . '_max_height')
                 ) {
                     // Check file width
-                    $file = $request->file($key);
                     $filename = md5(time() . $file->getClientOriginalName())
                         . '.' . $file->getClientOriginalExtension();
                     $thumbFilename = "public/uploads/thumb/$filename";
@@ -71,8 +71,10 @@ trait FileUploadTrait
                         ]));
 
                 } else {
-                    $filename = time() . '-' . $request->file($key)
-                            ->getClientOriginalName();
+                    $filename = md5(time() . $file->getClientOriginalName())
+                        . '.' . $file->getClientOriginalExtension();
+                    $filename = "public/uploads/$filename";
+
                     $request->file($key)
                         ->move(storage_path('app/public/uploads'), $filename);
                     $finalRequest

@@ -29,6 +29,7 @@ class Course extends Model
 
     protected $fillable
         = [
+            'user_id',
             'title',
             'slug',
             'description',
@@ -233,4 +234,8 @@ class Course extends Model
 
     }
 
+    public function setPublishedAttribute($value)
+    {
+        return $value ? 1 : 0;
+    }
 }

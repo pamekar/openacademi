@@ -13,9 +13,9 @@ const functions = {
     },
     setupAxios: function () {
         window.axios = require('axios');
-        window.axios.defaults.headers.common = {
-            'Authorization': 'Bearer ' + this.readCookie('jwt_token')
-        };
+        window.axios.defaults.headers.common['Authorization']='Bearer ' + this.readCookie('jwt_token');
+        window.axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+        window.axios.defaults.headers.put['Content-Type'] = 'multipart/form-data';
         // drg >> add a request interceptor
         axios.interceptors.request.use(function (config) {
             // drg >> display progress bar on every ajax request

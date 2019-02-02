@@ -11,13 +11,13 @@
         ></breadcrumb-component>
         <div class="card">
             <div class="card-body">
-                <form action="#">
+                <form action="javascript:void(0)" @submit="addLesson">
                     <div class="form-group row">
                         <label for="avatar" class="col-sm-3 col-form-label form-label">Preview</label>
                         <div class="col-sm-9">
                             <div class="media align-items-center">
                                 <div class="media-left" v-if="lesson.lesson_image_preview">
-                                    <img :src="lesson.lesson_image_preview" alt="" width="100" class="rounded">
+                                    <img :src="lesson_image_preview" alt="" width="100" class="rounded">
                                 </div>
                                 <div class="media-body">
                                     <div class="custom-file" style="width: auto;">
@@ -31,7 +31,7 @@
                     <div class="form-group row">
                         <label for="title" class="col-md-3 col-form-label form-label">Title</label>
                         <div class="col-md-6">
-                            <input id="title" type="text" class="form-control" placeholder="Write an awesome title">
+                            <input id="title" type="text" class="form-control" placeholder="Write an awesome title" v-model="lesson.title">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -39,28 +39,45 @@
                         <div class="col-md-4">
                             <select id="course" class="custom-control custom-select form-control" v-model="lesson.course_id">
                                 <option :value="null" disabled>Attach to a course</option>
-                                <option :value="course.id" v-for="course in courses">{{course.title}}</option>
+                                <option :value="course[0]" v-for="course in getArray(courses)">{{course[1]}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label form-label">Upload Video</label>
+                        <label class="col-md-3 col-form-label form-label">Upload <strong v-if="lesson_video_image">Video</strong><strong v-else>Image</strong></label>
                         <div class="col-md-9">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" value="https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0">
-                                        <small class="form-text text-muted d-flex align-items-center">
-                                            <i class="material-icons font-size-16pt mr-1">ondemand_video</i>
-                                            <span class="icon-text">Paste Video</span>
-                                        </small>
+                                        <div class="custom-file" v-if="lesson_video_image">
+                                            <input type="file" id="lesson_video_input" class="file_multi_video" accept="video/*" v-on:change="lessonVideoChanged">
+                                            <label for="lesson_video_input" class="custom-file-label">Choose file</label>
+                                        </div>
+                                        <div class="custom-file" v-else>
+                                            <input type="file" id="lesson_image_input" class="custom-file-input" accept="image/*" v-on:change="lessonImageChanged">
+                                            <label for="lesson_image_input" class="custom-file-label">Choose file</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
+                                            <input type="checkbox" id="video_image" class="custom-control-input" v-model="lesson_video_image">
+                                            <label class="custom-control-label" for="video_image">Yes</label>
+                                        </div>
+                                        <label class="form-label" for="video_image">Toggle Image/Video</label>
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0" allowfullscreen=""></iframe>
-                                        </div>
+                                    <div class="form-group" v-if="lesson_video_image">
+                                        <video width="400" controls>
+                                            <source :src="lesson_video" width="100%" id="lesson_video">
+                                            Your browser does not support HTML5 video.
+                                        </video>
+
+                                    </div>
+                                    <div class="form-group" v-else>
+                                        <img :src="lesson_image" width="100%" alt="" class="thumbnail">
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +85,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label form-label" for="description">Description</label>
-                        <div class="col-md-9">
+                        <div class="col-md-9 card">
                             <ckeditor id="description" :editor="editor" v-model="lesson.full_text"></ckeditor>
                         </div>
                     </div>
@@ -79,9 +96,27 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label form-label" for="duration">Duration</label>
-                        <div class="col-md-9">
-                            <time-picker id="duration" class="form-control" v-model="lesson.duration"></time-picker>
+                        <div class="col-sm-4">
+                            <label class="form-label" for="duration">Duration</label>
+                            <div class="custom-control">
+                                <time-picker id="duration" v-model="timePicker" format="HH:mm:ss" @change="timePickerChanged"></time-picker>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="form-label" for="purchased">Publish Lesson</label><br>
+                            <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
+                                <input type="checkbox" id="purchased" class="custom-control-input" v-model="lesson.published">
+                                <label class="custom-control-label" for="purchased">Yes</label>
+                            </div>
+                            <label class="form-label" for="purchased">Yes</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="form-label" for="freeLesson">Free Lesson?</label><br>
+                            <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
+                                <input type="checkbox" id="freeLesson" class="custom-control-input" v-model="lesson.free_lesson">
+                                <label class="custom-control-label" for="freeLesson">Yes</label>
+                            </div>
+                            <label class="form-label" for="freeLesson">Yes</label>
                         </div>
                     </div>
                 </form>
@@ -93,7 +128,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <v-uploader language="en" :multiple="true" :itemLimit="1" fileTypeExts="jpeg,jpg,gif,png,mp4" fileSizeLimit="25MB"></v-uploader>
+                    <v-uploader language="en" :multiple="true" :itemLimit="0" fileTypeExts="jpeg,jpg,gif,png,mp4" fileSizeLimit="25MB"></v-uploader>
                 </div>
             </div>
         </div>
@@ -110,7 +145,7 @@
     export default {
         data() {
             return {
-                breadcrumbs: [
+                breadcrumbs:          [
                     {
                         title: "Dashboard", link: 'dashboard'
                     },
@@ -121,23 +156,32 @@
                         title: ""
                     }
                 ],
-                editor:      InlineEditor,
-                lesson:      {
-                    title:       '',
-                    course_id:   null,
-                    short_text:  '',
-                    full_text:   "<h3>Description</h3><p>Write Content ...</p><h3>What you'll learn</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul><h3>Requirements</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul>",
-                    free_lesson: false,
-                    duration:    '',
-                    lesson_image_preview:''
+                editor:               InlineEditor,
+                lesson:               {
+                    title:                '',
+                    course_id:            null,
+                    short_text:           '',
+                    full_text:            "<h3>Course content</h3><p>Write Content ...</p><h3>Sample List</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul>",
+                    free_lesson:          false,
+                    published:            false,
+                    duration:             0,
+                    lesson_image_preview: '',
+                    lesson_image:         ''
                 },
-                pageTitle:   'Add New Lesson'
-
+                pageTitle:            'Add New Lesson',
+                lesson_image_preview: '',
+                lesson_image:         '',
+                lesson_video:         '',
+                lesson_video_image:   '',
+                timePicker:           {
+                    HH: "",
+                    mm: "",
+                    ss: ""
+                }
             }
         },
         created() {
-            this.$store.dispatch('courses/fetch_list');
-            this.$store.dispatch('courses/fetch_categories');
+            this.$store.dispatch('lessons/fetch_courses');
         },
         components: {
             'ckeditor':    CKEditor.component,
@@ -146,26 +190,63 @@
         computed:   {
             ...mapState(
                 {
-                    courses:    state => state.courses.courses,
-                    categories: state => state.courses.categories,
+                    courses: state => state.lessons.courses,
                 })
         },
         methods:    {
+
             addLesson: function () {
-                this.$store.dispatch('courses/edit', this.course);
+                this.$store.dispatch('lessons/add', this.lesson);
+            },
+            createImage(file) {
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    this.lesson_image = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            createImagePreview(file) {
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    this.lesson_image_preview = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            getArray(obj) {
+                let arr = Object.keys(obj).map(function (key) {
+                    return [Number(key), obj[key]];
+                });
+
+                return arr;
             },
             lessonPreviewImageChanged(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
+                this.lesson.lesson_image_preview = files[0];
+                this.createImagePreview(files[0]);
+            },
+            lessonImageChanged(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.lesson.lesson_image = files[0];
                 this.createImage(files[0]);
             },
-            createImage(file) {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    this.lesson.lesson_image_preview = e.target.result;
-                };
-                reader.readAsDataURL(file);
+            lessonVideoChanged(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.lesson.lesson_image = files[0];
+                var source = jQuery('#lesson_video');
+                this.lesson_video = URL.createObjectURL(files[0]);
+                source.parent()[0].load();
+            },
+            timePickerChanged(e) {
+                console.log(e);
+                let t = e.data;
+                let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
+                this.lesson.duration = time;
             },
         }
     }

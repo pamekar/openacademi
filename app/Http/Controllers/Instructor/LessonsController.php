@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Instructor;
 use App\Course;
 use App\Lesson;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Instructor\StoreLessonsRequest;
@@ -54,9 +55,7 @@ class LessonsController extends Controller
         if (!Gate::allows('lesson_create')) {
             return abort(401);
         }
-        $courses = \App\Course::ofTeacher()->get()->pluck('title', 'id')
-            ->prepend('Please select', '');
-
+        $courses = \App\Course::ofTeacher()->get()->pluck('title', 'id');
         return response()->json($courses);
     }
 
@@ -73,7 +72,9 @@ class LessonsController extends Controller
             return abort(401);
         }
         $request = $this->saveFiles($request);
-        $lesson = Lesson::create($request->all()
+        $lesson_data = $this->setLesson($request);
+
+        $lesson = Lesson::create($lesson_data
             + [
                 'position' => Lesson::where('course_id', $request->course_id)
                         ->max('position') + 1
@@ -87,8 +88,13 @@ class LessonsController extends Controller
             $file->save();
         }
 
-        return redirect()->route('instructor.lessons.index',
-            ['course_id' => $request->course_id]);
+        $status = [
+            'type'      => 'success',
+            'message'   => "$lesson->title has been added successfully",
+            'course_id' => $lesson->course_id
+        ];
+
+        return response()->json($status);
     }
 
 
@@ -142,8 +148,12 @@ class LessonsController extends Controller
         }
         $lesson->updateMedia($media, 'downloadable_files');
 
-        return redirect()->route('instructor.lessons.index',
-            ['course_id' => $request->course_id]);
+        $status = [
+            'type'    => 'success',
+            'message' => "$lesson->title has been updated successfully"
+        ];
+
+        return response()->json($status);
     }
 
 
@@ -242,5 +252,19 @@ class LessonsController extends Controller
         $lesson->forceDelete();
 
         return redirect()->route('instructor.lessons.index');
+    }
+
+    public function setLesson(Request $request)
+    {
+        $lesson = $request->all();
+        $slug = str_slug($lesson['title'], '-');
+        $uniqueSlug = $slug;
+
+        while (Lesson::where('slug', $uniqueSlug)->first()) {
+            $uniqueSlug = "$slug-" . mt_rand(10, 100);
+        }
+        $lesson['slug'] = $uniqueSlug;
+        $lesson['user_id'] = Auth::user()->id;
+        return $lesson;
     }
 }

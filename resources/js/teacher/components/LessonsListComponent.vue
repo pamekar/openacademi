@@ -9,12 +9,12 @@
                     </div>
                     <div class="media-body">
                         <h5 class="card-title h6 mb-0">
-                            <a href="#">{{lesson.title}}</a>
+                            <router-link :to="{name:'view-lesson', params:{'slug':lesson.slug}}">{{lesson.title}}</router-link>
                         </h5>
                         <small class="text-muted">updated {{lesson.last_updated}}</small>
                     </div>
                     <div class="media-right">
-                        <a href="#" class="btn btn-white btn-sm"><i class="material-icons">edit</i></a>
+                        <router-link :to="{name:'edit-lesson', params:{'id':lesson.id}}" class="btn btn-white btn-sm"><i class="material-icons">edit</i></router-link>
                     </div>
                 </div>
             </div>
