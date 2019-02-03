@@ -11,13 +11,13 @@
         ></breadcrumb-component>
         <div class="card">
             <div class="card-body">
-                <form action="javascript:void(0)" @submit="addLesson">
+                <form v-on:submit.prevent="addLesson">
                     <div class="form-group row">
                         <label for="image_preview" class="col-sm-3 col-form-label form-label">Preview</label>
                         <div class="col-sm-9">
                             <div class="media align-items-center">
-                                <div class="media-left" v-if="lesson.lesson_image_preview">
-                                    <img :src="lesson_image_preview" alt="" width="100" class="rounded">
+                                <div class="media-left" v-if="lesson_image_preview" v-viewer="{movable: false}">
+                                    <img :src="lesson_image_preview" style="cursor: pointer;" alt="" width="100" class="rounded">
                                 </div>
                                 <div class="media-body">
                                     <div class="custom-file" style="width: auto;">
@@ -69,15 +69,17 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group" v-if="lesson_video_image">
-                                        <video width="400" controls>
-                                            <source :src="lesson_video" width="100%" id="lesson_video">
-                                            Your browser does not support HTML5 video.
-                                        </video>
+                                    <div class="card" v-if="lesson_image || lesson_video || lesson.lesson_image">
+                                        <div class="card-body" v-if="lesson_video_image">
+                                            <video width="400" controls>
+                                                <source :src="lesson_video" width="100%" id="lesson_video">
+                                                Your browser does not support HTML5 video.
+                                            </video>
 
-                                    </div>
-                                    <div class="form-group" v-else>
-                                        <img :src="lesson_image" style="max-width:100%;" alt="" class="thumbnail">
+                                        </div>
+                                        <div class="card-body" v-else v-viewer="{movable: false}">
+                                            <img :src="lesson_image" style="max-width:100%; cursor: pointer;" alt="" class="thumbnail" v-if="lesson_image">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -169,9 +171,9 @@
                     lesson_image:         ''
                 },
                 pageTitle:            'Add New Lesson',
-                lesson_image_preview: '',
-                lesson_image:         '',
-                lesson_video:         '',
+                lesson_image_preview: null,
+                lesson_image:         null,
+                lesson_video:         null,
                 lesson_video_image:   '',
                 timePicker:           {
                     HH: "",

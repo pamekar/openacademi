@@ -15,12 +15,12 @@
                     <div class="form-group row">
                         <label for="avatar" class="col-sm-3 col-form-label form-label">Preview</label>
                         <div class="col-sm-9">
-                            <div class="media align-items-center">
-                                <div class="media-left" v-if="lesson_image_preview ">
-                                    <img :src="lesson_image_preview" alt="" width="100" class="rounded">
+                            <div class="media align-items-center"  v-viewer="{movable: false}">
+                                <div class="media-left" v-if="lesson_image_preview">
+                                    <img :src="lesson_image_preview" alt="" width="100" style="cursor: pointer;" class="rounded">
                                 </div>
                                 <div class="media-left" v-else-if="lesson.lesson_image_preview">
-                                    <img :src="lesson.lesson_image_preview" alt="" width="100" class="rounded">
+                                    <img :src="lesson.lesson_image_preview" style="cursor: pointer;" alt="" width="100" class="rounded">
                                 </div>
                                 <div class="media-body">
                                     <div class="custom-file" style="width: auto;">
@@ -80,9 +80,9 @@
                                             </video>
 
                                         </div>
-                                        <div class="card-body" v-else>
-                                            <img :src="lesson_image" style="max-width: 100%;" alt="" class="thumbnail" v-if="lesson_image">
-                                            <img :src="lesson.lesson_image" style="max-width: 100%;" alt="" class="thumbnail" v-else-if="lesson.lesson_image">
+                                        <div class="card-body" v-else v-viewer="{movable: false}">
+                                            <img :src="lesson_image" style="max-width: 100%; cursor: pointer;" alt="" class="thumbnail" v-if="lesson_image">
+                                            <img :src="lesson.lesson_image" style="max-width: 100%; cursor: pointer;" alt="" class="thumbnail image" v-else-if="lesson.lesson_image">
 
                                         </div>
                                         <div class="card-footer" v-if="media_title">
@@ -149,8 +149,8 @@
     import {mapState, mapActions} from 'vuex';
     import CKEditor from '@ckeditor/ckeditor5-vue';
     import InlineEditor from '@ckeditor/ckeditor5-build-inline';
-    import Timepicker from 'vue2-timepicker'
-    
+    import Timepicker from 'vue2-timepicker';
+
     export default {
         data() {
             return {
@@ -254,15 +254,7 @@
                 this.lesson_video = URL.createObjectURL(files[0]);
                 source.parent()[0].load();
             },
-            setDefaults() {
-                let lesson = this.$store.state.lessons;
-                // drg >> set timepicker
-                let duration = lesson.duration;
-
-
-            },
             timePickerChanged(t) {
-                console.log(t);
                 let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
                 this.lesson.duration = time;
             },

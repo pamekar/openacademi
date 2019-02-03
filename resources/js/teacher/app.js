@@ -14,6 +14,11 @@ import functions from './functions.js';
 import store from './store/index.js';
 
 import vUploader from 'v-uploader';
+import 'viewerjs/dist/viewer.css';
+import Viewer from 'v-viewer';
+
+Vue.use(Viewer);
+
 var csrf_token = document.querySelector('meta[name=csrf-token]').getAttribute('content');
 
 // v-uploader plugin global config
