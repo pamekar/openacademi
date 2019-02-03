@@ -35435,7 +35435,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return arr;
     },
 
-    lessonPreviewImageChanged(e) {
+    lessonImagePreviewChanged(e) {
       let files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.lesson.lesson_image_preview = files[0];
@@ -35459,7 +35459,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
 
     timePickerChanged(e) {
-      console.log(e);
       let t = e.data;
       let time = Number(t.HH) * 3600 + Number(t.mm) * 60 + Number(t.ss);
       this.lesson.duration = time;
@@ -36290,6 +36289,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -36307,21 +36316,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         title: ""
       }],
       editor: __WEBPACK_IMPORTED_MODULE_2__ckeditor_ckeditor5_build_inline___default.a,
-      pageTitle: 'Add New Lesson',
-      lesson_image_preview: '',
-      lesson_image: '',
+      lesson_video_image: null,
+      lesson_image_preview: null,
+      lesson_image: null,
       lesson_video: '',
-      lesson_video_image: '',
-      timePicker: {
-        HH: "",
-        mm: "",
-        ss: ""
-      }
+      media_title: ''
     };
   },
 
   created() {
-    this.$store.dispatch('lessons/fetch');
+    this.$store.dispatch('lessons/fetch_edit', this.$route.params.id);
+  },
+
+  mounted() {
+    this.setDefaults();
   },
 
   components: {
@@ -36331,8 +36339,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
     lesson: state => state.lessons.lesson,
     courses: state => state.lessons.courses,
-    pageTitle: state => state.courses.pageTitle
-  })),
+    pageTitle: state => state.lessons.pageTitle
+  }), {
+    timePicker: {
+      get: function () {
+        return this.$store.state.lessons.timePicker;
+      },
+      // setter
+      set: function (time) {
+        this.$store.state.lessons.timePicker.HH = time.HH;
+        this.$store.state.lessons.timePicker.mm = time.mm;
+        this.$store.state.lessons.timePicker.ss = time.ss;
+        this.timePickerChanged(time);
+      }
+    }
+  }),
   methods: {
     editLesson: function () {
       this.$store.dispatch('lessons/edit', this.lesson);
@@ -36340,6 +36361,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     createImage(file) {
       let reader = new FileReader();
+      this.media_title = file.name;
 
       reader.onload = e => {
         this.lesson_image = e.target.result;
@@ -36365,7 +36387,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return arr;
     },
 
-    lessonPreviewImageChanged(e) {
+    lessonImagePreviewChanged(e) {
       let files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.lesson.lesson_image_preview = files[0];
@@ -36388,9 +36410,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       source.parent()[0].load();
     },
 
-    timePickerChanged(e) {
-      console.log(e);
-      let t = e.data;
+    setDefaults() {
+      let lesson = this.$store.state.lessons; // drg >> set timepicker
+
+      let duration = lesson.duration;
+    },
+
+    timePickerChanged(t) {
+      console.log(t);
       let time = Number(t.HH) * 3600 + Number(t.mm) * 60 + Number(t.ss);
       this.lesson.duration = time;
     }
@@ -43051,7 +43078,17 @@ const state = {
   pageTo: 0,
   pageTotal: 0,
   pageTitle: '',
-  purchased: ''
+  purchased: '',
+  lesson_image_preview: '',
+  lesson_image: '',
+  lesson_video: '',
+  media_title: '',
+  duration: 0,
+  timePicker: {
+    HH: "",
+    mm: "",
+    ss: ""
+  }
 }; // actions
 
 const actions = {
@@ -43060,6 +43097,13 @@ const actions = {
     dispatch
   }, id) {
     axios.get(`${endpoint}/lessons/${id}/edit`).then(response => commit('SET_LESSON', response.data)).catch();
+  },
+
+  fetch_edit({
+    commit,
+    dispatch
+  }, id) {
+    axios.get(`${endpoint}/lessons/${id}/edit`).then(response => commit('SET_LESSON_EDIT', response.data)).catch();
   },
 
   fetch_empty({
@@ -43132,19 +43176,27 @@ const actions = {
   edit({
     dispatch
   }, lesson) {
-    axios.put(`${endpoint}/lessons/${lesson.id}`, {
+    let edit_form_data = new FormData();
+    let lessonData = {
+      // drg >> slug is not added to the list of objects, because it's auto generated
+      course_id: lesson.course_id,
       title: lesson.title,
-      slug: lesson.slug,
-      category: lesson.category,
-      tags: lesson.tags.join(';'),
-      summary: lesson.summary,
-      description: lesson.description,
-      price: lesson.price,
-      start_date: lesson.start_date,
-      end_date: lesson.end_date,
+      short_text: lesson.short_text,
+      full_text: lesson.full_text,
+      free_lesson: lesson.free_lesson,
+      duration: lesson.duration,
       published: lesson.published,
-      lesson_image_preview: lesson.lesson_image_preview
-    }).then(({
+      lesson_image: lesson.lesson_image,
+      lesson_image_preview: lesson.lesson_image_preview,
+      _method: 'PUT'
+    };
+
+    for (let key in lessonData) {
+      edit_form_data.append(key, lessonData[key]);
+    }
+
+    console.log(lessonData);
+    axios.post(`${endpoint}/lessons/${lesson.id}`, edit_form_data).then(({
       data
     }) => {
       jQuery.notify({
@@ -43154,7 +43206,6 @@ const actions = {
         // settings
         type: data.type
       });
-      console.log();
       dispatch('fetch', lesson.id);
     });
   }
@@ -43166,6 +43217,17 @@ const mutations = {
     state.lesson = lesson.lesson;
     state.courses = lesson.courses;
     state.pageTitle = lesson.lesson.title;
+  },
+
+  SET_LESSON_EDIT(state, lesson) {
+    state.lesson = lesson.lesson;
+    state.courses = lesson.courses;
+    state.pageTitle = lesson.lesson.title; // drg >> set timepicker
+
+    let duration = lesson.lesson.duration;
+    state.timePicker.HH = Math.floor(duration / 3600);
+    state.timePicker.mm = Math.floor(duration % 3600 / 60);
+    state.timePicker.ss = Math.floor(duration % 60);
   },
 
   SET_CATEGORIES(state, categories) {
@@ -58855,7 +58917,7 @@ var render = function() {
                   "label",
                   {
                     staticClass: "col-sm-3 col-form-label form-label",
-                    attrs: { for: "avatar" }
+                    attrs: { for: "image_preview" }
                   },
                   [_vm._v("Preview")]
                 ),
@@ -58885,15 +58947,15 @@ var render = function() {
                         [
                           _c("input", {
                             staticClass: "custom-file-input",
-                            attrs: { type: "file", id: "avatar" },
-                            on: { change: _vm.lessonPreviewImageChanged }
+                            attrs: { type: "file", id: "image_preview" },
+                            on: { change: _vm.lessonImagePreviewChanged }
                           }),
                           _vm._v(" "),
                           _c(
                             "label",
                             {
                               staticClass: "custom-file-label",
-                              attrs: { for: "avatar" }
+                              attrs: { for: "image_preview" }
                             },
                             [_vm._v("Choose file")]
                           )
@@ -59161,11 +59223,8 @@ var render = function() {
                         : _c("div", { staticClass: "form-group" }, [
                             _c("img", {
                               staticClass: "thumbnail",
-                              attrs: {
-                                src: _vm.lesson_image,
-                                width: "100%",
-                                alt: ""
-                              }
+                              staticStyle: { "max-width": "100%" },
+                              attrs: { src: _vm.lesson_image, alt: "" }
                             })
                           ])
                     ])
@@ -59444,7 +59503,8 @@ var render = function() {
                   language: "en",
                   multiple: true,
                   itemLimit: 0,
-                  fileTypeExts: "jpeg,jpg,gif,png,mp4",
+                  fileTypeExts:
+                    "jpeg,jpg,gif,png,aac,svg,html,css,js,php,mp3,mp4,doc,docx,xls,xlsx,pdf,ppt,pptx,zip,7z",
                   fileSizeLimit: "25MB"
                 }
               })
@@ -60399,7 +60459,7 @@ var render = function() {
         attrs: {
           title: _vm.pageTitle + " - OpenAcademi",
           description:
-            "As an instructor, you can add a new lesson at openacademi.com"
+            "As an instructor, you can edit a new lesson at openacademi.com"
         }
       }),
       _vm._v(" "),
@@ -60409,7 +60469,7 @@ var render = function() {
           title: _vm.pageTitle,
           button: {
             title: "Save",
-            method: _vm.addLesson,
+            method: _vm.editLesson,
             class: "btn btn-success"
           }
         }
@@ -60421,7 +60481,7 @@ var render = function() {
             "form",
             {
               attrs: { action: "javascript:void(0)" },
-              on: { submit: _vm.addLesson }
+              on: { submit: _vm.editLesson }
             },
             [
               _c("div", { staticClass: "form-group row" }, [
@@ -60436,12 +60496,23 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-9" }, [
                   _c("div", { staticClass: "media align-items-center" }, [
-                    _vm.lesson.lesson_image_preview
+                    _vm.lesson_image_preview
                       ? _c("div", { staticClass: "media-left" }, [
                           _c("img", {
                             staticClass: "rounded",
                             attrs: {
                               src: _vm.lesson_image_preview,
+                              alt: "",
+                              width: "100"
+                            }
+                          })
+                        ])
+                      : _vm.lesson.lesson_image_preview
+                      ? _c("div", { staticClass: "media-left" }, [
+                          _c("img", {
+                            staticClass: "rounded",
+                            attrs: {
+                              src: _vm.lesson.lesson_image_preview,
                               alt: "",
                               width: "100"
                             }
@@ -60460,7 +60531,7 @@ var render = function() {
                           _c("input", {
                             staticClass: "custom-file-input",
                             attrs: { type: "file", id: "avatar" },
-                            on: { change: _vm.lessonPreviewImageChanged }
+                            on: { change: _vm.lessonImagePreviewChanged }
                           }),
                           _vm._v(" "),
                           _c(
@@ -60713,35 +60784,60 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-6" }, [
-                      _vm.lesson_video_image
-                        ? _c("div", { staticClass: "form-group" }, [
-                            _c(
-                              "video",
-                              { attrs: { width: "400", controls: "" } },
-                              [
-                                _c("source", {
-                                  attrs: {
-                                    src: _vm.lesson_video,
-                                    width: "100%",
-                                    id: "lesson_video"
-                                  }
-                                }),
-                                _vm._v(
-                                  "\n                                        Your browser does not support HTML5 video.\n                                    "
-                                )
-                              ]
-                            )
+                      _vm.lesson_image ||
+                      _vm.lesson_video ||
+                      _vm.lesson.lesson_image
+                        ? _c("div", { staticClass: "card" }, [
+                            _vm.lesson_video_image
+                              ? _c("div", { staticClass: "card-body" }, [
+                                  _c(
+                                    "video",
+                                    {
+                                      staticStyle: { "max-width": "100%" },
+                                      attrs: { controls: "" }
+                                    },
+                                    [
+                                      _c("source", {
+                                        attrs: {
+                                          src: _vm.lesson_video,
+                                          id: "lesson_video"
+                                        }
+                                      }),
+                                      _vm._v(
+                                        "\n                                            Your browser does not support HTML5 video.\n                                        "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              : _c("div", { staticClass: "card-body" }, [
+                                  _vm.lesson_image
+                                    ? _c("img", {
+                                        staticClass: "thumbnail",
+                                        staticStyle: { "max-width": "100%" },
+                                        attrs: {
+                                          src: _vm.lesson_image,
+                                          alt: ""
+                                        }
+                                      })
+                                    : _vm.lesson.lesson_image
+                                    ? _c("img", {
+                                        staticClass: "thumbnail",
+                                        staticStyle: { "max-width": "100%" },
+                                        attrs: {
+                                          src: _vm.lesson.lesson_image,
+                                          alt: ""
+                                        }
+                                      })
+                                    : _vm._e()
+                                ]),
+                            _vm._v(" "),
+                            _vm.media_title
+                              ? _c("div", { staticClass: "card-footer" }, [
+                                  _c("small", [_vm._v(_vm._s(_vm.media_title))])
+                                ])
+                              : _vm._e()
                           ])
-                        : _c("div", { staticClass: "form-group" }, [
-                            _c("img", {
-                              staticClass: "thumbnail",
-                              attrs: {
-                                src: _vm.lesson_image,
-                                width: "100%",
-                                alt: ""
-                              }
-                            })
-                          ])
+                        : _vm._e()
                     ])
                   ])
                 ])
@@ -60819,7 +60915,20 @@ var render = function() {
                   _c(
                     "label",
                     { staticClass: "form-label", attrs: { for: "duration" } },
-                    [_vm._v("Duration")]
+                    [
+                      _vm._v(
+                        "Duration (" +
+                          _vm._s(
+                            _vm.timePicker.HH +
+                              " Hrs " +
+                              _vm.timePicker.mm +
+                              " Mins and " +
+                              _vm.timePicker.ss +
+                              " Secs"
+                          ) +
+                          ")"
+                      )
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
@@ -60828,7 +60937,6 @@ var render = function() {
                     [
                       _c("time-picker", {
                         attrs: { id: "duration", format: "HH:mm:ss" },
-                        on: { change: _vm.timePickerChanged },
                         model: {
                           value: _vm.timePicker,
                           callback: function($$v) {

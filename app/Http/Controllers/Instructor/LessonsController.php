@@ -136,7 +136,6 @@ class LessonsController extends Controller
         $lesson = Lesson::findOrFail($id);
         $lesson->update($request->all());
 
-
         $media = [];
         foreach ($request->input('downloadable_files_id', []) as $index => $id)
         {

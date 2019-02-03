@@ -2,26 +2,29 @@
     <div>
         <vue-headful
                 :title="pageTitle + ' - OpenAcademi'"
-                description="As an instructor, you can add a new lesson at openacademi.com"
+                description="As an instructor, you can edit a new lesson at openacademi.com"
         ></vue-headful>
         <breadcrumb-component
                 :breadcrumbs="breadcrumbs"
                 :title="pageTitle"
-                :button="{title:'Save',method:addLesson,class:'btn btn-success'}"
+                :button="{title:'Save',method:editLesson,class:'btn btn-success'}"
         ></breadcrumb-component>
         <div class="card">
             <div class="card-body">
-                <form action="javascript:void(0)" @submit="addLesson">
+                <form action="javascript:void(0)" @submit="editLesson">
                     <div class="form-group row">
                         <label for="avatar" class="col-sm-3 col-form-label form-label">Preview</label>
                         <div class="col-sm-9">
                             <div class="media align-items-center">
-                                <div class="media-left" v-if="lesson.lesson_image_preview">
+                                <div class="media-left" v-if="lesson_image_preview ">
                                     <img :src="lesson_image_preview" alt="" width="100" class="rounded">
+                                </div>
+                                <div class="media-left" v-else-if="lesson.lesson_image_preview">
+                                    <img :src="lesson.lesson_image_preview" alt="" width="100" class="rounded">
                                 </div>
                                 <div class="media-body">
                                     <div class="custom-file" style="width: auto;">
-                                        <input type="file" id="avatar" class="custom-file-input" v-on:change="lessonPreviewImageChanged">
+                                        <input type="file" id="avatar" class="custom-file-input" v-on:change="lessonImagePreviewChanged">
                                         <label for="avatar" class="custom-file-label">Choose file</label>
                                     </div>
                                 </div>
@@ -69,15 +72,22 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group" v-if="lesson_video_image">
-                                        <video width="400" controls>
-                                            <source :src="lesson_video" width="100%" id="lesson_video">
-                                            Your browser does not support HTML5 video.
-                                        </video>
+                                    <div class="card" v-if="lesson_image || lesson_video || lesson.lesson_image">
+                                        <div class="card-body" v-if="lesson_video_image">
+                                            <video style="max-width: 100%" controls>
+                                                <source :src="lesson_video" id="lesson_video">
+                                                Your browser does not support HTML5 video.
+                                            </video>
 
-                                    </div>
-                                    <div class="form-group" v-else>
-                                        <img :src="lesson_image" width="100%" alt="" class="thumbnail">
+                                        </div>
+                                        <div class="card-body" v-else>
+                                            <img :src="lesson_image" style="max-width: 100%;" alt="" class="thumbnail" v-if="lesson_image">
+                                            <img :src="lesson.lesson_image" style="max-width: 100%;" alt="" class="thumbnail" v-else-if="lesson.lesson_image">
+
+                                        </div>
+                                        <div class="card-footer" v-if="media_title">
+                                            <small>{{media_title}}</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -97,9 +107,9 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-4">
-                            <label class="form-label" for="duration">Duration</label>
+                            <label class="form-label" for="duration">Duration ({{timePicker.HH + " Hrs " + timePicker.mm + " Mins and " + timePicker.ss + " Secs"}})</label>
                             <div class="custom-control">
-                                <time-picker id="duration" v-model="timePicker" format="HH:mm:ss" @change="timePickerChanged"></time-picker>
+                                <time-picker id="duration" v-model="timePicker" format="HH:mm:ss"></time-picker>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -156,20 +166,19 @@
                     }
                 ],
                 editor:               InlineEditor,
-                pageTitle:            'Add New Lesson',
-                lesson_image_preview: '',
-                lesson_image:         '',
+                lesson_video_image:   null,
+                lesson_image_preview: null,
+                lesson_image:         null,
                 lesson_video:         '',
-                lesson_video_image:   '',
-                timePicker:           {
-                    HH: "",
-                    mm: "",
-                    ss: ""
-                }
+                media_title:          '',
             }
         },
         created() {
-            this.$store.dispatch('lessons/fetch');
+            this.$store.dispatch('lessons/fetch_edit', this.$route.params.id);
+
+        },
+        mounted() {
+            this.setDefaults();
         },
         components: {
             'ckeditor':    CKEditor.component,
@@ -178,19 +187,31 @@
         computed:   {
             ...mapState(
                 {
-                    lesson: state => state.lessons.lesson,
-                    courses: state => state.lessons.courses,
-                    pageTitle:  state => state.courses.pageTitle
-    
-                })
+                    lesson:    state => state.lessons.lesson,
+                    courses:   state => state.lessons.courses,
+                    pageTitle: state => state.lessons.pageTitle,
+                }),
+            timePicker: {
+                get: function () {
+                    return this.$store.state.lessons.timePicker
+                },
+                // setter
+                set: function (time) {
+                    this.$store.state.lessons.timePicker.HH = time.HH;
+                    this.$store.state.lessons.timePicker.mm = time.mm;
+                    this.$store.state.lessons.timePicker.ss = time.ss;
+                    this.timePickerChanged(time);
+                }
+            }
         },
         methods:    {
-    
             editLesson: function () {
                 this.$store.dispatch('lessons/edit', this.lesson);
             },
             createImage(file) {
                 let reader = new FileReader();
+                this.media_title = file.name;
+
                 reader.onload = (e) => {
                     this.lesson_image = e.target.result;
                 };
@@ -207,10 +228,10 @@
                 let arr = Object.keys(obj).map(function (key) {
                     return [Number(key), obj[key]];
                 });
-                
+
                 return arr;
             },
-            lessonPreviewImageChanged(e) {
+            lessonImagePreviewChanged(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
@@ -233,9 +254,15 @@
                 this.lesson_video = URL.createObjectURL(files[0]);
                 source.parent()[0].load();
             },
-            timePickerChanged(e) {
-                console.log(e);
-                let t = e.data;
+            setDefaults() {
+                let lesson = this.$store.state.lessons;
+                // drg >> set timepicker
+                let duration = lesson.duration;
+
+
+            },
+            timePickerChanged(t) {
+                console.log(t);
                 let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
                 this.lesson.duration = time;
             },

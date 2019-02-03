@@ -13,7 +13,7 @@
             <div class="card-body">
                 <form action="javascript:void(0)" @submit="addLesson">
                     <div class="form-group row">
-                        <label for="avatar" class="col-sm-3 col-form-label form-label">Preview</label>
+                        <label for="image_preview" class="col-sm-3 col-form-label form-label">Preview</label>
                         <div class="col-sm-9">
                             <div class="media align-items-center">
                                 <div class="media-left" v-if="lesson.lesson_image_preview">
@@ -21,8 +21,8 @@
                                 </div>
                                 <div class="media-body">
                                     <div class="custom-file" style="width: auto;">
-                                        <input type="file" id="avatar" class="custom-file-input" v-on:change="lessonPreviewImageChanged">
-                                        <label for="avatar" class="custom-file-label">Choose file</label>
+                                        <input type="file" id="image_preview" class="custom-file-input" v-on:change="lessonImagePreviewChanged">
+                                        <label for="image_preview" class="custom-file-label">Choose file</label>
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
 
                                     </div>
                                     <div class="form-group" v-else>
-                                        <img :src="lesson_image" width="100%" alt="" class="thumbnail">
+                                        <img :src="lesson_image" style="max-width:100%;" alt="" class="thumbnail">
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <v-uploader language="en" :multiple="true" :itemLimit="0" fileTypeExts="jpeg,jpg,gif,png,mp4" fileSizeLimit="25MB"></v-uploader>
+                    <v-uploader language="en" :multiple="true" :itemLimit="0" fileTypeExts="jpeg,jpg,gif,png,aac,svg,html,css,js,php,mp3,mp4,doc,docx,xls,xlsx,pdf,ppt,pptx,zip,7z" fileSizeLimit="25MB"></v-uploader>
                 </div>
             </div>
         </div>
@@ -219,7 +219,7 @@
 
                 return arr;
             },
-            lessonPreviewImageChanged(e) {
+            lessonImagePreviewChanged(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
@@ -243,7 +243,6 @@
                 source.parent()[0].load();
             },
             timePickerChanged(e) {
-                console.log(e);
                 let t = e.data;
                 let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
                 this.lesson.duration = time;

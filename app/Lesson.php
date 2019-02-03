@@ -58,6 +58,18 @@ class Lesson extends Model implements HasMedia
         $this->attributes['course_id'] = $input ? $input : null;
     }
 
+    public function setLessonImageAttribute($image)
+    {
+        $this->attributes['lesson_image'] = str_replace('/storage/',
+            'public/', $image);
+    }
+
+    public function setLessonImagePreviewAttribute($image)
+    {
+        $this->attributes['lesson_image_preview'] = str_replace('/storage/',
+            'public/', $image);
+    }
+
     /**
      * Set attribute to money format
      *

@@ -4,16 +4,26 @@ import router from '../../routes'
 const endpoint = '/api/instructor';
 
 const state = {
-    lesson:     [],
-    courses:    [],
-    categories: [],
-    pageCount:  0,
-    pageFrom:   0,
-    pagePer:    0,
-    pageTo:     0,
-    pageTotal:  0,
-    pageTitle:  '',
-    purchased:  '',
+    lesson:               [],
+    courses:              [],
+    categories:           [],
+    pageCount:            0,
+    pageFrom:             0,
+    pagePer:              0,
+    pageTo:               0,
+    pageTotal:            0,
+    pageTitle:            '',
+    purchased:            '',
+    lesson_image_preview: '',
+    lesson_image:         '',
+    lesson_video:         '',
+    media_title:          '',
+    duration:             0,
+    timePicker:           {
+        HH: "",
+        mm: "",
+        ss: ""
+    }
 };
 
 // actions
@@ -21,6 +31,10 @@ const actions = {
     fetch({commit, dispatch}, id) {
         axios.get(`${endpoint}/lessons/${id}/edit`)
             .then(response => commit('SET_LESSON', response.data)).catch();
+    },
+    fetch_edit({commit, dispatch}, id) {
+        axios.get(`${endpoint}/lessons/${id}/edit`)
+            .then(response => commit('SET_LESSON_EDIT', response.data)).catch();
     },
     fetch_empty({commit}) {
         commit('SET_EMPTY', []);
@@ -56,9 +70,11 @@ const actions = {
             lesson_image:         lesson.lesson_image,
             lesson_image_preview: lesson.lesson_image_preview,
         };
+        
         for (let key in lessonData) {
             form_data.append(key, lessonData[key]);
         }
+        
         axios.post(`${endpoint}/lessons`, form_data)
             .then(({data}) => {
                 
@@ -73,21 +89,28 @@ const actions = {
             });
     },
     edit({dispatch}, lesson) {
-        axios.put(`${endpoint}/lessons/${lesson.id}`, {
+        let edit_form_data = new FormData();
+        let lessonData = {
+            // drg >> slug is not added to the list of objects, because it's auto generated
+            course_id:            lesson.course_id,
             title:                lesson.title,
-            slug:                 lesson.slug,
-            category:             lesson.category,
-            tags:                 lesson.tags.join(';'),
-            summary:              lesson.summary,
-            description:          lesson.description,
-            price:                lesson.price,
-            start_date:           lesson.start_date,
-            end_date:             lesson.end_date,
+            short_text:           lesson.short_text,
+            full_text:            lesson.full_text,
+            free_lesson:          lesson.free_lesson,
+            duration:             lesson.duration,
             published:            lesson.published,
-            lesson_image_preview: lesson.lesson_image_preview
-        })
+            lesson_image:         lesson.lesson_image,
+            lesson_image_preview: lesson.lesson_image_preview,
+            _method:              'PUT'
+        };
+        
+        for (let key in lessonData) {
+            edit_form_data.append(key, lessonData[key]);
+        }
+        console.log(lessonData)
+        
+        axios.post(`${endpoint}/lessons/${lesson.id}`, edit_form_data)
             .then(({data}) => {
-                
                 jQuery.notify({
                     // options
                     message: data.message,
@@ -95,10 +118,10 @@ const actions = {
                     // settings
                     type: data.type,
                 });
-                console.log();
                 dispatch('fetch', lesson.id)
             });
-    },
+    }
+    
 };
 
 // mutations
@@ -107,6 +130,17 @@ const mutations = {
         state.lesson = lesson.lesson;
         state.courses = lesson.courses;
         state.pageTitle = lesson.lesson.title;
+    },
+    SET_LESSON_EDIT(state, lesson) {
+        state.lesson = lesson.lesson;
+        state.courses = lesson.courses;
+        state.pageTitle = lesson.lesson.title;
+        // drg >> set timepicker
+        let duration = lesson.lesson.duration;
+        state.timePicker.HH = Math.floor(duration / 3600);
+        state.timePicker.mm = Math.floor((duration % 3600) / 60);
+        state.timePicker.ss = Math.floor(duration % 60);
+        
     },
     SET_CATEGORIES(state, categories) {
         state.categories = categories;
