@@ -39,20 +39,29 @@ const actions = {
             .then(response => commit('SET_CATEGORIES', response.data));
     },
     add({}, course) {
-        axios.post(`${endpoint}/courses`, {
+        let form_data = new FormData();
+        let courseData = {
             // drg >> slug is not added to the list of objects, because it's auto generated
-            title:       course.title,
-            slug:        course.slug,
-            category:    course.category,
-            tags:        course.tags.join(';'),
-            summary:     course.summary,
-            description: course.description,
-            price:       course.price,
-            start_date:  course.start_date,
-            end_date:    course.end_date,
-            published:   course.published,
-            
-        })
+            title:                course.title,
+            slug:                 course.slug,
+            category:             course.category,
+            tags:                 course.tags.join(';'),
+            summary:              course.summary,
+            description:          course.description,
+            price:                course.price,
+            start_date:           course.start_date,
+            course_image:         course.course_image,
+            course_image_type:    course.course_image_type,
+            course_image_preview: course.course_image_preview,
+            end_date:             course.end_date,
+            published:            course.published,
+        };
+        
+        for (let key in courseData) {
+            form_data.append(key, courseData[key]);
+        }
+        
+        axios.post(`${endpoint}/courses`, form_data)
             .then(({data}) => {
                 
                 jQuery.notify({
@@ -66,19 +75,30 @@ const actions = {
             });
     },
     edit({dispatch}, course) {
-        axios.put(`${endpoint}/courses/${course.id}`, {
-            title:       course.title,
-            slug:        course.slug,
-            category:    course.category,
-            tags:        course.tags.join(';'),
-            summary:     course.summary,
-            description: course.description,
-            price:       course.price,
-            start_date:  course.start_date,
-            end_date:    course.end_date,
-            published:   course.published,
-            
-        })
+        let form_data = new FormData();
+        let courseData = {
+            // drg >> slug is not added to the list of objects, because it's auto generated
+            title:                course.title,
+            slug:                 course.slug,
+            category:             course.category,
+            tags:                 course.tags.join(';'),
+            summary:              course.summary,
+            description:          course.description,
+            price:                course.price,
+            start_date:           course.start_date,
+            course_image:         course.course_image,
+            course_image_type:    course.course_image_type,
+            course_image_preview: course.course_image_preview,
+            end_date:             course.end_date,
+            published:            course.published,
+            _method:              'PUT'
+        };
+        
+        for (let key in courseData) {
+            form_data.append(key, courseData[key]);
+        }
+        
+        axios.post(`${endpoint}/courses/${course.id}`, form_data)
             .then(({data}) => {
                 
                 jQuery.notify({
@@ -88,7 +108,6 @@ const actions = {
                     // settings
                     type: data.type,
                 });
-                console.log();
                 dispatch('fetch', course.id)
             });
     },

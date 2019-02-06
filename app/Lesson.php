@@ -90,6 +90,11 @@ class Lesson extends Model implements HasMedia
         return $value ? 1 : 0;
     }
 
+    public function getCourseTitleAttribute()
+    {
+        return title_case(Course::findOrFail($this->course_id)->title);
+    }
+
     public function getIsCompletedAttribute()
     {
         $isCompleted = Auth::user()->lessons()->where('lesson_id', $this->id)

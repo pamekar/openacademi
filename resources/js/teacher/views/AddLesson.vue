@@ -11,9 +11,10 @@
         ></breadcrumb-component>
         <div class="card">
             <div class="card-body">
-                <form v-on:submit.prevent="addLesson">
+                <form action="javascript:void(0)" @submit="addLesson">
+                    <input type="submit" style="display: none">
                     <div class="form-group row">
-                        <label for="image_preview" class="col-sm-3 col-form-label form-label">Preview</label>
+                        <label for="image_preview" class="col-sm-3 col-form-label form-label">Preview Image</label>
                         <div class="col-sm-9">
                             <div class="media align-items-center">
                                 <div class="media-left" v-if="lesson_image_preview" v-viewer="{movable: false}">
@@ -31,7 +32,7 @@
                     <div class="form-group row">
                         <label for="title" class="col-md-3 col-form-label form-label">Title</label>
                         <div class="col-md-6">
-                            <input id="title" type="text" class="form-control" placeholder="Write an awesome title" v-model="lesson.title">
+                            <input id="title" type="text" class="form-control" placeholder="Write an awesome title" v-model="lesson.title" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -79,6 +80,9 @@
                                         </div>
                                         <div class="card-body" v-else v-viewer="{movable: false}">
                                             <img :src="lesson_image" style="max-width:100%; cursor: pointer;" alt="" class="thumbnail" v-if="lesson_image">
+                                        </div>
+                                        <div class="card-footer" v-if="media_title">
+                                            <small>{{media_title}}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -175,6 +179,7 @@
                 lesson_image:         null,
                 lesson_video:         null,
                 lesson_video_image:   '',
+                media_title:          null,
                 timePicker:           {
                     HH: "",
                     mm: "",
@@ -202,6 +207,7 @@
             },
             createImage(file) {
                 let reader = new FileReader();
+                this.media_title = file.name;
                 reader.onload = (e) => {
                     this.lesson_image = e.target.result;
                 };

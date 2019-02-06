@@ -67,7 +67,7 @@ const routes = [
         component: AddLesson
     },
     {
-        path:      '/lesson/:slug',
+        path:      '/lesson/:id',
         name:      'view-lesson',
         component: Lesson
     },

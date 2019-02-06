@@ -5,6 +5,7 @@ const endpoint = '/api/instructor';
 
 const state = {
     lesson:               [],
+    course:               [],
     courses:              [],
     categories:           [],
     pageCount:            0,
@@ -29,7 +30,7 @@ const state = {
 // actions
 const actions = {
     fetch({commit, dispatch}, id) {
-        axios.get(`${endpoint}/lessons/${id}/edit`)
+        axios.get(`${endpoint}/lessons/${id}`)
             .then(response => commit('SET_LESSON', response.data)).catch();
     },
     fetch_edit({commit, dispatch}, id) {
@@ -89,7 +90,7 @@ const actions = {
             });
     },
     edit({dispatch}, lesson) {
-        let edit_form_data = new FormData();
+        let form_data = new FormData();
         let lessonData = {
             // drg >> slug is not added to the list of objects, because it's auto generated
             course_id:            lesson.course_id,
@@ -105,11 +106,11 @@ const actions = {
         };
         
         for (let key in lessonData) {
-            edit_form_data.append(key, lessonData[key]);
+            form_data.append(key, lessonData[key]);
         }
-        console.log(lessonData)
+        ;
         
-        axios.post(`${endpoint}/lessons/${lesson.id}`, edit_form_data)
+        axios.post(`${endpoint}/lessons/${lesson.id}`, form_data)
             .then(({data}) => {
                 jQuery.notify({
                     // options
@@ -127,8 +128,10 @@ const actions = {
 // mutations
 const mutations = {
     SET_LESSON(state, lesson) {
+        console.log(lesson);
         state.lesson = lesson.lesson;
-        state.courses = lesson.courses;
+        state.course = lesson.course;
+        state.tests = lesson.tests;
         state.pageTitle = lesson.lesson.title;
     },
     SET_LESSON_EDIT(state, lesson) {

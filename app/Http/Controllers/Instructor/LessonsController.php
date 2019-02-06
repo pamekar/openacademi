@@ -168,13 +168,18 @@ class LessonsController extends Controller
         if (!Gate::allows('lesson_view')) {
             return abort(401);
         }
-        $courses = \App\Course::get()->pluck('title', 'id')
-            ->prepend('Please select', '');
+        /*$courses = \App\Course::get()->pluck('title', 'id')
+            ->prepend('Please select', '');*/
         $tests = \App\Test::where('lesson_id', $id)->get();
 
         $lesson = Lesson::findOrFail($id);
 
-        return response()->json(['course' => $courses, 'lesson' => $lesson]);
+        $course = Course::where('id', $lesson->course_id)->with('lessons')->firstOrFail();
+        return response()->json([
+            'tests'  => $tests,
+            'lesson' => $lesson,
+            'course' => $course
+        ]);
 
     }
 

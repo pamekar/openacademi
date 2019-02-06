@@ -9,7 +9,7 @@
                     </div>
                     <div class="media-body">
                         <h5 class="card-title h6 mb-0">
-                            <router-link :to="{name:'view-lesson', params:{'slug':lesson.slug}}">{{lesson.title}}</router-link>
+                            <router-link :to="{name:'view-lesson', params:{'id':lesson.id}}">{{lesson.title}}</router-link>
                         </h5>
                         <small class="text-muted">updated {{lesson.last_updated}}</small>
                     </div>

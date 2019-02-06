@@ -39,7 +39,7 @@ class Course extends Model
             'price',
             'course_image',
             'course_image_type',
-            'course_image_thumbnail',
+            'course_image_preview',
             'start_date',
             'end_date',
             'published'
@@ -95,6 +95,18 @@ class Course extends Model
         }
     }
 
+    public function setCourseImageAttribute($image)
+    {
+        $this->attributes['course_image'] = str_replace('/storage/',
+            'public/', $image);
+    }
+
+    public function setCourseImagePreviewAttribute($image)
+    {
+        $this->attributes['course_image_preview'] = str_replace('/storage/',
+            'public/', $image);
+    }
+
     public function getCourseImageAttribute($value)
     {
         if ( !empty($value) ) {
@@ -103,7 +115,7 @@ class Course extends Model
         return $value;
     }
 
-    public function getCourseImageThumbnailAttribute($value)
+    public function getCourseImagePreviewAttribute($value)
     {
         if ( !empty($value) ) {
             return Storage::url($value);
@@ -111,15 +123,6 @@ class Course extends Model
         return $value;
     }
 
-    public function getCourseImageMainAttribute($value)
-    {
-        if ($this->course_image_type == 'image'
-            && !empty($value) 
-        ) {
-            return Storage::url($value);
-        }
-        return $value;
-    }
 
     public function getTotalLessonsAttribute()
     {

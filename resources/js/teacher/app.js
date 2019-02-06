@@ -12,7 +12,6 @@ import axios from 'axios';
 import router from './routes.js';
 import functions from './functions.js';
 import store from './store/index.js';
-
 import vUploader from 'v-uploader';
 import 'viewerjs/dist/viewer.css';
 import Viewer from 'v-viewer';
@@ -40,6 +39,7 @@ Vue.use(vUploader, uploaderConfig);
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
+
 
 
 functions.setupAxios();

@@ -7,7 +7,6 @@
         <breadcrumb-component
                 :breadcrumbs="breadcrumbs"
                 :title="pageTitle"
-                :button="{title:'Save',method:editCourse,class:'btn btn-info'}"
         ></breadcrumb-component>
 
         <div class="row">
@@ -15,7 +14,7 @@
 
                 <div class="card">
                     <div v-if="course.course_image_type == 'image'">
-                        <img :src="course.course_image_main" :alt="course.slug" width="100%"/>
+                        <img :src="course.course_image_main" :alt="course.slug" width="100%"  />
                     </div>
                     <div class="embed-responsive embed-responsive-16by9" v-if="course.course_image_type == 'video'">
                         <iframe class="embed-responsive-item" :src="course.course_image_main" allowfullscreen=""></iframe>
@@ -75,7 +74,7 @@
                         </li>
                     </ul>
                 </div>
-                <!--<div class="card">
+                <div class="card">
                     <div class="card-header">
                         <div class="media align-items-center">
                             <div class="media-left">
@@ -97,7 +96,7 @@
                         </a>
                         <a href="" class="btn btn-default"><i class="fab fa-github"></i></a>
                     </div>
-                </div>-->
+                </div>
 
             </div>
         </div>
@@ -116,28 +115,35 @@
                         title: "Dashboard", link: 'dashboard'
                     },
                     {
-                        title: "Courses", link: 'all-courses'
+                        title: "Courses", link:'all-courses'
                     },
                     {
                         title: ""
                     }
                 ],
                 pageTitle:       "Courses",
-                purchased:       ""
+                purchased:  ""
             }
         },
         created() {
-            this.$store.dispatch('courses/fetch', this.$route.params.id);
+            this.getCourse();
         },
         mounted() {
+            console.log('Dashboard Component mounted now.')
         },
         components: {
             'lessons-list-component': LessonsListComponent
         },
         methods:    {
-            editCourse() {
-                this.$router.push({name: 'edit-course', params: {id: this.course.id}});
-            }
+            getCourse() {
+                axios.get("/api/course/" + this.$route.params.slug)
+                    .then(({data}) => {
+                        this.course = data.course;
+                        this.pageTitle=data.course.title;
+                        this.purchased=data.purchased;
+                        this.breadcrumbs[2].title = data.course.title;
+                    });
+            },
         },
         props:      ['slug'],
         computed:   {}

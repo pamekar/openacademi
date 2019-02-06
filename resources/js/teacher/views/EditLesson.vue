@@ -13,7 +13,7 @@
             <div class="card-body">
                 <form action="javascript:void(0)" @submit="editLesson">
                     <div class="form-group row">
-                        <label for="avatar" class="col-sm-3 col-form-label form-label">Preview</label>
+                        <label for="avatar" class="col-sm-3 col-form-label form-label">Preview Image</label>
                         <div class="col-sm-9">
                             <div class="media align-items-center"  v-viewer="{movable: false}">
                                 <div class="media-left" v-if="lesson_image_preview">
@@ -178,7 +178,6 @@
 
         },
         mounted() {
-            this.setDefaults();
         },
         components: {
             'ckeditor':    CKEditor.component,
@@ -257,7 +256,7 @@
             timePickerChanged(t) {
                 let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
                 this.lesson.duration = time;
-            },
+            }
         }
     }
 </script>
