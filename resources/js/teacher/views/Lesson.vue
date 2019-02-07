@@ -93,12 +93,6 @@
             'lessons-list-component': LessonsListComponent,
         },
         methods:    {
-            setDefaults() {
-                
-                this.breadcrumbs[2].title = this.$store.state.lessons.course.title;
-                this.breadcrumbs[2].params = {id: this.$store.state.lessons.course.id};
-                this.breadcrumbs[3].title = this.lesson.title;
-            },
         },
         computed:   {
             ...mapState(

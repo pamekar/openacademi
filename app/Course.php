@@ -109,7 +109,7 @@ class Course extends Model
 
     public function getCourseImageAttribute($value)
     {
-        if ( !empty($value) ) {
+        if ($this->course_image_type == 'image' && !empty($value)) {
             return Storage::url($value);
         }
         return $value;
@@ -117,7 +117,7 @@ class Course extends Model
 
     public function getCourseImagePreviewAttribute($value)
     {
-        if ( !empty($value) ) {
+        if (!empty($value)) {
             return Storage::url($value);
         }
         return $value;
