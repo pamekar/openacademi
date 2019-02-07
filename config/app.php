@@ -255,5 +255,4 @@ return [
         'Html'         => Collective\Html\HtmlFacade::class,
 
     ],
-    'Vimeo' => Vimeo\Laravel\Facades\Vimeo::class,
 ];

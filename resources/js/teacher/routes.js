@@ -62,7 +62,7 @@ const routes = [
         component: EditCourse
     },
     {
-        path:      '/lesson/add',
+        path:      '/lesson/add/:id?',
         name:      'add-lesson',
         component: AddLesson
     },

@@ -189,6 +189,7 @@
         },
         created() {
             this.$store.dispatch('lessons/fetch_courses');
+            this.lesson.course_id = this.$route.params.id;
         },
         components: {
             'ckeditor':    CKEditor.component,
@@ -255,6 +256,6 @@
                 let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
                 this.lesson.duration = time;
             },
-        }
+        },
     }
 </script>

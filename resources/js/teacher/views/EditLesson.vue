@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
-                                            <input type="checkbox" id="video_image" class="custom-control-input" v-model="lesson_video_image">
+                                            <input type="checkbox" id="video_image" class="custom-control-input" v-model="lesson_video_image" @change="mediaChanged">
                                             <label class="custom-control-label" for="video_image">Yes</label>
                                         </div>
                                         <label class="form-label" for="video_image">Toggle Image/Video</label>
@@ -252,6 +252,9 @@
                 var source = jQuery('#lesson_video');
                 this.lesson_video = URL.createObjectURL(files[0]);
                 source.parent()[0].load();
+            },
+            mediaChanged(){
+
             },
             timePickerChanged(t) {
                 let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));

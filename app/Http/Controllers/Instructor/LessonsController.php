@@ -199,7 +199,13 @@ class LessonsController extends Controller
         $lesson = Lesson::findOrFail($id);
         $lesson->delete();
 
-        return redirect()->route('instructor.lessons.index');
+
+        $status = [
+            'type'    => 'success',
+            'message' => "$lesson->title has been deleted successfully"
+        ];
+
+        return response()->json($status);
     }
 
     /**

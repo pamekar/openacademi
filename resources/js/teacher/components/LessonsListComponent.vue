@@ -14,7 +14,8 @@
                         <small class="text-muted">updated {{lesson.last_updated}}</small>
                     </div>
                     <div class="media-right">
-                        <router-link :to="{name:'edit-lesson', params:{'id':lesson.id}}" class="btn btn-white btn-sm"><i class="material-icons">edit</i></router-link>
+                        <router-link :to="{name:'edit-lesson', params:{'id':lesson.id}}" class="btn btn-outline-info btn-sm"><i class="material-icons">edit</i></router-link>
+                        <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm" @click="deleteLesson(lesson.id)"><i class="material-icons">close</i></a>
                     </div>
                 </div>
             </div>
@@ -24,7 +25,14 @@
 
 <script>
     export default {
-        props: {
+        methods: {
+            deleteLesson(id) {
+                this.$store.dispatch('lessons/delete_lessons', id);
+                this.$store.dispatch('courses/fetch', this.$route.params.id);
+            },
+
+        },
+        props:   {
             lessons: Array
         }
     }

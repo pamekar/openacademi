@@ -87,7 +87,7 @@
                     </div>
                     <div class="card-body">
                         <p>
-                            <router-link :to="{name:'add-lesson'}" class="btn btn-primary">Add Lesson <i class="material-icons">add</i></router-link>
+                            <router-link :to="{name:'add-lesson',params:{id:course.id}}" class="btn btn-primary">Add Lesson <i class="material-icons">add</i></router-link>
                         </p>
                         <div class="nestable" id="nestable-handles">
                             <lessons-list-component :lessons="course.lessons"></lessons-list-component>

@@ -116,7 +116,7 @@
         methods:    {
             getCourses(page = 1) {
                 this.$store.dispatch('courses/fetch_all', page);
-            }
+            },
         },
         components: {
             'courses-component': Courses,
@@ -125,12 +125,12 @@
         computed:   {
             ...mapState(
                 {
-                    courses:   state => state.courses.courses,
-                    categories:   state => state.courses.categories,
-                    pageCount: state => state.courses.pageCount,
-                    pageFrom:  state => state.courses.pageFrom,
-                    pageTo:    state => state.courses.pageTo,
-                    pageTotal: state => state.courses.pageTotal,
+                    courses:    state => state.courses.courses,
+                    categories: state => state.courses.categories,
+                    pageCount:  state => state.courses.pageCount,
+                    pageFrom:   state => state.courses.pageFrom,
+                    pageTo:     state => state.courses.pageTo,
+                    pageTotal:  state => state.courses.pageTotal,
                 })
         }
     }

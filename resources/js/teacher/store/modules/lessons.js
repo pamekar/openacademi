@@ -29,6 +29,19 @@ const state = {
 
 // actions
 const actions = {
+    delete_lessons({},id){
+        axios.delete(`${endpoint}/lessons/${id}`)
+            .then(({data}) => {
+    
+                jQuery.notify({
+                    // options
+                    message: data.message,
+                }, {
+                    // settings
+                    type: data.type,
+                });
+            });
+    },
     fetch({commit, dispatch}, id) {
         axios.get(`${endpoint}/lessons/${id}`)
             .then(response => commit('SET_LESSON', response.data)).catch();

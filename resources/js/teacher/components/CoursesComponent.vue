@@ -16,7 +16,7 @@
                         <div class="d-flex align-items-end">
                             <div class="d-flex flex flex-column mr-3">
 
-                                    <star-rating :rating="Number(course.rating.split(';')[0])" :increment="0.01" :read-only="true" :star-size="18"></star-rating>
+                                <star-rating :rating="Number(course.rating.split(';')[0])" :increment="0.01" :read-only="true" :star-size="18"></star-rating>
                                 <div class="d-flex align-items-center py-1 border-bottom">
                                     <small class="text-black-70 mr-2">&dollar;1,230/mo</small>
                                     <small class="text-black-50">34 SALES</small>
@@ -31,7 +31,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="card__options dropdown right-0 pr-2">
                 <a href="#" class="dropdown-toggle text-muted" data-caret="false" data-toggle="dropdown">
@@ -41,7 +40,7 @@
                     <router-link class="dropdown-item" :to="{name:'edit-course', params:{'id':course.id}}">Edit course</router-link>
                     <router-link class="dropdown-item" :to="{name:'view-course', params:{'id':course.id}}">Course Insights</router-link>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#">Delete course</a>
+                    <a class="dropdown-item text-danger" href="#" @click="deleteCourse(course.id)">Delete course</a>
                 </div>
             </div>
         </div>
@@ -50,7 +49,13 @@
 
 <script>
     export default {
-        props: {
+        methods: {
+            deleteCourse(id) {
+                this.$store.dispatch('courses/delete', id);
+                this.$store.dispatch('courses/fetch_all');
+            },
+        },
+        props:   {
             course: Object,
             tags:   Array
         }

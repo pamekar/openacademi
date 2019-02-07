@@ -185,7 +185,12 @@ class CoursesController extends Controller
         $course = Course::findOrFail($id);
         $course->delete();
 
-        return redirect()->route('instructor.courses.index');
+        $status = [
+            'type'    => 'success',
+            'message' => "$course->title has been deleted successfully"
+        ];
+
+        return response()->json($status);
     }
 
     /**

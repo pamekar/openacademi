@@ -45,8 +45,6 @@
 <script src="{{asset("$public/assets/vendor/popper.min.js")}}"></script>
 <script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"></script>
 
-<script src="{{asset("$public/assets/vendor/jquery.nestable.js")}}"></script>
-<script src="{{asset("$public/assets/js/nestable.js")}}"></script>
 <script src="{{asset("$public/js/bootstrap-notify.min.js")}}"></script>
 @if(isset($notification))
     <script>
@@ -71,6 +69,8 @@
 <!-- App JS -->
 <script src="{{asset("$public/assets/js/app.js")}}"></script>
 
+<script src="{{asset("$public/assets/vendor/jquery.nestable.js")}}"></script>
+<script src="{{asset("$public/assets/js/nestable.js")}}"></script>
 <!-- Highlight.js -->
 <script src="{{asset("$public/assets/js/hljs.js")}}"></script>
 
@@ -94,16 +94,16 @@
 <script>
     (function() {
         'use strict';
-        
+
         Charts.init()
-        
+
         var earnings = []
-        
+
         // Create a date range for the last 7 days
         var start = moment().subtract(7, 'days').format('YYYY-MM-DD') // 7 days ago
         var end = moment().format('YYYY-MM-DD') // today
         var range = moment.range(start, end)
-        
+
         // Create the earnings graph data
         // Iterate the date range and assign a random ($) earnings value for each day
         range.by('days', function(moment) {
@@ -112,7 +112,7 @@
                 x: moment.toDate()
             })
         })
-        
+
         var Earnings = function(id, type = 'roundedBar', options = {}) {
             options = Chart.helpers.merge({
                 barRoundness: 1.2,
@@ -151,20 +151,20 @@
                     }
                 }
             }, options)
-            
+
             var data = {
                 datasets: [{
                     label: "Earnings",
                     data: earnings
                 }]
             }
-            
+
             Charts.create(id, type, options, data)
         }
-        
+
         // Create Chart
         Earnings('#earningsChart')
-        
+
     })()
 </script>
 

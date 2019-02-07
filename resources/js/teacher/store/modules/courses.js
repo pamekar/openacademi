@@ -19,6 +19,19 @@ const state = {
 
 // actions
 const actions = {
+    delete_courses({}, id) {
+        axios.delete(`${endpoint}/courses/${id}`)
+            .then(({data}) => {
+        
+                jQuery.notify({
+                    // options
+                    message: data.message,
+                }, {
+                    // settings
+                    type: data.type,
+                });
+            });
+    },
     fetch({commit, dispatch}, id) {
         axios.get(`${endpoint}/courses/${id}/edit`)
             .then(response => commit('SET_COURSE', response.data)).catch();
@@ -51,7 +64,7 @@ const actions = {
             price:                course.price,
             start_date:           course.start_date,
             course_image:         course.course_image,
-            course_image_type:    course.course_image_type,
+            //course_image_type:    course.course_image_type,
             course_image_preview: course.course_image_preview,
             end_date:             course.end_date,
             published:            course.published,
