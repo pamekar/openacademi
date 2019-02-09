@@ -69,7 +69,12 @@ class TestsController extends Controller
         }
         $test = Test::create($request->all());
 
-        return redirect()->route('instructor.tests.index');
+        $status = [
+            'type'    => 'success',
+            'message' => "$test->title has been created successfully"
+        ];
+
+        return response()->json($status);
     }
 
 
@@ -115,7 +120,12 @@ class TestsController extends Controller
         $test = Test::findOrFail($id);
         $test->update($request->all());
 
-        return redirect()->route('instructor.tests.index');
+        $status = [
+            'type'    => 'success',
+            'message' => "$test->title has been updated successfully"
+        ];
+
+        return response()->json($status);
     }
 
 
@@ -152,7 +162,12 @@ class TestsController extends Controller
         $test = Test::findOrFail($id);
         $test->delete();
 
-        return redirect()->route('instructor.tests.index');
+        $status = [
+            'type'    => 'success',
+            'message' => "$test->title has been deleted successfully"
+        ];
+
+        return response()->json($status);
     }
 
     /**
@@ -190,7 +205,12 @@ class TestsController extends Controller
         $test = Test::onlyTrashed()->findOrFail($id);
         $test->restore();
 
-        return redirect()->route('instructor.tests.index');
+        $status = [
+            'type'    => 'success',
+            'message' => "Test has been restored successfully"
+        ];
+
+        return response()->json($status);
     }
 
     /**
@@ -208,6 +228,11 @@ class TestsController extends Controller
         $test = Test::onlyTrashed()->findOrFail($id);
         $test->forceDelete();
 
-        return redirect()->route('instructor.tests.index');
+        $status = [
+            'type'    => 'success',
+            'message' => "Test has been permanently"
+        ];
+
+        return response()->json($status);
     }
 }

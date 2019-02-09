@@ -31,6 +31,7 @@ const actions = {
                     type: data.type,
                 });
             });
+        router.push({name: 'show-courses'});
     },
     fetch({commit, dispatch}, id) {
         axios.get(`${endpoint}/courses/${id}/edit`)

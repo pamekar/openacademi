@@ -147,13 +147,21 @@
 
                             </div>
                         </div>
-                        <div class="flex">
+                        <div class="flex  form-group">
                             <label class="form-label" for="purchased">Publish your course</label><br>
                             <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
                                 <input type="checkbox" id="purchased" class="custom-control-input" v-model="course.published">
                                 <label class="custom-control-label" for="purchased">{{course.published}}</label>
                             </div>
                             <label class="form-label" for="purchased">{{course.published}}</label>
+                        </div>
+                        <div class="form-group text-md-right">
+                            <button @click="editCourse" class="btn btn-outline-info btn-sm">
+                                Update
+                            </button>
+                            <button @click="deleteCourse(course.id)" class="btn btn-outline-warning btn-sm">
+                                Delete
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -213,9 +221,6 @@
                 })
         },
         methods:    {
-            editCourse:      function () {
-                this.$store.dispatch('courses/edit', this.course);
-            },
             changeMediaType: function (e) {
                 this.course.course_image_type = this.course_video_image ? 'video' : 'image';
             },
@@ -234,6 +239,12 @@
                     this.course_image_preview = e.target.result;
                 };
                 reader.readAsDataURL(file);
+            },
+            deleteCourse() {
+                this.$store.dispatch('courses/delete', id);
+            },
+            editCourse:      function () {
+                this.$store.dispatch('courses/edit', this.course);
             },
             getArray(obj) {
                 let arr = Object.keys(obj).map(function (key) {

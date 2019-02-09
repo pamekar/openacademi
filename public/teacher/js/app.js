@@ -34852,9 +34852,8 @@ const CONFIG = {
 //
 /* harmony default export */ __webpack_exports__["a"] = ({
   methods: {
-    deleteLesson(id) {
-      this.$store.dispatch('lessons/delete_lessons', id);
-      this.$store.dispatch('courses/fetch', this.$route.params.id);
+    deleteLesson(id, course) {
+      this.$store.dispatch('lessons/delete_lessons', id, course);
     }
 
   },
@@ -36293,6 +36292,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -36339,9 +36346,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     pageTitle: state => state.courses.pageTitle
   })),
   methods: {
-    editCourse: function () {
-      this.$store.dispatch('courses/edit', this.course);
-    },
     changeMediaType: function (e) {
       this.course.course_image_type = this.course_video_image ? 'video' : 'image';
     },
@@ -36365,6 +36369,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
 
       reader.readAsDataURL(file);
+    },
+
+    deleteCourse() {
+      this.$store.dispatch('courses/delete', id);
+    },
+
+    editCourse: function () {
+      this.$store.dispatch('courses/edit', this.course);
     },
 
     getArray(obj) {
@@ -37441,6 +37453,67 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -43459,6 +43532,9 @@ const actions = {
         type: data.type
       });
     });
+    __WEBPACK_IMPORTED_MODULE_0__routes__["a" /* default */].push({
+      name: 'show-courses'
+    });
   },
 
   fetch({
@@ -43645,7 +43721,7 @@ const state = {
 }; // actions
 
 const actions = {
-  delete_lessons({}, id) {
+  delete_lessons({}, id, course) {
     axios.delete(`${endpoint}/lessons/${id}`).then(({
       data
     }) => {
@@ -43656,6 +43732,12 @@ const actions = {
         // settings
         type: data.type
       });
+    });
+    __WEBPACK_IMPORTED_MODULE_0__routes__["a" /* default */].push({
+      name: 'view-course',
+      params: {
+        id: course
+      }
     });
   },
 
@@ -63528,13 +63610,12 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c(
-                    "a",
+                    "button",
                     {
-                      staticClass: "btn btn-outline-danger btn-sm",
-                      attrs: { href: "javascript:void(0)" },
+                      staticClass: "btn btn-outline-warning btn-sm",
                       on: {
                         click: function($event) {
-                          _vm.deleteLesson(lesson.id)
+                          _vm.deleteLesson(lesson.id, lesson.course_id)
                         }
                       }
                     },
@@ -65198,7 +65279,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "flex" }, [
+                _c("div", { staticClass: "flex  form-group" }, [
                   _c(
                     "label",
                     { staticClass: "form-label", attrs: { for: "purchased" } },
@@ -65274,6 +65355,38 @@ var render = function() {
                     "label",
                     { staticClass: "form-label", attrs: { for: "purchased" } },
                     [_vm._v(_vm._s(_vm.course.published))]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group text-md-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-info btn-sm",
+                      on: { click: _vm.editCourse }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Update\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-warning btn-sm",
+                      on: {
+                        click: function($event) {
+                          _vm.deleteCourse(_vm.course.id)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Delete\n                        "
+                      )
+                    ]
                   )
                 ])
               ]
@@ -67608,9 +67721,228 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { staticClass: "card-columns" }, [
+        _c("div", { staticClass: "card card-sm" }, [
+          _c("div", { staticClass: "card-body media" }, [
+            _c("div", { staticClass: "media-left" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "avatar avatar-lg avatar-4by3",
+                  attrs: { href: "instructor-review-quiz.html" }
+                },
+                [
+                  _c("img", {
+                    staticClass: "avatar-img rounded",
+                    attrs: {
+                      src: "assets/images/vuejs.png",
+                      alt: "Card image cap"
+                    }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "media-body" }, [
+              _c("h4", { staticClass: "card-title mb-0" }, [
+                _c("a", { attrs: { href: "instructor-review-quiz.html" } }, [
+                  _vm._v("Vue.js Deploy Quiz")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v("25 Completed")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer text-center" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-white btn-sm float-left",
+                attrs: { href: "instructor-review-quiz.html" }
+              },
+              [
+                _c("i", { staticClass: "material-icons btn__icon--left" }, [
+                  _vm._v("playlist_add_check")
+                ]),
+                _vm._v(" Review "),
+                _c("span", { staticClass: "badge badge-dark ml-2" }, [
+                  _vm._v("5")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-default btn-sm float-right",
+                attrs: { href: "instructor-quiz-edit.html" }
+              },
+              [
+                _c("i", { staticClass: "material-icons btn__icon--left" }, [
+                  _vm._v("edit")
+                ]),
+                _vm._v(" Edit ")
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "clearfix" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card card-sm" }, [
+          _c("div", { staticClass: "card-body media" }, [
+            _c("div", { staticClass: "media-left" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "avatar avatar-lg avatar-4by3",
+                  attrs: { href: "instructor-review-quiz.html" }
+                },
+                [
+                  _c("img", {
+                    staticClass: "avatar-img rounded",
+                    attrs: {
+                      src: "assets/images/github.png",
+                      alt: "Card image cap"
+                    }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "media-body" }, [
+              _c("h4", { staticClass: "card-title mb-0" }, [
+                _c("a", { attrs: { href: "instructor-review-quiz.html" } }, [
+                  _vm._v("GitHub Basic Setup")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v("410 Completed")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer text-center" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-white btn-sm float-left",
+                attrs: { href: "instructor-review-quiz.html" }
+              },
+              [
+                _c("i", { staticClass: "material-icons btn__icon--left" }, [
+                  _vm._v("playlist_add_check")
+                ]),
+                _vm._v(" Review "),
+                _c("span", { staticClass: "badge badge-dark ml-2" }, [
+                  _vm._v("5")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-default btn-sm float-right",
+                attrs: { href: "instructor-quiz-edit.html" }
+              },
+              [
+                _c("i", { staticClass: "material-icons btn__icon--left" }, [
+                  _vm._v("edit")
+                ]),
+                _vm._v(" Edit ")
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "clearfix" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card card-sm" }, [
+          _c("div", { staticClass: "card-body media" }, [
+            _c("div", { staticClass: "media-left" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "avatar avatar-lg avatar-4by3",
+                  attrs: { href: "instructor-review-quiz.html" }
+                },
+                [
+                  _c("img", {
+                    staticClass: "avatar-img rounded",
+                    attrs: {
+                      src: "assets/images/gulp.png",
+                      alt: "Card image cap"
+                    }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "media-body" }, [
+              _c("h4", { staticClass: "card-title mb-0" }, [
+                _c("a", { attrs: { href: "instructor-review-quiz.html" } }, [
+                  _vm._v("Gulp Front-End Boilerplate")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v("50 Completed")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer text-center" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-white btn-sm float-left",
+                attrs: { href: "instructor-review-quiz.html" }
+              },
+              [
+                _c("i", { staticClass: "material-icons btn__icon--left" }, [
+                  _vm._v("playlist_add_check")
+                ]),
+                _vm._v(" Review "),
+                _c("span", { staticClass: "badge badge-dark ml-2" }, [
+                  _vm._v("5")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-default btn-sm float-right",
+                attrs: { href: "instructor-quiz-edit.html" }
+              },
+              [
+                _c("i", { staticClass: "material-icons btn__icon--left" }, [
+                  _vm._v("edit")
+                ]),
+                _vm._v(" Edit ")
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "clearfix" })
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 if (false) {
