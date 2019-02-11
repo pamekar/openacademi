@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Instructor\StoreTestsRequest;
 use App\Http\Requests\Instructor\UpdateTestsRequest;
 
-class TestsController extends Controller
+class QuizesController extends Controller
 {
     /**
      * Display a listing of Test.
@@ -18,18 +18,19 @@ class TestsController extends Controller
      */
     public function index()
     {
+        $limit = 6;
+
         if (!Gate::allows('test_access')) {
             return abort(401);
         }
-
 
         if (request('show_deleted') == 1) {
             if (!Gate::allows('test_delete')) {
                 return abort(401);
             }
-            $tests = Test::onlyTrashed()->get();
+            $tests = Test::onlyTrashed()->paginate($limit);
         } else {
-            $tests = Test::all();
+            $tests = Test::paginate($limit);
         }
 
         return response()->json($tests);

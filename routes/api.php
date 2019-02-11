@@ -92,18 +92,18 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
                 'uses' => 'QuestionsOptionsController@perma_del',
                 'as'   => 'questions_options.perma_del'
             ]);
-            Route::resource('tests', 'TestsController');
-            Route::post('tests_mass_destroy', [
-                'uses' => 'TestsController@massDestroy',
-                'as'   => 'tests.mass_destroy'
+            Route::resource('quizes', 'QuizesController');
+            Route::post('quizes_mass_destroy', [
+                'uses' => 'QuizesController@massDestroy',
+                'as'   => 'quizes.mass_destroy'
             ]);
-            Route::post('tests_restore/{id}', [
-                'uses' => 'TestsController@restore',
-                'as'   => 'tests.restore'
+            Route::post('quizes_restore/{id}', [
+                'uses' => 'QuizesController@restore',
+                'as'   => 'quizes.restore'
             ]);
-            Route::delete('tests_perma_del/{id}', [
-                'uses' => 'TestsController@perma_del',
-                'as'   => 'tests.perma_del'
+            Route::delete('quizes_perma_del/{id}', [
+                'uses' => 'QuizesController@perma_del',
+                'as'   => 'quizes.perma_del'
             ]);
             Route::post('/spatie/media/upload',
                 'SpatieMediaController@create')

@@ -1,5 +1,15 @@
 <template>
     <div>
+        <vue-headful
+                :title="pageTitle + ' - OpenAcademi'"
+                :description="'all courses created by user'"
+        ></vue-headful>
+        <breadcrumb-component
+                :breadcrumbs="breadcrumbs"
+                :title="pageTitle"
+                :button="{title:'Add Quiz',link:'add-quiz',class:'btn btn-success'}"
+        ></breadcrumb-component>
+
         <div class="card-columns">
 
             <div class="card card-sm">
@@ -60,8 +70,69 @@
             </div>
 
         </div>
+
+        <!-- Pagination -->
+        <paginate
+                :page-count="pageCount"
+                :click-handler="getCourses"
+                :prev-text="'Prev'"
+                :next-text="'Next'"
+                container-class="pagination justify-content-center pagination-sm"
+                active-class="page-item active"
+                disabled-class="page-item disabled"
+                page-class="page-item"
+                next-class="page-item"
+                prev-class="page-item"
+                page-link-class="page-link"
+                next-link-class="page-link"
+                prev-link-class="page-link"
+        >
+        </paginate>
     </div>
 </template>
 <script>
-    export default {}
+    import {mapState, mapActions} from 'vuex';
+
+    import Paginate from 'vuejs-paginate'
+
+    export default {
+        data() {
+            return {
+                breadcrumbs: [
+                    {
+                        title: "Dashboard", link: 'dashboard'
+                    },
+                    {
+                        title: "Quizes", link: 'show-quizes'
+                    },
+                    {
+                        title: ""
+                    }
+                ],
+                pageTitle:   'My quizes'
+            }
+        },
+        mounted() {
+            this.$store.dispatch('quizes/fetch_all');
+        },
+        methods:    {
+            getQuizes(page = 1) {
+                this.$store.dispatch('quizes/fetch_all', page);
+            },
+        },
+        components: {
+            'paginate':          Paginate
+        },
+        computed:   {
+            ...mapState(
+                {
+                    quizes:    state => state.quizes.quizes,
+                    categories: state => state.quizes.categories,
+                    pageCount:  state => state.quizes.pageCount,
+                    pageFrom:   state => state.quizes.pageFrom,
+                    pageTo:     state => state.quizes.pageTo,
+                    pageTotal:  state => state.quizes.pageTotal,
+                })
+        }
+    }
 </script>

@@ -4,6 +4,8 @@ import router from '../../routes'
 const endpoint = '/api/instructor';
 
 const state = {
+    quiz:                 [],
+    quizes:               [],
     lesson:               [],
     course:               [],
     courses:              [],
@@ -29,10 +31,10 @@ const state = {
 
 // actions
 const actions = {
-    delete_lessons({},id,course){
-        axios.delete(`${endpoint}/lessons/${id}`)
+    delete_quizes({}, id, course) {
+        axios.delete(`${endpoint}/quizes/${id}`)
             .then(({data}) => {
-    
+                
                 jQuery.notify({
                     // options
                     message: data.message,
@@ -41,56 +43,56 @@ const actions = {
                     type: data.type,
                 });
             });
-        router.push({name: 'view-course',params:{id:course}});
+        router.push({name: 'view-course', params: {id: course}});
     },
     fetch({commit, dispatch}, id) {
-        axios.get(`${endpoint}/lessons/${id}`)
-            .then(response => commit('SET_LESSON', response.data)).catch();
+        axios.get(`${endpoint}/quizes/${id}`)
+            .then(response => commit('SET_QUIZ', response.data)).catch();
     },
     fetch_edit({commit, dispatch}, id) {
-        axios.get(`${endpoint}/lessons/${id}/edit`)
-            .then(response => commit('SET_LESSON_EDIT', response.data)).catch();
+        axios.get(`${endpoint}/quizes/${id}/edit`)
+            .then(response => commit('SET_QUIZ_EDIT', response.data)).catch();
     },
     fetch_empty({commit}) {
         commit('SET_EMPTY', []);
     },
     fetch_all({commit, dispatch}, page = 1) {
-        // drg >> this action fetches all the lessons (paginated)
-        axios.get(`${endpoint}/lessons?page=${page}`)
-            .then(response => commit('SET_LESSONS', response.data)).catch();
+        // drg >> this action fetches all the quizes (paginated)
+        axios.get(`${endpoint}/quizes?page=${page}`)
+            .then(response => commit('SET_QUIZES', response.data)).catch();
         dispatch('fetch_categories');
     },
     fetch_courses({commit}) {
         // drg >> this action fetches all the courses as a list
-        axios.get(`${endpoint}/lessons/create`)
+        axios.get(`${endpoint}/quizes/create`)
             .then(response => commit('SET_COURSES', response.data)).catch();
     },
     fetch_list({commit}) {
-        // drg >> this action fetches all the lessons as a list
-        axios.get(`${endpoint}/lessons`)
+        // drg >> this action fetches all the quizes as a list
+        axios.get(`${endpoint}/quizes`)
             .then(response => commit('SET_LIST', response.data)).catch();
     },
-    add({}, lesson) {
+    add({}, quiz) {
         
         let form_data = new FormData();
-        let lessonData = {
+        let quizData = {
             // drg >> slug is not added to the list of objects, because it's auto generated
-            course_id:            lesson.course_id,
-            title:                lesson.title,
-            short_text:           lesson.short_text,
-            full_text:            lesson.full_text,
-            free_lesson:          lesson.free_lesson,
-            duration:             lesson.duration,
-            published:            lesson.published,
-            lesson_image:         lesson.lesson_image,
-            lesson_image_preview: lesson.lesson_image_preview,
+            course_id:          quiz.course_id,
+            title:              quiz.title,
+            short_text:         quiz.short_text,
+            full_text:          quiz.full_text,
+            free_quiz:          quiz.free_quiz,
+            duration:           quiz.duration,
+            published:          quiz.published,
+            quiz_image:         quiz.quiz_image,
+            quiz_image_preview: quiz.quiz_image_preview,
         };
         
-        for (let key in lessonData) {
-            form_data.append(key, lessonData[key]);
+        for (let key in quizData) {
+            form_data.append(key, quizData[key]);
         }
         
-        axios.post(`${endpoint}/lessons`, form_data)
+        axios.post(`${endpoint}/quizes`, form_data)
             .then(({data}) => {
                 
                 jQuery.notify({
@@ -103,28 +105,28 @@ const actions = {
                 router.push({name: 'edit-course', params: {id: data.course_id}});
             });
     },
-    edit({dispatch}, lesson) {
+    edit({dispatch}, quiz) {
         let form_data = new FormData();
-        let lessonData = {
+        let quizData = {
             // drg >> slug is not added to the list of objects, because it's auto generated
-            course_id:            lesson.course_id,
-            title:                lesson.title,
-            short_text:           lesson.short_text,
-            full_text:            lesson.full_text,
-            free_lesson:          lesson.free_lesson,
-            duration:             lesson.duration,
-            published:            lesson.published,
-            lesson_image:         lesson.lesson_image,
-            lesson_image_preview: lesson.lesson_image_preview,
-            _method:              'PUT'
+            course_id:          quiz.course_id,
+            title:              quiz.title,
+            short_text:         quiz.short_text,
+            full_text:          quiz.full_text,
+            free_quiz:          quiz.free_quiz,
+            duration:           quiz.duration,
+            published:          quiz.published,
+            quiz_image:         quiz.quiz_image,
+            quiz_image_preview: quiz.quiz_image_preview,
+            _method:            'PUT'
         };
         
-        for (let key in lessonData) {
-            form_data.append(key, lessonData[key]);
+        for (let key in quizData) {
+            form_data.append(key, quizData[key]);
         }
         ;
         
-        axios.post(`${endpoint}/lessons/${lesson.id}`, form_data)
+        axios.post(`${endpoint}/quizes/${quiz.id}`, form_data)
             .then(({data}) => {
                 jQuery.notify({
                     // options
@@ -133,7 +135,7 @@ const actions = {
                     // settings
                     type: data.type,
                 });
-                dispatch('fetch', lesson.id)
+                dispatch('fetch', quiz.id)
             });
     }
     
@@ -141,19 +143,19 @@ const actions = {
 
 // mutations
 const mutations = {
-    SET_LESSON(state, lesson) {
-        console.log(lesson);
-        state.lesson = lesson.lesson;
-        state.course = lesson.course;
-        state.tests = lesson.tests;
-        state.pageTitle = lesson.lesson.title;
+    SET_QUIZ(state, quiz) {
+        console.log(quiz);
+        state.quiz = quiz.quiz;
+        state.course = quiz.course;
+        state.quizes = quiz.quizes;
+        state.pageTitle = quiz.quiz.title;
     },
-    SET_LESSON_EDIT(state, lesson) {
-        state.lesson = lesson.lesson;
-        state.courses = lesson.courses;
-        state.pageTitle = lesson.lesson.title;
+    SET_QUIZ_EDIT(state, quiz) {
+        state.quiz = quiz.quiz;
+        state.courses = quiz.courses;
+        state.pageTitle = quiz.quiz.title;
         // drg >> set timepicker
-        let duration = lesson.lesson.duration;
+        let duration = quiz.quiz.duration;
         state.timePicker.HH = Math.floor(duration / 3600);
         state.timePicker.mm = Math.floor((duration % 3600) / 60);
         state.timePicker.ss = Math.floor(duration % 60);
@@ -162,17 +164,17 @@ const mutations = {
     SET_CATEGORIES(state, categories) {
         state.categories = categories;
     },
-    SET_LESSONS(state, lessons) {
-        state.lessons = lessons.data;
-        state.pageCount = lessons.last_page;
-        state.pageFrom = lessons.from;
-        state.pagePer = lessons.per_page;
-        state.pageTo = lessons.to;
-        state.pageTotal = lessons.total;
+    SET_QUIZES(state, quizes) {
+        state.quizes = quizes.data;
+        state.pageCount = quizes.last_page;
+        state.pageFrom = quizes.from;
+        state.pagePer = quizes.per_page;
+        state.pageTo = quizes.to;
+        state.pageTotal = quizes.total;
     },
-    SET_EMPTY(state, lessons) {
-        state.lesson = [];
-        state.lessons = [];
+    SET_EMPTY(state, quizes) {
+        state.quiz = [];
+        state.quizes = [];
         state.categories = [];
         state.courses = [];
         state.pageCount = 0;
