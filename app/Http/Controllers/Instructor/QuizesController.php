@@ -6,8 +6,8 @@ use App\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Instructor\StoreTestsRequest;
-use App\Http\Requests\Instructor\UpdateTestsRequest;
+use App\Http\Requests\Instructor\StoreQuizesRequest;
+use App\Http\Requests\Instructor\UpdateQuizesRequest;
 
 class QuizesController extends Controller
 {
@@ -49,8 +49,8 @@ class QuizesController extends Controller
         $courses = \App\Course::ofTeacher()->get();
         $courses_ids = $courses->pluck('id');
         $courses = $courses->pluck('title', 'id')->prepend('Please select', '');
-        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)->get()
-            ->pluck('title', 'id')->prepend('Please select', '');
+        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)->get(['title','id','course_id'])
+     ;
 
         return response()->json(['courses' => $courses, 'lessons' => $lessons]);
 
@@ -59,11 +59,11 @@ class QuizesController extends Controller
     /**
      * Store a newly created Test in storage.
      *
-     * @param  \App\Http\Requests\StoreTestsRequest $request
+     * @param  \App\Http\Requests\StoreQuizesRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTestsRequest $request)
+    public function store(StoreQuizesRequest $request)
     {
         if (!Gate::allows('test_create')) {
             return abort(401);
@@ -108,12 +108,12 @@ class QuizesController extends Controller
     /**
      * Update Test in storage.
      *
-     * @param  \App\Http\Requests\UpdateTestsRequest $request
+     * @param  \App\Http\Requests\UpdateQuizesRequest $request
      * @param  int                                   $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTestsRequest $request, $id)
+    public function update(UpdateQuizesRequest $request, $id)
     {
         if (!Gate::allows('test_edit')) {
             return abort(401);

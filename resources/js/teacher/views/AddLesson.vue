@@ -167,7 +167,7 @@
                     title:                '',
                     course_id:            null,
                     short_text:           '',
-                    full_text:            "<h3>Course content</h3><p>Write Content ...</p><h3>Sample List</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul>",
+                    full_text:            "<h3>Lesson content</h3><p>Write Content ...</p><h3>Sample List</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul>",
                     free_lesson:          false,
                     published:            false,
                     duration:             0,
@@ -202,7 +202,6 @@
                 })
         },
         methods:    {
-
             addLesson: function () {
                 this.$store.dispatch('lessons/add', this.lesson);
             },
@@ -222,6 +221,7 @@
                 reader.readAsDataURL(file);
             },
             getArray(obj) {
+                // drg >> convert JSON object into array
                 let arr = Object.keys(obj).map(function (key) {
                     return [Number(key), obj[key]];
                 });

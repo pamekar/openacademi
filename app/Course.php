@@ -123,6 +123,10 @@ class Course extends Model
         return $value;
     }
 
+    public function getTitleAttribute($title)
+    {
+        return title_case($title);
+    }
 
     public function getTotalLessonsAttribute()
     {

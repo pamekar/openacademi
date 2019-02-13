@@ -5,54 +5,61 @@
                 <h4 class="card-title">Basic</h4>
             </div>
             <div class="card-body">
-                <form action="#">
+                <form action="javascript:void(0)" @submit="addQuiz">
                     <div class="form-group row">
                         <label for="quiz_title" class="col-sm-3 col-form-label form-label">Quiz Title:</label>
                         <div class="col-sm-9">
-                            <input id="quiz_title" type="text" class="form-control" placeholder="Title" value="Vue.js Introduction">
+                            <input id="quiz_title" type="text" class="form-control" placeholder="Title" v-model="quiz.title">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="course_title" class="col-sm-3 col-form-label form-label">Course:</label>
                         <div class="col-sm-9 col-md-4">
-                            <select id="course_title" class="custom-select form-control">
-                                <option value="#">HTML</option>
-                                <option value="#">Angular JS</option>
-                                <option value="#" selected="">Vue.js</option>
-                                <option value="#">CSS / LESS</option>
-                                <option value="#">Design / Concept</option>
+                            <select id="course_title" class="custom-select form-control" v-model="quiz.course_id">
+                                <option :value="null" disabled>Attach to a course</option>
+                                <option :value="course[0]" v-for="course in getArray(courses)">{{course[1]}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lesson_title" class="col-sm-3 col-form-label form-label">Lesson:</label>
+                        <div class="col-sm-9 col-md-4">
+                            <select id="lesson_title" class="custom-select form-control" v-model="quiz.lesson_id">
+                                <option :value="null" disabled>Choose to a lesson</option>
+                                <option :value="lesson.id" v-for="lesson in lessons" v-if="lesson.course_id == quiz.course_id">{{lesson.title}}</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="quiz_image" class="col-sm-3 col-form-label form-label">Quiz Image:</label>
-                        <div class="col-sm-9 col-md-4">
-                            <p><img src="assets/images/vuejs.png" alt="" width="150" class="rounded"></p>
-                            <div class="custom-file">
-                                <input type="file" id="quiz_image" class="custom-file-input">
-                                <label for="quiz_image" class="custom-file-label">Choose file</label>
-                            </div>
+                        <label class="col-sm-3 col-form-label form-label">Description:</label>
+                        <div class="col-sm-9 col-md-9">
+                            <ckeditor id="quiz_description" :editor="editor" v-model="quiz.description"></ckeditor>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cmn-toggle" class="col-sm-3 col-form-label form-label">Timeframe</label>
+                        <label for="cmn-toggle" class="col-sm-3 col-form-label form-label">Has Duration</label>
                         <div class="col-sm-9">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox-toggle">
-                                    <input id="cmn-toggle" type="checkbox" aria-checked="false" class="custom-control-input" role="switch">
-                                    <label class="custom-control-label" for="cmn-toggle"><span class="sr-only">Timeframe</span></label>
+                                    <input id="cmn-toggle" type="checkbox" aria-checked="false" class="custom-control-input" role="switch" v-model="hasDuration">
+                                    <label class="custom-control-label" for="cmn-toggle"><span class="sr-only">Duration</span></label>
                                 </div>
                             </div>
-                            <div class="form-inline">
-                                <div class="form-group mr-2">
-                                    <input type="number" class="form-control text-center" value="4" style="width:50px;">
+                            <div class="custom-control" v-if="hasDuration">
+                                <label for="cmn-toggle" class="col-sm-3 col-form-label form-label">Set Duration</label>
+                                <div class="custom-control">
+                                    <time-picker id="duration" v-model="timePicker" format="HH:mm:ss" @change="timePickerChanged"></time-picker>
                                 </div>
-                                <div class="form-group">
-                                    <select class="custom-select">
-                                        <option value="hour" selected="">Hours</option>
-                                        <option value="minutes">Minutes</option>
-                                    </select>
+                            </div>
+                        </div>
+                    </div><div class="form-group row">
+                        <label for="cmn-toggle" class="col-sm-3 col-form-label form-label">Published</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox-toggle">
+                                    <input type="checkbox" id="purchased" class="custom-control-input" v-model="quiz.published">
+                                    <label class="custom-control-label" for="purchased">Yes</label>
                                 </div>
                             </div>
                         </div>
@@ -65,110 +72,77 @@
                 </form>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Questions</h4>
-            </div>
-            <div class="card-header">
-                <a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-outline-secondary">Add Question <i class="material-icons">add</i></a>
-            </div>
-            <div class="nestable" id="nestable">
-                <ul class="list-group list-group-fit nestable-list-plain mb-0">
-                    <li class="list-group-item nestable-item">
-                        <div class="media align-items-center">
-                            <div class="media-left">
-                                <a href="#" class="btn btn-default nestable-handle"><i class="material-icons">menu</i></a>
-                            </div>
-                            <div class="media-body">
-                                Installation
-                            </div>
-                            <div class="media-right text-right">
-                                <div style="width:100px">
-                                    <a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-primary btn-sm"><i class="material-icons">edit</i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item nestable-item">
-                        <div class="media align-items-center">
-                            <div class="media-left">
-                                <a href="#" class="btn btn-default nestable-handle"><i class="material-icons">menu</i></a>
-                            </div>
-                            <div class="media-body">
-                                The MVC architectural pattern
-                            </div>
-                            <div class="media-right text-right">
-                                <div style="width:100px">
-                                    <a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-primary btn-sm"><i class="material-icons">edit</i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item nestable-item">
-                        <div class="media align-items-center">
-                            <div class="media-left">
-                                <a href="#" class="btn btn-default nestable-handle"><i class="material-icons">menu</i></a>
-                            </div>
-                            <div class="media-body">
-                                Database Models
-                            </div>
-                            <div class="media-right text-right">
-                                <div style="width:100px">
-                                    <a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-primary btn-sm"><i class="material-icons">edit</i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item nestable-item" data-id="4">
-                        <div class="media align-items-center">
-                            <div class="media-left">
-                                <a href="#" class="btn btn-default nestable-handle"><i class="material-icons">menu</i></a>
-                            </div>
-                            <div class="media-body">
-                                Database Access
-                            </div>
-                            <div class="media-right text-right">
-                                <div style="width:100px">
-                                    <a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-primary btn-sm"><i class="material-icons">edit</i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item nestable-item" data-id="5">
-                        <div class="media align-items-center">
-                            <div class="media-left">
-                                <a href="#" class="btn btn-default nestable-handle"><i class="material-icons">menu</i></a>
-                            </div>
-                            <div class="media-body">
-                                Eloquent Basics
-                            </div>
-                            <div class="media-right text-right">
-                                <div style="width:100px">
-                                    <a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-primary btn-sm"><i class="material-icons">edit</i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item nestable-item" data-id="6">
-                        <div class="media align-items-center">
-                            <div class="media-left">
-                                <a href="#" class="btn btn-default nestable-handle"><i class="material-icons">menu</i></a>
-                            </div>
-                            <div class="media-body">
-                                Take Quiz
-                            </div>
-                            <div class="media-right text-right">
-                                <div style="width:100px">
-                                    <a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-primary btn-sm"><i class="material-icons">edit</i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </div>
 </template>
 <script>
-    export default {}
+    import {mapState, mapActions} from 'vuex';
+    import CKEditor from '@ckeditor/ckeditor5-vue';
+    import InlineEditor from '@ckeditor/ckeditor5-build-inline';
+    import Timepicker from 'vue2-timepicker'
+    
+    export default {
+        data() {
+            return {
+                hasDuration: false,
+                breadcrumbs: [
+                    {
+                        title: "Dashboard", link: 'dashboard'
+                    },
+                    {
+                        title: "Quizes", link: 'show-quizes'
+                    },
+                    {
+                        title: ""
+                    }
+                ],
+                pageTitle:   'Add New Lesson',
+                editor:      InlineEditor,
+                quiz:        {
+                    title:       '',
+                    course_id:   null,
+                    lesson_id:   null,
+                    description: "<h3>Course content</h3><p>Write Content ...</p><h3>Sample List</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul>",
+                    published:   false,
+                    duration:    0,
+                },
+                timePicker:  {
+                    HH: "",
+                    mm: "",
+                    ss: ""
+                }
+            }
+        },
+        created() {
+            this.$store.dispatch('quizes/fetch_add');
+        },
+        components: {
+            'ckeditor':    CKEditor.component,
+            'time-picker': Timepicker,
+        },
+        computed:   {
+            ...mapState(
+                {
+                    courses: state => state.quizes.courses,
+                    lessons: state => state.quizes.lessons
+                })
+        },
+        methods:    {
+            addQuiz: function () {
+                this.$store.dispatch('quizes/add', this.quiz);
+            },
+            getArray(obj) {
+                // drg >> convert JSON object into array
+                let arr = Object.keys(obj).map(function (key) {
+                    return [Number(key), obj[key]];
+                });
+                
+                return arr;
+            },
+            timePickerChanged(e) {
+                let t = e.data;
+                let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
+                this.quiz.duration = time;
+            },
+        }
+    }
 </script>

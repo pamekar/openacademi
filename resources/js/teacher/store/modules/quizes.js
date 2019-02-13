@@ -7,9 +7,8 @@ const state = {
     quiz:                 [],
     quizes:               [],
     lesson:               [],
-    course:               [],
+    lessons:              [],
     courses:              [],
-    categories:           [],
     pageCount:            0,
     pageFrom:             0,
     pagePer:              0,
@@ -49,6 +48,11 @@ const actions = {
         axios.get(`${endpoint}/quizes/${id}`)
             .then(response => commit('SET_QUIZ', response.data)).catch();
     },
+    fetch_all({commit, dispatch}, page = 1) {
+        // drg >> this action fetches all the lessons (paginated)
+        axios.get(`${endpoint}/quizes?page=${page}`)
+            .then(response => commit('SET_QUIZES', response.data)).catch();
+    },
     fetch_edit({commit, dispatch}, id) {
         axios.get(`${endpoint}/quizes/${id}/edit`)
             .then(response => commit('SET_QUIZ_EDIT', response.data)).catch();
@@ -56,16 +60,10 @@ const actions = {
     fetch_empty({commit}) {
         commit('SET_EMPTY', []);
     },
-    fetch_all({commit, dispatch}, page = 1) {
-        // drg >> this action fetches all the quizes (paginated)
-        axios.get(`${endpoint}/quizes?page=${page}`)
-            .then(response => commit('SET_QUIZES', response.data)).catch();
-        dispatch('fetch_categories');
-    },
-    fetch_courses({commit}) {
+    fetch_add({commit}) {
         // drg >> this action fetches all the courses as a list
         axios.get(`${endpoint}/quizes/create`)
-            .then(response => commit('SET_COURSES', response.data)).catch();
+            .then(response => commit('SET_ADD', response.data)).catch();
     },
     fetch_list({commit}) {
         // drg >> this action fetches all the quizes as a list
@@ -77,15 +75,12 @@ const actions = {
         let form_data = new FormData();
         let quizData = {
             // drg >> slug is not added to the list of objects, because it's auto generated
-            course_id:          quiz.course_id,
-            title:              quiz.title,
-            short_text:         quiz.short_text,
-            full_text:          quiz.full_text,
-            free_quiz:          quiz.free_quiz,
-            duration:           quiz.duration,
-            published:          quiz.published,
-            quiz_image:         quiz.quiz_image,
-            quiz_image_preview: quiz.quiz_image_preview,
+            title:       quiz.title,
+            course_id:   quiz.course_id,
+            lesson_id:   quiz.lesson_id,
+            description: quiz.description,
+            published:   quiz.published,
+            duration:    quiz.duration
         };
         
         for (let key in quizData) {
@@ -102,7 +97,7 @@ const actions = {
                     // settings
                     type: data.type,
                 });
-                router.push({name: 'edit-course', params: {id: data.course_id}});
+                router.push({name: 'edit-lesson', params: {id: quiz.lesson_id}});
             });
     },
     edit({dispatch}, quiz) {
@@ -144,7 +139,6 @@ const actions = {
 // mutations
 const mutations = {
     SET_QUIZ(state, quiz) {
-        console.log(quiz);
         state.quiz = quiz.quiz;
         state.course = quiz.course;
         state.quizes = quiz.quizes;
@@ -181,8 +175,9 @@ const mutations = {
         state.pageTitle = '';
         state.purchased = '';
     },
-    SET_COURSES(state, courses) {
-        state.courses = courses;
+    SET_ADD(state, quiz) {
+        state.courses = quiz.courses;
+        state.lessons = quiz.lessons;
     }
 };
 

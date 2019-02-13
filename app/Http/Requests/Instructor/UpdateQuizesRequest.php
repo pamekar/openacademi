@@ -3,7 +3,7 @@ namespace App\Http\Requests\Instructor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTestsRequest extends FormRequest
+class UpdateQuizesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +23,7 @@ class StoreTestsRequest extends FormRequest
     public function rules()
     {
         return [
+            
             'questions.*' => 'exists:questions,id',
         ];
     }
