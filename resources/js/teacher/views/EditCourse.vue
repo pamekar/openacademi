@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <vue-headful
                 :title="pageTitle + ' - OpenAcademi'"
                 :description="course.summary"
@@ -8,7 +7,7 @@
         <breadcrumb-component
                 :breadcrumbs="breadcrumbs"
                 :title="pageTitle"
-                :button="{title:'Save',method:editCourse,class:'btn btn-success'}"
+                :button="{title:'Save Course',method:editCourse,class:'btn btn-success'}"
         ></breadcrumb-component>
 
         <div class="row">
@@ -182,7 +181,6 @@
         data() {
             return {
                 editor:               InlineEditor,
-                editorConfig:         {},
                 breadcrumbs:          [
                     {
                         title: "Dashboard", link: 'dashboard'

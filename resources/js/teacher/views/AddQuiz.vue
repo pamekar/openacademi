@@ -15,7 +15,7 @@
                     <div class="form-group row">
                         <label for="course_title" class="col-sm-3 col-form-label form-label">Course:</label>
                         <div class="col-sm-9 col-md-4">
-                            <select id="course_title" class="custom-select form-control" v-model="quiz.course_id">
+                            <select id="course_title" class="custom-select form-control" v-model="quiz.course_id" @change="quiz.lesson_id=null">
                                 <option :value="null" disabled>Attach to a course</option>
                                 <option :value="course[0]" v-for="course in getArray(courses)">{{course[1]}}</option>
                             </select>
@@ -38,6 +38,12 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-3 col-form-label form-label">About quiz:</label>
+                        <div class="col-sm-9 col-md-9">
+                            <textarea class="form-control" id="quiz_about_quiz" v-model="quiz.about_quiz" placeholder="What is this test for?"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="cmn-toggle" class="col-sm-3 col-form-label form-label">Has Duration</label>
                         <div class="col-sm-9">
                             <div class="form-group">
@@ -53,7 +59,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div><div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="cmn-toggle" class="col-sm-3 col-form-label form-label">Published</label>
                         <div class="col-sm-9">
                             <div class="form-group">
@@ -66,7 +73,7 @@
                     </div>
                     <div class="form-group row mb-0">
                         <div class="col-sm-9 offset-sm-3">
-                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="submit" class="btn btn-success" >Save</button>
                         </div>
                     </div>
                 </form>
@@ -101,6 +108,7 @@
                     title:       '',
                     course_id:   null,
                     lesson_id:   null,
+                    about_quiz:  null,
                     description: "<h3>Course content</h3><p>Write Content ...</p><h3>Sample List</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul>",
                     published:   false,
                     duration:    0,

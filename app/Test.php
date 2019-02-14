@@ -25,7 +25,10 @@ class Test extends Model
             'description',
             'published',
             'course_id',
-            'lesson_id'
+            'lesson_id',
+            'about_quiz',
+            'duration',
+            'user_id'
         ];
 
     protected $appends = ['lesson_title', 'completed_count'];

@@ -122,3 +122,11 @@ Route::post('upload', function () {
         "url"     => "http://test.dev:8000/assets/images/people/50/guy-6.jpg"
     ], 200);
 });
+
+Route::get('kjsdsjdsksdncxmkjdsiwejkmwem/add_about_quiz', function () {
+    $faker = \Faker\Factory::create();
+    $tests = \App\Test::all();
+    foreach ($tests as $test){
+        \Illuminate\Support\Facades\DB::table('tests')->where('id',$test->id)->update(['about_quiz'=>$faker->realText(150)]);
+    }
+});

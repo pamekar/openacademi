@@ -53,17 +53,19 @@ const actions = {
         axios.get(`${endpoint}/quizes?page=${page}`)
             .then(response => commit('SET_QUIZES', response.data)).catch();
     },
+    fetch_add({commit}) {
+        // drg >> this action fetches all the quizes as a list
+        axios.get(`${endpoint}/quizes/create`)
+            .then(response => commit('SET_ADD', response.data)).catch();
+    },
+    // drg >> fetch data for quiz edit
     fetch_edit({commit, dispatch}, id) {
         axios.get(`${endpoint}/quizes/${id}/edit`)
             .then(response => commit('SET_QUIZ_EDIT', response.data)).catch();
     },
+    // drg >> empty all quiz data
     fetch_empty({commit}) {
         commit('SET_EMPTY', []);
-    },
-    fetch_add({commit}) {
-        // drg >> this action fetches all the courses as a list
-        axios.get(`${endpoint}/quizes/create`)
-            .then(response => commit('SET_ADD', response.data)).catch();
     },
     fetch_list({commit}) {
         // drg >> this action fetches all the quizes as a list
@@ -79,6 +81,7 @@ const actions = {
             course_id:   quiz.course_id,
             lesson_id:   quiz.lesson_id,
             description: quiz.description,
+            about_quiz:  quiz.about_quiz,
             published:   quiz.published,
             duration:    quiz.duration
         };
@@ -104,22 +107,19 @@ const actions = {
         let form_data = new FormData();
         let quizData = {
             // drg >> slug is not added to the list of objects, because it's auto generated
-            course_id:          quiz.course_id,
-            title:              quiz.title,
-            short_text:         quiz.short_text,
-            full_text:          quiz.full_text,
-            free_quiz:          quiz.free_quiz,
-            duration:           quiz.duration,
-            published:          quiz.published,
-            quiz_image:         quiz.quiz_image,
-            quiz_image_preview: quiz.quiz_image_preview,
-            _method:            'PUT'
+            title:       quiz.title,
+            course_id:   quiz.course_id,
+            lesson_id:   quiz.lesson_id,
+            description: quiz.description,
+            about_quiz:  quiz.about_quiz,
+            published:   quiz.published,
+            duration:    quiz.duration,
+            _method:     'PUT'
         };
         
         for (let key in quizData) {
             form_data.append(key, quizData[key]);
-        }
-        ;
+        };
         
         axios.post(`${endpoint}/quizes/${quiz.id}`, form_data)
             .then(({data}) => {
@@ -144,16 +144,20 @@ const mutations = {
         state.quizes = quiz.quizes;
         state.pageTitle = quiz.quiz.title;
     },
-    SET_QUIZ_EDIT(state, quiz) {
-        state.quiz = quiz.quiz;
+    SET_ADD(state, quiz) {
         state.courses = quiz.courses;
-        state.pageTitle = quiz.quiz.title;
-        // drg >> set timepicker
-        let duration = quiz.quiz.duration;
+        state.lessons = quiz.lessons;
+    },
+    SET_QUIZ_EDIT(state, quiz) {
+        state.quiz = quiz.test;
+        state.courses = quiz.courses;
+        state.lessons = quiz.lessons;
+        state.pageTitle = quiz.test.title;
+        // drg >> set timepicker data
+        let duration = quiz.test.duration;
         state.timePicker.HH = Math.floor(duration / 3600);
         state.timePicker.mm = Math.floor((duration % 3600) / 60);
         state.timePicker.ss = Math.floor(duration % 60);
-        
     },
     SET_CATEGORIES(state, categories) {
         state.categories = categories;
@@ -175,10 +179,6 @@ const mutations = {
         state.pageTitle = '';
         state.purchased = '';
     },
-    SET_ADD(state, quiz) {
-        state.courses = quiz.courses;
-        state.lessons = quiz.lessons;
-    }
 };
 
 export default {

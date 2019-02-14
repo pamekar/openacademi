@@ -94,10 +94,9 @@ class QuizesController extends Controller
         $courses = \App\Course::ofTeacher()->get();
         $courses_ids = $courses->pluck('id');
         $courses = $courses->pluck('title', 'id')->prepend('Please select', '');
-        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)->get()
-            ->pluck('title', 'id')->prepend('Please select', '');
-
-        $test = Test::findOrFail($id);
+        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)->get(['title','id','course_id'])
+        ;
+        $test = Test::with('questions')->findOrFail($id);
         return response()->json([
             'test'    => $test,
             'courses' => $courses,

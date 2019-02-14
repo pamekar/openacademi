@@ -87,7 +87,7 @@ const routes = [
         component: AddQuiz
     },
     {
-        path:      '/quiz/:slug',
+        path:      '/quiz/:id',
         name:      'view-quiz',
         component: Quiz
     },
@@ -97,7 +97,12 @@ const routes = [
         component: Quizes
     },
     {
-        path:      '/question/:slug',
+        path:      '/quiz/:id/edit',
+        name:      'edit-quiz',
+        component: EditQuiz
+    },
+    {
+        path:      '/question/:id',
         name:      'view-question',
         component: Question
     },
@@ -143,14 +148,14 @@ const router = new VueRouter({
 // drg >> start progress bar before route request
 router.beforeResolve((to, from, next) => {
     if (to.name) {
-        NProgress.start()
+        NProgress.start();
     }
     next()
 });
 
 // drg >> end progress bar after route response
 router.afterEach((to, from) => {
-    NProgress.done()
+    NProgress.done();
 });
 
 export default router;
