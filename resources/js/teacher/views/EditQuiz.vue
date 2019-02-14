@@ -53,29 +53,27 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cmn-toggle" class="col-sm-3 col-form-label form-label">Has Duration</label>
+                        <label for="duration" class="col-sm-3 col-form-label form-label">Duration ({{timePicker.HH + " Hrs " + timePicker.mm + " Mins and " + timePicker.ss + " Secs"}})</label>
                         <div class="col-sm-9">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox-toggle">
-                                    <input id="cmn-toggle" type="checkbox" aria-checked="false" class="custom-control-input" role="switch" v-model="hasDuration">
-                                    <label class="custom-control-label" for="cmn-toggle"><span class="sr-only">Duration</span></label>
+                                    <time-picker id="duration" v-model="timePicker" format="HH:mm:ss"></time-picker>
                                 </div>
                             </div>
-                            <div class="custom-control" v-if="hasDuration">
-                                <label for="cmn-toggle" class="col-sm-3 col-form-label form-label">Set Duration</label>
+                            <div class="custom-control">
                                 <div class="custom-control">
-                                    <time-picker id="duration" v-model="timePicker" format="HH:mm:ss" @change="timePickerChanged"></time-picker>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cmn-toggle" class="col-sm-3 col-form-label form-label">Published</label>
+                        <label for="published" class="col-sm-3 col-form-label form-label">Published</label>
                         <div class="col-sm-9">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox-toggle">
-                                    <input type="checkbox" id="purchased" class="custom-control-input" v-model="quiz.published">
-                                    <label class="custom-control-label" for="purchased">Yes</label>
+                                    <input type="checkbox" id="published" class="custom-control-input" v-model="quiz.published">
+                                    <label class="custom-control-label" for="published">Yes</label>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +94,7 @@
                 <h4 class="card-title">Questions</h4>
             </div>
             <div class="card-header">
-                <a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-outline-secondary">Add Question <i class="material-icons">add</i></a>
+                <a href="javascript:void(0)" data-toggle="modal" data-target="#editQuiz" class="btn btn-outline-secondary" v-on:click="setQuestion">Add Question <i class="material-icons">add</i></a>
             </div>
             <div class="nestable" id="nestable">
                 <ul class="list-group list-group-fit nestable-list-plain mb-0">
@@ -105,12 +103,10 @@
                             <div class="media-left">
                                 <a href="#" class="btn btn-default nestable-handle"><i class="material-icons">menu</i></a>
                             </div>
-                            <div class="media-body">
-                                {{question.question}}
-                            </div>
+                            <div class="media-body" v-html="question.question"></div>
                             <div class="media-right text-right">
                                 <div style="width:100px">
-                                    <a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-primary btn-sm"><i class="material-icons">edit</i></a>
+                                    <a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-primary btn-sm" v-on:click="setQuestion(question.id)"><i class="material-icons">edit</i></a>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +121,7 @@
     import CKEditor from '@ckeditor/ckeditor5-vue';
     import InlineEditor from '@ckeditor/ckeditor5-build-inline';
     import Timepicker from 'vue2-timepicker'
-    
+
     export default {
         data() {
             return {
@@ -154,11 +150,23 @@
         computed:   {
             ...mapState(
                 {
-                    quiz:       state => state.quizes.quiz,
-                    courses:    state => state.quizes.courses,
-                    lessons:    state => state.quizes.lessons,
+                    quiz:      state => state.quizes.quiz,
+                    courses:   state => state.quizes.courses,
+                    lessons:   state => state.quizes.lessons,
                     pageTitle: state => state.quizes.pageTitle,
-                })
+                }),
+            timePicker: {
+                get: function () {
+                    return this.$store.state.quizes.timePicker
+                },
+                // setter
+                set: function (time) {
+                    this.$store.state.quizes.timePicker.HH = time.HH;
+                    this.$store.state.quizes.timePicker.mm = time.mm;
+                    this.$store.state.quizes.timePicker.ss = time.ss;
+                    this.timePickerChanged(time);
+                }
+            }
         },
         methods:    {
             editQuiz: function () {
@@ -172,11 +180,17 @@
                 
                 return arr;
             },
-            timePickerChanged(e) {
-                let t = e.data;
-                let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
-                this.quiz.duration = time;
+            setQuestion(question = null) {
+                question ?
+                    this.$store.dispatch('quizes/fetch_question', question)
+                    :
+                    this.$store.dispatch('quizes/fetch_question_empty');
             },
+            timePickerChanged(t) {
+                let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
+                console.log(time);
+                this.quiz.duration = time;
+            }
         }
     }
 </script>

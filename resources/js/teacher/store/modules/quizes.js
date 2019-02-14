@@ -4,11 +4,12 @@ import router from '../../routes'
 const endpoint = '/api/instructor';
 
 const state = {
-    quiz:                 [],
-    quizes:               [],
+    courses:              [],
     lesson:               [],
     lessons:              [],
-    courses:              [],
+    lesson_image_preview: '',
+    lesson_image:         '',
+    lesson_video:         '',
     pageCount:            0,
     pageFrom:             0,
     pagePer:              0,
@@ -16,9 +17,9 @@ const state = {
     pageTotal:            0,
     pageTitle:            '',
     purchased:            '',
-    lesson_image_preview: '',
-    lesson_image:         '',
-    lesson_video:         '',
+    question:             [],
+    quiz:                 [],
+    quizes:               [],
     media_title:          '',
     duration:             0,
     timePicker:           {
@@ -30,48 +31,6 @@ const state = {
 
 // actions
 const actions = {
-    delete_quizes({}, id, course) {
-        axios.delete(`${endpoint}/quizes/${id}`)
-            .then(({data}) => {
-                
-                jQuery.notify({
-                    // options
-                    message: data.message,
-                }, {
-                    // settings
-                    type: data.type,
-                });
-            });
-        router.push({name: 'view-course', params: {id: course}});
-    },
-    fetch({commit, dispatch}, id) {
-        axios.get(`${endpoint}/quizes/${id}`)
-            .then(response => commit('SET_QUIZ', response.data)).catch();
-    },
-    fetch_all({commit, dispatch}, page = 1) {
-        // drg >> this action fetches all the lessons (paginated)
-        axios.get(`${endpoint}/quizes?page=${page}`)
-            .then(response => commit('SET_QUIZES', response.data)).catch();
-    },
-    fetch_add({commit}) {
-        // drg >> this action fetches all the quizes as a list
-        axios.get(`${endpoint}/quizes/create`)
-            .then(response => commit('SET_ADD', response.data)).catch();
-    },
-    // drg >> fetch data for quiz edit
-    fetch_edit({commit, dispatch}, id) {
-        axios.get(`${endpoint}/quizes/${id}/edit`)
-            .then(response => commit('SET_QUIZ_EDIT', response.data)).catch();
-    },
-    // drg >> empty all quiz data
-    fetch_empty({commit}) {
-        commit('SET_EMPTY', []);
-    },
-    fetch_list({commit}) {
-        // drg >> this action fetches all the quizes as a list
-        axios.get(`${endpoint}/quizes`)
-            .then(response => commit('SET_LIST', response.data)).catch();
-    },
     add({}, quiz) {
         
         let form_data = new FormData();
@@ -103,6 +62,20 @@ const actions = {
                 router.push({name: 'edit-lesson', params: {id: quiz.lesson_id}});
             });
     },
+    delete_quizes({}, id, course) {
+        axios.delete(`${endpoint}/quizes/${id}`)
+            .then(({data}) => {
+                
+                jQuery.notify({
+                    // options
+                    message: data.message,
+                }, {
+                    // settings
+                    type: data.type,
+                });
+            });
+        router.push({name: 'view-course', params: {id: course}});
+    },
     edit({dispatch}, quiz) {
         let form_data = new FormData();
         let quizData = {
@@ -119,7 +92,8 @@ const actions = {
         
         for (let key in quizData) {
             form_data.append(key, quizData[key]);
-        };
+        }
+        ;
         
         axios.post(`${endpoint}/quizes/${quiz.id}`, form_data)
             .then(({data}) => {
@@ -132,8 +106,39 @@ const actions = {
                 });
                 dispatch('fetch', quiz.id)
             });
-    }
-    
+    },
+    fetch({commit, dispatch}, id) {
+        axios.get(`${endpoint}/quizes/${id}`)
+            .then(response => commit('SET_QUIZ', response.data)).catch();
+    },
+    fetch_add({commit}) {
+        // drg >> this action fetches all the quizes as a list
+        axios.get(`${endpoint}/quizes/create`)
+            .then(response => commit('SET_ADD', response.data)).catch();
+    },
+    fetch_all({commit, dispatch}, page = 1) {
+        // drg >> this action fetches all the lessons (paginated)
+        axios.get(`${endpoint}/quizes?page=${page}`)
+            .then(response => commit('SET_QUIZES', response.data)).catch();
+    },
+    // drg >> fetch data for quiz edit
+    fetch_edit({commit, dispatch}, id) {
+        axios.get(`${endpoint}/quizes/${id}/edit`)
+            .then(response => commit('SET_QUIZ_EDIT', response.data)).catch();
+    },
+    fetch_list({commit}) {
+        // drg >> this action fetches all the quizes as a list
+        axios.get(`${endpoint}/quizes`)
+            .then(response => commit('SET_LIST', response.data)).catch();
+    },
+    // drg >> empty all quiz data
+    fetch_question({commit}) {
+        axios.get(`${endpoint}/quizes`)
+            .then(response => commit('SET_QUESTION', response.data)).catch();
+    },
+    fetch_question_empty({commit}) {
+        commit('SET_QUESTION_EMPTY', []);
+    },
 };
 
 // mutations
@@ -170,14 +175,8 @@ const mutations = {
         state.pageTo = quizes.to;
         state.pageTotal = quizes.total;
     },
-    SET_EMPTY(state, quizes) {
-        state.quiz = [];
-        state.quizes = [];
-        state.categories = [];
-        state.courses = [];
-        state.pageCount = 0;
-        state.pageTitle = '';
-        state.purchased = '';
+    SET_QUESTION_EMPTY(state, quizes) {
+        state.question = [];
     },
 };
 

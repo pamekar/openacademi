@@ -35,7 +35,6 @@
     </div>
 </div>
 @yield('content')
-@include('partials.instructors_modals')
 <form id="logout-form" action="{{ url('/logout') }}"
       method="POST" style="display: none;"
 >{{ csrf_field() }}</form>
@@ -59,7 +58,6 @@
 
     </script>
 @endif
-<script src="{{asset("$public/teacher/js/app.js")}}"></script>
 <!-- Perfect Scrollbar -->
 <script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
 
@@ -171,7 +169,7 @@
 <!-- List.js -->
 <script src="{{asset("$public/assets/vendor/list.min.js")}}"></script>
 <script src="{{asset("$public/assets/js/list.js")}}"></script>
-
+<script src="{{asset("$public/teacher/js/app.js")}}"></script>
 
 </body>
 

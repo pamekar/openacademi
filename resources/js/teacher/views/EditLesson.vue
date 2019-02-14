@@ -15,7 +15,7 @@
                     <div class="form-group row">
                         <label for="avatar" class="col-sm-3 col-form-label form-label">Preview Image</label>
                         <div class="col-sm-9">
-                            <div class="media align-items-center"  v-viewer="{movable: false}">
+                            <div class="media align-items-center" v-viewer="{movable: false}">
                                 <div class="media-left" v-if="lesson_image_preview">
                                     <img :src="lesson_image_preview" alt="" width="100" style="cursor: pointer;" class="rounded">
                                 </div>
@@ -253,12 +253,11 @@
                 this.lesson_video = URL.createObjectURL(files[0]);
                 source.parent()[0].load();
             },
-            mediaChanged(){
+            mediaChanged() {
 
             },
             timePickerChanged(t) {
-                let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
-                this.lesson.duration = time;
+                this.lesson.duration = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
             }
         }
     }

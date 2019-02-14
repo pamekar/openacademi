@@ -1,54 +1,55 @@
 <template>
+    <div>
+        <div class="mdk-header-layout js-mdk-header-layout">
 
-    <div class="mdk-header-layout js-mdk-header-layout">
-
-        <!-- Header -->
-
-
-        <!-- // END Header -->
-
-        <!-- Header Layout Content -->
-        <!-- // END Header Layout Content -->
+            <!-- Header -->
 
 
-        <div id="header" data-fixed class="mdk-header js-mdk-header mb-0">
-            <header-component></header-component>
-        </div>
+            <!-- // END Header -->
 
-        <div class="mdk-header-layout__content">
+            <!-- Header Layout Content -->
+            <!-- // END Header Layout Content -->
 
-            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
-                <div class="mdk-drawer-layout__content page" style="transform: translate3d(0px, 0px, 0px);">
 
-                    <div class="container-fluid page__container">
+            <div id="header" data-fixed class="mdk-header js-mdk-header mb-0">
+                <header-component></header-component>
+            </div>
 
-                        <transition :name="transitionName">
-                            <router-view></router-view>
-                        </transition>
-                        <div class="page">
-                            <div class="container page__container">
-                                <div class="footer">
-                                    Copyright &copy;  - <a
-                                        href="#"></a>
+            <div class="mdk-header-layout__content">
+
+                <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                    <div class="mdk-drawer-layout__content page" style="transform: translate3d(0px, 0px, 0px);">
+
+                        <div class="container-fluid page__container">
+
+                            <transition :name="transitionName">
+                                <router-view></router-view>
+                            </transition>
+                            <div class="page">
+                                <div class="container page__container">
+                                    <div class="footer">
+                                        Copyright &copy;  - <a
+                                            href="#"></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
-                    <sidebar-component :menu="sidebarItems"></sidebar-component>
+                    <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+                        <sidebar-component :menu="sidebarItems"></sidebar-component>
+                    </div>
                 </div>
             </div>
         </div>
+        <modals-component></modals-component>
     </div>
-
-
 </template>
 
 <script>
     import Sidebar from './components/SidebarComponent.vue'
     import Header from './components/HeaderComponent.vue'
-
+    import Modals from './components/ModalsComponent.vue'
+    
     export default {
         name:       'App',
         data() {
@@ -141,15 +142,13 @@
                                   ]
                     }
                 ]
-
+                
             }
         },
         created() {
-
+            
         },
-        methods:    {
-
-        },
+        methods:    {},
         watch:      {
             '$route'(to, from) {
                 const toDepth = to.path.split('/').length
@@ -160,6 +159,7 @@
         components: {
             'header-component':  Header,
             'sidebar-component': Sidebar,
+            'modals-component':  Modals,
         }
     }
 </script>
