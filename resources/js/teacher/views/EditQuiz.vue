@@ -94,7 +94,7 @@
                 <h4 class="card-title">Questions</h4>
             </div>
             <div class="card-header">
-                <a href="javascript:void(0)" data-toggle="modal" data-target="#editQuiz" class="btn btn-outline-secondary" v-on:click="setQuestion">Add Question <i class="material-icons">add</i></a>
+                <a href="javascript:void(0)" data-toggle="modal" data-target="#editQuiz" class="btn btn-outline-secondary" v-on:click="setQuestion(false)">Add Question <i class="material-icons">add</i></a>
             </div>
             <div class="nestable" id="nestable">
                 <ul class="list-group list-group-fit nestable-list-plain mb-0">
@@ -120,7 +120,7 @@
     import {mapState, mapActions} from 'vuex';
     import CKEditor from '@ckeditor/ckeditor5-vue';
     import InlineEditor from '@ckeditor/ckeditor5-build-inline';
-    import Timepicker from 'vue2-timepicker'
+    import Timepicker from 'vue2-timepicker';
 
     export default {
         data() {
@@ -154,6 +154,7 @@
                     courses:   state => state.quizes.courses,
                     lessons:   state => state.quizes.lessons,
                     pageTitle: state => state.quizes.pageTitle,
+                    question:  state => state.questions.question,
                 }),
             timePicker: {
                 get: function () {
@@ -166,9 +167,20 @@
                     this.$store.state.quizes.timePicker.ss = time.ss;
                     this.timePickerChanged(time);
                 }
-            }
+            },getObject(obj) {
+                // drg >> convert JSON object into array
+                let arr = Object.keys(obj).map(function (key) {
+                    return [{name: obj[key], 'value': Number(key)}];
+                });
+
+                console.log(arr);
+            },
         },
         methods:    {
+            addQuestion: function(){
+                this.$store.dispatch('questions/add', this.question);
+                getObject(this.question.tests);
+            },
             editQuiz: function () {
                 this.$store.dispatch('quizes/edit', this.quiz);
             },
@@ -180,15 +192,24 @@
                 
                 return arr;
             },
-            setQuestion(question = null) {
-                question ?
-                    this.$store.dispatch('quizes/fetch_question', question)
-                    :
-                    this.$store.dispatch('quizes/fetch_question_empty');
+            getObject(obj) {
+                // drg >> convert JSON object into array
+                let arr = Object.keys(obj).map(function (key) {
+                    return [{name: obj[key], 'value': Number(key)}];
+                });
+
+                console.log(arr);
+            },
+            setQuestion(question) {
+                if (question) {
+                    this.$store.dispatch('questions/fetch_edit', question);
+                }
+                else {
+                    this.$store.dispatch('questions/fetch_add');
+                }
             },
             timePickerChanged(t) {
                 let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
-                console.log(time);
                 this.quiz.duration = time;
             }
         }

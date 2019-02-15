@@ -3,6 +3,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class Question
@@ -38,5 +39,17 @@ class Question extends Model
         return $this->belongsToMany(Test::class, 'question_test');
     }
 
-    
+    public function getQuestionImageAttribute($value)
+    {
+        if (!empty($value)) {
+            return Storage::url($value);
+        }
+        return $value;
+    }
+
+    public function setLessonImageAttribute($image)
+    {
+        $this->attributes['lesson_image'] = str_replace('/storage/',
+            'public/', $image);
+    }
 }

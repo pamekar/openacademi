@@ -29,7 +29,7 @@
                                 <div class="container page__container">
                                     <div class="footer">
                                         Copyright &copy;  - <a
-                                            href="#"></a>
+                                            href="/home">OpenAcademi</a>
                                     </div>
                                 </div>
                             </div>

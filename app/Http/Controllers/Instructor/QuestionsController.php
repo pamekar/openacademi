@@ -49,8 +49,15 @@ class QuestionsController extends Controller
         if (!Gate::allows('question_create')) {
             return abort(401);
         }
-        $tests = \App\Test::get()->pluck('title', 'id');
-        return view('admin.questions.create', compact('tests'));
+        $tests = [];
+
+        foreach (\App\Test::get()->pluck('title', 'id') as $key => $value) {
+            array_push($tests, ['title' => $value, 'value' => $key]);
+        }
+
+        return response()->json([
+            'tests'          => $tests,
+        ]);
     }
 
     /**
@@ -96,10 +103,24 @@ class QuestionsController extends Controller
         if (!Gate::allows('question_edit')) {
             return abort(401);
         }
-        $question = Question::findOrFail($id);
-        $tests = \App\Test::get()->pluck('title', 'id');
+        $question = Question::with('options')->findOrFail($id);
+        $question_tests =[];
+        $tests =[];
 
-        return response()->json(['course' => $question, 'test' => $tests]);
+        foreach (\App\Test::get()->pluck('title', 'id') as $key => $value) {
+            array_push($tests, ['title' => $value, 'value' => $key]);
+        }
+        // drg >> get question tests
+        foreach ($question->tests->pluck('title', 'id') as $key => $value) {
+            array_push($question_tests, ['title' => $value, 'value' => $key]);
+        }
+
+
+        return response()->json([
+            'question'       => $question,
+            'tests'          => $tests,
+            'question_tests' => $question_tests
+        ]);
 
     }
 

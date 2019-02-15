@@ -175,9 +175,6 @@ const mutations = {
         state.pageTo = quizes.to;
         state.pageTotal = quizes.total;
     },
-    SET_QUESTION_EMPTY(state, quizes) {
-        state.question = [];
-    },
 };
 
 export default {
