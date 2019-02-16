@@ -9,7 +9,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#">
+                    <form action="javascript:void(0)" @submit="create_updateQuestion">
                         <div class="form-group row">
                             <label class="col-form-label form-label col-md-3">Question:</label>
                             <div class="col-md-9">
@@ -98,14 +98,14 @@
 <script>
     import {mapState, mapActions} from 'vuex';
     import CKEditor from '@ckeditor/ckeditor5-vue';
-    import InlineEditor from '@ckeditor/ckeditor5-build-inline';
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     import InputTag from 'vue-input-tag';
     import Multiselect from 'vue-multiselect';
 
     export default {
         data() {
             return {
-                editor:         InlineEditor,
+                editor:         ClassicEditor,
                 question_image: '',
                 value:          [
                     {name: 'Javascript', code: 'js'}
@@ -131,9 +131,17 @@
                 {
                     question: state => state.questions.question,
                     tests:    state => state.questions.tests,
+                    quiz:     state => state.quizes.quiz,
                 }),
         },
         methods:    {
+            create_updateQuestion: function () {
+                // drg >> check if we're creating a new question
+                this.question.is_new ?
+                    this.$store.dispatch('questions/add', this.question, this.$route.params.id)
+                    :
+                    this.$store.dispatch('questions/edit', this.question, this.$route.params.id);
+            },
             createImage(file) {
                 let reader = new FileReader();
                 this.media_title = file.name;

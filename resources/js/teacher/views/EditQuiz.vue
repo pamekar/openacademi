@@ -167,13 +167,6 @@
                     this.$store.state.quizes.timePicker.ss = time.ss;
                     this.timePickerChanged(time);
                 }
-            },getObject(obj) {
-                // drg >> convert JSON object into array
-                let arr = Object.keys(obj).map(function (key) {
-                    return [{name: obj[key], 'value': Number(key)}];
-                });
-
-                console.log(arr);
             },
         },
         methods:    {
@@ -191,14 +184,6 @@
                 });
                 
                 return arr;
-            },
-            getObject(obj) {
-                // drg >> convert JSON object into array
-                let arr = Object.keys(obj).map(function (key) {
-                    return [{name: obj[key], 'value': Number(key)}];
-                });
-
-                console.log(arr);
             },
             setQuestion(question) {
                 if (question) {

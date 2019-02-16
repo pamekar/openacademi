@@ -42,7 +42,7 @@ const actions = {
             description: quiz.description,
             about_quiz:  quiz.about_quiz,
             published:   quiz.published,
-            duration:    quiz.duration
+            duration:    quiz.duration ? quiz.duration : 0
         };
         
         for (let key in quizData) {
@@ -81,19 +81,18 @@ const actions = {
         let quizData = {
             // drg >> slug is not added to the list of objects, because it's auto generated
             title:       quiz.title,
-            course_id:   quiz.course_id,
-            lesson_id:   quiz.lesson_id,
+            course_id:   quiz.course_id ? quiz.course_id : 0,
+            lesson_id:   quiz.lesson_id ? quiz.lesson_id : 0,
             description: quiz.description,
             about_quiz:  quiz.about_quiz,
             published:   quiz.published,
-            duration:    quiz.duration,
+            duration:    quiz.duration ? quiz.duration : 0,
             _method:     'PUT'
         };
         
         for (let key in quizData) {
             form_data.append(key, quizData[key]);
-        }
-        ;
+        };
         
         axios.post(`${endpoint}/quizes/${quiz.id}`, form_data)
             .then(({data}) => {
@@ -104,7 +103,8 @@ const actions = {
                     // settings
                     type: data.type,
                 });
-                dispatch('fetch', quiz.id)
+                router.push({name: 'edit-quiz', params: {id: quiz.id}});
+    
             });
     },
     fetch({commit, dispatch}, id) {

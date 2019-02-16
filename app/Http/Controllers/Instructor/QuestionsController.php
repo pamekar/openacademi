@@ -74,7 +74,8 @@ class QuestionsController extends Controller
         }
         $request = $this->saveFiles($request);
         $question = Question::create($request->all());
-        $question->tests()->sync(array_filter((array)$request->input('tests')));
+
+        $question->tests()->sync(array_filter(explode(',',$request->input('tests'))));
 
         for ($q = 1; $q <= 4; $q++) {
             $option = $request->input('option_text_' . $q, '');
@@ -87,7 +88,13 @@ class QuestionsController extends Controller
             }
         }
 
-        return redirect()->route('instructor.questions.index');
+        $status = [
+            'type'      => 'success',
+            'message'   => "Question has been added successfully",
+
+        ];
+
+        return response()->json($status);
     }
 
 
@@ -140,10 +147,16 @@ class QuestionsController extends Controller
         $request = $this->saveFiles($request);
         $question = Question::findOrFail($id);
         $question->update($request->all());
-        $question->tests()->sync(array_filter((array)$request->input('tests')));
+        $question->tests()->sync(array_filter(explode(',',$request->input('tests'))));
 
 
-        return redirect()->route('instructor.questions.index');
+        $status = [
+            'type'      => 'success',
+            'message'   => "Question has been updated successfully",
+
+        ];
+
+        return response()->json($status);
     }
 
 

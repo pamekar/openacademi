@@ -28,14 +28,24 @@ const state = {
 
 // actions
 const actions = {
-    add({}, question) {
+    add({}, question, quiz) {
         let form_data = new FormData();
+        
+        // drg >> set list of tests
+        let tests = [];
+        let testList = question.tests;
+        
+        for (let test in testList) {
+            tests.push([testList[test].value]);
+        }
+        
         let questionData = {
             // drg >> slug is not added to the list of objects, because it's auto generated
             question:       question.question,
             question_image: question.question_image,
-            score:          question.score,
+            score:          question.score ? question.score : 0,
             type:           question.type,
+            tests:          tests
         };
         
         for (let key in questionData) {
@@ -44,7 +54,7 @@ const actions = {
         
         axios.post(`${endpoint}/questions`, form_data)
             .then(({data}) => {
-                
+                router.push({name: 'edit-quiz', params: {id: quiz}});
                 jQuery.notify({
                     // options
                     message: data.message,
@@ -52,7 +62,6 @@ const actions = {
                     // settings
                     type: data.type,
                 });
-                router.push({name: 'edit-lesson', params: {id: question.lesson_id}});
             });
     },
     delete_questions({}, id, course) {
@@ -69,14 +78,24 @@ const actions = {
             });
         router.push({name: 'view-course', params: {id: course}});
     },
-    edit({dispatch}, question) {
+    edit({dispatch}, question, quiz) {
         let form_data = new FormData();
+        
+        // drg >> set list of tests
+        let tests = [];
+        let testList = question.tests;
+        
+        for (let test in testList) {
+            tests.push([testList[test].value]);
+        }
+        
         let questionData = {
             // drg >> slug is not added to the list of objects, because it's auto generated
             question:       question.question,
             question_image: question.question_image,
-            score:          question.score,
+            score:          question.score ? question.score : 0,
             type:           question.type,
+            tests:          tests,
             _method:        'PUT'
         };
         
@@ -87,6 +106,7 @@ const actions = {
         
         axios.post(`${endpoint}/questions/${question.id}`, form_data)
             .then(({data}) => {
+                router.push({name: 'edit-quiz', params: {id: quiz}});
                 jQuery.notify({
                     // options
                     message: data.message,
@@ -94,7 +114,6 @@ const actions = {
                     // settings
                     type: data.type,
                 });
-                dispatch('fetch', question.id)
             });
     },
     fetch({commit, dispatch}, id) {
@@ -140,11 +159,12 @@ const mutations = {
     },
     SET_ADD(state, question) {
         state.question = {
+            is_new:         true,
             question:       '',
             question_image: null,
             score:          0,
             type:           'radio',
-            tests:[]
+            tests:          []
         };
         state.tests = question.tests;
     },
