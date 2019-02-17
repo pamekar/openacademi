@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="avatar" class="col-sm-3 col-form-label form-label">Lesson Image</label>
+                            <label for="avatar" class="col-sm-3 col-form-label form-label">Quiz Image</label>
                             <div class="col-sm-9 row">
                                 <div :class="question_image || question.question_image? 'col-md-6':''">
                                     <div class="custom-file" style="width: auto;">
@@ -56,7 +56,6 @@
                             <label for="touch-spin-2" class="col-form-label form-label col-md-3">Tests:</label>
                             <div class="col-md-9">
                                 <multiselect v-model="question.tests" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="title" track-by="value" :options="tests" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
-
                             </div>
                         </div>
 
@@ -107,16 +106,7 @@
             return {
                 editor:         ClassicEditor,
                 question_image: '',
-                value:          [
-                    {name: 'Javascript', code: 'js'}
-                ],
-                options:        [
-                    {name: 'Vue.js', code: 'vu'},
-                    {name: 'Javascript', code: 'js'},
-                    {name: 'Open Source', code: 'os'}
-                ]
             }
-
         },
         created() {
             
@@ -137,10 +127,13 @@
         methods:    {
             create_updateQuestion: function () {
                 // drg >> check if we're creating a new question
+                this.question.origin_id=this.$route.params.id
                 this.question.is_new ?
-                    this.$store.dispatch('questions/add', this.question, this.$route.params.id)
+                    this.$store.dispatch('questions/add', this.question)
                     :
                     this.$store.dispatch('questions/edit', this.question, this.$route.params.id);
+                jQuery(".modal").modal("hide");
+
             },
             createImage(file) {
                 let reader = new FileReader();

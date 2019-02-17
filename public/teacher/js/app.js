@@ -42328,7 +42328,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -42338,21 +42337,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data() {
     return {
       editor: __WEBPACK_IMPORTED_MODULE_2__ckeditor_ckeditor5_build_classic___default.a,
-      question_image: '',
-      value: [{
-        name: 'Javascript',
-        code: 'js'
-      }],
-      options: [{
-        name: 'Vue.js',
-        code: 'vu'
-      }, {
-        name: 'Javascript',
-        code: 'js'
-      }, {
-        name: 'Open Source',
-        code: 'os'
-      }]
+      question_image: ''
     };
   },
 
@@ -42371,7 +42356,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     create_updateQuestion: function () {
       // drg >> check if we're creating a new question
-      this.question.is_new ? this.$store.dispatch('questions/add', this.question, this.$route.params.id) : this.$store.dispatch('questions/edit', this.question, this.$route.params.id);
+      this.question.origin_id = this.$route.params.id;
+      this.question.is_new ? this.$store.dispatch('questions/add', this.question) : this.$store.dispatch('questions/edit', this.question, this.$route.params.id);
+      jQuery(".modal").modal("hide");
     },
 
     createImage(file) {
@@ -60026,7 +60013,7 @@ var render = function() {
                     staticClass: "col-sm-3 col-form-label form-label",
                     attrs: { for: "avatar" }
                   },
-                  [_vm._v("Lesson Image")]
+                  [_vm._v("Quiz Image")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-9 row" }, [
@@ -70787,7 +70774,7 @@ const state = {
 }; // actions
 
 const actions = {
-  add({}, question, quiz) {
+  add({}, question) {
     let form_data = new FormData(); // drg >> set list of tests
 
     let tests = [];
@@ -70816,7 +70803,7 @@ const actions = {
       __WEBPACK_IMPORTED_MODULE_0__routes__["a" /* default */].push({
         name: 'edit-quiz',
         params: {
-          id: quiz
+          id: question.origin_id
         }
       });
       jQuery.notify({
@@ -70833,6 +70820,12 @@ const actions = {
     axios.delete(`${endpoint}/questions/${id}`).then(({
       data
     }) => {
+      __WEBPACK_IMPORTED_MODULE_0__routes__["a" /* default */].push({
+        name: 'edit-quiz',
+        params: {
+          id: question.origin_id
+        }
+      });
       jQuery.notify({
         // options
         message: data.message
@@ -70841,17 +70834,11 @@ const actions = {
         type: data.type
       });
     });
-    __WEBPACK_IMPORTED_MODULE_0__routes__["a" /* default */].push({
-      name: 'view-course',
-      params: {
-        id: course
-      }
-    });
   },
 
   edit({
     dispatch
-  }, question, quiz) {
+  }, question) {
     let form_data = new FormData(); // drg >> set list of tests
 
     let tests = [];
@@ -70882,7 +70869,7 @@ const actions = {
       __WEBPACK_IMPORTED_MODULE_0__routes__["a" /* default */].push({
         name: 'edit-quiz',
         params: {
-          id: quiz
+          id: question.origin_id
         }
       });
       jQuery.notify({

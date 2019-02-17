@@ -28,9 +28,8 @@ const state = {
 
 // actions
 const actions = {
-    add({}, question, quiz) {
+    add({}, question) {
         let form_data = new FormData();
-        
         // drg >> set list of tests
         let tests = [];
         let testList = question.tests;
@@ -54,7 +53,7 @@ const actions = {
         
         axios.post(`${endpoint}/questions`, form_data)
             .then(({data}) => {
-                router.push({name: 'edit-quiz', params: {id: quiz}});
+                router.push({name: 'edit-quiz', params: {id: question.origin_id}});
                 jQuery.notify({
                     // options
                     message: data.message,
@@ -67,7 +66,7 @@ const actions = {
     delete_questions({}, id, course) {
         axios.delete(`${endpoint}/questions/${id}`)
             .then(({data}) => {
-                
+                router.push({name: 'edit-quiz', params: {id: question.origin_id}});
                 jQuery.notify({
                     // options
                     message: data.message,
@@ -76,11 +75,9 @@ const actions = {
                     type: data.type,
                 });
             });
-        router.push({name: 'view-course', params: {id: course}});
     },
-    edit({dispatch}, question, quiz) {
+    edit({dispatch}, question) {
         let form_data = new FormData();
-        
         // drg >> set list of tests
         let tests = [];
         let testList = question.tests;
@@ -106,7 +103,7 @@ const actions = {
         
         axios.post(`${endpoint}/questions/${question.id}`, form_data)
             .then(({data}) => {
-                router.push({name: 'edit-quiz', params: {id: quiz}});
+                router.push({name: 'edit-quiz', params: {id: question.origin_id}});
                 jQuery.notify({
                     // options
                     message: data.message,
