@@ -126,11 +126,24 @@ Route::post('upload', function () {
 Route::get('kjsdsjdsksdncxmkjdsiwejkmwem/add_about_quiz', function () {
     $faker = \Faker\Factory::create();
     $tests = \App\Test::all();
-    foreach ($tests as $test){
-        \Illuminate\Support\Facades\DB::table('tests')->where('id',$test->id)->update(['about_quiz'=>$faker->realText(150)]);
+    foreach ($tests as $test) {
+        \Illuminate\Support\Facades\DB::table('tests')->where('id', $test->id)
+            ->update(['about_quiz' => $faker->realText(150)]);
     }
 });
 
-Route::get('kujsdlkdjlksere', function (){
-    print_r(\App\User::find(8758)->student);
+Route::get('kujsdlkdjlksere', function () {
+    // drg >> this route sets test results answers
+    $tests = \App\Test::with(['results', 'questions.options'])->get();
+    foreach ($tests as $test) {
+        foreach ($test->results as $result) {
+            foreach ($test->questions as $question) {
+                $options=$question->options->toArray();
+                $option = $options[array_rand($options)];
+                \App\TestsResultsAnswer::insert([
+                    // drg >> start from here
+                ]);
+            }
+        }
+    }
 });
