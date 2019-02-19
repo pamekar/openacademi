@@ -21,7 +21,6 @@ class User extends \TCG\Voyager\Models\User implements JWTSubject
     use Notifiable;
     protected $fillable = ['name', 'email', 'password','categories', 'remember_token','role_id'];
 
-
     /**
      * Hash password
      * @param $input
@@ -55,6 +54,9 @@ class User extends \TCG\Voyager\Models\User implements JWTSubject
         return $this->hasMany('App\Payment');
     }
 
+    public function student(){
+        return $this->hasOne('App\Student');
+    }
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

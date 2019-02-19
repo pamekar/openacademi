@@ -4,6 +4,7 @@ import router from '../../routes'
 const endpoint = '/api/instructor';
 
 const state = {
+    answers:              [],
     courses:              [],
     lesson:               [],
     lessons:              [],
@@ -15,6 +16,7 @@ const state = {
     pagePer:              0,
     pageTo:               0,
     pageTotal:            0,
+    results:              [],
     pageTitle:            '',
     purchased:            '',
     question:             [],
@@ -92,7 +94,8 @@ const actions = {
         
         for (let key in quizData) {
             form_data.append(key, quizData[key]);
-        };
+        }
+        ;
         
         axios.post(`${endpoint}/quizes/${quiz.id}`, form_data)
             .then(({data}) => {
@@ -104,7 +107,7 @@ const actions = {
                     type: data.type,
                 });
                 router.push({name: 'edit-quiz', params: {id: quiz.id}});
-    
+                
             });
     },
     fetch({commit, dispatch}, id) {
@@ -144,10 +147,10 @@ const actions = {
 // mutations
 const mutations = {
     SET_QUIZ(state, quiz) {
-        state.quiz = quiz.quiz;
-        state.course = quiz.course;
-        state.quizes = quiz.quizes;
-        state.pageTitle = quiz.quiz.title;
+        state.answers = quiz.results[0].answers; // drg >> get the first result to display answers
+        state.pageCount = Math.ceil(quiz.results.length / 10);
+        state.quiz = quiz;
+        state.results = quiz.results.slice(0, 10);
     },
     SET_ADD(state, quiz) {
         state.courses = quiz.courses;

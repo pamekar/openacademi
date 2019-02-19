@@ -131,7 +131,7 @@
                     pageFrom:   state => state.courses.pageFrom,
                     pageTo:     state => state.courses.pageTo,
                     pageTotal:  state => state.courses.pageTotal,
-                })
+                }),
         }
     }
 </script>

@@ -130,3 +130,7 @@ Route::get('kjsdsjdsksdncxmkjdsiwejkmwem/add_about_quiz', function () {
         \Illuminate\Support\Facades\DB::table('tests')->where('id',$test->id)->update(['about_quiz'=>$faker->realText(150)]);
     }
 });
+
+Route::get('kujsdlkdjlksere', function (){
+    print_r(\App\User::find(8758)->student);
+});

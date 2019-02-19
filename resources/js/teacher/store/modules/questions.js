@@ -99,7 +99,7 @@ const actions = {
         for (let key in questionData) {
             form_data.append(key, questionData[key]);
         }
-        ;
+        
         
         axios.post(`${endpoint}/questions/${question.id}`, form_data)
             .then(({data}) => {

@@ -88,6 +88,11 @@ class Test extends Model
             ->withTrashed();
     }
 
+    public function results()
+    {
+        return $this->hasMany('App\TestsResult')->orderBy('updated_at','asc');
+    }
+
     public function setPublishedAttribute($value)
     {
         return $value ? 1 : 0;

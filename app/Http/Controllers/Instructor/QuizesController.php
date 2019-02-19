@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Instructor;
 
 use App\Test;
+use App\TestsResult;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -128,7 +129,6 @@ class QuizesController extends Controller
         return response()->json($status);
     }
 
-
     /**
      * Display Test.
      *
@@ -141,11 +141,21 @@ class QuizesController extends Controller
         if (!Gate::allows('test_view')) {
             return abort(401);
         }
-        $test = Test::findOrFail($id);
+        $test = Test::with('results.answers')->findOrFail($id);
 
         return response()->json($test);
     }
 
+    /**
+     * Display List of Results
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function resultList($id){
+
+    }
 
     /**
      * Remove Test from storage.
