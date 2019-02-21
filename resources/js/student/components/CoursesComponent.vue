@@ -12,7 +12,7 @@
 
             <span class="course-price">&#8358;{{course.price.toLocaleString('en', {maximumSignificantDigits: 2})}}</span>
             <router-link :to="{name:'course',params:{'slug':course.slug}}">
-                <img :src="course.course_image" :alt="course.title" style="width:100%;">
+                <img :src="course.course_image_preview" :alt="course.title" style="width:100%;">
             </router-link>
 
             <div class="card-body">

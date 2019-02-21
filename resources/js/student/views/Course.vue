@@ -14,10 +14,10 @@
 
                 <div class="card">
                     <div v-if="course.course_image_type == 'image'">
-                        <img :src="course.course_image_main" :alt="course.slug" width="100%"  />
+                        <img :src="course.course_image" :alt="course.slug" width="100%"  />
                     </div>
                     <div class="embed-responsive embed-responsive-16by9" v-if="course.course_image_type == 'video'">
-                        <iframe class="embed-responsive-item" :src="course.course_image_main" allowfullscreen=""></iframe>
+                        <iframe class="embed-responsive-item" :src="course.course_image" allowfullscreen=""></iframe>
                     </div>
                     <div class="card-body" v-html="course.description"></div>
                 </div>

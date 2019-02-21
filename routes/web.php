@@ -134,16 +134,56 @@ Route::get('kjsdsjdsksdncxmkjdsiwejkmwem/add_about_quiz', function () {
 
 Route::get('kujsdlkdjlksere', function () {
     // drg >> this route sets test results answers
-    $tests = \App\Test::with(['results', 'questions.options'])->get();
+    $faker = \Faker\Factory::create();
+    $tests = \App\Test::with(['results', 'questions.options'])->get()
+        ->shuffle();
+    $i = 0;
+
     foreach ($tests as $test) {
+        // drg >> loop through tests
+        $questions = $test->questions->shuffle();
+        $questions_length = count($test->questions);
+        $results_length = $test->results->count();
+        $j = 0;
         foreach ($test->results as $result) {
-            foreach ($test->questions as $question) {
-                $options=$question->options->toArray();
-                $option = $options[array_rand($options)];
+            // drg >> loop through results
+            $k = 0;
+            $score = 0;
+            foreach ($questions as $question) {
+                // drg >> loop through test questions
+                $options = $question->options;
+                if ($test->id % 2 === 0) {
+                    $option = $k > 0.45 * $questions_length
+                        ? $options[array_rand($options->toArray())]
+                        : $options->where('correct', true)->first();
+                    $review = null;
+                } else {
+                    if (mt_rand(0, 1)) {
+                        $option = null;
+                        $review = $faker->realText();
+                    } else {
+                        $option = $k > 0.45 * $questions_length
+                            ? $options[array_rand($options->toArray())]
+                            : $options->where('correct', true)->first();
+                        $review = null;
+                    }
+                }
                 \App\TestsResultsAnswer::insert([
-                    // drg >> start from here
+                    'tests_result_id' => $result->id,
+                    'question_id'     => $question->id,
+                    'option_id'       => $option ? $option->id : null,
+                    'correct'         => $option ? $option->correct : null,
+                    'review'          => $review
                 ]);
+                $score += $option && $option->correct ? $question->score : 0;
+                $k++;
             }
+            \App\TestsResult::where('id', $result->id)->update([
+                'test_result' => $score,
+                'updated_at'  => date('Y-m-d H:i:s')
+            ]);
+            $j++;
         }
+        $i++;
     }
 });

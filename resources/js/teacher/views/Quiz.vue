@@ -108,7 +108,7 @@
             <!-- Pagination -->
             <paginate
                     :page-count="pageCount"
-                    :click-handler="getQuizes"
+                    :click-handler="getResults"
                     :prev-text="'Prev'"
                     :next-text="'Next'"
                     container-class="pagination justify-content-center pagination-sm"
@@ -147,7 +147,7 @@
             'paginate': Paginate
         },
         methods:    {
-            getQuizes: function (page = 1) {
+            getResults: function (page = 1) {
                 this.results = this.quiz.results.slice((page - 1) * this.limit, page * this.limit);
             }
         },
