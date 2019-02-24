@@ -139,18 +139,20 @@ Route::get('kujsdlkdjlksere', function () {
         ->shuffle();
     $id = 0;
 
-    $setQuestions = \App\Question::all();
+    /*$setQuestions = \App\Question::all();
     foreach ($setQuestions as $qst) {
-        if (array_rand([0, 1, 0, 1, 0, 0, 0])) {
-            $type = array_rand(['textarea', 'input', 'richtext']);
+        $falsify = [0, 1, 0, 1, 0, 0, 0];
+        if ($falsify[array_rand($falsify)]) {
+            $types = ['textarea', 'input', 'richtext'];
+            $type = $types[array_rand($types)];
         } else {
             $type = 'radio';
         }
         $question = \App\Question::find($qst->id);
         $question->type = $type;
         $question->save();
-    }
 
+    }*/
     foreach ($tests as $test) {
         // drg >> loop through tests
         $questions = $test->questions->shuffle();
@@ -162,17 +164,25 @@ Route::get('kujsdlkdjlksere', function () {
             $k = 0;
             $score = 0;
             $answers = [];
+            $hasReview=false;
             foreach ($questions as $question) {
                 $id++;
+                $hasReview=$question->type !== 'radio';
                 // drg >> loop through test questions
                 $options = $question->options;
                 $option = null;
+                // drg >> text to be used for review
                 $review = null;
+                // drg >>flag if review is correct
+                $correctReview = $k > 0.45 * $questions_length
+                    ? mt_rand(0, 1)
+                    : 1;
                 switch ($question->type) {
                     case 'radio':
                         $option = $k > 0.45 * $questions_length
                             ? $options[array_rand($options->toArray())]
                             : $options->where('correct', true)->first();
+                        $correctReview = null;
                         break;
                     case 'input':
                         $review = $faker->realText(50);
@@ -191,31 +201,41 @@ Route::get('kujsdlkdjlksere', function () {
                         $review = null;
                         break;
                 }
-                if ($question->type == 'radio') {
-
-                } else {
-                    if (mt_rand(0, 1)) {
-
-                    }
-                }
+                // drg >> flag for 'answer and review is correct'
+                $correct = is_null($correctReview) ? $option->correct
+                    : $correctReview;
                 array_push($answers, [
-                    'id'=>$id,
+                    'id'              => $id,
                     'tests_result_id' => $result->id,
                     'question_id'     => $question->id,
                     'option_id'       => $option ? $option->id : null,
-                    'correct'         => $option ? $option->correct : null,
+                    'correct'         => $correct,
                     'review'          => $review
                 ]);
+                if ($hasReview) {
+                    $reviewScore = $correctReview
+                        ? floor((mt_rand(55, 100) / 100) * $question->score)
+                        : 0;
+                    $answerReview = new \App\TestsResultsAnswersReview();
+                    $answerReview->tests_results_answer_id = $id;
+                    $answerReview->review = $review;
+                    $answerReview->score = $reviewScore;
+                    $score += $reviewScore;
+                }
                 $score += $option && $option->correct ? $question->score : 0;
                 $k++;
             }
-            \App\TestsResultsAnswer::insert(shuffle($answers));
+
+
+            \App\TestsResultsAnswer::insert($answers);
+            if ($hasReview) {
+                $answerReview->save();
+            }
             \App\TestsResult::where('id', $result->id)->update([
                 'test_result' => $score,
                 'updated_at'  => date('Y-m-d H:i:s')
             ]);
             $j++;
         }
-        $i++;
     }
 });
