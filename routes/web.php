@@ -137,7 +137,19 @@ Route::get('kujsdlkdjlksere', function () {
     $faker = \Faker\Factory::create();
     $tests = \App\Test::with(['results', 'questions.options'])->get()
         ->shuffle();
-    $i = 0;
+    $id = 0;
+
+    $setQuestions = \App\Question::all();
+    foreach ($setQuestions as $qst) {
+        if (array_rand([0, 1, 0, 1, 0, 0, 0])) {
+            $type = array_rand(['textarea', 'input', 'richtext']);
+        } else {
+            $type = 'radio';
+        }
+        $question = \App\Question::find($qst->id);
+        $question->type = $type;
+        $question->save();
+    }
 
     foreach ($tests as $test) {
         // drg >> loop through tests
@@ -149,26 +161,45 @@ Route::get('kujsdlkdjlksere', function () {
             // drg >> loop through results
             $k = 0;
             $score = 0;
+            $answers = [];
             foreach ($questions as $question) {
+                $id++;
                 // drg >> loop through test questions
                 $options = $question->options;
-                if ($test->id % 2 === 0) {
-                    $option = $k > 0.45 * $questions_length
-                        ? $options[array_rand($options->toArray())]
-                        : $options->where('correct', true)->first();
-                    $review = null;
-                } else {
-                    if (mt_rand(0, 1)) {
-                        $option = null;
-                        $review = $faker->realText();
-                    } else {
+                $option = null;
+                $review = null;
+                switch ($question->type) {
+                    case 'radio':
                         $option = $k > 0.45 * $questions_length
                             ? $options[array_rand($options->toArray())]
                             : $options->where('correct', true)->first();
+                        break;
+                    case 'input':
+                        $review = $faker->realText(50);
+                        break;
+                    case 'textarea':
+                        $review = $faker->realText(200);
+                        break;
+                    case 'richtext':
+                        $review = $faker->paragraph(4) . "<br>"
+                            . $faker->paragraph(5) . "<br>"
+                            . $faker->paragraph(3) . "<br>"
+                            . $faker->paragraph(7);
+                        break;
+                    default:
+                        $option = null;
                         $review = null;
+                        break;
+                }
+                if ($question->type == 'radio') {
+
+                } else {
+                    if (mt_rand(0, 1)) {
+
                     }
                 }
-                \App\TestsResultsAnswer::insert([
+                array_push($answers, [
+                    'id'=>$id,
                     'tests_result_id' => $result->id,
                     'question_id'     => $question->id,
                     'option_id'       => $option ? $option->id : null,
@@ -178,6 +209,7 @@ Route::get('kujsdlkdjlksere', function () {
                 $score += $option && $option->correct ? $question->score : 0;
                 $k++;
             }
+            \App\TestsResultsAnswer::insert(shuffle($answers));
             \App\TestsResult::where('id', $result->id)->update([
                 'test_result' => $score,
                 'updated_at'  => date('Y-m-d H:i:s')

@@ -93,6 +93,7 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
                 'as'   => 'questions_options.perma_del'
             ]);
             Route::resource('quizes', 'QuizesController');
+            Route::get('quizes/{id}/results', 'QuizesController@results');
             Route::post('quizes_mass_destroy', [
                 'uses' => 'QuizesController@massDestroy',
                 'as'   => 'quizes.mass_destroy'

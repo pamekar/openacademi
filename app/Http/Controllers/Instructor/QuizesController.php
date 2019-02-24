@@ -50,8 +50,8 @@ class QuizesController extends Controller
         $courses = \App\Course::ofTeacher()->get();
         $courses_ids = $courses->pluck('id');
         $courses = $courses->pluck('title', 'id')->prepend('Please select', '');
-        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)->get(['title','id','course_id'])
-     ;
+        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)
+            ->get(['title', 'id', 'course_id']);
 
         return response()->json(['courses' => $courses, 'lessons' => $lessons]);
 
@@ -95,8 +95,8 @@ class QuizesController extends Controller
         $courses = \App\Course::ofTeacher()->get();
         $courses_ids = $courses->pluck('id');
         $courses = $courses->pluck('title', 'id')->prepend('Please select', '');
-        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)->get(['title','id','course_id'])
-        ;
+        $lessons = \App\Lesson::whereIn('course_id', $courses_ids)
+            ->get(['title', 'id', 'course_id']);
         $test = Test::with('questions')->findOrFail($id);
         return response()->json([
             'test'    => $test,
@@ -109,7 +109,7 @@ class QuizesController extends Controller
      * Update Test in storage.
      *
      * @param  \App\Http\Requests\UpdateQuizesRequest $request
-     * @param  int                                   $id
+     * @param  int                                    $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -141,7 +141,7 @@ class QuizesController extends Controller
         if (!Gate::allows('test_view')) {
             return abort(401);
         }
-        $test = Test::with('results.answers')->findOrFail($id);
+        $test = Test::findOrFail($id);
 
         return response()->json($test);
     }
@@ -153,8 +153,15 @@ class QuizesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function resultList($id){
+    public function results($id)
+    {
+        if (!Gate::allows('test_view')) {
+            return abort(401);
+        }
+        $results = TestsResult::where('test_id', $id)->orderBy('created_at','desc')->with('answers.question')
+            ->paginate(10);
 
+        return response()->json($results);
     }
 
     /**

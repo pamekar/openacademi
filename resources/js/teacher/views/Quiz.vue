@@ -12,72 +12,92 @@
 
 
         <div class="media flex-wrap align-items-center mb-headings">
-            <div class="media-left avatar avatar-lg avatar-4by3">
-                <img src="assets/images/vuejs.png" alt="" class="avatar-img rounded">
-            </div>
             <div class="media-body mb-3 mb-sm-0">
                 <h1 class="h2 mb-0">{{quiz.title}}</h1>
-                <span class="text-muted">submited by</span> <a href="instructor-profile.html">Adrian Demian</a>
+                <span class="text-muted">submited by</span> <a href="#">{{result.student.full_name}}</a>
             </div>
             <div class="text-left text-sm-right w-100 w-sm-auto">
-                <a href="#" class="btn btn-white btn-sm"><i class="material-icons">keyboard_arrow_left</i></a>
-                <a href="#" class="btn btn-primary btn-sm"><i class="material-icons">keyboard_arrow_right</i></a>
+                <button class="btn btn-white btn-sm" @click="viewResult(currentIndex-1)" v-if="results[currentIndex-1]"><i class="material-icons">keyboard_arrow_left</i></button>
+                <button class="btn btn-primary btn-sm" @click="viewResult(currentIndex+1)" v-if="results[currentIndex+1]"><i class="material-icons">keyboard_arrow_right</i></button>
             </div>
         </div>
 
         <div class="card">
             <ul class="nav nav-tabs nav-tabs-card">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#first" data-toggle="tab">Review</a>
+                    <a class="nav-link" href="#first" data-toggle="tab">Review</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#second" data-toggle="tab">All Questions</a>
+                    <a class="nav-link active" href="#second" data-toggle="tab">All Questions</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="first">
-                    <ul class="list-group mb-0 list-group-fit">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <p><strong>#9. What are the first three steps?</strong></p>
-                                    <small class="text-muted">ANSWER:</small>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati temporibus blanditiis iste itaque deleniti minima.
-                                    </p>
+                <div class="tab-pane" id="first">
+                    <div id="accordion">
+                        <div class="card mb-0" v-for="(answer,index) in result.answers" v-if="answer.correct === null">
+                            <div class="card-header">
+                                <a class="card-link d-block" data-toggle="collapse" :href="'#collapse-'+index">
+                                    Review Question {{index + 1}}
+                                </a>
+                            </div>
+                            <div :id="'collapse-'+index" :class="{collapse:true,show:index===0}" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <p><strong>#{{index + 1}}.</strong></p>
+                                            <img :src="answer.question.question_image" class="img img-thumbnail" style="max-width:70%;">
+                                            <div class="card-body">
+                                                <small class="text-muted">QUESTION:</small>
+                                                <div v-html="answer.question.question"></div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <small class="text-muted">ANSWER:</small>
 
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group d-flex flex-column">
-                                        <label class="form-label" for="customRange2">Score</label>
-                                        <input type="range" class="custom-range" min="0" max="5" id="customRange2">
+                                                    <div style="font-size:1.1em" v-html="answer.review"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group d-flex flex-column">
+                                                <label class="form-label" for="customRange2">Score <span>({{score}})</span></label>
+                                                <input type="range" class="custom-range" min="0" :max="answer.question.score" id="customRange2" v-model="score">
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control" rows="2" placeholder="Write comment" v-model="review"></textarea>
+                                            </div>
+                                            <a href="#" class="btn btn-success float-right">Save review <i class="material-icons btn__icon--right">check</i></a>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control" rows="2" placeholder="Write comment"></textarea>
-                                    </div>
-                                    <a href="#" class="btn btn-success float-right">Save review <i class="material-icons btn__icon--right">check</i></a>
                                 </div>
                             </div>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#"><strong>#12.</strong> How do you deploy?</a>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="tab-pane" id="second">
+                <div class="tab-pane active" id="second">
                     <ul class="list-group mb-0 list-group-fit">
-                        <li class="list-group-item">
+                        <li class="list-group-item" v-for="(answer,index) in result.answers">
                             <div class="media">
                                 <div class="media-left">
-                                    <div class="text-muted-light">2.</div>
+                                    <div class="text-muted-light">{{index + 1}}.</div>
                                 </div>
-                                <div class="media-body">The MVC architectural pattern</div>
-                                <div class="media-right"><strong class="text-primary">7</strong></div>
+                                <div class="media-body">
+                                    <div v-html="answer.question.question"></div>
+                                </div>
+                                <div class="media-right">
+                                    <span class="badge badge-success" v-if="answer.correct === null && answer.review ">Pending Review</span>
+                                    <strong class="text-primary" v-else-if="answer.correct === 1 && answer.review">{{answer.question.score}}</strong>
+
+                                    <strong class="text-primary" v-else-if="answer.correct === 1">{{answer.question.score}}</strong>
+                                    <strong class="text-danger" v-else-if="answer.correct === 0">0</strong>
+
+                                </div>
                             </div>
                         </li>
                     </ul>
                     <div class="card card-footer">
-                        Total Score: <span class="h5 text-primary"><strong>340</strong></span>
+                        Total Score: <span class="h5 text-primary"><strong>{{result.test_result}}</strong></span>
                     </div>
                 </div>
             </div>
@@ -85,7 +105,7 @@
 
         <h4>Review History</h4>
         <div class="table-responsive">
-            <table class="table table-sm table-middle" v-on:show="getQuizes">
+            <table class="table table-sm table-middle">
                 <thead>
                 <tr>
                     <th style="width: 120px">Submitted</th>
@@ -96,12 +116,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="result in results">
+                <tr v-for="(result,index) in results">
                     <td><span class="badge badge-light ">{{result.created_at}}</span></td>
                     <td><a href="#">{{result.student.full_name}}</a></td>
                     <td class="text-center"><span class="text-muted">{{result.test_result}}</span></td>
                     <td><span class="text-muted">PENDING</span></td>
-                    <td class="right"><a href="#" class="btn btn-sm btn-primary">Review</a></td>
+                    <td class="right">
+                        <button class="btn btn-sm btn-primary" @click="viewResult(index)">Review</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -133,12 +155,16 @@
     export default {
         data() {
             return {
-                limit:     10,
-                purchased: "",
+                currentIndex: 0,
+                limit:        10,
+                purchased:    "",
+                review:       "",
+                score:        0
             }
         },
         created() {
             this.$store.dispatch('quizes/fetch', this.$route.params.id);
+            this.$store.dispatch('quizes/fetch_results', {id: this.$route.params.id, page: 1});
             //
         },
         mounted() {
@@ -148,25 +174,29 @@
         },
         methods:    {
             getResults: function (page = 1) {
-                this.results = this.quiz.results.slice((page - 1) * this.limit, page * this.limit);
+                this.$store.dispatch('quizes/fetch_results', {id: this.$route.params.id, page: page});
+                this.currentIndex=0;
+            },
+            viewResult: function (index) {
+                this.result = this.results[index];
+                this.currentIndex = index;
             }
         },
         computed:   {
             ...mapState(
                 {
-                    answers:   state => state.quizes.answers,
                     course:    state => state.quizes.course,
                     pageCount: state => state.quizes.pageCount,
                     pageTitle: state => state.quizes.pageTitle,
                     quiz:      state => state.quizes.quiz,
+                    results:   state => state.quizes.results,
                 }),
-            results: {
+            result: {
                 get: function () {
-                    return this.$store.state.quizes.results;
+                    return this.$store.state.quizes.result;
                 },
-                // setter
-                set: function (results) {
-                    this.$store.state.quizes.results = results;
+                set: function (result) {
+                    this.$store.state.quizes.result = result;
                 }
             }
         },

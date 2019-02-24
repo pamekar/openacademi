@@ -192,7 +192,7 @@
                 }),
             timePicker: {
                 get: function () {
-                    return this.$store.state.lessons.timePicker
+                    return this.$store.state.lessons.timePicker;
                 },
                 // setter
                 set: function (time) {

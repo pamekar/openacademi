@@ -4,7 +4,6 @@ import router from '../../routes'
 const endpoint = '/api/instructor';
 
 const state = {
-    answers:              [],
     courses:              [],
     lesson:               [],
     lessons:              [],
@@ -16,6 +15,7 @@ const state = {
     pagePer:              0,
     pageTo:               0,
     pageTotal:            0,
+    result:              [],
     results:              [],
     pageTitle:            '',
     purchased:            '',
@@ -142,15 +142,17 @@ const actions = {
     fetch_question_empty({commit}) {
         commit('SET_QUESTION_EMPTY', []);
     },
+    fetch_results({commit, dispatch}, params) {
+        // drg >> this action fetches all the lessons (paginated)
+        axios.get(`${endpoint}/quizes/${params.id}/results?page=${params.page}`)
+            .then(response => commit('SET_RESULTS', response.data)).catch();
+    },
 };
 
 // mutations
 const mutations = {
     SET_QUIZ(state, quiz) {
-        state.answers = quiz.results[0].answers; // drg >> get the first result to display answers
-        state.pageCount = Math.ceil(quiz.results.length / 10);
         state.quiz = quiz;
-        state.results = quiz.results.slice(0, 10);
     },
     SET_ADD(state, quiz) {
         state.courses = quiz.courses;
@@ -177,6 +179,15 @@ const mutations = {
         state.pagePer = quizes.per_page;
         state.pageTo = quizes.to;
         state.pageTotal = quizes.total;
+    },
+    SET_RESULTS(state, results) {
+        state.results = results.data;
+        state.pageCount = results.last_page;
+        state.pageFrom = results.from;
+        state.pagePer = results.per_page;
+        state.pageTo = results.to;
+        state.pageTotal = results.total;
+        state.result = results.data[0];
     },
 };
 

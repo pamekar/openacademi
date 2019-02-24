@@ -21,7 +21,6 @@
     <!-- Font Awesome Icons -->
     <link type="text/css" href="{{asset("$public/assets/css/fontawesome.css")}}" rel="stylesheet">
 
-
     <!-- App CSS -->
     <link type="text/css" href="{{asset("$public/assets/css/app.css")}}" rel="stylesheet">
     <link type="text/css" href="{{asset("$public/assets/css/nestable.css")}}" rel="stylesheet">
