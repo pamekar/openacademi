@@ -13,4 +13,8 @@ class TestsResultsAnswer extends Model
         return $this->belongsTo('App\Question');
     }
 
+    public function review(){
+        return $this->hasOne('App\TestsResultsAnswersReview');
+    }
+
 }

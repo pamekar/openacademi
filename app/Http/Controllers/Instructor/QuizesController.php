@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Instructor;
 
 use App\Test;
 use App\TestsResult;
+use App\TestsResultsAnswer;
+use App\TestsResultsAnswersReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -79,6 +81,28 @@ class QuizesController extends Controller
         return response()->json($status);
     }
 
+    /**
+     * Store a newly created Test in storage.
+     *
+     * @param  Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function storeReview(Request $request,$id)
+    {
+        if (!Gate::allows('test_create')) {
+            return abort(401);
+        }
+        $answers= TestsResultsAnswer::findOrFail($id);
+        $answers->review()->create($request->all());
+
+        $status = [
+            'type'    => 'success',
+            'message' => "Your review has been created successfully"
+        ];
+
+        return response()->json($status);
+    }
 
     /**
      * Show the form for editing Test.
@@ -130,6 +154,30 @@ class QuizesController extends Controller
     }
 
     /**
+     * Update Review
+     *
+     * @param  Request $request
+     * @param  int                                    $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateReview(Request $request, $id)
+    {
+        if (!Gate::allows('test_edit')) {
+            return abort(401);
+        }
+        $review = TestsResultsAnswersReview::findOrFail($id);
+        $review->update($request->all());
+
+        $status = [
+            'type'    => 'success',
+            'message' => "Your review has been updated"
+        ];
+
+        return response()->json($status);
+    }
+
+    /**
      * Display Test.
      *
      * @param  int $id
@@ -158,7 +206,7 @@ class QuizesController extends Controller
         if (!Gate::allows('test_view')) {
             return abort(401);
         }
-        $results = TestsResult::where('test_id', $id)->orderBy('created_at','desc')->with('answers.question')
+        $results = TestsResult::where('test_id', $id)->orderBy('created_at','desc')->with('answers.question','answers.review')
             ->paginate(10);
 
         return response()->json($results);

@@ -34,7 +34,7 @@
             <div class="tab-content">
                 <div class="tab-pane" id="first">
                     <div id="accordion">
-                        <div class="card mb-0" v-for="(answer,index) in result.answers" v-if="answer.correct === null">
+                        <div class="card mb-0" v-for="(answer,index) in result.answers" v-if="answer.answer_text">
                             <div class="card-header">
                                 <a class="card-link d-block" data-toggle="collapse" :href="'#collapse-'+index">
                                     Review Question {{index + 1}}
@@ -54,20 +54,30 @@
                                                 <div class="card-body">
                                                     <small class="text-muted">ANSWER:</small>
 
-                                                    <div style="font-size:1.1em" v-html="answer.review"></div>
+                                                    <div style="font-size:1.1em" v-html="answer.answer_text"></div>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-4" v-if="answer.answer_text && !answer.review">
                                             <div class="form-group d-flex flex-column">
-                                                <label class="form-label" for="customRange2">Score <span>({{score}})</span></label>
-                                                <input type="range" class="custom-range" min="0" :max="answer.question.score" id="customRange2" v-model="score">
+                                                <label class="form-label" for="customRange2">Score <span>({{review.score}})</span></label>
+                                                <input type="range" class="custom-range" min="0" :max="answer.question.score" v-model="score">
                                             </div>
                                             <div class="form-group">
-                                                <textarea class="form-control" rows="2" placeholder="Write comment" v-model="review"></textarea>
+                                                <textarea class="form-control" rows="2" placeholder="Write comment" v-model="review.review"></textarea>
                                             </div>
                                             <a href="#" class="btn btn-success float-right">Save review <i class="material-icons btn__icon--right">check</i></a>
+                                        </div>
+                                        <div class="col-md-4" v-if="answer.answer_text && answer.review">
+                                            <div class="form-group d-flex flex-column">
+                                                <label class="form-label" for="customRange2">Score <span>({{answer.review.score}})</span></label>
+                                                <input type="range" class="custom-range" min="0" :max="answer.question.score" id="customRange2" v-model="answer.review.score">
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control" rows="2" placeholder="Write comment" v-model="answer.review.review"></textarea>
+                                            </div>
+                                            <button class="btn btn-success float-right" @click="editReview">Save review <i class="material-icons btn__icon--right">check</i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -86,11 +96,11 @@
                                     <div v-html="answer.question.question"></div>
                                 </div>
                                 <div class="media-right">
-                                    <span class="badge badge-success" v-if="answer.correct === null && answer.review ">Pending Review</span>
-                                    <strong class="text-primary" v-else-if="answer.correct === 1 && answer.review">{{answer.question.score}}</strong>
-
-                                    <strong class="text-primary" v-else-if="answer.correct === 1">{{answer.question.score}}</strong>
-                                    <strong class="text-danger" v-else-if="answer.correct === 0">0</strong>
+                                    <span class="badge badge-success" v-if="answer.correct === null && !answer.review ">Pending Review</span>
+                                    <strong class="text-primary" v-else-if="answer.correct === 1 && answer.review">{{answer.review.score}}</strong>
+                                    <strong class="text-danger" v-else-if="answer.correct === 0 && answer.review">0</strong>
+                                    <strong class="text-primary" v-else-if="answer.correct === 1 && !answer.review">{{answer.question.score}}</strong>
+                                    <strong class="text-danger" v-else-if="answer.correct === 0 && !answer.review">0</strong>
 
                                 </div>
                             </div>
@@ -151,15 +161,17 @@
 <script>
     import {mapState, mapActions} from 'vuex';
     import Paginate from 'vuejs-paginate';
-
+    
     export default {
         data() {
             return {
                 currentIndex: 0,
                 limit:        10,
                 purchased:    "",
-                review:       "",
-                score:        0
+                review:       {
+                    review: "",
+                    score:  0
+                }
             }
         },
         created() {
@@ -175,11 +187,14 @@
         methods:    {
             getResults: function (page = 1) {
                 this.$store.dispatch('quizes/fetch_results', {id: this.$route.params.id, page: page});
-                this.currentIndex=0;
+                this.currentIndex = 0;
             },
             viewResult: function (index) {
                 this.result = this.results[index];
                 this.currentIndex = index;
+            },
+            editReview: function () {
+                
             }
         },
         computed:   {
@@ -198,7 +213,7 @@
                 set: function (result) {
                     this.$store.state.quizes.result = result;
                 }
-            }
+            },
         },
         watch:      {
             '$route'(to, from) {

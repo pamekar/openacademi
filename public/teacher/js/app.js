@@ -46184,6 +46184,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -46192,8 +46202,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       currentIndex: 0,
       limit: 10,
       purchased: "",
-      review: "",
-      score: 0
+      review: {
+        review: "",
+        score: 0
+      }
     };
   },
 
@@ -46221,7 +46233,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     viewResult: function (index) {
       this.result = this.results[index];
       this.currentIndex = index;
-    }
+    },
+    editReview: function () {}
   },
   computed: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
     course: state => state.quizes.course,
@@ -69407,7 +69420,7 @@ var render = function() {
               "div",
               { attrs: { id: "accordion" } },
               _vm._l(_vm.result.answers, function(answer, index) {
-                return answer.correct === null
+                return answer.answer_text
                   ? _c("div", { staticClass: "card mb-0" }, [
                       _c("div", { staticClass: "card-header" }, [
                         _c(
@@ -69477,89 +69490,213 @@ var render = function() {
                                     _c("div", {
                                       staticStyle: { "font-size": "1.1em" },
                                       domProps: {
-                                        innerHTML: _vm._s(answer.review)
+                                        innerHTML: _vm._s(answer.answer_text)
                                       }
                                     })
                                   ])
                                 ])
                               ]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "col-md-4" }, [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "form-group d-flex flex-column"
-                                  },
-                                  [
+                              answer.answer_text && !answer.review
+                                ? _c("div", { staticClass: "col-md-4" }, [
                                     _c(
-                                      "label",
+                                      "div",
                                       {
-                                        staticClass: "form-label",
-                                        attrs: { for: "customRange2" }
+                                        staticClass:
+                                          "form-group d-flex flex-column"
                                       },
                                       [
-                                        _vm._v("Score "),
-                                        _c("span", [
-                                          _vm._v("(" + _vm._s(_vm.score) + ")")
-                                        ])
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "form-label",
+                                            attrs: { for: "customRange2" }
+                                          },
+                                          [
+                                            _vm._v("Score "),
+                                            _c("span", [
+                                              _vm._v(
+                                                "(" +
+                                                  _vm._s(_vm.review.score) +
+                                                  ")"
+                                              )
+                                            ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.score,
+                                              expression: "score"
+                                            }
+                                          ],
+                                          staticClass: "custom-range",
+                                          attrs: {
+                                            type: "range",
+                                            min: "0",
+                                            max: answer.question.score
+                                          },
+                                          domProps: { value: _vm.score },
+                                          on: {
+                                            __r: function($event) {
+                                              _vm.score = $event.target.value
+                                            }
+                                          }
+                                        })
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.score,
-                                          expression: "score"
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("textarea", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.review.review,
+                                            expression: "review.review"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          rows: "2",
+                                          placeholder: "Write comment"
+                                        },
+                                        domProps: { value: _vm.review.review },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.review,
+                                              "review",
+                                              $event.target.value
+                                            )
+                                          }
                                         }
-                                      ],
-                                      staticClass: "custom-range",
-                                      attrs: {
-                                        type: "range",
-                                        min: "0",
-                                        max: answer.question.score,
-                                        id: "customRange2"
-                                      },
-                                      domProps: { value: _vm.score },
-                                      on: {
-                                        __r: function($event) {
-                                          _vm.score = $event.target.value
-                                        }
-                                      }
-                                    })
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "form-group" }, [
-                                  _c("textarea", {
-                                    directives: [
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm._m(1, true)
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              answer.answer_text && answer.review
+                                ? _c("div", { staticClass: "col-md-4" }, [
+                                    _c(
+                                      "div",
                                       {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.review,
-                                        expression: "review"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: {
-                                      rows: "2",
-                                      placeholder: "Write comment"
-                                    },
-                                    domProps: { value: _vm.review },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
+                                        staticClass:
+                                          "form-group d-flex flex-column"
+                                      },
+                                      [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "form-label",
+                                            attrs: { for: "customRange2" }
+                                          },
+                                          [
+                                            _vm._v("Score "),
+                                            _c("span", [
+                                              _vm._v(
+                                                "(" +
+                                                  _vm._s(answer.review.score) +
+                                                  ")"
+                                              )
+                                            ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: answer.review.score,
+                                              expression: "answer.review.score"
+                                            }
+                                          ],
+                                          staticClass: "custom-range",
+                                          attrs: {
+                                            type: "range",
+                                            min: "0",
+                                            max: answer.question.score,
+                                            id: "customRange2"
+                                          },
+                                          domProps: {
+                                            value: answer.review.score
+                                          },
+                                          on: {
+                                            __r: function($event) {
+                                              return _vm.$set(
+                                                answer.review,
+                                                "score",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c("textarea", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: answer.review.review,
+                                            expression: "answer.review.review"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          rows: "2",
+                                          placeholder: "Write comment"
+                                        },
+                                        domProps: {
+                                          value: answer.review.review
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              answer.review,
+                                              "review",
+                                              $event.target.value
+                                            )
+                                          }
                                         }
-                                        _vm.review = $event.target.value
-                                      }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _vm._m(1, true)
-                              ])
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-success float-right",
+                                        on: { click: _vm.editReview }
+                                      },
+                                      [
+                                        _vm._v("Save review "),
+                                        _c(
+                                          "i",
+                                          {
+                                            staticClass:
+                                              "material-icons btn__icon--right"
+                                          },
+                                          [_vm._v("check")]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                : _vm._e()
                             ])
                           ])
                         ]
@@ -69596,19 +69733,23 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "media-right" }, [
-                        answer.correct === null && answer.review
+                        answer.correct === null && !answer.review
                           ? _c("span", { staticClass: "badge badge-success" }, [
                               _vm._v("Pending Review")
                             ])
                           : answer.correct === 1 && answer.review
                           ? _c("strong", { staticClass: "text-primary" }, [
-                              _vm._v(_vm._s(answer.question.score))
+                              _vm._v(_vm._s(answer.review.score))
                             ])
-                          : answer.correct === 1
+                          : answer.correct === 0 && answer.review
+                          ? _c("strong", { staticClass: "text-danger" }, [
+                              _vm._v("0")
+                            ])
+                          : answer.correct === 1 && !answer.review
                           ? _c("strong", { staticClass: "text-primary" }, [
                               _vm._v(_vm._s(answer.question.score))
                             ])
-                          : answer.correct === 0
+                          : answer.correct === 0 && !answer.review
                           ? _c("strong", { staticClass: "text-danger" }, [
                               _vm._v("0")
                             ])
