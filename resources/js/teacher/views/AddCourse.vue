@@ -144,14 +144,14 @@
 <script>
     import {mapState, mapActions} from 'vuex';
     import CKEditor from '@ckeditor/ckeditor5-vue';
-    import InlineEditor from '@ckeditor/ckeditor5-build-inline';
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     import InputTag from 'vue-input-tag';
     import VueNumeric from 'vue-numeric';
 
     export default {
         data() {
             return {
-                editor:               InlineEditor,
+                editor:               ClassicEditor,
                 editorConfig:         {},
                 breadcrumbs:          [
                     {

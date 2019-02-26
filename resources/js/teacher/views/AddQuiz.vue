@@ -84,7 +84,7 @@
 <script>
     import {mapState, mapActions} from 'vuex';
     import CKEditor from '@ckeditor/ckeditor5-vue';
-    import InlineEditor from '@ckeditor/ckeditor5-build-inline';
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     import Timepicker from 'vue2-timepicker'
     
     export default {
@@ -103,7 +103,7 @@
                     }
                 ],
                 pageTitle:   'Add New Lesson',
-                editor:      InlineEditor,
+                editor:      ClassicEditor,
                 quiz:        {
                     title:       '',
                     course_id:   null,
