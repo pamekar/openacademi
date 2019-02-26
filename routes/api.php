@@ -94,7 +94,7 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
             ]);
             Route::resource('quizes', 'QuizesController');
             Route::get('quizes/{id}/results', 'QuizesController@results');
-            Route::post('quizes/review/{id}', 'QuizesController@createReview');
+            Route::post('quizes/review/{id}', 'QuizesController@storeReview');
             Route::put('quizes/review/{id}', 'QuizesController@updateReview');
             Route::post('quizes_mass_destroy', [
                 'uses' => 'QuizesController@massDestroy',

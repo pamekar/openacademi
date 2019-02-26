@@ -82,19 +82,26 @@ class QuizesController extends Controller
     }
 
     /**
-     * Store a newly created Test in storage.
+     * Store a newly created answer review in storage.
      *
      * @param  Request $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function storeReview(Request $request,$id)
+    public function storeReview(Request $request, $id)
     {
         if (!Gate::allows('test_create')) {
             return abort(401);
         }
-        $answers= TestsResultsAnswer::findOrFail($id);
-        $answers->review()->create($request->all());
+        $answer = TestsResultsAnswer::findOrFail($id);
+        $test = TestsResult::findOrFail($answer->tests_result_id);
+
+        // drg >> update the testScore
+        $test->test_result = $test->test_result + $request->score;
+        $answer->correct = $request->score > 0;
+        $answer->save();
+        $test->save();
+        $answer->review()->create($request->all());
 
         $status = [
             'type'    => 'success',
@@ -157,7 +164,7 @@ class QuizesController extends Controller
      * Update Review
      *
      * @param  Request $request
-     * @param  int                                    $id
+     * @param  int     $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -167,8 +174,21 @@ class QuizesController extends Controller
             return abort(401);
         }
         $review = TestsResultsAnswersReview::findOrFail($id);
+
+        $answers
+            = TestsResultsAnswer::findOrFail($review->tests_results_answer_id);
+        $test = TestsResult::findOrFail($answers->tests_result_id);
+
+        // drg >> update the testScore
+        $test->test_result = $test->test_result - $answers->review->score
+            + $request->score;
+
+        $answers->correct = $request->score > 0;
+        $answers->save();
+
         $review->update($request->all());
 
+        $test->save();
         $status = [
             'type'    => 'success',
             'message' => "Your review has been updated"
@@ -206,7 +226,9 @@ class QuizesController extends Controller
         if (!Gate::allows('test_view')) {
             return abort(401);
         }
-        $results = TestsResult::where('test_id', $id)->orderBy('created_at','desc')->with('answers.question','answers.review')
+        $results = TestsResult::where('test_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->with('answers.question', 'answers.review')
             ->paginate(10);
 
         return response()->json($results);

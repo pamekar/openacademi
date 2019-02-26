@@ -46199,6 +46199,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["a"] = ({
   data() {
     return {
+      answerIndex: 0,
       currentIndex: 0,
       limit: 10,
       purchased: "",
@@ -46223,22 +46224,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     'paginate': __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate___default.a
   },
   methods: {
-    getResults: function (page = 1) {
+    addReview: function (index) {
+      let answer = {
+        id: this.result.answers[index].id,
+        review: this.review
+      };
+      this.$store.dispatch('quizes/add_review', answer);
+      this.getResults(this.currentPage);
+    },
+    editReview: function (index) {
+      this.$store.dispatch('quizes/edit_review', this.result.answers[index].review);
+      this.getResults(this.currentPage, this.currentIndex);
+      this.viewResult(this.currentIndex);
+    },
+    getResults: function (page = 1, currentIndex = 0) {
       this.$store.dispatch('quizes/fetch_results', {
         id: this.$route.params.id,
         page: page
       });
-      this.currentIndex = 0;
+      this.currentIndex = currentIndex;
     },
     viewResult: function (index) {
       this.result = this.results[index];
       this.currentIndex = index;
-    },
-    editReview: function () {}
+    }
   },
   computed: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
     course: state => state.quizes.course,
     pageCount: state => state.quizes.pageCount,
+    currentPage: state => state.quizes.currentPage,
     pageTitle: state => state.quizes.pageTitle,
     quiz: state => state.quizes.quiz,
     results: state => state.quizes.results
@@ -69529,8 +69543,8 @@ var render = function() {
                                             {
                                               name: "model",
                                               rawName: "v-model",
-                                              value: _vm.score,
-                                              expression: "score"
+                                              value: _vm.review.score,
+                                              expression: "review.score"
                                             }
                                           ],
                                           staticClass: "custom-range",
@@ -69539,10 +69553,14 @@ var render = function() {
                                             min: "0",
                                             max: answer.question.score
                                           },
-                                          domProps: { value: _vm.score },
+                                          domProps: { value: _vm.review.score },
                                           on: {
                                             __r: function($event) {
-                                              _vm.score = $event.target.value
+                                              return _vm.$set(
+                                                _vm.review,
+                                                "score",
+                                                $event.target.value
+                                              )
                                             }
                                           }
                                         })
@@ -69580,7 +69598,29 @@ var render = function() {
                                       })
                                     ]),
                                     _vm._v(" "),
-                                    _vm._m(1, true)
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-success float-right",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.addReview(index)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v("Save review "),
+                                        _c(
+                                          "i",
+                                          {
+                                            staticClass:
+                                              "material-icons btn__icon--right"
+                                          },
+                                          [_vm._v("check")]
+                                        )
+                                      ]
+                                    )
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
@@ -69681,10 +69721,14 @@ var render = function() {
                                       {
                                         staticClass:
                                           "btn btn-success float-right",
-                                        on: { click: _vm.editReview }
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.editReview(index)
+                                          }
+                                        }
                                       },
                                       [
-                                        _vm._v("Save review "),
+                                        _vm._v("Update review "),
                                         _c(
                                           "i",
                                           {
@@ -69733,7 +69777,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "media-right" }, [
-                        answer.correct === null && !answer.review
+                        answer.answer_text && !answer.review
                           ? _c("span", { staticClass: "badge badge-success" }, [
                               _vm._v("Pending Review")
                             ])
@@ -69759,16 +69803,16 @@ var render = function() {
                   ])
                 }),
                 0
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "card card-footer" }, [
-                _vm._v("\n                    Total Score: "),
-                _c("span", { staticClass: "h5 text-primary" }, [
-                  _c("strong", [_vm._v(_vm._s(_vm.result.test_result))])
-                ])
-              ])
+              )
             ]
           )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-footer" }, [
+          _vm._v("\n            Total Score: "),
+          _c("span", { staticClass: "h5 text-primary" }, [
+            _c("strong", [_vm._v(_vm._s(_vm.result.test_result))])
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -69779,7 +69823,7 @@ var render = function() {
         { staticClass: "table-responsive" },
         [
           _c("table", { staticClass: "table table-sm table-middle" }, [
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "tbody",
@@ -69803,7 +69847,7 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(3, true),
+                  _vm._m(2, true),
                   _vm._v(" "),
                   _c("td", { staticClass: "right" }, [
                     _c(
@@ -69878,21 +69922,6 @@ var staticRenderFns = [
         )
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn btn-success float-right", attrs: { href: "#" } },
-      [
-        _vm._v("Save review "),
-        _c("i", { staticClass: "material-icons btn__icon--right" }, [
-          _vm._v("check")
-        ])
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -71352,6 +71381,7 @@ const mutations = {
 
 const endpoint = '/api/instructor';
 const state = {
+  currentPage: 1,
   courses: [],
   lesson: [],
   lessons: [],
@@ -71398,6 +71428,36 @@ const actions = {
     }
 
     axios.post(`${endpoint}/quizes`, form_data).then(({
+      data
+    }) => {
+      jQuery.notify({
+        // options
+        message: data.message
+      }, {
+        // settings
+        type: data.type
+      });
+      __WEBPACK_IMPORTED_MODULE_0__routes__["a" /* default */].push({
+        name: 'edit-lesson',
+        params: {
+          id: quiz.lesson_id
+        }
+      });
+    });
+  },
+
+  add_review({}, answer) {
+    let form_data = new FormData();
+    let reviewData = {
+      score: answer.review.score,
+      review: answer.review.review
+    };
+
+    for (let key in reviewData) {
+      form_data.append(key, reviewData[key]);
+    }
+
+    axios.post(`${endpoint}/quizes/review/${answer.id}`, form_data).then(({
       data
     }) => {
       jQuery.notify({
@@ -71471,6 +71531,37 @@ const actions = {
         name: 'edit-quiz',
         params: {
           id: quiz.id
+        }
+      });
+    });
+  },
+
+  edit_review({}, review) {
+    let form_data = new FormData();
+    let reviewData = {
+      score: review.score,
+      review: review.review,
+      _method: 'PUT'
+    };
+
+    for (let key in reviewData) {
+      form_data.append(key, reviewData[key]);
+    }
+
+    axios.post(`${endpoint}/quizes/review/${review.id}`, form_data).then(({
+      data
+    }) => {
+      jQuery.notify({
+        // options
+        message: data.message
+      }, {
+        // settings
+        type: data.type
+      });
+      __WEBPACK_IMPORTED_MODULE_0__routes__["a" /* default */].push({
+        name: 'edit-lesson',
+        params: {
+          id: quiz.lesson_id
         }
       });
     });
@@ -71572,13 +71663,14 @@ const mutations = {
   },
 
   SET_RESULTS(state, results) {
+    state.currentPage = results.current_page;
+    state.result = results.data[0];
     state.results = results.data;
     state.pageCount = results.last_page;
     state.pageFrom = results.from;
     state.pagePer = results.per_page;
     state.pageTo = results.to;
     state.pageTotal = results.total;
-    state.result = results.data[0];
   }
 
 };

@@ -62,12 +62,12 @@
                                         <div class="col-md-4" v-if="answer.answer_text && !answer.review">
                                             <div class="form-group d-flex flex-column">
                                                 <label class="form-label" for="customRange2">Score <span>({{review.score}})</span></label>
-                                                <input type="range" class="custom-range" min="0" :max="answer.question.score" v-model="score">
+                                                <input type="range" class="custom-range" min="0" :max="answer.question.score" v-model="review.score">
                                             </div>
                                             <div class="form-group">
                                                 <textarea class="form-control" rows="2" placeholder="Write comment" v-model="review.review"></textarea>
                                             </div>
-                                            <a href="#" class="btn btn-success float-right">Save review <i class="material-icons btn__icon--right">check</i></a>
+                                            <button class="btn btn-success float-right" @click="addReview(index)">Save review <i class="material-icons btn__icon--right">check</i></button>
                                         </div>
                                         <div class="col-md-4" v-if="answer.answer_text && answer.review">
                                             <div class="form-group d-flex flex-column">
@@ -77,7 +77,7 @@
                                             <div class="form-group">
                                                 <textarea class="form-control" rows="2" placeholder="Write comment" v-model="answer.review.review"></textarea>
                                             </div>
-                                            <button class="btn btn-success float-right" @click="editReview">Save review <i class="material-icons btn__icon--right">check</i></button>
+                                            <button class="btn btn-success float-right" @click="editReview(index)">Update review <i class="material-icons btn__icon--right">check</i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                     <div v-html="answer.question.question"></div>
                                 </div>
                                 <div class="media-right">
-                                    <span class="badge badge-success" v-if="answer.correct === null && !answer.review ">Pending Review</span>
+                                    <span class="badge badge-success" v-if="answer.answer_text && !answer.review ">Pending Review</span>
                                     <strong class="text-primary" v-else-if="answer.correct === 1 && answer.review">{{answer.review.score}}</strong>
                                     <strong class="text-danger" v-else-if="answer.correct === 0 && answer.review">0</strong>
                                     <strong class="text-primary" v-else-if="answer.correct === 1 && !answer.review">{{answer.question.score}}</strong>
@@ -106,10 +106,10 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="card card-footer">
-                        Total Score: <span class="h5 text-primary"><strong>{{result.test_result}}</strong></span>
-                    </div>
                 </div>
+            </div>
+            <div class="card-footer">
+                Total Score: <span class="h5 text-primary"><strong>{{result.test_result}}</strong></span>
             </div>
         </div>
 
@@ -165,6 +165,7 @@
     export default {
         data() {
             return {
+                answerIndex:  0,
                 currentIndex: 0,
                 limit:        10,
                 purchased:    "",
@@ -185,26 +186,38 @@
             'paginate': Paginate
         },
         methods:    {
-            getResults: function (page = 1) {
+            addReview:  function (index) {
+                let answer = {
+                    id:     this.result.answers[index].id,
+                    review: this.review
+                };
+                this.$store.dispatch('quizes/add_review', answer);
+                this.getResults(this.currentPage);
+            },
+            editReview: function (index) {
+                this.$store.dispatch('quizes/edit_review', this.result.answers[index].review);
+                this.getResults(this.currentPage, this.currentIndex);
+                this.viewResult(this.currentIndex);
+            },
+            getResults: function (page = 1, currentIndex = 0) {
                 this.$store.dispatch('quizes/fetch_results', {id: this.$route.params.id, page: page});
-                this.currentIndex = 0;
+                this.currentIndex = currentIndex;
             },
             viewResult: function (index) {
                 this.result = this.results[index];
                 this.currentIndex = index;
-            },
-            editReview: function () {
-                
             }
+
         },
         computed:   {
             ...mapState(
                 {
-                    course:    state => state.quizes.course,
-                    pageCount: state => state.quizes.pageCount,
-                    pageTitle: state => state.quizes.pageTitle,
-                    quiz:      state => state.quizes.quiz,
-                    results:   state => state.quizes.results,
+                    course:      state => state.quizes.course,
+                    pageCount:   state => state.quizes.pageCount,
+                    currentPage: state => state.quizes.currentPage,
+                    pageTitle:   state => state.quizes.pageTitle,
+                    quiz:        state => state.quizes.quiz,
+                    results:     state => state.quizes.results,
                 }),
             result: {
                 get: function () {

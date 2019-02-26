@@ -4,6 +4,7 @@ import router from '../../routes'
 const endpoint = '/api/instructor';
 
 const state = {
+    currentPage:         1,
     courses:              [],
     lesson:               [],
     lessons:              [],
@@ -15,7 +16,7 @@ const state = {
     pagePer:              0,
     pageTo:               0,
     pageTotal:            0,
-    result:              [],
+    result:               [],
     results:              [],
     pageTitle:            '',
     purchased:            '',
@@ -52,6 +53,29 @@ const actions = {
         }
         
         axios.post(`${endpoint}/quizes`, form_data)
+            .then(({data}) => {
+                
+                jQuery.notify({
+                    // options
+                    message: data.message,
+                }, {
+                    // settings
+                    type: data.type,
+                });
+                router.push({name: 'edit-lesson', params: {id: quiz.lesson_id}});
+            });
+    },
+    add_review({}, answer) {
+        let form_data = new FormData();
+        let reviewData = {
+            score:  answer.review.score,
+            review: answer.review.review
+        };
+        for (let key in reviewData) {
+            form_data.append(key, reviewData[key]);
+        }
+        
+        axios.post(`${endpoint}/quizes/review/${answer.id}`, form_data)
             .then(({data}) => {
                 
                 jQuery.notify({
@@ -108,6 +132,30 @@ const actions = {
                 });
                 router.push({name: 'edit-quiz', params: {id: quiz.id}});
                 
+            });
+    },
+    edit_review({}, review) {
+        let form_data = new FormData();
+        let reviewData = {
+            score:   review.score,
+            review:  review.review,
+            _method: 'PUT'
+        };
+        
+        for (let key in reviewData) {
+            form_data.append(key, reviewData[key]);
+        }
+        
+        axios.post(`${endpoint}/quizes/review/${review.id}`, form_data)
+            .then(({data}) => {
+                jQuery.notify({
+                    // options
+                    message: data.message,
+                }, {
+                    // settings
+                    type: data.type,
+                });
+                router.push({name: 'edit-lesson', params: {id: quiz.lesson_id}});
             });
     },
     fetch({commit, dispatch}, id) {
@@ -181,13 +229,14 @@ const mutations = {
         state.pageTotal = quizes.total;
     },
     SET_RESULTS(state, results) {
+        state.currentPage=results.current_page;
+        state.result = results.data[0];
         state.results = results.data;
         state.pageCount = results.last_page;
         state.pageFrom = results.from;
         state.pagePer = results.per_page;
         state.pageTo = results.to;
         state.pageTotal = results.total;
-        state.result = results.data[0];
     },
 };
 
