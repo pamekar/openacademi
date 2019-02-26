@@ -161,12 +161,10 @@ class QuizesController extends Controller
     }
 
     /**
-     * Update Review
+     * @param Request $request
+     * @param         $id
      *
-     * @param  Request $request
-     * @param  int     $id
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|void
      */
     public function updateReview(Request $request, $id)
     {

@@ -155,10 +155,10 @@
                             <label class="form-label" for="purchased">{{course.published}}</label>
                         </div>
                         <div class="form-group text-md-right">
-                            <button @click="editCourse" class="btn btn-outline-info btn-sm">
+                            <button type="submit" class="btn btn-outline-info btn-sm">
                                 Update
                             </button>
-                            <button @click="deleteCourse(course.id)" class="btn btn-outline-warning btn-sm">
+                            <button type="button" @click="deleteCourse(course.id)" class="btn btn-outline-warning btn-sm">
                                 Delete
                             </button>
                         </div>

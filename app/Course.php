@@ -54,6 +54,17 @@ class Course extends Model
         ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts
+        = [
+            'published' => 'boolean',
+        ];
+
+
+    /**
      * Set attribute to money format
      *
      * @param $input
@@ -243,6 +254,6 @@ class Course extends Model
 
     public function setPublishedAttribute($value)
     {
-        return $value ? 1 : 0;
+        $this->attributes['published'] = (int)$value;
     }
 }

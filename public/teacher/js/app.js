@@ -65956,7 +65956,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-outline-info btn-sm",
-                      on: { click: _vm.editCourse }
+                      attrs: { type: "submit" }
                     },
                     [
                       _vm._v(
@@ -65969,6 +65969,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-outline-warning btn-sm",
+                      attrs: { type: "button" },
                       on: {
                         click: function($event) {
                           return _vm.deleteCourse(_vm.course.id)

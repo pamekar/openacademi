@@ -82,12 +82,12 @@ class Lesson extends Model implements HasMedia
 
     public function setFreeLessonAttribute($value)
     {
-        return $value ? 1 : 0;
+        $this->attributes['free_lesson'] = (int)$value;
     }
 
     public function setPublishedAttribute($value)
     {
-        return $value ? 1 : 0;
+        $this->attributes['published'] = (int)$value;
     }
 
     public function getCourseTitleAttribute()
