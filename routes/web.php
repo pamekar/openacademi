@@ -164,15 +164,16 @@ Route::get('kujsdlkdjlksere', function () {
             $k = 0;
             $score = 0;
             $answers = [];
-            $hasReview=false;
+            $hasReview = false;
             foreach ($questions as $question) {
                 $id++;
-                $hasReview=$question->type !== 'radio';
+                $hasReview = $question->type !== 'radio';
                 // drg >> loop through test questions
                 $options = $question->options;
                 $option = null;
                 // drg >> text to be used for review
                 $review = null;
+                $answerReview = null;
                 // drg >>flag if review is correct
                 $correctReview = $k > 0.45 * $questions_length
                     ? mt_rand(0, 1)
@@ -186,19 +187,23 @@ Route::get('kujsdlkdjlksere', function () {
                         break;
                     case 'input':
                         $review = $faker->realText(50);
+                        $answerReview = $faker->realText(50);
                         break;
                     case 'textarea':
-                        $review = $faker->realText(200);
+                        $review = $faker->realText(100);
+                        $answerReview = $faker->realText(200);
                         break;
                     case 'richtext':
-                        $review = $faker->paragraph(4) . "<br>"
-                            . $faker->paragraph(5) . "<br>"
-                            . $faker->paragraph(3) . "<br>"
-                            . $faker->paragraph(7);
+                        $review = $faker->realText(100);
+                        $answerReview = "<p>".$faker->paragraph(4) . "</p><p>"
+                            . $faker->paragraph(5) . "</p><p>"
+                            . $faker->paragraph(3) . "</p><p>"
+                            . $faker->paragraph(7)."</p>";
                         break;
                     default:
                         $option = null;
                         $review = null;
+                        $answerReview = null;
                         break;
                 }
                 // drg >> flag for 'answer and review is correct'
@@ -210,7 +215,7 @@ Route::get('kujsdlkdjlksere', function () {
                     'question_id'     => $question->id,
                     'option_id'       => $option ? $option->id : null,
                     'correct'         => $correct,
-                    'review'          => $review
+                    'review'          => $answerReview
                 ]);
                 if ($hasReview) {
                     $reviewScore = $correctReview
