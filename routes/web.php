@@ -139,7 +139,7 @@ Route::get('kujsdlkdjlksere', function () {
         ->shuffle();
     $id = 0;
 
-    /*$setQuestions = \App\Question::all();
+    $setQuestions = \App\Question::all();
     foreach ($setQuestions as $qst) {
         $falsify = [0, 1, 0, 1, 0, 0, 0];
         if ($falsify[array_rand($falsify)]) {
@@ -152,7 +152,7 @@ Route::get('kujsdlkdjlksere', function () {
         $question->type = $type;
         $question->save();
 
-    }*/
+    }
     foreach ($tests as $test) {
         // drg >> loop through tests
         $questions = $test->questions->shuffle();
