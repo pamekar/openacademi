@@ -6989,7 +6989,7 @@ const routes = [{
 }, {
   path: '/lesson/add/:id?',
   name: 'add-lesson',
-  component: __WEBPACK_IMPORTED_MODULE_4__views_AddLesson_vue__["default"]
+  component: __WEBPACK_IMPORTED_MODULE_4__views_AddLesson_vue__["a" /* default */]
 }, {
   path: '/lesson/:id',
   name: 'view-lesson',
@@ -43615,9 +43615,312 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 /* 161 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: /var/www/html/QuickLMS-master/resources/js/teacher/views/AddLesson.vue: Unexpected token, expected \",\" (234:8)\n\n\u001b[0m \u001b[90m 232 | \u001b[39m            }\u001b[0m\n\u001b[0m \u001b[90m 233 | \u001b[39m        }\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 234 | \u001b[39m        getArray(obj) {\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 235 | \u001b[39m            \u001b[90m// drg >> convert JSON object into array\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 236 | \u001b[39m            let arr \u001b[33m=\u001b[39m \u001b[33mObject\u001b[39m\u001b[33m.\u001b[39mkeys(obj)\u001b[33m.\u001b[39mmap(\u001b[36mfunction\u001b[39m (key) {\u001b[0m\n\u001b[0m \u001b[90m 237 | \u001b[39m                \u001b[36mreturn\u001b[39m [\u001b[33mNumber\u001b[39m(key)\u001b[33m,\u001b[39m obj[key]]\u001b[33m;\u001b[39m\u001b[0m\n    at Parser.raise (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:3831:17)\n    at Parser.unexpected (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5143:16)\n    at Parser.expect (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5135:28)\n    at Parser.parseObj (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:6600:14)\n    at Parser.parseExprAtom (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:6229:21)\n    at Parser.parseExprSubscripts (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5862:23)\n    at Parser.parseMaybeUnary (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5842:21)\n    at Parser.parseExprOps (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5729:23)\n    at Parser.parseMaybeConditional (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5702:23)\n    at Parser.parseMaybeAssign (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5647:21)\n    at Parser.parseObjectProperty (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:6730:101)\n    at Parser.parseObjPropValue (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:6755:101)\n    at Parser.parseObj (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:6670:12)\n    at Parser.parseExprAtom (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:6229:21)\n    at Parser.parseExprSubscripts (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5862:23)\n    at Parser.parseMaybeUnary (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5842:21)\n    at Parser.parseExprOps (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5729:23)\n    at Parser.parseMaybeConditional (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5702:23)\n    at Parser.parseMaybeAssign (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:5647:21)\n    at Parser.parseExportDefaultExpression (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:8405:24)\n    at Parser.parseExport (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:8299:31)\n    at Parser.parseStatementContent (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:7347:27)\n    at Parser.parseStatement (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:7243:17)\n    at Parser.parseBlockOrModuleBlockBody (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:7810:25)\n    at Parser.parseBlockBody (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:7797:10)\n    at Parser.parseTopLevel (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:7181:10)\n    at Parser.parse (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:8658:17)\n    at parse (/var/www/html/QuickLMS-master/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10658:38)\n    at parser (/var/www/html/QuickLMS-master/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)\n    at normalizeFile (/var/www/html/QuickLMS-master/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)");
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_vue__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ckeditor_ckeditor5_build_classic__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ckeditor_ckeditor5_build_classic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ckeditor_ckeditor5_build_classic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue2_timepicker__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue2_timepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue2_timepicker__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  data() {
+    return {
+      breadcrumbs: [{
+        title: "Dashboard",
+        link: 'dashboard'
+      }, {
+        title: "Courses",
+        link: 'show-courses'
+      }, {
+        title: ""
+      }],
+      editor: __WEBPACK_IMPORTED_MODULE_2__ckeditor_ckeditor5_build_classic___default.a,
+      uploadFileParams: {
+        model_name: 'Lesson',
+        file_key: 'downloadable_files',
+        bucket: 'downloadable_files'
+      },
+      lesson: {
+        title: '',
+        course_id: null,
+        downloadable_files_id: [],
+        short_text: '',
+        full_text: "<h3>Lesson content</h3><p>Write Content ...</p><h3>Sample List</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul>",
+        free_lesson: false,
+        published: false,
+        duration: 0,
+        lesson_image_preview: '',
+        lesson_image: ''
+      },
+      pageTitle: 'Add New Lesson',
+      lesson_image_preview: null,
+      lesson_image: null,
+      lesson_video: null,
+      lesson_video_image: '',
+      media_title: null,
+      timePicker: {
+        HH: "",
+        mm: "",
+        ss: ""
+      }
+    };
+  },
+
+  created() {
+    this.$store.dispatch('lessons/fetch_courses');
+    this.lesson.course_id = this.$route.params.id;
+  },
+
+  components: {
+    'ckeditor': __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_vue___default.a.component,
+    'time-picker': __WEBPACK_IMPORTED_MODULE_3_vue2_timepicker___default.a
+  },
+  computed: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+    courses: state => state.lessons.courses
+  }), {
+    downloadable_files: {
+      get: function () {
+        return this.downloadable_files_id;
+      },
+      set: function (id) {
+        this.downloadable_files_id.push(id);
+      }
+    }
+  }),
+  methods: {
+    addLesson: function () {
+      this.$store.dispatch('lessons/add', this.lesson);
+    },
+
+    createImage(file) {
+      let reader = new FileReader();
+      this.media_title = file.name;
+
+      reader.onload = e => {
+        this.lesson_image = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    },
+
+    createImagePreview(file) {
+      let reader = new FileReader();
+
+      reader.onload = e => {
+        this.lesson_image_preview = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    },
+
+    fileUploaded(files) {
+      for (let i = 0; i < files.length; i++) {
+        let file = files[i].files;
+
+        if (file && Array.isArray(file) && file.length) {
+          for (let j = 0; j < file.length; j++) {
+            let downloadableFiles = this.lesson.downloadable_files_id;
+            downloadableFiles.push(file[j].id);
+            this.lesson.downloadable_files_id = [...new Set(downloadableFiles)];
+          }
+        }
+      }
+    },
+
+    getArray(obj) {
+      // drg >> convert JSON object into array
+      let arr = Object.keys(obj).map(function (key) {
+        return [Number(key), obj[key]];
+      });
+      return arr;
+    },
+
+    lessonImagePreviewChanged(e) {
+      let files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.lesson.lesson_image_preview = files[0];
+      this.createImagePreview(files[0]);
+    },
+
+    lessonImageChanged(e) {
+      let files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.lesson.lesson_image = files[0];
+      this.createImage(files[0]);
+    },
+
+    lessonVideoChanged(e) {
+      let files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.lesson.lesson_image = files[0];
+      var source = jQuery('#lesson_video');
+      this.lesson_video = URL.createObjectURL(files[0]);
+      source.parent()[0].load();
+    },
+
+    timePickerChanged(e) {
+      let t = e.data;
+      let time = Number(t.HH) * 3600 + Number(t.mm) * 60 + Number(t.ss);
+      this.lesson.duration = time;
+    }
+
+  }
+});
 
 /***/ }),
 /* 162 */
@@ -63003,7 +63306,6 @@ if (false) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_node_modules_vue_loader_lib_selector_type_script_index_0_AddLesson_vue__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_node_modules_vue_loader_lib_selector_type_script_index_0_AddLesson_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_node_modules_vue_loader_lib_selector_type_script_index_0_AddLesson_vue__);
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_65f7ea06_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_AddLesson_vue__ = __webpack_require__(374);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(2);
@@ -63023,7 +63325,7 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 
 var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_node_modules_vue_loader_lib_selector_type_script_index_0_AddLesson_vue__["default"],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_node_modules_vue_loader_lib_selector_type_script_index_0_AddLesson_vue__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_65f7ea06_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_AddLesson_vue__["a" /* render */],
   __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_65f7ea06_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_AddLesson_vue__["b" /* staticRenderFns */],
   __vue_template_functional__,
@@ -63049,7 +63351,7 @@ if (false) {(function () {
   })
 })()}
 
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
 
 
 /***/ }),

@@ -151,7 +151,7 @@
     export default {
         data() {
             return {
-                breadcrumbs:          [
+                breadcrumbs:           [
                     {
                         title: "Dashboard", link: 'dashboard'
                     },
@@ -162,15 +162,16 @@
                         title: ""
                     }
                 ],
-                editor:               ClassicEditor,
-                uploadFileParams:     {
+                editor:                ClassicEditor,
+                uploadFileParams:      {
                     model_name: 'Lesson',
                     file_key:   'downloadable_files',
                     bucket:     'downloadable_files'
                 },
-                lesson:               {
+                lesson:                {
                     title:                '',
                     course_id:            null,
+                    downloadable_files_id: [],
                     short_text:           '',
                     full_text:            "<h3>Lesson content</h3><p>Write Content ...</p><h3>Sample List</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul>",
                     free_lesson:          false,
@@ -179,13 +180,13 @@
                     lesson_image_preview: '',
                     lesson_image:         ''
                 },
-                pageTitle:            'Add New Lesson',
-                lesson_image_preview: null,
-                lesson_image:         null,
-                lesson_video:         null,
-                lesson_video_image:   '',
-                media_title:          null,
-                timePicker:           {
+                pageTitle:             'Add New Lesson',
+                lesson_image_preview:  null,
+                lesson_image:          null,
+                lesson_video:          null,
+                lesson_video_image:    '',
+                media_title:           null,
+                timePicker:            {
                     HH: "",
                     mm: "",
                     ss: ""
@@ -204,7 +205,16 @@
             ...mapState(
                 {
                     courses: state => state.lessons.courses,
-                })
+                }),
+            downloadable_files: {
+                get: function () {
+                    return this.downloadable_files_id;
+                },
+                set: function (id) {
+                    this.downloadable_files_id.push(id);
+                }
+            }
+
         },
         methods:    {
             addLesson: function () {
@@ -225,12 +235,19 @@
                 };
                 reader.readAsDataURL(file);
             },
-            fileUploaded(files){
-                console.log(files);
-                if(files && Array.isArray(files) && files.length){
-                    // do something...
+            fileUploaded(files) {
+                for (let i = 0; i < files.length; i++) {
+                    let file = files[i].files;
+                    if (file && Array.isArray(file) && file.length) {
+                        for (let j = 0; j < file.length; j++) {
+                            let downloadableFiles= this.lesson.downloadable_files_id;
+                            downloadableFiles.push(file[j].id);
+                            this.lesson.downloadable_files_id=[...new Set(downloadableFiles)];
+                        }
+                    }
+
                 }
-            }
+            },
             getArray(obj) {
                 // drg >> convert JSON object into array
                 let arr = Object.keys(obj).map(function (key) {
