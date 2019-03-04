@@ -10,11 +10,12 @@ class SpatieMediaController extends Controller
 {
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function create(Request $request)
     {
-        if (! $request->has('model_name') && ! $request->has('file_key') && ! $request->has('bucket')) {
+        if (!$request->has('model_name') && !$request->has('bucket')) {
             return abort(500);
         }
 
@@ -25,17 +26,17 @@ class SpatieMediaController extends Controller
             abort(500, 'Model not found');
         }
 
-        $files      = $request->file($request->input('file_key'));
-        $addedFiles = [];
-        foreach ($files as $file) {
-            try {
-                $media        = $model->addMedia($file)->toMediaLibrary($request->input('bucket'));
-                $addedFiles[] = $media;
-            } catch (\Exception $e) {
-                abort(500, 'Could not upload your file');
-            }
+        $file = $request->file($request->input('file_key'));
+        $fileMeta=[];
+        try {
+            $media = $model->addMedia($file)
+                ->toMediaLibrary($request->input('bucket'));
+            $fileMeta[] = $media;
+        } catch (\Exception $e) {
+            abort(500,$e->getMessage());
         }
 
-        return response()->json(['files' => $addedFiles]);
+
+        return response()->json(['files' => $fileMeta,'success'=>true,'error'=>null,'url'=>null]);
     }
 }

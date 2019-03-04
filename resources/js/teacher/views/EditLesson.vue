@@ -138,7 +138,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <v-uploader language="en" :multiple="true" :itemLimit="0" fileTypeExts="jpeg,jpg,gif,png,mp4" fileSizeLimit="25MB"></v-uploader>
+                    <v-uploader language="en" :multiple="true" :itemLimit="0" :fileParams="{model:'lesson'}" fileTypeExts="audio/*,video/*,image/*,text/*" fileSizeLimit="25MB"></v-uploader>
                 </div>
             </div>
         </div>
@@ -175,7 +175,6 @@
         },
         created() {
             this.$store.dispatch('lessons/fetch_edit', this.$route.params.id);
-
         },
         mounted() {
         },

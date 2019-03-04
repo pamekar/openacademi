@@ -114,6 +114,21 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')
 Route::post('register', 'Auth\RegisterController@register')
     ->name('register');
 
+Route::group(['middleware' => 'checkLoggedIn'], function () {
+    Route::group([
+        'prefix'     => 'instructor',
+        'namespace'  => 'Instructor',
+        'middleware' => 'auth'
+    ],
+        function () {
+            Route::post('/spatie/media/upload',
+                'SpatieMediaController@create')
+                ->name('media.upload');
+            Route::post('/spatie/media/remove',
+                'SpatieMediaController@destroy')
+                ->name('media.remove');
+        });
+});
 Route::post('upload', function () {
 
     return response()->json([

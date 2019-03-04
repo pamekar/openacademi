@@ -193,6 +193,8 @@
                 };
                 this.$store.dispatch('quizes/add_review', answer);
                 this.getResults(this.currentPage);
+                this.review="";
+                this.score=0;
             },
             editReview: function (index) {
                 this.$store.dispatch('quizes/edit_review', this.result.answers[index].review);

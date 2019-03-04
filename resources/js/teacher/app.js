@@ -22,12 +22,15 @@ var csrf_token = document.querySelector('meta[name=csrf-token]').getAttribute('c
 
 // v-uploader plugin global config
 const uploaderConfig = {
+    uploadCustomHeaders:  {
+            Authorization:  'Bearer ' + functions.readCookie('jwt_token')
+    },
     // file uploader service url
-    uploadFileUrl: '/upload?_token='+csrf_token,
+    uploadFileUrl:       '/api/instructor/spatie/media/upload',
     // file delete service url
-    deleteFileUrl: 'http://xxx/upload/deleteUploadFile',
+    deleteFileUrl:       '/api/instructor/spatie/media/remove',
     // set the way to show upload message(upload fail message)
-    showMessage: (vue, message) => {
+    showMessage:         (vue, message) => {
         //using v-dialogs to show message
         vue.$vDialog.alert(message, null, {messageType: 'error'});
     }
@@ -39,7 +42,6 @@ Vue.use(vUploader, uploaderConfig);
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
-
 
 
 functions.setupAxios();

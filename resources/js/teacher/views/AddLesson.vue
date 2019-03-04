@@ -134,7 +134,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <v-uploader language="en" :multiple="true" :itemLimit="0" fileTypeExts="jpeg,jpg,gif,png,aac,svg,html,css,js,php,mp3,mp4,doc,docx,xls,xlsx,pdf,ppt,pptx,zip,7z" fileSizeLimit="25MB"></v-uploader>
+                    <v-uploader language="en" :multiple="true" :itemLimit="0" :fileParams="uploadFileParams" uploadFileObjName="downloadable_files" fileTypeExts="jpeg,jpg,gif,png,aac,svg,html,css,js,php,mp3,mp4,doc,docx,xls,xlsx,pdf,ppt,pptx,zip,7z" fileSizeLimit="25MB" @done="fileUploaded"></v-uploader>
                 </div>
             </div>
         </div>
@@ -163,6 +163,11 @@
                     }
                 ],
                 editor:               ClassicEditor,
+                uploadFileParams:     {
+                    model_name: 'Lesson',
+                    file_key:   'downloadable_files',
+                    bucket:     'downloadable_files'
+                },
                 lesson:               {
                     title:                '',
                     course_id:            null,
@@ -184,7 +189,7 @@
                     HH: "",
                     mm: "",
                     ss: ""
-                }
+                },
             }
         },
         created() {
@@ -220,6 +225,12 @@
                 };
                 reader.readAsDataURL(file);
             },
+            fileUploaded(files){
+                console.log(files);
+                if(files && Array.isArray(files) && files.length){
+                    // do something...
+                }
+            }
             getArray(obj) {
                 // drg >> convert JSON object into array
                 let arr = Object.keys(obj).map(function (key) {

@@ -1,5 +1,6 @@
 import NProgress from './uiux/js/nprogress.js'
 import jquery from 'jquery'
+
 const functions = {
     readCookie: function (name) {
         var nameEQ = name + "=";
@@ -12,8 +13,9 @@ const functions = {
         return null;
     },
     setupAxios: function () {
+        let jwtAuth=this.readCookie('jwt_token');
         window.axios = require('axios');
-        window.axios.defaults.headers.common['Authorization']='Bearer ' + this.readCookie('jwt_token');
+        window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + jwtAuth;
         window.axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
         window.axios.defaults.headers.put['Content-Type'] = 'multipart/form-data';
         // drg >> add a request interceptor
@@ -35,15 +37,22 @@ const functions = {
             console.error(error);
             return Promise.reject(error);
         });
-    
+        
         jquery(document).ajaxComplete(function (event, request, settings) {
             console.log(2);
             NProgress.done();
         });
-    
+        
         jquery(document).ajaxStart(function () {
             console.log(2);
             NProgress.start();
+        });
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN':  $('meta[name="csrf-token"]').attr('content'),
+                'Authorization': 'Bearer ' + jwtAuth
+            }
         });
     },
 };
