@@ -87,7 +87,7 @@ class Lesson extends Model implements HasMedia
 
     public function setPublishedAttribute($value)
     {
-        $this->attributes['published'] = (int)$value;
+        $this->attributes['published'] = $value === 'true' ? 1 : 0;
     }
 
     public function getCourseTitleAttribute()

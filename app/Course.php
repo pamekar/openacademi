@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\Types\Boolean;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
@@ -249,11 +250,10 @@ class Course extends Model
         $average = $count !== 0 && $sum !== 0 ? number_format($sum / $count, 2)
             : 0;
         return "$average;$count";
-
     }
 
     public function setPublishedAttribute($value)
     {
-        $this->attributes['published'] = (int)$value;
+        $this->attributes['published'] = $value === 'true' ? 1 : 0;
     }
 }

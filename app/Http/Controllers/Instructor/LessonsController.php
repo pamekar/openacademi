@@ -80,7 +80,8 @@ class LessonsController extends Controller
                         ->max('position') + 1
             ]);
 
-        foreach ($request->input('downloadable_files_id', []) as $index => $id)
+
+        foreach (explode(',', $request->input('downloadable_files_id')) as $id)
         {
             $model = config('laravel-medialibrary.media_model');
             $file = $model::find($id);
@@ -174,7 +175,8 @@ class LessonsController extends Controller
 
         $lesson = Lesson::findOrFail($id);
 
-        $course = Course::where('id', $lesson->course_id)->with('lessons')->firstOrFail();
+        $course = Course::where('id', $lesson->course_id)->with('lessons')
+            ->firstOrFail();
         return response()->json([
             'tests'  => $tests,
             'lesson' => $lesson,

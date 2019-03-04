@@ -71280,6 +71280,7 @@ const actions = {
     let lessonData = {
       // drg >> slug is not added to the list of objects, because it's auto generated
       course_id: lesson.course_id,
+      downloadable_files_id: lesson.downloadable_files_id,
       title: lesson.title,
       short_text: lesson.short_text,
       full_text: lesson.full_text,
@@ -71320,6 +71321,7 @@ const actions = {
     let lessonData = {
       // drg >> slug is not added to the list of objects, because it's auto generated
       course_id: lesson.course_id,
+      downloadable_files_id: lesson.downloadable_files_id,
       title: lesson.title,
       short_text: lesson.short_text,
       full_text: lesson.full_text,
