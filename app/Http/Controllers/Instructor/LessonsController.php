@@ -81,8 +81,9 @@ class LessonsController extends Controller
             ]);
 
 
-        foreach (explode(',', $request->input('downloadable_files_id')) as $id)
-        {
+        foreach (
+            explode(',', $request->input('downloadable_files_id', [])) as $id
+        ) {
             $model = config('laravel-medialibrary.media_model');
             $file = $model::find($id);
             $file->model_id = $lesson->id;
@@ -138,13 +139,18 @@ class LessonsController extends Controller
         $lesson->update($request->all());
 
         $media = [];
-        foreach ($request->input('downloadable_files_id', []) as $index => $id)
-        {
-            $model = config('laravel-medialibrary.media_model');
-            $file = $model::find($id);
-            $file->model_id = $lesson->id;
-            $file->save();
-            $media[] = $file;
+
+        if (!empty($request->input('downloadable_files_id', []))) {
+            foreach (
+                explode(',', $request->input('downloadable_files_id', [])) as
+                $id
+            ) {
+                $model = config('laravel-medialibrary.media_model');
+                $file = $model::find($id);
+                $file->model_id = $lesson->id;
+                $file->save();
+                $media[] = $file;
+            }
         }
         $lesson->updateMedia($media, 'downloadable_files');
 

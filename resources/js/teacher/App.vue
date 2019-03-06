@@ -2,15 +2,6 @@
     <div>
         <div class="mdk-header-layout js-mdk-header-layout">
 
-            <!-- Header -->
-
-
-            <!-- // END Header -->
-
-            <!-- Header Layout Content -->
-            <!-- // END Header Layout Content -->
-
-
             <div id="header" data-fixed class="mdk-header js-mdk-header mb-0">
                 <header-component></header-component>
             </div>

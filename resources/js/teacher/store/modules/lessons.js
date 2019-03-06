@@ -80,9 +80,9 @@ const actions = {
             title:                lesson.title,
             short_text:           lesson.short_text,
             full_text:            lesson.full_text,
-            free_lesson:          lesson.free_lesson,
+            free_lesson:          Number(lesson.free_lesson),
             duration:             lesson.duration,
-            published:            lesson.published,
+            published:            Number(lesson.published),
             lesson_image:         lesson.lesson_image,
             lesson_image_preview: lesson.lesson_image_preview,
         };
@@ -113,9 +113,9 @@ const actions = {
             title:                lesson.title,
             short_text:           lesson.short_text,
             full_text:            lesson.full_text,
-            free_lesson:          lesson.free_lesson,
+            free_lesson:          Number(lesson.free_lesson),
             duration:             lesson.duration,
-            published:            lesson.published,
+            published:            Number(lesson.published),
             lesson_image:         lesson.lesson_image,
             lesson_image_preview: lesson.lesson_image_preview,
             _method:              'PUT'
@@ -124,7 +124,6 @@ const actions = {
         for (let key in lessonData) {
             form_data.append(key, lessonData[key]);
         }
-        ;
         
         axios.post(`${endpoint}/lessons/${lesson.id}`, form_data)
             .then(({data}) => {
@@ -138,13 +137,11 @@ const actions = {
                 dispatch('fetch', lesson.id)
             });
     }
-    
 };
 
 // mutations
 const mutations = {
     SET_LESSON(state, lesson) {
-        console.log(lesson);
         state.lesson = lesson.lesson;
         state.course = lesson.course;
         state.tests = lesson.tests;

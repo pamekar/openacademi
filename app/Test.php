@@ -95,7 +95,7 @@ class Test extends Model
 
     public function setPublishedAttribute($value)
     {
-        $this->attributes['published'] = $value === 'true' ? 1 : 0;
+        $this->attributes['published'] = $value == 'true' || $value == 1 ? 1 : 0;
     }
 
 }

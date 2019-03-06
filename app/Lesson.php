@@ -45,8 +45,61 @@ class Lesson extends Model implements HasMedia
             'course_id',
             'duration'
         ];
-    protected $appends = ['is_completed', 'last_updated'];
+    protected $appends
+        = [
+            'is_completed',
+            'last_updated',
+            'downloadable_files_id'
+        ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts
+        = [
+            'published' => 'boolean',
+            'free_lesson' => 'boolean',
+        ];
+
+    public function getCourseTitleAttribute()
+    {
+        return title_case(Course::findOrFail($this->course_id)->title);
+    }
+
+    public function getDownloadableFilesIdAttribute()
+    {
+        $downloadables = $this->getMedia('downloadable_files');
+        $fileIds = [];
+        foreach ($downloadables as $downloadable) {
+            array_push($fileIds, $downloadable->id);
+        }
+        return $fileIds;
+    }
+
+    public function getIsCompletedAttribute()
+    {
+        $isCompleted = Auth::user()->lessons()->where('lesson_id', $this->id)
+            ->count();
+        return $isCompleted;
+    }
+
+    public function getLessonImageAttribute($value)
+    {
+        if ($this->lesson_image_type == 'image' && !empty($value)) {
+            return Storage::url($value);
+        }
+        return $value;
+    }
+
+    public function getLessonImagePreviewAttribute($value)
+    {
+        if (!empty($value)) {
+            return Storage::url($value);
+        }
+        return $value;
+    }
 
     /**
      * Set to null if empty
@@ -78,44 +131,6 @@ class Lesson extends Model implements HasMedia
     public function setPositionAttribute($input)
     {
         $this->attributes['position'] = $input ? $input : null;
-    }
-
-    public function setFreeLessonAttribute($value)
-    {
-        $this->attributes['free_lesson'] = $value === 'true' ? 1 : 0;
-    }
-
-    public function setPublishedAttribute($value)
-    {
-        $this->attributes['published'] = $value === 'true' ? 1 : 0;
-    }
-
-    public function getCourseTitleAttribute()
-    {
-        return title_case(Course::findOrFail($this->course_id)->title);
-    }
-
-    public function getIsCompletedAttribute()
-    {
-        $isCompleted = Auth::user()->lessons()->where('lesson_id', $this->id)
-            ->count();
-        return $isCompleted;
-    }
-
-    public function getLessonImageAttribute($value)
-    {
-        if ($this->lesson_image_type == 'image' && !empty($value)) {
-            return Storage::url($value);
-        }
-        return $value;
-    }
-
-    public function getLessonImagePreviewAttribute($value)
-    {
-        if (!empty($value)) {
-            return Storage::url($value);
-        }
-        return $value;
     }
 
     public function course()

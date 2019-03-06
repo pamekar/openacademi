@@ -41869,15 +41869,6 @@ if(false) {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -45027,6 +45018,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -45048,7 +45079,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       lesson_image_preview: null,
       lesson_image: null,
       lesson_video: '',
-      media_title: ''
+      media_title: '',
+      uploadFileParams: {
+        model_name: 'Lesson',
+        file_key: 'downloadable_files',
+        bucket: 'downloadable_files'
+      }
     };
   },
 
@@ -45081,10 +45117,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   methods: {
-    editLesson: function () {
-      this.$store.dispatch('lessons/edit', this.lesson);
-    },
-
     createImage(file) {
       let reader = new FileReader();
       this.media_title = file.name;
@@ -45106,11 +45138,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       reader.readAsDataURL(file);
     },
 
+    editLesson: function () {
+      this.$store.dispatch('lessons/edit', this.lesson);
+    },
+
+    fileUploaded(files) {
+      for (let i = 0; i < files.length; i++) {
+        let file = files[i].files;
+
+        if (file && Array.isArray(file) && file.length) {
+          for (let j = 0; j < file.length; j++) {
+            let downloadableFiles = this.lesson.downloadable_files_id;
+            downloadableFiles.push(file[j].id);
+            this.lesson.downloadable_files_id = [...new Set(downloadableFiles)];
+          }
+        }
+      }
+    },
+
     getArray(obj) {
       let arr = Object.keys(obj).map(function (key) {
         return [Number(key), obj[key]];
       });
       return arr;
+    },
+
+    includeDownload(id, name) {
+      let downloadableFiles = this.lesson.downloadable_files_id;
+      downloadableFiles.push(id);
+      this.lesson.downloadable_files_id = [...new Set(downloadableFiles)];
+      jQuery.notify({
+        // options
+        message: `${name} has been included.`
+      }, {
+        // settings
+        type: 'success'
+      });
     },
 
     lessonImagePreviewChanged(e) {
@@ -45136,7 +45199,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       source.parent()[0].load();
     },
 
-    mediaChanged() {},
+    removeDownload(id, name) {
+      let downloadableFiles = this.lesson.downloadable_files_id;
+      downloadableFiles.splice(downloadableFiles.indexOf(id), 1);
+      this.lesson.downloadable_files_id = [...new Set(downloadableFiles)];
+      jQuery.notify({
+        // options
+        message: `${name} has been removed.`
+      }, {
+        // settings
+        type: 'success'
+      });
+    },
 
     timePickerChanged(t) {
       this.lesson.duration = Number(t.HH) * 3600 + Number(t.mm) * 60 + Number(t.ss);
@@ -66146,7 +66220,7 @@ var render = function() {
           breadcrumbs: _vm.breadcrumbs,
           title: _vm.pageTitle,
           button: {
-            title: "Save",
+            title: "Update",
             method: _vm.editLesson,
             class: "btn btn-success"
           }
@@ -66158,7 +66232,7 @@ var render = function() {
           _c(
             "form",
             {
-              attrs: { action: "javascript:void(0)" },
+              attrs: { action: "javascript:void(0)", id: "lessonForm" },
               on: { submit: _vm.editLesson }
             },
             [
@@ -66734,7 +66808,7 @@ var render = function() {
                           staticClass: "custom-control-label",
                           attrs: { for: "purchased" }
                         },
-                        [_vm._v("Yes")]
+                        [_vm._v(_vm._s(_vm.lesson.published))]
                       )
                     ]
                   ),
@@ -66742,7 +66816,7 @@ var render = function() {
                   _c(
                     "label",
                     { staticClass: "form-label", attrs: { for: "purchased" } },
-                    [_vm._v("Yes")]
+                    [_vm._v(_vm._s(_vm.lesson.published))]
                   )
                 ]),
                 _vm._v(" "),
@@ -66813,7 +66887,7 @@ var render = function() {
                           staticClass: "custom-control-label",
                           attrs: { for: "freeLesson" }
                         },
-                        [_vm._v("Yes")]
+                        [_vm._v(_vm._s(_vm.lesson.free_lesson))]
                       )
                     ]
                   ),
@@ -66821,38 +66895,156 @@ var render = function() {
                   _c(
                     "label",
                     { staticClass: "form-label", attrs: { for: "freeLesson" } },
-                    [_vm._v("Yes")]
+                    [_vm._v(_vm._s(_vm.lesson.free_lesson))]
                   )
                 ])
-              ])
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
             ]
           )
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card" }, [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c(
-            "div",
-            { staticClass: "row" },
-            [
-              _c("v-uploader", {
-                attrs: {
-                  language: "en",
-                  multiple: true,
-                  itemLimit: 0,
-                  fileParams: { model: "lesson" },
-                  fileTypeExts: "audio/*,video/*,image/*,text/*",
-                  fileSizeLimit: "25MB"
-                }
-              })
-            ],
-            1
-          )
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("table", { staticClass: "table" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.lesson.media, function(file, index) {
+                  return _c(
+                    "tr",
+                    {
+                      class: {
+                        "table-warning": !_vm.lesson.downloadable_files_id.includes(
+                          file.id
+                        )
+                      }
+                    },
+                    [
+                      _c("td", { staticClass: "text-muted" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: "/uploads/" + file.id + "/" + file.file_name
+                            }
+                          },
+                          [_vm._v(_vm._s(file.file_name))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-muted" }, [
+                        _vm._v(_vm._s(file.size) + " KB")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-sm btn-outline-primary",
+                            attrs: {
+                              href: "/uploads/" + file.id + "/" + file.file_name
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "material-icons" }, [
+                              _vm._v("file_download")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.lesson.downloadable_files_id.includes(file.id)
+                          ? _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-danger font-weight-bolder",
+                                attrs: { title: "Remove " + file.name },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.removeDownload(
+                                      file.id,
+                                      file.name
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "material-icons" }, [
+                                  _vm._v("close")
+                                ])
+                              ]
+                            )
+                          : _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-success font-weight-bolder",
+                                attrs: { title: "Include " + file.name },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.includeDownload(
+                                      file.id,
+                                      file.name
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "material-icons" }, [
+                                  _vm._v("add")
+                                ])
+                              ]
+                            )
+                      ])
+                    ]
+                  )
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(3)
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _vm._m(4),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "card-body" },
+          [
+            _c("v-uploader", {
+              attrs: {
+                language: "en",
+                multiple: true,
+                itemLimit: 0,
+                fileParams: _vm.uploadFileParams,
+                uploadFileObjName: "downloadable_files",
+                fileTypeExts:
+                  "jpeg,jpg,gif,png,aac,svg,html,css,js,php,mp3,mp4,doc,docx,xls,xlsx,pdf,ppt,pptx,zip,7z",
+                fileSizeLimit: "25MB"
+              },
+              on: { done: _vm.fileUploaded }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(5)
     ],
     1
   )
@@ -66862,8 +67054,74 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Update")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("h4", { staticClass: "card-title" }, [_vm._v("Files")])
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Downloadable Files")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Size")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("?")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success pull",
+          attrs: { type: "submit", form: "lessonForm" }
+        },
+        [_vm._v("Update")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Upload Files")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success float-right",
+          attrs: { type: "submit", form: "lessonForm" }
+        },
+        [_vm._v("Update")]
+      )
     ])
   }
 ]
@@ -71074,7 +71332,7 @@ const actions = {
       //course_image_type:    course.course_image_type,
       course_image_preview: course.course_image_preview,
       end_date: course.end_date,
-      published: course.published
+      published: Number(course.published)
     };
 
     for (let key in courseData) {
@@ -71118,7 +71376,7 @@ const actions = {
       course_image_type: course.course_image_type,
       course_image_preview: course.course_image_preview,
       end_date: course.end_date,
-      published: course.published,
+      published: Number(course.published),
       _method: 'PUT'
     };
 
@@ -71284,9 +71542,9 @@ const actions = {
       title: lesson.title,
       short_text: lesson.short_text,
       full_text: lesson.full_text,
-      free_lesson: lesson.free_lesson,
+      free_lesson: Number(lesson.free_lesson),
       duration: lesson.duration,
-      published: lesson.published,
+      published: Number(lesson.published),
       lesson_image: lesson.lesson_image,
       lesson_image_preview: lesson.lesson_image_preview
     };
@@ -71325,9 +71583,9 @@ const actions = {
       title: lesson.title,
       short_text: lesson.short_text,
       full_text: lesson.full_text,
-      free_lesson: lesson.free_lesson,
+      free_lesson: Number(lesson.free_lesson),
       duration: lesson.duration,
-      published: lesson.published,
+      published: Number(lesson.published),
       lesson_image: lesson.lesson_image,
       lesson_image_preview: lesson.lesson_image_preview,
       _method: 'PUT'
@@ -71337,7 +71595,6 @@ const actions = {
       form_data.append(key, lessonData[key]);
     }
 
-    ;
     axios.post(`${endpoint}/lessons/${lesson.id}`, form_data).then(({
       data
     }) => {
@@ -71356,7 +71613,6 @@ const actions = {
 
 const mutations = {
   SET_LESSON(state, lesson) {
-    console.log(lesson);
     state.lesson = lesson.lesson;
     state.course = lesson.course;
     state.tests = lesson.tests;

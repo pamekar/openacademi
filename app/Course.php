@@ -251,9 +251,4 @@ class Course extends Model
             : 0;
         return "$average;$count";
     }
-
-    public function setPublishedAttribute($value)
-    {
-        $this->attributes['published'] = $value === 'true' ? 1 : 0;
-    }
 }

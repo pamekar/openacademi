@@ -68,7 +68,7 @@ const actions = {
             //course_image_type:    course.course_image_type,
             course_image_preview: course.course_image_preview,
             end_date:             course.end_date,
-            published:            course.published,
+            published:            Number(course.published),
         };
         
         for (let key in courseData) {
@@ -104,7 +104,7 @@ const actions = {
             course_image_type:    course.course_image_type,
             course_image_preview: course.course_image_preview,
             end_date:             course.end_date,
-            published:            course.published,
+            published:            Number(course.published),
             _method:              'PUT'
         };
         
