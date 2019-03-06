@@ -42191,18 +42191,6 @@ if(false) {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["a"] = ({});
 
 /***/ }),
@@ -59577,7 +59565,7 @@ var staticRenderFns = [
           attrs: { id: "default-navbar" }
         },
         [
-          _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "container-fluid" }, [
             _c(
               "button",
               {
@@ -59587,19 +59575,56 @@ var staticRenderFns = [
               [_c("span", { staticClass: "material-icons" }, [_vm._v("menu")])]
             ),
             _vm._v(" "),
-            _c("a", { staticClass: "navbar-brand", attrs: { href: "home" } }, [
-              _c("img", {
-                staticClass: "mr-2",
-                attrs: {
-                  src: "/assets/images/logo/white.svg",
-                  alt: "LearnPlus"
-                }
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "d-none d-xs-md-block" }, [
-                _vm._v("LearnPlus")
-              ])
-            ]),
+            _c(
+              "a",
+              {
+                staticClass: "navbar-brand",
+                attrs: { href: "instructor-dashboard.html" }
+              },
+              [
+                _c("img", {
+                  staticClass: "mr-2",
+                  attrs: {
+                    src: "assets/images/logo/white.svg",
+                    alt: "LearnPlus"
+                  }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "d-none d-xs-md-block" }, [
+                  _vm._v("OpenAcademi")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "ul",
+              {
+                staticClass:
+                  "nav navbar-nav navbar-nav-stats d-none d-md-flex flex-nowrap"
+              },
+              [
+                _c("li", { staticClass: "nav-item" }, [
+                  _c("div", { staticClass: "nav-stats" }, [
+                    _vm._v("$591 "),
+                    _c("small", [_vm._v("GROSS")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c("div", { staticClass: "nav-stats" }, [
+                    _vm._v("$31 "),
+                    _c("small", [_vm._v("TAXES")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item mr-3" }, [
+                  _c("div", { staticClass: "nav-stats" }, [
+                    _vm._v("$560 "),
+                    _c("small", [_vm._v("NET")])
+                  ])
+                ])
+              ]
+            ),
             _vm._v(" "),
             _c("form", { staticClass: "search-form d-none d-md-flex" }, [
               _c("input", {
@@ -59625,41 +59650,15 @@ var staticRenderFns = [
                     "a",
                     {
                       staticClass: "nav-link",
-                      attrs: { href: "fixed-student-forum.html" }
+                      attrs: { href: "instructor-forum.html" }
                     },
                     [_vm._v("Forum")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { href: "fixed-student-help-center.html" }
-                    },
-                    [_vm._v("Get Help")]
                   )
                 ])
               ]
             ),
             _vm._v(" "),
             _c("ul", { staticClass: "nav navbar-nav flex-nowrap" }, [
-              _c("li", { staticClass: "nav-item d-none d-md-flex" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link",
-                    attrs: { href: "fixed-student-cart.html" }
-                  },
-                  [
-                    _c("i", { staticClass: "material-icons" }, [
-                      _vm._v("shopping_cart")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
               _c(
                 "li",
                 {
@@ -59717,7 +59716,7 @@ var staticRenderFns = [
                                 {
                                   staticClass:
                                     "list-group-item list-group-item-action unread",
-                                  attrs: { href: "fixed-student-messages.html" }
+                                  attrs: { href: "instructor-messages.html" }
                                 },
                                 [
                                   _c(
@@ -59750,7 +59749,7 @@ var staticRenderFns = [
                                             "avatar-img rounded-circle",
                                           attrs: {
                                             src:
-                                              "/assets/images/people/110/woman-5.jpg",
+                                              "assets/images/people/110/woman-5.jpg",
                                             alt: "people"
                                           }
                                         })
@@ -59785,7 +59784,7 @@ var staticRenderFns = [
                                 {
                                   staticClass:
                                     "list-group-item list-group-item-action unread",
-                                  attrs: { href: "fixed-student-messages.html" }
+                                  attrs: { href: "instructor-messages.html" }
                                 },
                                 [
                                   _c(
@@ -59818,7 +59817,7 @@ var staticRenderFns = [
                                             "avatar-img rounded-circle",
                                           attrs: {
                                             src:
-                                              "/assets/images/people/110/woman-5.jpg",
+                                              "assets/images/people/110/woman-5.jpg",
                                             alt: "people"
                                           }
                                         })
@@ -59859,7 +59858,7 @@ var staticRenderFns = [
                                 {
                                   staticClass:
                                     "list-group-item list-group-item-action border-left-3 border-left-danger",
-                                  attrs: { href: "fixed-student-messages.html" }
+                                  attrs: { href: "instructor-messages.html" }
                                 },
                                 [
                                   _c(
@@ -59928,7 +59927,7 @@ var staticRenderFns = [
                                 {
                                   staticClass:
                                     "list-group-item list-group-item-action",
-                                  attrs: { href: "fixed-student-messages.html" }
+                                  attrs: { href: "instructor-messages.html" }
                                 },
                                 [
                                   _c(
@@ -59999,7 +59998,7 @@ var staticRenderFns = [
                                 {
                                   staticClass:
                                     "list-group-item list-group-item-action",
-                                  attrs: { href: "fixed-student-messages.html" }
+                                  attrs: { href: "instructor-messages.html" }
                                 },
                                 [
                                   _c(
@@ -60086,7 +60085,7 @@ var staticRenderFns = [
                     _c("img", {
                       staticClass: "rounded-circle",
                       attrs: {
-                        src: "/assets/images/people/50/guy-6.jpg",
+                        src: "assets/images/people/50/guy-6.jpg",
                         alt: "Avatar",
                         width: "40"
                       }
@@ -60102,7 +60101,7 @@ var staticRenderFns = [
                       "a",
                       {
                         staticClass: "dropdown-item",
-                        attrs: { href: "fixed-student-account-edit.html" }
+                        attrs: { href: "instructor-account-edit.html" }
                       },
                       [
                         _c("i", { staticClass: "material-icons" }, [
@@ -60116,7 +60115,7 @@ var staticRenderFns = [
                       "a",
                       {
                         staticClass: "dropdown-item",
-                        attrs: { href: "fixed-student-profile.html" }
+                        attrs: { href: "instructor-profile.html" }
                       },
                       [
                         _c("i", { staticClass: "material-icons" }, [
@@ -60130,12 +60129,7 @@ var staticRenderFns = [
                       "a",
                       {
                         staticClass: "dropdown-item",
-                        attrs: {
-                          href: "logout",
-                          title: "",
-                          onclick:
-                            "event.preventDefault(); document.getElementById('logout-form').submit();"
-                        }
+                        attrs: { href: "guest-login.html" }
                       },
                       [
                         _c("i", { staticClass: "material-icons" }, [

@@ -69,28 +69,7 @@
 
 <script src="{{asset("$public/assets/vendor/jquery.nestable.js")}}"></script>
 <script src="{{asset("$public/assets/js/nestable.js")}}"></script>
-<!-- Highlight.js -->
-<script src="{{asset("$public/assets/js/hljs.js")}}"></script>
 
-<!-- App Settings (safe to remove) -->
-<script src="{{asset("$public/assets/js/app-settings.js")}}"></script>
-
-<script src="{{asset("$public/assets/js/settings.js")}}"></script>
-
-<!-- Moment.js -->
-<script src="{{asset("$public/assets/vendor/moment.min.js")}}"></script>
-<script src="{{asset("$public/assets/vendor/moment-range.min.js")}}"></script>
-
-<!-- Chart.js -->
-<script src="{{asset("$public/assets/vendor/Chart.min.js")}}"></script>
-
-<!-- UI Charts Page JS -->
-<script src="{{asset("$public/assets/js/chartjs-rounded-bar.js")}}"></script>
-<script src="{{asset("$public/assets/js/chartjs.js")}}"></script>
-
-<!-- List.js -->
-<script src="{{asset("$public/assets/vendor/list.min.js")}}"></script>
-<script src="{{asset("$public/assets/js/list.js")}}"></script>
 <script src="{{asset("$public/teacher/js/app.js")}}"></script>
 
 </body>
