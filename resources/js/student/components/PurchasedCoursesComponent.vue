@@ -5,7 +5,7 @@
                 <div class="media">
                     <div class="media-left">
                         <router-link :to="{name:'course',params:{'slug':course.slug}}">
-                            <img :src="course.course_image" style="width:80px; max-height: 60px;" :alt="course.title" class="rounded">
+                            <img :src="course.course_image_preview" style="width:80px; max-height: 60px;" :alt="course.title" class="rounded">
                         </router-link>
                     </div>
                     <div class="media-body">
