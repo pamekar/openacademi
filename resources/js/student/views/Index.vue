@@ -1,7 +1,7 @@
 <template>
     <div>
         <vue-headful
-                :title="pageTitle + ' - OpenAcademi'"
+                :title="pageTitle + ' | OpenAcademi'"
                 :description="pageTitle"
         ></vue-headful>
         <breadcrumb-component

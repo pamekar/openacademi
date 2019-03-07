@@ -1,7 +1,7 @@
 <template>
     <div>
         <vue-headful
-                :title="pageTitle + ' - OpenAcademi'"
+                :title="pageTitle + ' | OpenAcademi'"
                 :description="course.summary"
         ></vue-headful>
         <breadcrumb-component
@@ -19,8 +19,36 @@
                     <div class="embed-responsive embed-responsive-16by9" v-if="lesson.lesson_image_type == 'video'">
                         <iframe class="embed-responsive-item" :src="lesson.lesson_image" allowfullscreen=""></iframe>
                     </div>
+                    <div class="card-body" v-html="lesson.full_text"></div>
+                </div>
+                <div class="card" v-if="lesson.media.length>0">
+                    <div class="card-header">
+                        <h4 class="card-title">Lesson Materials</h4>
+                    </div>
                     <div class="card-body">
-                        {{lesson.full_text}}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Size</th>
+                                    <th class="text-center">?</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(file,index) in lesson.media">
+                                    <td class="text-muted">{{index + 1}}</td>
+                                    <td><a :href="'/uploads/'+file.id+'/'+file.file_name">{{file.file_name}}</a></td>
+                                    <td class="text-muted">{{file.size}} KB</td>
+                                    <td class="text-center">
+                                        <a :href="'/uploads/'+file.id+'/'+file.file_name" class="btn btn-sm btn-outline-primary" :title="`Download ${file.file_name}`"><i class="material-icons">file_download</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,6 +62,19 @@
                                 <strong>&#8358; {{course.price.toLocaleString('en', {maximumSignificantDigits: 2})}}</strong>
                             </a>
                         </p>
+                    </div>
+                </div>
+                <div class="card" v-if="purchased && lesson.test">
+                    <div class="card-header">
+                        <h4 class="card-title">Quiz</h4>
+                    </div>
+                    <div class="card-body">
+                        <h3>{{lesson.test.title}}</h3>
+                        <p>{{lesson.test.about_quiz}}</p>
+                        <p class="text-muted"> {{quizDuration}}</p>
+                        <div class="text-center">
+                            <a href="#" class="btn btn-success">Take Quiz</a>
+                        </div>
                     </div>
                 </div>
                 <!-- Lessons -->
@@ -141,7 +182,6 @@
             this.getLesson();
         },
         mounted() {
-            console.log('Dashboard Component mounted now.')
         },
         components: {
             'lessons-list-component': LessonsListComponent,
@@ -161,7 +201,17 @@
                     });
             },
         },
-        computed:   {},
+        computed:   {
+            quizDuration: function (){
+                let duration=this.lesson.test.duration;
+                
+                let HH = Math.floor(duration / 3600);
+                let mm = Math.floor((duration % 3600) / 60);
+                let ss = Math.floor(duration % 60);
+                
+                return `${HH} hr ${mm} min ${ss} sec`;
+            }
+        },
         props:      ['slug'],
         watch:      {
             '$route'(to, from) {

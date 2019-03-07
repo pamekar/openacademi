@@ -1,7 +1,7 @@
 <template>
     <div>
         <vue-headful
-                :title="pageTitle + ' - OpenAcademi'"
+                :title="pageTitle + ' | OpenAcademi'"
                 :description="quiz.short_text"
         ></vue-headful>
         <breadcrumb-component

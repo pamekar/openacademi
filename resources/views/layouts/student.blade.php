@@ -44,7 +44,6 @@
 <script src="{{asset("$public/assets/vendor/popper.min.js")}}"></script>
 <script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"></script>
 
-
 @if(isset($notification))
     <script src="{{asset("$public/js/bootstrap-notify.min.js")}}"></script>
     <script>

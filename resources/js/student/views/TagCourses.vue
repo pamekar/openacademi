@@ -1,7 +1,7 @@
 <template>
     <div>
         <vue-headful
-                :title="tag + ' Courses - OpenAcademi'"
+                :title="tag + ' Courses | OpenAcademi'"
                 :description="pageTitle"
         ></vue-headful>
 

@@ -1,7 +1,7 @@
 <template>
     <div class="mdk-drawer-layout__content page" style="transform: translate3d(0px, 0px, 0px);">
         <vue-headful
-                :title="pageTitle + ' - OpenAcademi'"
+                :title="pageTitle + ' | OpenAcademi'"
                 :description="pageTitle"
         ></vue-headful>
 

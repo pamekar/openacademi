@@ -63710,7 +63710,7 @@ var render = function() {
     [
       _c("vue-headful", {
         attrs: {
-          title: _vm.pageTitle + " - OpenAcademi",
+          title: _vm.pageTitle + " | OpenAcademi",
           description:
             "As an instructor, you can add a new lesson at openacademi.com"
         }
@@ -68492,7 +68492,7 @@ var render = function() {
     [
       _c("vue-headful", {
         attrs: {
-          title: _vm.pageTitle + " - OpenAcademi",
+          title: _vm.pageTitle + " | OpenAcademi",
           description: _vm.lesson.short_text
         }
       }),

@@ -29371,6 +29371,47 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -29400,9 +29441,7 @@ if (false) {(function () {
     this.getLesson();
   },
 
-  mounted() {
-    console.log('Dashboard Component mounted now.');
-  },
+  mounted() {},
 
   components: {
     'lessons-list-component': __WEBPACK_IMPORTED_MODULE_0__components_LessonsListComponent_vue__["a" /* default */],
@@ -29426,7 +29465,15 @@ if (false) {(function () {
     }
 
   },
-  computed: {},
+  computed: {
+    quizDuration: function () {
+      let duration = this.lesson.test.duration;
+      let HH = Math.floor(duration / 3600);
+      let mm = Math.floor(duration % 3600 / 60);
+      let ss = Math.floor(duration % 60);
+      return `${HH} hr ${mm} min ${ss} sec`;
+    }
+  },
   props: ['slug'],
   watch: {
     '$route'(to, from) {
@@ -32587,7 +32634,7 @@ var render = function() {
     [
       _c("vue-headful", {
         attrs: {
-          title: _vm.pageTitle + " - OpenAcademi",
+          title: _vm.pageTitle + " | OpenAcademi",
           description: _vm.course.summary
         }
       }),
@@ -32627,14 +32674,79 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(_vm.lesson.full_text) +
-                  "\n                "
-              )
-            ])
-          ])
+            _c("div", {
+              staticClass: "card-body",
+              domProps: { innerHTML: _vm._s(_vm.lesson.full_text) }
+            })
+          ]),
+          _vm._v(" "),
+          _vm.lesson.media.length > 0
+            ? _c("div", { staticClass: "card" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "table-responsive" }, [
+                    _c("table", { staticClass: "table" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.lesson.media, function(file, index) {
+                          return _c("tr", [
+                            _c("td", { staticClass: "text-muted" }, [
+                              _vm._v(_vm._s(index + 1))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    href:
+                                      "/uploads/" +
+                                      file.id +
+                                      "/" +
+                                      file.file_name
+                                  }
+                                },
+                                [_vm._v(_vm._s(file.file_name))]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-muted" }, [
+                              _vm._v(_vm._s(file.size) + " KB")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-sm btn-outline-primary",
+                                  attrs: {
+                                    href:
+                                      "/uploads/" +
+                                      file.id +
+                                      "/" +
+                                      file.file_name,
+                                    title: "Download " + file.file_name
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "material-icons" }, [
+                                    _vm._v("file_download")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c(
@@ -32675,6 +32787,24 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
+            _vm.purchased && _vm.lesson.test
+              ? _c("div", { staticClass: "card" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.lesson.test.title))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(_vm.lesson.test.about_quiz))]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-muted" }, [
+                      _vm._v(" " + _vm._s(_vm.quizDuration))
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(3)
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
             _vm.purchased
               ? _c("div", { staticClass: "card" }, [
                   _c(
@@ -32708,7 +32838,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("div", { staticClass: "card" }, [
-              _vm._m(0),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c(
@@ -32736,7 +32866,7 @@ var render = function() {
               _c("ul", { staticClass: "list-group list-group-fit" }, [
                 _c("li", { staticClass: "list-group-item" }, [
                   _c("div", { staticClass: "media align-items-center" }, [
-                    _vm._m(1),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("div", { staticClass: "media-body" }, [
                       _vm._v(
@@ -32750,7 +32880,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("li", { staticClass: "list-group-item" }, [
                   _c("div", { staticClass: "media align-items-center" }, [
-                    _vm._m(2),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c("div", { staticClass: "media-body" }, [
                       _vm._v(
@@ -32775,7 +32905,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(3)
+            _vm._m(7)
           ],
           1
         )
@@ -32785,6 +32915,48 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Lesson Materials")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Size")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("?")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Quiz")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center" }, [
+      _c("a", { staticClass: "btn btn-success", attrs: { href: "#" } }, [
+        _vm._v("Take Quiz")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -33066,7 +33238,7 @@ var render = function() {
     [
       _c("vue-headful", {
         attrs: {
-          title: _vm.pageTitle + " - OpenAcademi",
+          title: _vm.pageTitle + " | OpenAcademi",
           description: _vm.pageTitle
         }
       }),

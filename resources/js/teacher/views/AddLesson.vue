@@ -1,7 +1,7 @@
 <template>
     <div>
         <vue-headful
-                :title="pageTitle + ' - OpenAcademi'"
+                :title="pageTitle + ' | OpenAcademi'"
                 description="As an instructor, you can add a new lesson at openacademi.com"
         ></vue-headful>
         <breadcrumb-component

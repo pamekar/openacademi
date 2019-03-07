@@ -57,6 +57,9 @@
 
     </script>
 @endif
+<script src="{{asset("$public/assets/vendor/jquery.nestable.js")}}"></script>
+<script src="{{asset("$public/assets/js/nestable.js")}}"></script>
+
 <script src="{{asset("$public/teacher/js/app.js")}}"></script>
 
 <!-- Perfect Scrollbar -->
@@ -68,8 +71,6 @@
 <!-- App JS -->
 <script src="{{asset("$public/assets/js/app.js")}}"></script>
 
-<script src="{{asset("$public/assets/vendor/jquery.nestable.js")}}"></script>
-<script src="{{asset("$public/assets/js/nestable.js")}}"></script>
 
 </body>
 
