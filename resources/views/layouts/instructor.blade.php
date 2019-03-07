@@ -42,8 +42,6 @@
 <script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
 <script src="{{asset("$public/assets/vendor/popper.min.js")}}"></script>
 <script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"></script>
-<!-- Perfect Scrollbar -->
-<script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
 
 <script src="{{asset("$public/js/bootstrap-notify.min.js")}}"></script>
 @if(isset($notification))
@@ -59,7 +57,10 @@
 
     </script>
 @endif
+<script src="{{asset("$public/teacher/js/app.js")}}"></script>
 
+<!-- Perfect Scrollbar -->
+<script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
 
 <!-- MDK -->
 <script src="{{asset("$public/assets/vendor/dom-factory.js")}}"></script>
@@ -69,8 +70,6 @@
 
 <script src="{{asset("$public/assets/vendor/jquery.nestable.js")}}"></script>
 <script src="{{asset("$public/assets/js/nestable.js")}}"></script>
-
-<script src="{{asset("$public/teacher/js/app.js")}}"></script>
 
 </body>
 

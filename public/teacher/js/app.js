@@ -41860,15 +41860,6 @@ if(false) {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -41966,9 +41957,6 @@ if(false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
-//
 //
 //
 //
@@ -45186,6 +45174,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.lesson_video = URL.createObjectURL(files[0]);
       source.parent()[0].load();
     },
+
+    mediaChanged() {},
 
     removeDownload(id, name) {
       let downloadableFiles = this.lesson.downloadable_files_id;
@@ -59331,14 +59321,14 @@ var render = function() {
           "div",
           { staticClass: "sidebar-p-y" },
           _vm._l(_vm.menu, function(items, bigIndex) {
-            return _c("div", [
-              _c("div", { staticClass: "sidebar-heading" }, [
-                _vm._v(_vm._s(items.category))
-              ]),
-              _vm._v(" "),
-              _c(
-                "ul",
-                { staticClass: "sidebar-menu sm-active-button-bg" },
+            return _c(
+              "ul",
+              { staticClass: "sidebar-menu sm-active-button-bg" },
+              [
+                _c("li", { staticClass: "sidebar-heading" }, [
+                  _vm._v(_vm._s(items.category))
+                ]),
+                _vm._v(" "),
                 _vm._l(items.menus, function(item, index) {
                   return _c(
                     "li",
@@ -59365,7 +59355,7 @@ var render = function() {
                               _vm._v(
                                 " " +
                                   _vm._s(item.title) +
-                                  "\n                        "
+                                  "\n                    "
                               )
                             ]
                           )
@@ -59464,10 +59454,10 @@ var render = function() {
                     ],
                     1
                   )
-                }),
-                0
-              )
-            ])
+                })
+              ],
+              2
+            )
           }),
           0
         )
@@ -60727,65 +60717,53 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "mdk-header-layout js-mdk-header-layout" },
     [
-      _c("div", { staticClass: "mdk-header-layout js-mdk-header-layout" }, [
+      _c(
+        "div",
+        {
+          staticClass: "mdk-header js-mdk-header mb-0",
+          attrs: { id: "header", "data-fixed": "" }
+        },
+        [_c("header-component")],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "mdk-header-layout__content" }, [
         _c(
           "div",
           {
-            staticClass: "mdk-header js-mdk-header mb-0",
-            attrs: { id: "header", "data-fixed": "" }
+            staticClass: "mdk-drawer-layout js-mdk-drawer-layout",
+            attrs: { "data-push": "", "data-responsive-width": "992px" }
           },
-          [_c("header-component")],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "mdk-header-layout__content" }, [
-          _c(
-            "div",
-            {
-              staticClass: "mdk-drawer-layout js-mdk-drawer-layout",
-              attrs: { "data-push": "", "data-responsive-width": "992px" }
-            },
-            [
+          [
+            _c("div", { staticClass: "mdk-drawer-layout__content page" }, [
               _c(
                 "div",
-                {
-                  staticClass: "mdk-drawer-layout__content page",
-                  staticStyle: { transform: "translate3d(0px, 0px, 0px)" }
-                },
+                { staticClass: "container-fluid page__container" },
                 [
                   _c(
-                    "div",
-                    { staticClass: "container-fluid page__container" },
-                    [
-                      _c(
-                        "transition",
-                        { attrs: { name: _vm.transitionName } },
-                        [_c("router-view")],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm._m(0)
-                    ],
+                    "transition",
+                    { attrs: { name: _vm.transitionName } },
+                    [_c("router-view")],
                     1
                   )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "mdk-drawer js-mdk-drawer",
-                  attrs: { id: "default-drawer" }
-                },
-                [
-                  _c("sidebar-component", { attrs: { menu: _vm.sidebarItems } })
                 ],
                 1
               )
-            ]
-          )
-        ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "mdk-drawer js-mdk-drawer",
+                attrs: { id: "default-drawer" }
+              },
+              [_c("sidebar-component", { attrs: { menu: _vm.sidebarItems } })],
+              1
+            )
+          ]
+        )
       ]),
       _vm._v(" "),
       _c("modals-component")
@@ -60793,21 +60771,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "page" }, [
-      _c("div", { staticClass: "container page__container" }, [
-        _c("div", { staticClass: "footer" }, [
-          _vm._v("\n                                    Copyright ©  - "),
-          _c("a", { attrs: { href: "/home" } }, [_vm._v("OpenAcademi")])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 if (false) {
@@ -66947,7 +66911,9 @@ var render = function() {
                           {
                             staticClass: "btn btn-sm btn-outline-primary",
                             attrs: {
-                              href: "/uploads/" + file.id + "/" + file.file_name
+                              href:
+                                "/uploads/" + file.id + "/" + file.file_name,
+                              title: "Download " + file.file_name
                             }
                           },
                           [

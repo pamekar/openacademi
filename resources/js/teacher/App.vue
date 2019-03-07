@@ -1,34 +1,25 @@
 <template>
-    <div>
-        <div class="mdk-header-layout js-mdk-header-layout">
 
-            <div id="header" data-fixed class="mdk-header js-mdk-header mb-0">
-                <header-component></header-component>
-            </div>
+    <div class="mdk-header-layout js-mdk-header-layout">
 
-            <div class="mdk-header-layout__content">
+        <div id="header" data-fixed class="mdk-header js-mdk-header mb-0">
+            <header-component></header-component>
+        </div>
 
-                <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
-                    <div class="mdk-drawer-layout__content page" style="transform: translate3d(0px, 0px, 0px);">
+        <div class="mdk-header-layout__content">
 
-                        <div class="container-fluid page__container">
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout">
+                <div class="mdk-drawer-layout__content page">
 
-                            <transition :name="transitionName">
-                                <router-view></router-view>
-                            </transition>
-                            <div class="page">
-                                <div class="container page__container">
-                                    <div class="footer">
-                                        Copyright &copy;  - <a
-                                            href="/home">OpenAcademi</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="container-fluid page__container">
+
+                        <transition :name="transitionName">
+                            <router-view></router-view>
+                        </transition>
                     </div>
-                    <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
-                        <sidebar-component :menu="sidebarItems"></sidebar-component>
-                    </div>
+                </div>
+                <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+                    <sidebar-component :menu="sidebarItems"></sidebar-component>
                 </div>
             </div>
         </div>
