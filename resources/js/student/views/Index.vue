@@ -80,7 +80,7 @@
                                     <a class="text-body" href="#"><strong>{{quiz.test.title}}</strong></a><br>
                                     <div class="d-flex align-items-center">
                                         <small class="text-black-50 text-uppercase mr-2">Course</small>
-                                        <a href="#">{{quiz.test.course_title}}</a>
+                                        <router-link :to="{name:'course',params:{'slug':quiz.test.course.slug}}">{{quiz.test.course_title}}</router-link>
                                     </div>
                                 </div>
                                 <div class="media-right text-center d-flex align-items-center">

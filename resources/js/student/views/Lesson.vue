@@ -64,6 +64,14 @@
                         </p>
                     </div>
                 </div>
+                <!-- Lessons -->
+                <div class="card" v-if="purchased">
+                    <div class="card-body">
+                        <progress-component :course="course"></progress-component>
+                        <small class="text-muted">Lessons: {{course.completed_lessons}} of {{course.total_lessons}}</small>
+                    </div>
+                </div>
+                <lessons-list-component :lessons="course.published_lessons" :purchased="purchased" :id="course.id"></lessons-list-component>
                 <div class="card" v-if="purchased && lesson.test">
                     <div class="card-header">
                         <h4 class="card-title">Quiz</h4>
@@ -77,14 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Lessons -->
-                <div class="card" v-if="purchased">
-                    <div class="card-body">
-                        <progress-component :course="course"></progress-component>
-                        <small class="text-muted">Lessons: {{course.completed_lessons}} of {{course.total_lessons}}</small>
-                    </div>
-                </div>
-                <lessons-list-component :lessons="course.published_lessons" :purchased="purchased" :id="course.id"></lessons-list-component>
+
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Ratings</h4>

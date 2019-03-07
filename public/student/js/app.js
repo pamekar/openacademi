@@ -29412,6 +29412,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -32954,6 +32955,38 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
+            _vm.purchased
+              ? _c("div", { staticClass: "card" }, [
+                  _c(
+                    "div",
+                    { staticClass: "card-body" },
+                    [
+                      _c("progress-component", {
+                        attrs: { course: _vm.course }
+                      }),
+                      _vm._v(" "),
+                      _c("small", { staticClass: "text-muted" }, [
+                        _vm._v(
+                          "Lessons: " +
+                            _vm._s(_vm.course.completed_lessons) +
+                            " of " +
+                            _vm._s(_vm.course.total_lessons)
+                        )
+                      ])
+                    ],
+                    1
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("lessons-list-component", {
+              attrs: {
+                lessons: _vm.course.published_lessons,
+                purchased: _vm.purchased,
+                id: _vm.course.id
+              }
+            }),
+            _vm._v(" "),
             _vm.purchased && _vm.lesson.test
               ? _c("div", { staticClass: "card" }, [
                   _vm._m(2),
@@ -32993,38 +33026,6 @@ var render = function() {
                   ])
                 ])
               : _vm._e(),
-            _vm._v(" "),
-            _vm.purchased
-              ? _c("div", { staticClass: "card" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card-body" },
-                    [
-                      _c("progress-component", {
-                        attrs: { course: _vm.course }
-                      }),
-                      _vm._v(" "),
-                      _c("small", { staticClass: "text-muted" }, [
-                        _vm._v(
-                          "Lessons: " +
-                            _vm._s(_vm.course.completed_lessons) +
-                            " of " +
-                            _vm._s(_vm.course.total_lessons)
-                        )
-                      ])
-                    ],
-                    1
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("lessons-list-component", {
-              attrs: {
-                lessons: _vm.course.published_lessons,
-                purchased: _vm.purchased,
-                id: _vm.course.id
-              }
-            }),
             _vm._v(" "),
             _c("div", { staticClass: "card" }, [
               _vm._m(3),
@@ -33613,17 +33614,33 @@ var render = function() {
                       ),
                       _c("br"),
                       _vm._v(" "),
-                      _c("div", { staticClass: "d-flex align-items-center" }, [
-                        _c(
-                          "small",
-                          { staticClass: "text-black-50 text-uppercase mr-2" },
-                          [_vm._v("Course")]
-                        ),
-                        _vm._v(" "),
-                        _c("a", { attrs: { href: "#" } }, [
-                          _vm._v(_vm._s(quiz.test.course_title))
-                        ])
-                      ])
+                      _c(
+                        "div",
+                        { staticClass: "d-flex align-items-center" },
+                        [
+                          _c(
+                            "small",
+                            {
+                              staticClass: "text-black-50 text-uppercase mr-2"
+                            },
+                            [_vm._v("Course")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "course",
+                                  params: { slug: quiz.test.course.slug }
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(quiz.test.course_title))]
+                          )
+                        ],
+                        1
+                      )
                     ]),
                     _vm._v(" "),
                     _c(
