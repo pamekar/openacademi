@@ -31081,12 +31081,12 @@ var staticRenderFns = [
                 staticClass: "mr-2",
                 attrs: {
                   src: "/assets/images/logo/white.svg",
-                  alt: "LearnPlus"
+                  alt: "OpenAcademi"
                 }
               }),
               _vm._v(" "),
               _c("span", { staticClass: "d-none d-xs-md-block" }, [
-                _vm._v("LearnPlus")
+                _vm._v("OpenAcademi")
               ])
             ]),
             _vm._v(" "),

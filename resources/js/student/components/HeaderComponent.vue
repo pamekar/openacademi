@@ -11,8 +11,8 @@
 
                 <!-- Brand -->
                 <a href="home" class="navbar-brand">
-                    <img src="/assets/images/logo/white.svg" class="mr-2" alt="LearnPlus"/>
-                    <span class="d-none d-xs-md-block">LearnPlus</span>
+                    <img src="/assets/images/logo/white.svg" class="mr-2" alt="OpenAcademi"/>
+                    <span class="d-none d-xs-md-block">OpenAcademi</span>
                 </a>
 
                 <!-- Search -->

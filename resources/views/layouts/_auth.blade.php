@@ -36,13 +36,13 @@
         <div class="text-center mt-5 mb-1">
             <div class="avatar avatar-lg">
                 <img src="{{asset("$public/assets/images/logo/primary.svg")}}" class="avatar-img rounded-circle"
-                     alt="LearnPlus"/>
+                     alt="OpenAcademi"/>
             </div>
         </div>
         <div class="d-flex justify-content-center mb-5 navbar-light">
             <!-- Brand -->
             <a href="student-dashboard.html" class="navbar-brand m-0">
-                LearnPlus
+                OpenAcademi
             </a>
         </div>
         <div class="card navbar-shadow">

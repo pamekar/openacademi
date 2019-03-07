@@ -10,7 +10,7 @@
 
                 <!-- Brand -->
                 <a href="instructor-dashboard.html" class="navbar-brand">
-                    <img src="assets/images/logo/white.svg" class="mr-2" alt="LearnPlus" />
+                    <img src="assets/images/logo/white.svg" class="mr-2" alt="OpenAcademi" />
                     <span class="d-none d-xs-md-block">OpenAcademi</span>
                 </a>
 

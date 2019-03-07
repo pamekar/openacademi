@@ -59581,7 +59581,7 @@ var staticRenderFns = [
                   staticClass: "mr-2",
                   attrs: {
                     src: "assets/images/logo/white.svg",
-                    alt: "LearnPlus"
+                    alt: "OpenAcademi"
                   }
                 }),
                 _vm._v(" "),
