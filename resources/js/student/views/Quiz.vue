@@ -13,6 +13,9 @@
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item active">Quiz</li>
         </ol>
+        <div class="card">
+
+        </div>
         <div class="row">
             <div class="col-md-9 col-sm-8">
                 <div class="card-group">
@@ -70,15 +73,15 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-white">Skip</a>
-                        <a href="#" class="btn btn-success float-right">Submit <i class="material-icons btn__icon--right">send</i></a>
+                        <a href="#" class="btn btn-white">Previous</a>
+                        <a href="#" class="btn btn-info float-right">Next<i class="material-icons btn__icon--right">send</i></a>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-4">
-                <ul class="nav flex-sm-column">
-                    <li class="list-group-item active">
-                        <a href="#">
+                <ul class="nav flex-sm-column nav-pills bg-white">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
                                             <span class="media align-items-center">
                                                 <span class="media-left">
                                                     <span class="btn btn-white btn-circle">#9</span>
@@ -89,8 +92,8 @@
                                             </span>
                         </a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="#">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                                             <span class="media align-items-center">
                                                 <span class="media-left">
                                                     <span class="btn btn-white btn-circle">#10</span>
@@ -101,8 +104,8 @@
                                             </span>
                         </a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="#">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                                             <span class="media align-items-center">
                                                 <span class="media-left">
                                                     <span class="btn btn-white btn-circle">#11</span>
@@ -113,8 +116,8 @@
                                             </span>
                         </a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="#">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                                             <span class="media align-items-center">
                                                 <span class="media-left">
                                                     <span class="btn btn-white btn-circle">#12</span>
@@ -177,3 +180,9 @@
         computed:   {}
     }
 </script>
+<style>
+    [dir=ltr] .nav-pills .nav-link.active:hover, [dir=ltr] .nav-pills .show > .nav-link:hover {
+        color: #fff;
+        background-color: #2196f3;
+    }
+</style>

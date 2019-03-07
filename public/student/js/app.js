@@ -30269,6 +30269,9 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data() {
@@ -34126,6 +34129,10 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_24cfebc8_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Quiz_vue__ = __webpack_require__(223);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(2);
 var disposed = false
+function injectStyle (context) {
+  if (disposed) return
+  __webpack_require__(428)
+}
 /* script */
 
 
@@ -34134,7 +34141,7 @@ var disposed = false
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -34196,6 +34203,8 @@ var render = function() {
       }),
       _vm._v(" "),
       _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }),
       _vm._v(" "),
       _vm._m(1)
     ],
@@ -34337,17 +34346,14 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "card-footer" }, [
             _c("a", { staticClass: "btn btn-white", attrs: { href: "#" } }, [
-              _vm._v("Skip")
+              _vm._v("Previous")
             ]),
             _vm._v(" "),
             _c(
               "a",
-              {
-                staticClass: "btn btn-success float-right",
-                attrs: { href: "#" }
-              },
+              { staticClass: "btn btn-info float-right", attrs: { href: "#" } },
               [
-                _vm._v("Submit "),
+                _vm._v("Next"),
                 _c("i", { staticClass: "material-icons btn__icon--right" }, [
                   _vm._v("send")
                 ])
@@ -34358,9 +34364,9 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-3 col-sm-4" }, [
-        _c("ul", { staticClass: "nav flex-sm-column" }, [
-          _c("li", { staticClass: "list-group-item active" }, [
-            _c("a", { attrs: { href: "#" } }, [
+        _c("ul", { staticClass: "nav flex-sm-column nav-pills bg-white" }, [
+          _c("li", { staticClass: "nav-item" }, [
+            _c("a", { staticClass: "nav-link active", attrs: { href: "#" } }, [
               _c("span", { staticClass: "media align-items-center" }, [
                 _c("span", { staticClass: "media-left" }, [
                   _c("span", { staticClass: "btn btn-white btn-circle" }, [
@@ -34377,8 +34383,8 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _c("a", { attrs: { href: "#" } }, [
+          _c("li", { staticClass: "nav-item" }, [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
               _c("span", { staticClass: "media align-items-center" }, [
                 _c("span", { staticClass: "media-left" }, [
                   _c("span", { staticClass: "btn btn-white btn-circle" }, [
@@ -34395,8 +34401,8 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _c("a", { attrs: { href: "#" } }, [
+          _c("li", { staticClass: "nav-item" }, [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
               _c("span", { staticClass: "media align-items-center" }, [
                 _c("span", { staticClass: "media-left" }, [
                   _c("span", { staticClass: "btn btn-white btn-circle" }, [
@@ -34413,8 +34419,8 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _c("a", { attrs: { href: "#" } }, [
+          _c("li", { staticClass: "nav-item" }, [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
               _c("span", { staticClass: "media align-items-center" }, [
                 _c("span", { staticClass: "media-left" }, [
                   _c("span", { staticClass: "btn btn-white btn-circle" }, [
@@ -34517,6 +34523,241 @@ const functions = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */,
+/* 387 */,
+/* 388 */,
+/* 389 */,
+/* 390 */,
+/* 391 */,
+/* 392 */,
+/* 393 */,
+/* 394 */,
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(429);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(22).default
+var update = add("9208c338", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"scoped\":false,\"sourceMap\":false}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Quiz.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"scoped\":false,\"sourceMap\":false}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Quiz.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 429 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)();
+exports.push([module.i, "\n[dir=ltr] .nav-pills .nav-link.active:hover, [dir=ltr] .nav-pills .show > .nav-link:hover {\n    color: #fff;\n    background-color: #2196f3;\n}\n", ""]);
 
 /***/ })
 /******/ ]);
