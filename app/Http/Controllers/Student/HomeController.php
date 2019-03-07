@@ -6,6 +6,10 @@ use App\Course;
 use App\CourseCategory;
 use App\Http\Controllers\Student\APIController;
 use App\Http\Controllers\Controller;
+use App\TestsResult;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class HomeController extends Controller
@@ -14,7 +18,7 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->user =JWTAuth::parseToken()->toUser();
+        $this->user = JWTAuth::parseToken()->toUser();
     }
 
     /**
@@ -32,10 +36,22 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-     /*   $courses = Course::where('published', 1)
-            ->orderBy('created_at', 'desc')->inRandomOrder()->limit(10)->get();*/
+        /*   $courses = Course::where('published', 1)
+               ->orderBy('created_at', 'desc')->inRandomOrder()->limit(10)->get();*/
 
-     return response()->json(['my_courses'=>$my_courses]);
+        return response()->json(['my_courses' => $my_courses]);
+    }
+
+    public function results(Request $request)
+    {
+        $count = $request->input('count', 8);
+        $results = $request->dashboard
+            ? TestsResult::with(['test'])->where('user_id', Auth::id())
+                ->latest('updated_at')->limit($count)->get()
+            : TestsResult::with('test')->where('user_id', Auth::id())
+                ->latest('updated_at')->paginate    ($count);
+
+        return response()->json($results);
     }
 
     public function faq()

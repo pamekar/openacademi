@@ -44,17 +44,15 @@ class CoursesController extends Controller
 
     public function getAllCourses(Request $request)
     {
-        $isDashboard = $request->dashboard;
         $count = $request->input('count', 8);
-        if ($isDashboard) {
-            $courses = Course::where('published', 1)->orderBy('id', 'desc')
+
+        $courses = $request->dashboard
+            ? Course::where('published', 1)->orderBy('id', 'desc')
                 ->limit($count)
-                ->get();
-        } else {
-            // drg >> It has to be in random order because of the categories we're dealing with
-            $courses = Course::where('published', 1)->inRandomOrder()
+                ->get()
+            : Course::where('published', 1)->inRandomOrder()
                 ->paginate($count);
-        }
+
 
         return response()->json($courses);
     }

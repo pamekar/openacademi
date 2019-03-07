@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class Test
  *
  * @package App
- * @property string $course
- * @property string $lesson
- * @property string $title
- * @property text $description
+ * @property string      $course
+ * @property string      $lesson
+ * @property string      $title
+ * @property text        $description
  * @property tinyInteger $published
  */
 class Test extends Model
@@ -31,8 +31,7 @@ class Test extends Model
             'user_id'
         ];
 
-    protected $appends = ['lesson_title', 'completed_count'];
-
+    protected $appends = ['lesson_title', 'course_title', 'completed_count'];
 
     /**
      * Set to null if empty
@@ -59,19 +58,23 @@ class Test extends Model
         return $this->belongsTo(Course::class, 'course_id')->withTrashed();
     }
 
+    public function getCourseTitleAttribute()
+    {
+        return title_case($this->course->title);
+    }
 
     public function getLessonTitleAttribute()
     {
         return title_case(Lesson::findOrFail($this->lesson_id)->title);
     }
 
-    public function getCompletedCountAttribute(){
+    public function getCompletedCountAttribute()
+    {
         $count = TestsResult::where('test_id', $this->id)
             ->count();
-
         return $count;
     }
-    
+
     public function getTitleAttribute($title)
     {
         return title_case($title);
@@ -90,12 +93,13 @@ class Test extends Model
 
     public function results()
     {
-        return $this->hasMany('App\TestsResult')->orderBy('updated_at','asc');
+        return $this->hasMany('App\TestsResult')->orderBy('updated_at', 'asc');
     }
 
     public function setPublishedAttribute($value)
     {
-        $this->attributes['published'] = $value == 'true' || $value == 1 ? 1 : 0;
+        $this->attributes['published'] = $value == 'true' || $value == 1 ? 1
+            : 0;
     }
 
 }

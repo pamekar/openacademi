@@ -10,7 +10,7 @@
         ></breadcrumb-component>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
                         <div class="media align-items-center">
@@ -59,7 +59,7 @@
                     </ul>
                 </div>
             </div>
-            <!--<div class="col-md-6">
+            <div class="col-md-6">
 
                 <div class="card">
                     <div class="card-header">
@@ -73,64 +73,25 @@
                             </div>
                         </div>
                     </div>
-
-
                     <ul class="list-group list-group-fit mb-0">
-
-                        <li class="list-group-item">
+                        <li class="list-group-item" v-for="quiz in quizes">
                             <div class="media align-items-center">
                                 <div class="media-body">
-                                    <a class="text-body" href="#"><strong>Title of
-                                        quiz goes here?</strong></a><br>
+                                    <a class="text-body" href="#"><strong>{{quiz.test.title}}</strong></a><br>
                                     <div class="d-flex align-items-center">
                                         <small class="text-black-50 text-uppercase mr-2">Course</small>
-                                        <a href="#">Basics of HTML</a>
+                                        <a href="#">{{quiz.test.course_title}}</a>
                                     </div>
                                 </div>
                                 <div class="media-right text-center d-flex align-items-center">
                                     <span class="text-black-50 mr-3">Good</span>
-                                    <h4 class="mb-0">5.8</h4>
+                                    <h4 class="mb-0">{{quiz.test_result}}</h4>
                                 </div>
                             </div>
                         </li>
-
-                        <li class="list-group-item">
-                            <div class="media align-items-center">
-                                <div class="media-body">
-                                    <a class="text-body" href="#"><strong>Directives
-                                        &amp; Routing</strong></a><br>
-                                    <div class="d-flex align-items-center">
-                                        <small class="text-black-50 text-uppercase mr-2">Course</small>
-                                        <a href="#">Angular in Steps</a>
-                                    </div>
-                                </div>
-                                <div class="media-right text-center d-flex align-items-center">
-                                    <span class="text-black-50 mr-3">Great</span>
-                                    <h4 class="mb-0 text-success">9.8</h4>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item">
-                            <div class="media align-items-center">
-                                <div class="media-body">
-                                    <a class="text-body" href="#"><strong>Responsive
-                                        &amp; Retina</strong></a><br>
-                                    <div class="d-flex align-items-center">
-                                        <small class="text-black-50 text-uppercase mr-2">Course</small>
-                                        <a href="#">Bootstrap Foundations</a>
-                                    </div>
-                                </div>
-                                <div class="media-right text-center d-flex align-items-center">
-                                    <span class="text-black-50 mr-3">Failed</span>
-                                    <h4 class="mb-0 text-danger">2.8</h4>
-                                </div>
-                            </div>
-                        </li>
-
                     </ul>
                 </div>
-            </div>-->
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -173,13 +134,15 @@
                         title: "Dashboard"
                     }
                 ],
-                pageTitle:        "Dashboard"
+                pageTitle:        "Dashboard",
+                quizes:           []
             };
         },
 
         created() {
             this.getPurchasedCourses();
             this.getAllCourses();
+            this.getQuizResults();
         },
 
         methods:    {
@@ -194,6 +157,12 @@
                 axios.get("/api/courses/all?count=8&dashboard=1")
                     .then(({data}) => {
                         this.allCourses = data;
+                    });
+            },
+            getQuizResults(page = 1) {
+                axios.get("/api/quizes/results?count=4&dashboard=1")
+                    .then(({data}) => {
+                        this.quizes = data;
                     });
             },
             // drg >> compute lesson progress

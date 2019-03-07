@@ -50,6 +50,11 @@ class User extends \TCG\Voyager\Models\User implements JWTSubject
         return $this->belongsToMany('App\Lesson', 'lesson_student');
     }
 
+    public function results()
+    {
+        return $this->hasMany('App\TestsResult');
+    }
+
     public function payments(){
         return $this->hasMany('App\Payment');
     }

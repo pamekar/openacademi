@@ -17,6 +17,9 @@ class TestsResult extends Model
         return $this->hasMany('App\TestsResultsAnswer');
     }
 
+    public function test(){
+        return $this->belongsTo('App\Test');
+    }
     public function getCreatedAtAttribute($input)
     {
         return date_format(date_create($input),'M jS, Y');

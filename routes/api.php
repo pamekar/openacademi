@@ -14,7 +14,8 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
             Route::get('courses/categories', 'CoursesController@getCategories');
             Route::get('courses/all', 'CoursesController@getAllCourses');
             Route::get('lesson/{id}/{slug}', 'LessonsController@show');
-
+            Route::post('lesson/{slug}/test', 'LessonsController@test');
+            Route::get('quizes/results', 'HomeController@results');
         });
     Route::group([
         'prefix'     => 'instructor',

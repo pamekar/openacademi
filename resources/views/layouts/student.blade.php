@@ -63,6 +63,7 @@
 
 <!-- MDK -->
 <script src="{{asset("$public/assets/vendor/dom-factory.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/material-design-kit.js")}}"></script>
 
 <!-- App JS -->
 <script src="{{asset("$public/assets/js/app.js")}}"></script>

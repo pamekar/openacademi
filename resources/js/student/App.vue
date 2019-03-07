@@ -34,7 +34,7 @@
                     <div class="container page__container">
                         <div class="footer">
                             Copyright &copy;  - <a
-                                href="#"></a>
+                                href="/">OpenAcademi</a>
                         </div>
                     </div>
                 </div>
@@ -162,6 +162,7 @@
                                           icon:     "account_box",
                                           dropdown: [
                                               {
+
                                                   title: "Edit Account",
                                                   route: "error"
                                               }
