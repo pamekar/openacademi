@@ -31714,6 +31714,8 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_Index_vue__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_PurchasedCourses_vue__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_TagCourses_vue__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_Quiz_vue__ = __webpack_require__(426);
+
 
 
 
@@ -31762,14 +31764,19 @@ const routes = [{
   name: 'lesson',
   component: __WEBPACK_IMPORTED_MODULE_4__views_Lesson_vue__["a" /* default */]
 }, {
+  path: '/courses/purchased',
+  name: 'purchased-courses',
+  component: __WEBPACK_IMPORTED_MODULE_7__views_PurchasedCourses_vue__["a" /* default */]
+}, {
   path: '/courses/tags/:tag',
   name: 'tag-courses',
   component: __WEBPACK_IMPORTED_MODULE_8__views_TagCourses_vue__["a" /* default */],
   props: true
 }, {
-  path: '/courses/purchased',
-  name: 'purchased-courses',
-  component: __WEBPACK_IMPORTED_MODULE_7__views_PurchasedCourses_vue__["a" /* default */]
+  path: '/quiz/:id/:slug',
+  name: 'quiz',
+  component: __WEBPACK_IMPORTED_MODULE_9__views_Quiz_vue__["a" /* default */],
+  props: true
 }, {
   path: '/dashboard',
   component: __WEBPACK_IMPORTED_MODULE_6__views_Index_vue__["a" /* default */]
@@ -32800,7 +32807,29 @@ var render = function() {
                       _vm._v(" " + _vm._s(_vm.quizDuration))
                     ]),
                     _vm._v(" "),
-                    _vm._m(3)
+                    _c(
+                      "div",
+                      { staticClass: "text-center" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn btn-success",
+                            attrs: {
+                              to: {
+                                name: "quiz",
+                                params: {
+                                  id: _vm.course.id,
+                                  slug: _vm.lesson.slug
+                                }
+                              }
+                            }
+                          },
+                          [_vm._v("Take Quiz")]
+                        )
+                      ],
+                      1
+                    )
                   ])
                 ])
               : _vm._e(),
@@ -32838,7 +32867,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("div", { staticClass: "card" }, [
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c(
@@ -32866,7 +32895,7 @@ var render = function() {
               _c("ul", { staticClass: "list-group list-group-fit" }, [
                 _c("li", { staticClass: "list-group-item" }, [
                   _c("div", { staticClass: "media align-items-center" }, [
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("div", { staticClass: "media-body" }, [
                       _vm._v(
@@ -32880,7 +32909,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("li", { staticClass: "list-group-item" }, [
                   _c("div", { staticClass: "media align-items-center" }, [
-                    _vm._m(6),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("div", { staticClass: "media-body" }, [
                       _vm._v(
@@ -32905,7 +32934,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(7)
+            _vm._m(6)
           ],
           1
         )
@@ -32945,16 +32974,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("h4", { staticClass: "card-title" }, [_vm._v("Quiz")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center" }, [
-      _c("a", { staticClass: "btn btn-success", attrs: { href: "#" } }, [
-        _vm._v("Take Quiz")
-      ])
     ])
   },
   function() {
@@ -33984,6 +34003,595 @@ const functions = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */,
+/* 387 */,
+/* 388 */,
+/* 389 */,
+/* 390 */,
+/* 391 */,
+/* 392 */,
+/* 393 */,
+/* 394 */,
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_LessonsListComponent_vue__ = __webpack_require__(99);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  data() {
+    return {
+      course: [],
+      courseListWidth: "col-lg-3 col-md-4, col-sm-6",
+      breadcrumbs: [{
+        title: "Dashboard",
+        link: 'dashboard'
+      }, {
+        title: "Courses",
+        link: 'all-courses'
+      }, {
+        title: ""
+      }],
+      pageTitle: "Courses",
+      purchased: ""
+    };
+  },
+
+  created() {
+    this.getCourse();
+  },
+
+  mounted() {
+    console.log('Dashboard Component mounted now.');
+  },
+
+  components: {
+    'lessons-list-component': __WEBPACK_IMPORTED_MODULE_0__components_LessonsListComponent_vue__["a" /* default */]
+  },
+  methods: {
+    getCourse() {
+      axios.get("/api/course/" + this.$route.params.slug).then(({
+        data
+      }) => {
+        this.course = data.course;
+        this.pageTitle = data.course.title;
+        this.purchased = data.purchased;
+        this.breadcrumbs[2].title = data.course.title;
+      });
+    }
+
+  },
+  props: ['slug'],
+  computed: {}
+});
+
+/***/ }),
+/* 426 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_node_modules_vue_loader_lib_selector_type_script_index_0_Quiz_vue__ = __webpack_require__(425);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_24cfebc8_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Quiz_vue__ = __webpack_require__(427);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(2);
+var disposed = false
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+
+var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_node_modules_vue_loader_lib_selector_type_script_index_0_Quiz_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_24cfebc8_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Quiz_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_24cfebc8_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Quiz_vue__["b" /* staticRenderFns */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/student/views/Quiz.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-24cfebc8", Component.options)
+  } else {
+    hotAPI.reload("data-v-24cfebc8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 427 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("vue-headful", {
+        attrs: {
+          title: _vm.pageTitle + " | OpenAcademi",
+          description: _vm.course.summary
+        }
+      }),
+      _vm._v(" "),
+      _c("breadcrumb-component", {
+        attrs: { breadcrumbs: _vm.breadcrumbs, title: _vm.pageTitle }
+      }),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _vm._m(2)
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ol", { staticClass: "breadcrumb" }, [
+      _c("li", { staticClass: "breadcrumb-item" }, [
+        _c("a", { attrs: { href: "fixed-student-dashboard.html" } }, [
+          _vm._v("Home")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Quiz")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-group" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body text-center" }, [
+          _c("h4", { staticClass: "mb-0" }, [_c("strong", [_vm._v("25")])]),
+          _vm._v(" "),
+          _c("small", { staticClass: "text-muted-light" }, [_vm._v("TOTAL")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body text-center" }, [
+          _c("h4", { staticClass: "text-success mb-0" }, [
+            _c("strong", [_vm._v("3")])
+          ]),
+          _vm._v(" "),
+          _c("small", { staticClass: "text-muted-light" }, [_vm._v("CORECT")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body text-center" }, [
+          _c("h4", { staticClass: "text-danger mb-0" }, [
+            _c("strong", [_vm._v("5")])
+          ]),
+          _vm._v(" "),
+          _c("small", { staticClass: "text-muted-light" }, [_vm._v("WRONG")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body text-center" }, [
+          _c("h4", { staticClass: "text-primary mb-0" }, [
+            _c("strong", [_vm._v("17")])
+          ]),
+          _vm._v(" "),
+          _c("small", { staticClass: "text-muted-light" }, [_vm._v("LEFT")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("div", { staticClass: "media align-items-center" }, [
+          _c("div", { staticClass: "media-left" }, [
+            _c("h4", { staticClass: "mb-0" }, [_c("strong", [_vm._v("#9")])])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "media-body" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v(
+                "\n                        Github command to deploy comits?\n                    "
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "custom-control custom-checkbox" }, [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { id: "customCheck01", type: "checkbox" }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "customCheck01" }
+              },
+              [_vm._v("git push")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "custom-control custom-checkbox" }, [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { id: "customCheck02", type: "checkbox" }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "customCheck02" }
+              },
+              [_vm._v('git commit -m "message"')]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "custom-control custom-checkbox" }, [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { id: "customCheck03", type: "checkbox" }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "customCheck03" }
+              },
+              [_vm._v("git pull")]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-footer" }, [
+        _c("a", { staticClass: "btn btn-white", attrs: { href: "#" } }, [
+          _vm._v("Skip")
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "btn btn-success float-right", attrs: { href: "#" } },
+          [
+            _vm._v("Submit "),
+            _c("i", { staticClass: "material-icons btn__icon--right" }, [
+              _vm._v("send")
+            ])
+          ]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-24cfebc8", { render: render, staticRenderFns: staticRenderFns })
+  }
+}
 
 /***/ })
 /******/ ]);

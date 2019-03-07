@@ -73,7 +73,7 @@
                         <p>{{lesson.test.about_quiz}}</p>
                         <p class="text-muted"> {{quizDuration}}</p>
                         <div class="text-center">
-                            <a href="#" class="btn btn-success">Take Quiz</a>
+                            <router-link :to="{name:'quiz',params:{id:course.id,slug:lesson.slug}}" class="btn btn-success">Take Quiz</router-link>
                         </div>
                     </div>
                 </div>
@@ -202,8 +202,8 @@
             },
         },
         computed:   {
-            quizDuration: function (){
-                let duration=this.lesson.test.duration;
+            quizDuration: function () {
+                let duration = this.lesson.test.duration;
                 
                 let HH = Math.floor(duration / 3600);
                 let mm = Math.floor((duration % 3600) / 60);

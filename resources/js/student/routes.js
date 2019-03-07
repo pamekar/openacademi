@@ -7,6 +7,7 @@ import CategoryCourses from './views/CategoryCourses.vue';
 import Index from './views/Index.vue';
 import PurchasedCourses from './views/PurchasedCourses.vue';
 import TagCourses from './views/TagCourses.vue';
+import Quiz from './views/Quiz.vue';
 
 const Error404 = {
     template: "",
@@ -51,15 +52,21 @@ const routes = [
         component: Lesson
     },
     {
+        path:      '/courses/purchased',
+        name:      'purchased-courses',
+        component: PurchasedCourses
+    },
+    {
         path:      '/courses/tags/:tag',
         name:      'tag-courses',
         component: TagCourses,
         props:     true
     },
     {
-        path:      '/courses/purchased',
-        name:      'purchased-courses',
-        component: PurchasedCourses
+        path:      '/quiz/:id/:slug',
+        name:      'quiz',
+        component: Quiz,
+        props:     true
     },
     {
         path:      '/dashboard',
