@@ -71,7 +71,6 @@
 <!-- App JS -->
 <script src="{{asset("$public/assets/js/app.js")}}"></script>
 
-
 </body>
 
 </html>

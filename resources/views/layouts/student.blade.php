@@ -63,16 +63,19 @@
 
 <!-- MDK -->
 <script src="{{asset("$public/assets/vendor/dom-factory.js")}}"></script>
-<script src="{{asset("$public/assets/vendor/material-design-kit.js")}}"></script>
 
 <!-- App JS -->
 <script src="{{asset("$public/assets/js/app.js")}}"></script>
 
-<!-- Highlight.js -->
-<script src="{{asset("$public/assets/js/hljs.js")}}"></script>
+<!-- Required by countdown -->
+<script src="{{asset("$public/assets/vendor/moment.min.js")}}"></script>
 
-<!-- App Settings (safe to remove) -->
-<script src="{{asset("$public/assets/js/app-settings.js")}}"></script>
+<!-- Easy Countdown -->
+<script src="{{asset("$public/assets/vendor/jquery.countdown.min.js")}}"></script>
+
+<!-- Init -->
+<script src="{{asset("$public/assets/js/countdown.js")}}"></script>
+
 
 </body>
 
