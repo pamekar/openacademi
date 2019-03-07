@@ -17,6 +17,15 @@
                             <router-view></router-view>
                         </transition>
                     </div>
+
+                    <div class="page">
+                        <div class="container page__container">
+                            <div class="footer">
+                                Copyright &copy;  - <a
+                                    href="/">OpenAcademi</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
                     <sidebar-component :menu="sidebarItems"></sidebar-component>

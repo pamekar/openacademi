@@ -41861,6 +41861,15 @@ if(false) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -60755,7 +60764,9 @@ var render = function() {
                   )
                 ],
                 1
-              )
+              ),
+              _vm._v(" "),
+              _vm._m(0)
             ]),
             _vm._v(" "),
             _c(
@@ -60776,7 +60787,21 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "page" }, [
+      _c("div", { staticClass: "container page__container" }, [
+        _c("div", { staticClass: "footer" }, [
+          _vm._v("\n                            Copyright ©  - "),
+          _c("a", { attrs: { href: "/" } }, [_vm._v("OpenAcademi")])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 if (false) {

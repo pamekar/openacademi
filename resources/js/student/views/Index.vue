@@ -30,7 +30,7 @@
                         <li class="list-group-item" style="z-index: initial;" v-for="course in purchasedCourses">
                             <div class="d-flex align-items-center">
                                 <router-link :to="{name:'course',params:{'slug':course.slug}}" class="avatar avatar-4by3 avatar-sm mr-3">
-                                    <img :src="course.course_image" width="64" height="40" :alt="course.title"
+                                    <img :src="course.course_image_preview" width="64" height="40" :alt="course.title"
                                          class="avatar-img rounded">
                                 </router-link>
                                 <div class="flex">

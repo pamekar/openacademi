@@ -24,6 +24,9 @@
     <!-- App CSS -->
     <link type="text/css" href="{{asset("$public/assets/css/app.css")}}" rel="stylesheet">
     <link type="text/css" href="{{asset("$public/assets/css/nestable.css")}}" rel="stylesheet">
+    <script>
+        const public_= {{$public}};
+    </script>
 </head>
 
 <body class="layout-fluid">

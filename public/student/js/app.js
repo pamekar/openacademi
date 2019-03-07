@@ -33485,7 +33485,7 @@ var render = function() {
                             _c("img", {
                               staticClass: "avatar-img rounded",
                               attrs: {
-                                src: course.course_image,
+                                src: course.course_image_preview,
                                 width: "64",
                                 height: "40",
                                 alt: course.title
