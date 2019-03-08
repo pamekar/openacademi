@@ -45,7 +45,7 @@ Vue.use(VueRouter);
 
 functions.setupAxios();
 
-Vue.component('star-rating', StarRating);
+Vue.component('star-rating',                                                 StarRating);
 Vue.component('vue-headful', VueHeadful);
 Vue.component('breadcrumb-component', Breadcrumb);
 

@@ -31069,7 +31069,7 @@ var render = function() {
             _c("img", {
               staticClass: "mr-2",
               attrs: {
-                src: _vm.public_ + "/assets/images/logo/white.svg",
+                src: _vm.$public_ + "/assets/images/logo/white.svg",
                 alt: "OpenAcademi"
               }
             }),
@@ -31134,7 +31134,7 @@ var render = function() {
                                           "avatar-img rounded-circle",
                                         attrs: {
                                           src:
-                                            _vm.public_ +
+                                            _vm.$public_ +
                                             "/assets/images/people/110/woman-5.jpg",
                                           alt: "people"
                                         }
@@ -31167,7 +31167,7 @@ var render = function() {
                                           "avatar-img rounded-circle",
                                         attrs: {
                                           src:
-                                            _vm.public_ +
+                                            _vm.$public_ +
                                             "/assets/images/people/110/woman-5.jpg",
                                           alt: "people"
                                         }
@@ -31207,7 +31207,7 @@ var render = function() {
                   _c("img", {
                     staticClass: "rounded-circle",
                     attrs: {
-                      src: _vm.public_ + "/assets/images/people/50/guy-6.jpg",
+                      src: _vm.$public_ + "/assets/images/people/50/guy-6.jpg",
                       alt: "Avatar",
                       width: "40"
                     }
@@ -32238,7 +32238,7 @@ var render = function() {
                   _c("img", {
                     staticClass: "rounded-circle",
                     attrs: {
-                      src: _vm.public_ + "/assets/images/people/110/guy-6.jpg",
+                      src: _vm.$public_ + "/assets/images/people/110/guy-6.jpg",
                       alt: "About Adrian",
                       width: "50"
                     }
@@ -33017,7 +33017,7 @@ var render = function() {
                       staticClass: "rounded-circle",
                       attrs: {
                         src:
-                          _vm.public_ + "/assets/images/people/110/guy-6.jpg",
+                          _vm.$public_ + "/assets/images/people/110/guy-6.jpg",
                         alt: "About Adrian",
                         width: "50"
                       }

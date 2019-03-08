@@ -11,7 +11,7 @@
 
                 <!-- Brand -->
                 <a href="home" class="navbar-brand">
-                    <img :src="public_+'/assets/images/logo/white.svg'" class="mr-2" alt="OpenAcademi"/>
+                    <img :src="$public_+'/assets/images/logo/white.svg'" class="mr-2" alt="OpenAcademi"/>
                     <span class="d-none d-xs-md-block">OpenAcademi</span>
                 </a>
 
@@ -66,7 +66,7 @@
                                                 </span>
                                         <span class="d-flex">
                                                     <span class="avatar avatar-xs mr-2">
-                                                        <img :src="public_+'/assets/images/people/110/woman-5.jpg'"
+                                                        <img :src="$public_+'/assets/images/people/110/woman-5.jpg'"
                                                              alt="people"
                                                              class="avatar-img rounded-circle">
                                                     </span>
@@ -87,7 +87,7 @@
                                                 </span>
                                         <span class="d-flex">
                                                     <span class="avatar avatar-xs mr-2">
-                                                        <img :src="public_+'/assets/images/people/110/woman-5.jpg'"
+                                                        <img :src="$public_+'/assets/images/people/110/woman-5.jpg'"
                                                              alt="people"
                                                              class="avatar-img rounded-circle">
                                                     </span>
@@ -168,7 +168,7 @@
                     <!-- User dropdown -->
                     <li class="nav-item dropdown ml-1 ml-md-3">
                         <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#"
-                           role="button"><img :src="public_+'/assets/images/people/50/guy-6.jpg'"
+                           role="button"><img :src="$public_+'/assets/images/people/50/guy-6.jpg'"
                             alt="Avatar"
                             class="rounded-circle" width="40"></a>
                         <div class="dropdown-menu dropdown-menu-right">

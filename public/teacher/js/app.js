@@ -59577,7 +59577,7 @@ var render = function() {
               _c("img", {
                 staticClass: "mr-2",
                 attrs: {
-                  src: _vm.public_ + "/assets/images/logo/white.svg",
+                  src: _vm.$public_ + "/assets/images/logo/white.svg",
                   alt: "OpenAcademi"
                 }
               }),
@@ -59643,7 +59643,7 @@ var render = function() {
                                           "avatar-img rounded-circle",
                                         attrs: {
                                           src:
-                                            _vm.public_ +
+                                            _vm.$public_ +
                                             "/assets/images/people/110/woman-5.jpg",
                                           alt: "people"
                                         }
@@ -59676,7 +59676,7 @@ var render = function() {
                                           "avatar-img rounded-circle",
                                         attrs: {
                                           src:
-                                            _vm.public_ +
+                                            _vm.$public_ +
                                             "/assets/images/people/110/woman-5.jpg",
                                           alt: "people"
                                         }
@@ -59716,7 +59716,7 @@ var render = function() {
                   _c("img", {
                     staticClass: "rounded-circle",
                     attrs: {
-                      src: _vm.public_ + "/assets/images/people/50/guy-6.jpg",
+                      src: _vm.$public_ + "/assets/images/people/50/guy-6.jpg",
                       alt: "Avatar",
                       width: "40"
                     }
@@ -61241,7 +61241,7 @@ var render = function() {
                                       staticClass: "avatar-img rounded",
                                       attrs: {
                                         src:
-                                          _vm.public_ +
+                                          _vm.$public_ +
                                           "/assets/images/gulp.png",
                                         alt: "course"
                                       }
@@ -61277,7 +61277,7 @@ var render = function() {
                                       staticClass: "avatar-img rounded",
                                       attrs: {
                                         src:
-                                          _vm.public_ +
+                                          _vm.$public_ +
                                           "/assets/images/github.png",
                                         alt: "course"
                                       }
@@ -61313,7 +61313,7 @@ var render = function() {
                                       staticClass: "avatar-img rounded",
                                       attrs: {
                                         src:
-                                          _vm.public_ +
+                                          _vm.$public_ +
                                           "/assets/images/vuejs.png",
                                         alt: "course"
                                       }
@@ -61349,7 +61349,7 @@ var render = function() {
                                       staticClass: "avatar-img rounded",
                                       attrs: {
                                         src:
-                                          _vm.public_ +
+                                          _vm.$public_ +
                                           "/assets/images/vuejs.png",
                                         alt: "course"
                                       }
@@ -61391,7 +61391,7 @@ var render = function() {
                             staticClass: "avatar-img rounded-circle",
                             attrs: {
                               src:
-                                _vm.public_ +
+                                _vm.$public_ +
                                 "/assets/images/people/110/guy-9.jpg",
                               alt: "Guy"
                             }
@@ -61422,7 +61422,7 @@ var render = function() {
                               staticClass: "avatar-img rounded-circle",
                               attrs: {
                                 src:
-                                  _vm.public_ +
+                                  _vm.$public_ +
                                   "/assets/images/people/110/guy-6.jpg",
                                 alt: "Guy"
                               }
@@ -68906,7 +68906,7 @@ var render = function() {
                           staticClass: "avatar-img rounded-circle",
                           attrs: {
                             src:
-                              _vm.public_ +
+                              _vm.$public_ +
                               "/assets/images/256_rsz_sharina-mae-agellon-377466-unsplash.jpg",
                             alt: "Avatar"
                           }
@@ -68927,7 +68927,7 @@ var render = function() {
                           staticClass: "avatar-img rounded-circle",
                           attrs: {
                             src:
-                              _vm.public_ +
+                              _vm.$public_ +
                               "/assets/images/256_rsz_90-jiang-640827-unsplash.jpg",
                             alt: "Avatar"
                           }
@@ -68948,7 +68948,7 @@ var render = function() {
                           staticClass: "avatar-img rounded-circle",
                           attrs: {
                             src:
-                              _vm.public_ +
+                              _vm.$public_ +
                               "/assets/images/256_rsz_nicolas-horn-689011-unsplash.jpg",
                             alt: "Avatar"
                           }
@@ -68969,7 +68969,7 @@ var render = function() {
                           staticClass: "avatar-img rounded-circle",
                           attrs: {
                             src:
-                              _vm.public_ +
+                              _vm.$public_ +
                               "/assets/images/256_rsz_karl-s-973833-unsplash.jpg",
                             alt: "Avatar"
                           }
