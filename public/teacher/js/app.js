@@ -46832,7 +46832,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('star-rating', __WEBPACK_I
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vue-headful', __WEBPACK_IMPORTED_MODULE_3_vue_headful___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('breadcrumb-component', __WEBPACK_IMPORTED_MODULE_8__components_BreadcrumbComponent_vue__["a" /* default */]); // drg >> set global variables
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.public_ = window.public_;
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$public_ = window.public_;
 let app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',
   render: h => h(__WEBPACK_IMPORTED_MODULE_6__App_vue__["a" /* default */]),

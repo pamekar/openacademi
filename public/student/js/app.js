@@ -29882,9 +29882,7 @@ if (false) {(function () {
 
   },
 
-  mounted() {
-    console.log(this.$public_);
-  },
+  mounted() {},
 
   components: {
     'courses-component': __WEBPACK_IMPORTED_MODULE_0__components_CoursesComponent_vue__["a" /* default */]
@@ -30411,8 +30409,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('star-rating', __WEBPACK_I
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vue-headful', __WEBPACK_IMPORTED_MODULE_2_vue_headful___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('breadcrumb-component', __WEBPACK_IMPORTED_MODULE_6__components_BreadcrumbComponent_vue__["a" /* default */]); // drg >> set global variables
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.public_ = window.public_;
-console.log(window.public_);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$public_ = window.public_;
 let app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',
   render: h => h(__WEBPACK_IMPORTED_MODULE_4__App_vue__["a" /* default */]),
