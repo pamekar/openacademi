@@ -23,7 +23,7 @@
     <!-- App CSS -->
     <link type="text/css" href="{{asset("$public/assets/css/app.css")}}" rel="stylesheet">
     <script>
-        const public_= {{$public}};
+        window.public_= "{{$public?"/$public":''}}";
     </script>
 </head>
 

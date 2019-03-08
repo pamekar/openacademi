@@ -43,12 +43,16 @@ Vue.use(vUploader, uploaderConfig);
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
 
-
 functions.setupAxios();
 
 Vue.component('star-rating', StarRating);
 Vue.component('vue-headful', VueHeadful);
 Vue.component('breadcrumb-component', Breadcrumb);
+
+
+
+// drg >> set global variables
+Vue.prototype.public_ = window.public_;
 
 let app = new Vue({
     el:     '#app',

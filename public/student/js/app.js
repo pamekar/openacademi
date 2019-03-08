@@ -30409,7 +30409,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_7_axio
 __WEBPACK_IMPORTED_MODULE_9__functions_js__["a" /* default */].setupAxios();
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('star-rating', __WEBPACK_IMPORTED_MODULE_5_vue_star_rating___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vue-headful', __WEBPACK_IMPORTED_MODULE_2_vue_headful___default.a);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('breadcrumb-component', __WEBPACK_IMPORTED_MODULE_6__components_BreadcrumbComponent_vue__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('breadcrumb-component', __WEBPACK_IMPORTED_MODULE_6__components_BreadcrumbComponent_vue__["a" /* default */]); // drg >> set global variables
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.public_ = window.public_;
 let app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',
   render: h => h(__WEBPACK_IMPORTED_MODULE_4__App_vue__["a" /* default */]),
@@ -31052,593 +31054,499 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mdk-header__content" }, [
-      _c(
-        "nav",
-        {
-          staticClass: "navbar navbar-expand navbar-dark bg-primary m-0",
-          attrs: { id: "default-navbar" }
-        },
-        [
-          _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "mdk-header__content" }, [
+    _c(
+      "nav",
+      {
+        staticClass: "navbar navbar-expand navbar-dark bg-primary m-0",
+        attrs: { id: "default-navbar" }
+      },
+      [
+        _c("div", { staticClass: "container" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("a", { staticClass: "navbar-brand", attrs: { href: "home" } }, [
+            _c("img", {
+              staticClass: "mr-2",
+              attrs: {
+                src: _vm.public_ + "/assets/images/logo/white.svg",
+                alt: "OpenAcademi"
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "d-none d-xs-md-block" }, [
+              _vm._v("OpenAcademi")
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex" }),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c("ul", { staticClass: "nav navbar-nav flex-nowrap" }, [
+            _vm._m(3),
+            _vm._v(" "),
             _c(
-              "button",
+              "li",
               {
-                staticClass: "navbar-toggler d-block",
-                attrs: { "data-toggle": "sidebar", type: "button" }
+                staticClass:
+                  "nav-item dropdown dropdown-notifications dropdown-menu-sm-full"
               },
-              [_c("span", { staticClass: "material-icons" }, [_vm._v("menu")])]
-            ),
-            _vm._v(" "),
-            _c("a", { staticClass: "navbar-brand", attrs: { href: "home" } }, [
-              _c("img", {
-                staticClass: "mr-2",
-                attrs: {
-                  src: "/assets/images/logo/white.svg",
-                  alt: "OpenAcademi"
-                }
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "d-none d-xs-md-block" }, [
-                _vm._v("OpenAcademi")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("form", { staticClass: "search-form d-none d-md-flex" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Search" }
-              }),
-              _vm._v(" "),
-              _c("button", { staticClass: "btn", attrs: { type: "button" } }, [
-                _c("i", { staticClass: "material-icons font-size-24pt" }, [
-                  _vm._v("search")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex" }),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { staticClass: "nav navbar-nav flex-nowrap d-none d-lg-flex" },
               [
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { href: "fixed-student-forum.html" }
-                    },
-                    [_vm._v("Forum")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { href: "fixed-student-help-center.html" }
-                    },
-                    [_vm._v("Get Help")]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("ul", { staticClass: "nav navbar-nav flex-nowrap" }, [
-              _c("li", { staticClass: "nav-item d-none d-md-flex" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link",
-                    attrs: { href: "fixed-student-cart.html" }
-                  },
-                  [
-                    _c("i", { staticClass: "material-icons" }, [
-                      _vm._v("shopping_cart")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass:
-                    "nav-item dropdown dropdown-notifications dropdown-menu-sm-full"
-                },
-                [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "nav-link btn-flush dropdown-toggle",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "dropdown",
-                        "data-dropdown-disable-document-scroll": "",
-                        "data-caret": "false"
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "material-icons" }, [
-                        _vm._v("notifications")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          staticClass: "badge badge-notifications badge-danger"
-                        },
-                        [_vm._v("2")]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "dropdown-menu dropdown-menu-right" },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "position-relative",
-                          attrs: { "data-perfect-scrollbar": "" }
-                        },
-                        [
-                          _c("div", { staticClass: "dropdown-header" }, [
-                            _c("strong", [_vm._v("Messages")])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "list-group list-group-flush mb-0" },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "list-group-item list-group-item-action unread",
-                                  attrs: { href: "fixed-student-messages.html" }
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "d-flex align-items-center mb-1"
-                                    },
-                                    [
-                                      _c(
-                                        "small",
-                                        { staticClass: "text-muted" },
-                                        [_vm._v("5 minutes ago")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("span", {
-                                        staticClass:
-                                          "ml-auto unread-indicator bg-primary"
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "d-flex" }, [
-                                    _c(
-                                      "span",
-                                      { staticClass: "avatar avatar-xs mr-2" },
-                                      [
-                                        _c("img", {
-                                          staticClass:
-                                            "avatar-img rounded-circle",
-                                          attrs: {
-                                            src:
-                                              "/assets/images/people/110/woman-5.jpg",
-                                            alt: "people"
-                                          }
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass: "flex d-flex flex-column"
-                                      },
-                                      [
-                                        _c("strong", [_vm._v("Michelle")]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          { staticClass: "text-black-70" },
-                                          [
-                                            _vm._v(
-                                              "Clients loved the new design."
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "list-group-item list-group-item-action unread",
-                                  attrs: { href: "fixed-student-messages.html" }
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "d-flex align-items-center mb-1"
-                                    },
-                                    [
-                                      _c(
-                                        "small",
-                                        { staticClass: "text-muted" },
-                                        [_vm._v("5 minutes ago")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("span", {
-                                        staticClass:
-                                          "ml-auto unread-indicator bg-primary"
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "d-flex" }, [
-                                    _c(
-                                      "span",
-                                      { staticClass: "avatar avatar-xs mr-2" },
-                                      [
-                                        _c("img", {
-                                          staticClass:
-                                            "avatar-img rounded-circle",
-                                          attrs: {
-                                            src:
-                                              "/assets/images/people/110/woman-5.jpg",
-                                            alt: "people"
-                                          }
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass: "flex d-flex flex-column"
-                                      },
-                                      [
-                                        _c("strong", [_vm._v("Michelle")]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          { staticClass: "text-black-70" },
-                                          [_vm._v("🔥 Superb job..")]
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-header" }, [
-                            _c("strong", [_vm._v("System notifications")])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "list-group list-group-flush mb-0" },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "list-group-item list-group-item-action border-left-3 border-left-danger",
-                                  attrs: { href: "fixed-student-messages.html" }
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "d-flex align-items-center mb-1"
-                                    },
-                                    [
-                                      _c(
-                                        "small",
-                                        { staticClass: "text-muted" },
-                                        [_vm._v("3 minutes ago")]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "d-flex" }, [
-                                    _c(
-                                      "span",
-                                      { staticClass: "avatar avatar-xs mr-2" },
-                                      [
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "avatar-title rounded-circle bg-light"
-                                          },
-                                          [
-                                            _c(
-                                              "i",
-                                              {
-                                                staticClass:
-                                                  "material-icons font-size-16pt text-danger"
-                                              },
-                                              [_vm._v("account_circle")]
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass: "flex d-flex flex-column"
-                                      },
-                                      [
-                                        _c(
-                                          "span",
-                                          { staticClass: "text-black-70" },
-                                          [
-                                            _vm._v(
-                                              "Your profile information has not been synced correctly."
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "list-group-item list-group-item-action",
-                                  attrs: { href: "fixed-student-messages.html" }
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "d-flex align-items-center mb-1"
-                                    },
-                                    [
-                                      _c(
-                                        "small",
-                                        { staticClass: "text-muted" },
-                                        [_vm._v("5 hours ago")]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "d-flex" }, [
-                                    _c(
-                                      "span",
-                                      { staticClass: "avatar avatar-xs mr-2" },
-                                      [
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "avatar-title rounded-circle bg-light"
-                                          },
-                                          [
-                                            _c(
-                                              "i",
-                                              {
-                                                staticClass:
-                                                  "material-icons font-size-16pt text-success"
-                                              },
-                                              [_vm._v("group_add")]
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass: "flex d-flex flex-column"
-                                      },
-                                      [
-                                        _c("strong", [_vm._v("Adrian. D")]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          { staticClass: "text-black-70" },
-                                          [
-                                            _vm._v(
-                                              "Wants to join your private group."
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "list-group-item list-group-item-action",
-                                  attrs: { href: "fixed-student-messages.html" }
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "d-flex align-items-center mb-1"
-                                    },
-                                    [
-                                      _c(
-                                        "small",
-                                        { staticClass: "text-muted" },
-                                        [_vm._v("1 day ago")]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "d-flex" }, [
-                                    _c(
-                                      "span",
-                                      { staticClass: "avatar avatar-xs mr-2" },
-                                      [
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "avatar-title rounded-circle bg-light"
-                                          },
-                                          [
-                                            _c(
-                                              "i",
-                                              {
-                                                staticClass:
-                                                  "material-icons font-size-16pt text-warning"
-                                              },
-                                              [_vm._v("storage")]
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass: "flex d-flex flex-column"
-                                      },
-                                      [
-                                        _c(
-                                          "span",
-                                          { staticClass: "text-black-70" },
-                                          [
-                                            _vm._v(
-                                              "Your deploy was successful."
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item dropdown ml-1 ml-md-3" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link active dropdown-toggle",
-                    attrs: {
-                      "data-toggle": "dropdown",
-                      href: "#",
-                      role: "button"
-                    }
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "rounded-circle",
-                      attrs: {
-                        src: "/assets/images/people/50/guy-6.jpg",
-                        alt: "Avatar",
-                        width: "40"
-                      }
-                    })
-                  ]
-                ),
+                _vm._m(4),
                 _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "dropdown-menu dropdown-menu-right" },
                   [
                     _c(
-                      "a",
+                      "div",
                       {
-                        staticClass: "dropdown-item",
-                        attrs: { href: "fixed-student-account-edit.html" }
+                        staticClass: "position-relative",
+                        attrs: { "data-perfect-scrollbar": "" }
                       },
                       [
-                        _c("i", { staticClass: "material-icons" }, [
-                          _vm._v("edit")
-                        ]),
-                        _vm._v(" Edit Account\n                        ")
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { href: "fixed-student-profile.html" }
-                      },
-                      [
-                        _c("i", { staticClass: "material-icons" }, [
-                          _vm._v("person")
-                        ]),
-                        _vm._v(" Public Profile\n                        ")
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: {
-                          href: "logout",
-                          title: "",
-                          onclick:
-                            "event.preventDefault(); document.getElementById('logout-form').submit();"
-                        }
-                      },
-                      [
-                        _c("i", { staticClass: "material-icons" }, [
-                          _vm._v("lock")
-                        ]),
-                        _vm._v(" Logout\n                        ")
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "list-group list-group-flush mb-0" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "list-group-item list-group-item-action unread",
+                                attrs: { href: "fixed-student-messages.html" }
+                              },
+                              [
+                                _vm._m(6),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "d-flex" }, [
+                                  _c(
+                                    "span",
+                                    { staticClass: "avatar avatar-xs mr-2" },
+                                    [
+                                      _c("img", {
+                                        staticClass:
+                                          "avatar-img rounded-circle",
+                                        attrs: {
+                                          src:
+                                            _vm.public_ +
+                                            "/assets/images/people/110/woman-5.jpg",
+                                          alt: "people"
+                                        }
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(7)
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "list-group-item list-group-item-action unread",
+                                attrs: { href: "fixed-student-messages.html" }
+                              },
+                              [
+                                _vm._m(8),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "d-flex" }, [
+                                  _c(
+                                    "span",
+                                    { staticClass: "avatar avatar-xs mr-2" },
+                                    [
+                                      _c("img", {
+                                        staticClass:
+                                          "avatar-img rounded-circle",
+                                        attrs: {
+                                          src:
+                                            _vm.public_ +
+                                            "/assets/images/people/110/woman-5.jpg",
+                                          alt: "people"
+                                        }
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(9)
+                                ])
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(10),
+                        _vm._v(" "),
+                        _vm._m(11)
                       ]
                     )
                   ]
                 )
+              ]
+            ),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item dropdown ml-1 ml-md-3" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link active dropdown-toggle",
+                  attrs: {
+                    "data-toggle": "dropdown",
+                    href: "#",
+                    role: "button"
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "rounded-circle",
+                    attrs: {
+                      src: _vm.public_ + "/assets/images/people/50/guy-6.jpg",
+                      alt: "Avatar",
+                      width: "40"
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(12)
+            ])
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler d-block",
+        attrs: { "data-toggle": "sidebar", type: "button" }
+      },
+      [_c("span", { staticClass: "material-icons" }, [_vm._v("menu")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", { staticClass: "search-form d-none d-md-flex" }, [
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", placeholder: "Search" }
+      }),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn", attrs: { type: "button" } }, [
+        _c("i", { staticClass: "material-icons font-size-24pt" }, [
+          _vm._v("search")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      { staticClass: "nav navbar-nav flex-nowrap d-none d-lg-flex" },
+      [
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: { href: "fixed-student-forum.html" }
+            },
+            [_vm._v("Forum")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: { href: "fixed-student-help-center.html" }
+            },
+            [_vm._v("Get Help")]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item d-none d-md-flex" }, [
+      _c(
+        "a",
+        { staticClass: "nav-link", attrs: { href: "fixed-student-cart.html" } },
+        [_c("i", { staticClass: "material-icons" }, [_vm._v("shopping_cart")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "nav-link btn-flush dropdown-toggle",
+        attrs: {
+          type: "button",
+          "data-toggle": "dropdown",
+          "data-dropdown-disable-document-scroll": "",
+          "data-caret": "false"
+        }
+      },
+      [
+        _c("i", { staticClass: "material-icons" }, [_vm._v("notifications")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "badge badge-notifications badge-danger" }, [
+          _vm._v("2")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "dropdown-header" }, [
+      _c("strong", [_vm._v("Messages")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "d-flex align-items-center mb-1" }, [
+      _c("small", { staticClass: "text-muted" }, [_vm._v("5 minutes ago")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "ml-auto unread-indicator bg-primary" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "flex d-flex flex-column" }, [
+      _c("strong", [_vm._v("Michelle")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-black-70" }, [
+        _vm._v("Clients loved the new design.")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "d-flex align-items-center mb-1" }, [
+      _c("small", { staticClass: "text-muted" }, [_vm._v("5 minutes ago")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "ml-auto unread-indicator bg-primary" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "flex d-flex flex-column" }, [
+      _c("strong", [_vm._v("Michelle")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-black-70" }, [_vm._v("🔥 Superb job..")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "dropdown-header" }, [
+      _c("strong", [_vm._v("System notifications")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "list-group list-group-flush mb-0" }, [
+      _c(
+        "a",
+        {
+          staticClass:
+            "list-group-item list-group-item-action border-left-3 border-left-danger",
+          attrs: { href: "fixed-student-messages.html" }
+        },
+        [
+          _c("span", { staticClass: "d-flex align-items-center mb-1" }, [
+            _c("small", { staticClass: "text-muted" }, [
+              _vm._v("3 minutes ago")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "d-flex" }, [
+            _c("span", { staticClass: "avatar avatar-xs mr-2" }, [
+              _c(
+                "span",
+                { staticClass: "avatar-title rounded-circle bg-light" },
+                [
+                  _c(
+                    "i",
+                    {
+                      staticClass: "material-icons font-size-16pt text-danger"
+                    },
+                    [_vm._v("account_circle")]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "flex d-flex flex-column" }, [
+              _c("span", { staticClass: "text-black-70" }, [
+                _vm._v(
+                  "Your profile information has not been synced correctly."
+                )
               ])
             ])
           ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "list-group-item list-group-item-action",
+          attrs: { href: "fixed-student-messages.html" }
+        },
+        [
+          _c("span", { staticClass: "d-flex align-items-center mb-1" }, [
+            _c("small", { staticClass: "text-muted" }, [_vm._v("5 hours ago")])
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "d-flex" }, [
+            _c("span", { staticClass: "avatar avatar-xs mr-2" }, [
+              _c(
+                "span",
+                { staticClass: "avatar-title rounded-circle bg-light" },
+                [
+                  _c(
+                    "i",
+                    {
+                      staticClass: "material-icons font-size-16pt text-success"
+                    },
+                    [_vm._v("group_add")]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "flex d-flex flex-column" }, [
+              _c("strong", [_vm._v("Adrian. D")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-black-70" }, [
+                _vm._v("Wants to join your private group.")
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "list-group-item list-group-item-action",
+          attrs: { href: "fixed-student-messages.html" }
+        },
+        [
+          _c("span", { staticClass: "d-flex align-items-center mb-1" }, [
+            _c("small", { staticClass: "text-muted" }, [_vm._v("1 day ago")])
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "d-flex" }, [
+            _c("span", { staticClass: "avatar avatar-xs mr-2" }, [
+              _c(
+                "span",
+                { staticClass: "avatar-title rounded-circle bg-light" },
+                [
+                  _c(
+                    "i",
+                    {
+                      staticClass: "material-icons font-size-16pt text-warning"
+                    },
+                    [_vm._v("storage")]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "flex d-flex flex-column" }, [
+              _c("span", { staticClass: "text-black-70" }, [
+                _vm._v("Your deploy was successful.")
+              ])
+            ])
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
+      _c(
+        "a",
+        {
+          staticClass: "dropdown-item",
+          attrs: { href: "fixed-student-account-edit.html" }
+        },
+        [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("edit")]),
+          _vm._v(" Edit Account\n                        ")
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "dropdown-item",
+          attrs: { href: "fixed-student-profile.html" }
+        },
+        [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("person")]),
+          _vm._v(" Public Profile\n                        ")
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "dropdown-item",
+          attrs: {
+            href: "logout",
+            title: "",
+            onclick:
+              "event.preventDefault(); document.getElementById('logout-form').submit();"
+          }
+        },
+        [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("lock")]),
+          _vm._v(" Logout\n                        ")
         ]
       )
     ])
@@ -32323,7 +32231,26 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(3)
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _c("div", { staticClass: "media align-items-center" }, [
+                _c("div", { staticClass: "media-left" }, [
+                  _c("img", {
+                    staticClass: "rounded-circle",
+                    attrs: {
+                      src: _vm.public_ + "/assets/images/people/110/guy-6.jpg",
+                      alt: "About Adrian",
+                      width: "50"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(3)
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(4)
+          ])
         ])
       ])
     ],
@@ -32363,50 +32290,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-header" }, [
-        _c("div", { staticClass: "media align-items-center" }, [
-          _c("div", { staticClass: "media-left" }, [
-            _c("img", {
-              staticClass: "rounded-circle",
-              attrs: {
-                src: "assets/images/people/110/guy-6.jpg",
-                alt: "About Adrian",
-                width: "50"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "media-body" }, [
-            _c("h4", { staticClass: "card-title" }, [
-              _c("a", { attrs: { href: "fixed-student-profile.html" } }, [
-                _vm._v("Adrian Demian")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-subtitle" }, [_vm._v("Instructor")])
-          ])
+    return _c("div", { staticClass: "media-body" }, [
+      _c("h4", { staticClass: "card-title" }, [
+        _c("a", { attrs: { href: "fixed-student-profile.html" } }, [
+          _vm._v("Adrian Demian")
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("p", [
-          _vm._v(
-            "Having over 12 years exp. Adrian is one of the lead UI designers in the industry Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, aut."
-          )
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
-          _c("i", { staticClass: "fab fa-facebook" })
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
-          _c("i", { staticClass: "fab fa-twitter" })
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
-          _c("i", { staticClass: "fab fa-github" })
-        ])
+      _c("p", { staticClass: "card-subtitle" }, [_vm._v("Instructor")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body" }, [
+      _c("p", [
+        _vm._v(
+          "Having over 12 years exp. Adrian is one of the lead UI designers in the industry Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, aut."
+        )
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
+        _c("i", { staticClass: "fab fa-facebook" })
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
+        _c("i", { staticClass: "fab fa-twitter" })
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
+        _c("i", { staticClass: "fab fa-github" })
       ])
     ])
   }
@@ -33095,7 +33009,27 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(6)
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _c("div", { staticClass: "media align-items-center" }, [
+                  _c("div", { staticClass: "media-left" }, [
+                    _c("img", {
+                      staticClass: "rounded-circle",
+                      attrs: {
+                        src:
+                          _vm.public_ + "/assets/images/people/110/guy-6.jpg",
+                        alt: "About Adrian",
+                        width: "50"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(6)
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(7)
+            ])
           ],
           1
         )
@@ -33169,50 +33103,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-header" }, [
-        _c("div", { staticClass: "media align-items-center" }, [
-          _c("div", { staticClass: "media-left" }, [
-            _c("img", {
-              staticClass: "rounded-circle",
-              attrs: {
-                src: "assets/images/people/110/guy-6.jpg",
-                alt: "About Adrian",
-                width: "50"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "media-body" }, [
-            _c("h4", { staticClass: "card-title" }, [
-              _c("a", { attrs: { href: "fixed-student-profile.html" } }, [
-                _vm._v("Adrian Demian")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-subtitle" }, [_vm._v("Instructor")])
-          ])
+    return _c("div", { staticClass: "media-body" }, [
+      _c("h4", { staticClass: "card-title" }, [
+        _c("a", { attrs: { href: "fixed-student-profile.html" } }, [
+          _vm._v("Adrian Demian")
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("p", [
-          _vm._v(
-            "Having over 12 years exp. Adrian is one of the lead UI designers in the industry Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, aut."
-          )
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
-          _c("i", { staticClass: "fab fa-facebook" })
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
-          _c("i", { staticClass: "fab fa-twitter" })
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
-          _c("i", { staticClass: "fab fa-github" })
-        ])
+      _c("p", { staticClass: "card-subtitle" }, [_vm._v("Instructor")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body" }, [
+      _c("p", [
+        _vm._v(
+          "Having over 12 years exp. Adrian is one of the lead UI designers in the industry Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, aut."
+        )
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
+        _c("i", { staticClass: "fab fa-facebook" })
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
+        _c("i", { staticClass: "fab fa-twitter" })
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
+        _c("i", { staticClass: "fab fa-github" })
       ])
     ])
   }
@@ -33928,7 +33849,7 @@ var render = function() {
                       staticClass: "rounded",
                       staticStyle: { width: "80px", "max-height": "60px" },
                       attrs: {
-                        src: _vm.course.course_image,
+                        src: _vm.course.course_image_preview,
                         alt: _vm.course.title
                       }
                     })
