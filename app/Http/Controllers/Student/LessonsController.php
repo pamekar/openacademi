@@ -18,29 +18,32 @@ class LessonsController extends Controller
         $lesson = Lesson::where('slug', $lesson_slug)->where('published', true)
             ->where('course_id', $course_id)->firstOrFail();
         //dd($lesson); exit;
-        if (\Auth::check()) {
-            if ($lesson->students()->where('id', \Auth::id())->count() == 0) {
-                $lesson->students()->attach(\Auth::id());
-            }
-        }
-
-        $test_result = null;
-        if ($lesson->test) {
-            $test_result = TestsResult::where('test_id', $lesson->test->id)
-                ->where('user_id', \Auth::id())
-                ->first();
-        }
-
-        $course = Course::where('id', $course_id)->with('publishedLessons')
-            ->firstOrFail()->append('duration');
-
         $purchased_course = $lesson->course->students()
                 ->where('user_id', \Auth::id())->count() > 0;
-        $test_exists = false;
-        if ($lesson->test && $lesson->test->questions->count() > 0) {
-            $test_exists = true;
-        }
         if ($purchased_course || $lesson->free_lesson) {
+            if (\Auth::check()) {
+                if ($lesson->students()->where('id', \Auth::id())->count()
+                    == 0
+                ) {
+                    $lesson->students()->attach(\Auth::id());
+                }
+            }
+
+            $test_result = null;
+            if ($lesson->test) {
+                $test_result = TestsResult::where('test_id', $lesson->test->id)
+                    ->where('user_id', \Auth::id())
+                    ->first();
+            }
+
+            $course = Course::where('id', $course_id)->with('publishedLessons')
+                ->firstOrFail()->append('duration');
+
+            $test_exists = false;
+            if ($lesson->test && $lesson->test->questions->count() > 0) {
+                $test_exists = true;
+            }
+
             return response()->json([
                 'lesson'           => $lesson,
                 'course'           => $course,
@@ -49,43 +52,11 @@ class LessonsController extends Controller
                 'test_exists'      => $test_exists
             ]);
         }
+        $status = [
+            'type'    => 'success',
+            'message' => "Oops! Now is a good time to purchase the course"
+        ];
 
+        return response()->json($status);
     }
-
-    public function test($lesson_slug, Request $request)
-    {
-        $lesson = Lesson::where('slug', $lesson_slug)->firstOrFail();
-        $answers = [];
-        $test_score = 0;
-        foreach ($request->get('questions') as $question_id => $answer_id) {
-            $question = Question::find($question_id);
-            $correct = QuestionsOption::where('question_id', $question_id)
-                    ->where('id', $answer_id)
-                    ->where('correct', 1)->count() > 0;
-            $answers[] = [
-                'question_id' => $question_id,
-                'option_id'   => $answer_id,
-                'correct'     => $correct
-            ];
-            if ($correct) {
-                $test_score += $question->score;
-            }
-            /*
-             * Save the answer
-             * Check if it is correct and then add points
-             * Save all test result and show the points
-             */
-        }
-        $test_result = TestsResult::create([
-            'test_id'     => $lesson->test->id,
-            'user_id'     => \Auth::id(),
-            'test_result' => $test_score
-        ]);
-        $test_result->answers()->createMany($answers);
-
-        return redirect()
-            ->route('lessons.show', [$lesson->course_id, $lesson_slug])
-            ->with('message', 'Test score: ' . $test_score);
-    }
-
 }

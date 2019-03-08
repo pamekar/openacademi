@@ -31842,8 +31842,7 @@ const routes = [{
 }, {
   path: '/quiz/:id/:slug',
   name: 'quiz',
-  component: __WEBPACK_IMPORTED_MODULE_9__views_Quiz_vue__["a" /* default */],
-  props: true
+  component: __WEBPACK_IMPORTED_MODULE_9__views_Quiz_vue__["a" /* default */]
 }, {
   path: '/dashboard',
   component: __WEBPACK_IMPORTED_MODULE_6__views_Index_vue__["a" /* default */]
@@ -32900,43 +32899,50 @@ var render = function() {
             }),
             _vm._v(" "),
             _vm.purchased && _vm.lesson.test
-              ? _c("div", { staticClass: "card" }, [
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("h3", [_vm._v(_vm._s(_vm.lesson.test.title))]),
+              ? _c(
+                  "div",
+                  { staticClass: "card" },
+                  [
+                    _vm._m(2),
                     _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(_vm.lesson.test.about_quiz))]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "text-muted" }, [
-                      _vm._v(" " + _vm._s(_vm.quizDuration))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "text-center" },
-                      [
+                    _vm._l(_vm.lesson.tests, function(test) {
+                      return _c("div", { staticClass: "card-body" }, [
+                        _c("h3", [_vm._v(_vm._s(test.title))]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(test.about_quiz))]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "text-muted" }, [
+                          _vm._v(" " + _vm._s(_vm.quizDuration(test)))
+                        ]),
+                        _vm._v(" "),
                         _c(
-                          "router-link",
-                          {
-                            staticClass: "btn btn-success",
-                            attrs: {
-                              to: {
-                                name: "quiz",
-                                params: {
-                                  id: _vm.course.id,
-                                  slug: _vm.lesson.slug
+                          "div",
+                          { staticClass: "text-center" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "btn btn-success",
+                                attrs: {
+                                  to: {
+                                    name: "quiz",
+                                    params: {
+                                      id: test.id,
+                                      slug: _vm.lesson.slug
+                                    }
+                                  }
                                 }
-                              }
-                            }
-                          },
-                          [_vm._v("Take Quiz")]
+                              },
+                              [_vm._v("Take Quiz")]
+                            )
+                          ],
+                          1
                         )
-                      ],
-                      1
-                    )
-                  ])
-                ])
+                      ])
+                    })
+                  ],
+                  2
+                )
               : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "card" }, [

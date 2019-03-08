@@ -76,12 +76,12 @@
                     <div class="card-header">
                         <h4 class="card-title">Quiz</h4>
                     </div>
-                    <div class="card-body">
-                        <h3>{{lesson.test.title}}</h3>
-                        <p>{{lesson.test.about_quiz}}</p>
-                        <p class="text-muted"> {{quizDuration}}</p>
+                    <div class="card-body" v-for="test in lesson.tests">
+                        <h3>{{test.title}}</h3>
+                        <p>{{test.about_quiz}}</p>
+                        <p class="text-muted"> {{quizDuration(test)}}</p>
                         <div class="text-center">
-                            <router-link :to="{name:'quiz',params:{id:course.id,slug:lesson.slug}}" class="btn btn-success">Take Quiz</router-link>
+                            <router-link :to="{name:'quiz',params:{id:test.id,slug:lesson.slug}}" class="btn btn-success">Take Quiz</router-link>
                         </div>
                     </div>
                 </div>

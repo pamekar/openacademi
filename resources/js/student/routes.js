@@ -66,7 +66,6 @@ const routes = [
         path:      '/quiz/:id/:slug',
         name:      'quiz',
         component: Quiz,
-        props:     true
     },
     {
         path:      '/dashboard',
