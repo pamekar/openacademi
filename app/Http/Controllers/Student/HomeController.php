@@ -42,18 +42,6 @@ class HomeController extends Controller
         return response()->json(['my_courses' => $my_courses]);
     }
 
-    public function results(Request $request)
-    {
-        $count = $request->input('count', 8);
-        $results = $request->dashboard
-            ? TestsResult::with(['test'])->where('user_id', Auth::id())
-                ->latest('updated_at')->limit($count)->get()
-            : TestsResult::with('test')->where('user_id', Auth::id())
-                ->latest('updated_at')->paginate    ($count);
-
-        return response()->json($results);
-    }
-
     public function faq()
     {
         return view('faq');

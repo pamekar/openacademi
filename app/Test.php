@@ -31,7 +31,7 @@ class Test extends Model
             'user_id'
         ];
 
-    protected $appends = ['lesson_title', 'course_title', 'completed_count'];
+    protected $appends = ['lesson_title', 'course_title', 'completed_count','instructions'];
 
     /**
      * Set to null if empty
@@ -73,6 +73,10 @@ class Test extends Model
         $count = TestsResult::where('test_id', $this->id)
             ->count();
         return $count;
+    }
+
+    public function getInstructionsAttribute(){
+        return setting('site.quiz_instructions');
     }
 
     public function getTitleAttribute($title)

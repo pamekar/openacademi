@@ -8,6 +8,7 @@ import Index from './views/Index.vue';
 import PurchasedCourses from './views/PurchasedCourses.vue';
 import TagCourses from './views/TagCourses.vue';
 import Quiz from './views/Quiz.vue';
+import QuizInstructions from './views/QuizInstructions.vue';
 
 const Error404 = {
     template: "",
@@ -66,6 +67,11 @@ const routes = [
         path:      '/quiz/:id/:slug',
         name:      'quiz',
         component: Quiz,
+    },
+    {
+        path:      '/quiz/:id/:slug',
+        name:      'quiz-instructions',
+        component: QuizInstructions,
     },
     {
         path:      '/dashboard',
