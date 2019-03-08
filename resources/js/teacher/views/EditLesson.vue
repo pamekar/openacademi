@@ -136,7 +136,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" v-if="lesson.media.length>0">
             <div class="card-header">
                 <h4 class="card-title">Downloadable Files</h4>
             </div>
@@ -323,7 +323,7 @@
                 this.lesson_video = URL.createObjectURL(files[0]);
                 source.parent()[0].load();
             },
-            mediaChanged(){
+            mediaChanged() {
 
             },
             removeDownload(id, name) {

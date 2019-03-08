@@ -66848,120 +66848,126 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "table-responsive" }, [
-            _c("table", { staticClass: "table" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.lesson.media, function(file, index) {
-                  return _c(
-                    "tr",
-                    {
-                      class: {
-                        "table-warning": !_vm.lesson.downloadable_files_id.includes(
-                          file.id
-                        )
-                      }
-                    },
-                    [
-                      _c("td", { staticClass: "text-muted" }, [
-                        _vm._v(_vm._s(index + 1))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: "/uploads/" + file.id + "/" + file.file_name
-                            }
-                          },
-                          [_vm._v(_vm._s(file.file_name))]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-muted" }, [
-                        _vm._v(_vm._s(file.size) + " KB")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-sm btn-outline-primary",
-                            attrs: {
-                              href:
-                                "/uploads/" + file.id + "/" + file.file_name,
-                              title: "Download " + file.file_name
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "material-icons" }, [
-                              _vm._v("file_download")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm.lesson.downloadable_files_id.includes(file.id)
-                          ? _c(
-                              "button",
+      _vm.lesson.media.length > 0
+        ? _c("div", { staticClass: "card" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c("table", { staticClass: "table" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.lesson.media, function(file, index) {
+                      return _c(
+                        "tr",
+                        {
+                          class: {
+                            "table-warning": !_vm.lesson.downloadable_files_id.includes(
+                              file.id
+                            )
+                          }
+                        },
+                        [
+                          _c("td", { staticClass: "text-muted" }, [
+                            _vm._v(_vm._s(index + 1))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "a",
                               {
-                                staticClass:
-                                  "btn btn-sm btn-outline-danger font-weight-bolder",
-                                attrs: { title: "Remove " + file.name },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.removeDownload(
-                                      file.id,
-                                      file.name
-                                    )
-                                  }
+                                attrs: {
+                                  href:
+                                    "/uploads/" + file.id + "/" + file.file_name
+                                }
+                              },
+                              [_vm._v(_vm._s(file.file_name))]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "text-muted" }, [
+                            _vm._v(_vm._s(file.size) + " KB")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "text-center" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-sm btn-outline-primary",
+                                attrs: {
+                                  href:
+                                    "/uploads/" +
+                                    file.id +
+                                    "/" +
+                                    file.file_name,
+                                  title: "Download " + file.file_name
                                 }
                               },
                               [
                                 _c("i", { staticClass: "material-icons" }, [
-                                  _vm._v("close")
+                                  _vm._v("file_download")
                                 ])
                               ]
-                            )
-                          : _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn btn-sm btn-outline-success font-weight-bolder",
-                                attrs: { title: "Include " + file.name },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.includeDownload(
-                                      file.id,
-                                      file.name
-                                    )
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", { staticClass: "material-icons" }, [
-                                  _vm._v("add")
-                                ])
-                              ]
-                            )
-                      ])
-                    ]
+                            ),
+                            _vm._v(" "),
+                            _vm.lesson.downloadable_files_id.includes(file.id)
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-sm btn-outline-danger font-weight-bolder",
+                                    attrs: { title: "Remove " + file.name },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.removeDownload(
+                                          file.id,
+                                          file.name
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", { staticClass: "material-icons" }, [
+                                      _vm._v("close")
+                                    ])
+                                  ]
+                                )
+                              : _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-sm btn-outline-success font-weight-bolder",
+                                    attrs: { title: "Include " + file.name },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.includeDownload(
+                                          file.id,
+                                          file.name
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", { staticClass: "material-icons" }, [
+                                      _vm._v("add")
+                                    ])
+                                  ]
+                                )
+                          ])
+                        ]
+                      )
+                    }),
+                    0
                   )
-                }),
-                0
-              )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(3)
             ])
-          ]),
-          _vm._v(" "),
-          _vm._m(3)
-        ])
-      ]),
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "card" }, [
         _vm._m(4),
