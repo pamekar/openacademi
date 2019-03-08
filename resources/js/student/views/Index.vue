@@ -187,7 +187,7 @@
             },
         },
         mounted() {
-            console.log('Dashboard Component mounted now.')
+            console.log(this.$public_);
         },
         components: {
             'courses-component': Courses,

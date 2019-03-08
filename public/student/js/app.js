@@ -29883,7 +29883,7 @@ if (false) {(function () {
   },
 
   mounted() {
-    console.log('Dashboard Component mounted now.');
+    console.log(this.$public_);
   },
 
   components: {
@@ -30412,6 +30412,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vue-headful', __WEBPACK_I
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('breadcrumb-component', __WEBPACK_IMPORTED_MODULE_6__components_BreadcrumbComponent_vue__["a" /* default */]); // drg >> set global variables
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.public_ = window.public_;
+console.log(window.public_);
 let app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',
   render: h => h(__WEBPACK_IMPORTED_MODULE_4__App_vue__["a" /* default */]),

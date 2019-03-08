@@ -20,7 +20,7 @@ Vue.component('breadcrumb-component', Breadcrumb);
 
 // drg >> set global variables
 Vue.prototype.public_ = window.public_;
-
+console.log(window.public_);
 let app = new Vue({
     el:     '#app',
     render: h => h(App),
