@@ -9,7 +9,7 @@
 <!-- Mirrored from bitlers.com/html/easy-edu/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Jan 2019 10:13:27 GMT -->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>{{config('app.name')}}</title>
+    <title>@yield('pageTitle') | {{setting('site.title')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
@@ -48,8 +48,9 @@
                             <a href="{{route('login')}}" title="">Sign in</a>
                         @endguest
                         @auth
-                                <a href="{{route('user')}}" title="">Dashboard</a>
-                                <a href="{{route('logout')}}" title="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <a href="{{route('user')}}" title="">Dashboard</a>
+                            <a href="{{route('logout')}}" title=""
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                         @endauth
                     </div>
                 </div><!-- Top Bar -->
