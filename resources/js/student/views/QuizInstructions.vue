@@ -2,19 +2,26 @@
     <div>
         <vue-headful
                 :title="pageTitle + ' | OpenAcademi'"
-                :description="course.summary"
+                :description="quiz.description"
         ></vue-headful>
         <breadcrumb-component
                 :breadcrumbs="breadcrumbs"
                 :title="pageTitle"
         ></breadcrumb-component>
 
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Quiz</li>
-        </ol>
         <div class="card">
-
+            <div class="card-body" v-html="quiz.description"></div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">
+                    Quiz Instructions
+                </h4>
+            </div>
+            <div class="card-body" v-html="instructions"></div>
+            <div class="card-footer">
+                <button class="btn btn-lg btn-success"></button>
+            </div>
         </div>
     </div>
 </template>
@@ -24,8 +31,9 @@
     export default {
         data() {
             return {
-                instructions:          "",
-                breadcrumbs:     [
+                instructions: "",
+                quiz:         [],
+                breadcrumbs:  [
                     {
                         title: "Dashboard", link: 'dashboard'
                     },
@@ -36,7 +44,7 @@
                         title: ""
                     }
                 ],
-                pageTitle:       ""
+                pageTitle:    ""
             }
         },
         created() {
@@ -44,16 +52,15 @@
         },
         mounted() {
         },
-        components: {
-        },
+        components: {},
         methods:    {
             getQuiz() {
                 axios.get(`/api/quizes/${this.$route.params.id}/${this.$route.params.slug}`)
                     .then(({data}) => {
-                        this.course = data.course;
-                        this.pageTitle = data.course.title;
-                        this.purchased = data.purchased;
-                        this.breadcrumbs[2].title = data.course.title;
+                        this.quiz = data.quiz;
+                        this.pageTitle = data.quiz.title;
+                        this.breadcrumbs[2].title = data.quiz.title;
+                        this.instructions = data.instructions;
                     });
             },
         },

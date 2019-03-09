@@ -30316,11 +30316,19 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data() {
     return {
       instructions: "",
+      quiz: [],
       breadcrumbs: [{
         title: "Dashboard",
         link: 'dashboard'
@@ -30346,10 +30354,10 @@ if (false) {(function () {
       axios.get(`/api/quizes/${this.$route.params.id}/${this.$route.params.slug}`).then(({
         data
       }) => {
-        this.course = data.course;
-        this.pageTitle = data.course.title;
-        this.purchased = data.purchased;
-        this.breadcrumbs[2].title = data.course.title;
+        this.quiz = data.quiz;
+        this.pageTitle = data.quiz.title;
+        this.breadcrumbs[2].title = data.quiz.title;
+        this.instructions = data.instructions;
       });
     }
 
@@ -31910,7 +31918,7 @@ const routes = [{
   component: __WEBPACK_IMPORTED_MODULE_8__views_TagCourses_vue__["a" /* default */],
   props: true
 }, {
-  path: '/quiz/:id/:slug',
+  path: '/quiz/:id/:slug/start',
   name: 'quiz',
   component: __WEBPACK_IMPORTED_MODULE_9__views_Quiz_vue__["a" /* default */]
 }, {
@@ -32977,9 +32985,9 @@ var render = function() {
                   _vm._m(2),
                   _vm._v(" "),
                   _c("div", { staticClass: "card-body" }, [
-                    _c("h3", [_vm._v(_vm._s(_vm.lesson.tests.title))]),
+                    _c("h3", [_vm._v(_vm._s(_vm.lesson.test.title))]),
                     _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(_vm.lesson.tests.about_quiz))]),
+                    _c("p", [_vm._v(_vm._s(_vm.lesson.test.about_quiz))]),
                     _vm._v(" "),
                     _c("p", { staticClass: "text-muted" }, [
                       _vm._v(" " + _vm._s(_vm.quizDuration))
@@ -32997,7 +33005,7 @@ var render = function() {
                               to: {
                                 name: "quiz-instructions",
                                 params: {
-                                  id: _vm.lesson.tests.id,
+                                  id: _vm.lesson.test.id,
                                   slug: _vm.lesson.slug
                                 }
                               }
@@ -34652,7 +34660,7 @@ var render = function() {
       _c("vue-headful", {
         attrs: {
           title: _vm.pageTitle + " | OpenAcademi",
-          description: _vm.course.summary
+          description: _vm.quiz.description
         }
       }),
       _vm._v(" "),
@@ -34660,9 +34668,23 @@ var render = function() {
         attrs: { breadcrumbs: _vm.breadcrumbs, title: _vm.pageTitle }
       }),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "card" }, [
+        _c("div", {
+          staticClass: "card-body",
+          domProps: { innerHTML: _vm._s(_vm.quiz.description) }
+        })
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card" })
+      _c("div", { staticClass: "card" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "card-body",
+          domProps: { innerHTML: _vm._s(_vm.instructions) }
+        }),
+        _vm._v(" "),
+        _vm._m(1)
+      ])
     ],
     1
   )
@@ -34672,12 +34694,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("ol", { staticClass: "breadcrumb" }, [
-      _c("li", { staticClass: "breadcrumb-item" }, [
-        _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Quiz")])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h4", { staticClass: "card-title mb-0" }, [
+        _vm._v("\n                Quiz Instructions\n            ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer" }, [
+      _c("button", { staticClass: "btn btn-lg btn-success" })
     ])
   }
 ]

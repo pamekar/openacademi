@@ -21,22 +21,25 @@ class QuizesController extends Controller
 
             $quiz = Test::findOrFail($id);
             /*$quiz = Test::with('instructions')->where('id', $id)->get();*/
-            $isPending = TestsResult::where('test_id', $quiz->id)
+            $result = TestsResult::where('test_id', $quiz->id)
                 ->where('user_id', Auth::id())
                 ->where('status', '<>', 'completed')->first();
-            $data=[
+            $data = [
                 'instructions' => $quiz->instructions,
                 'quiz'         => $quiz
             ];
-            if ($quiz && !$isPending) {
+            if ($quiz && !$result) {
                 $result = new TestsResult();
                 $result->test_id = $quiz->id;
                 $result->user_id = Auth::id();
                 $result->status = 'pending';
+                $result->test_result = 0;
                 $result->save();
-                array_push($data,['questions'=>$quiz->questions]);
+//                $data['questions'] = $quiz->questions;
             }
-            return response()->json();
+  //          $data['result'] = $result;
+
+            return response()->json($data);
         }
 
         $status = [

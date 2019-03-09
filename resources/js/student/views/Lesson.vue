@@ -77,11 +77,11 @@
                         <h4 class="card-title">Quiz</h4>
                     </div>
                     <div class="card-body">
-                        <h3>{{lesson.tests.title}}</h3>
-                        <p>{{lesson.tests.about_quiz}}</p>
+                        <h3>{{lesson.test.title}}</h3>
+                        <p>{{lesson.test.about_quiz}}</p>
                         <p class="text-muted"> {{quizDuration}}</p>
                         <div class="text-center">
-                            <router-link :to="{name:'quiz-instructions',params:{id:lesson.tests.id,slug:lesson.slug}}" class="btn btn-success">Take Quiz</router-link>
+                            <router-link :to="{name:'quiz-instructions',params:{id:lesson.test.id,slug:lesson.slug}}" class="btn btn-success">Take Quiz</router-link>
                         </div>
                     </div>
                 </div>
