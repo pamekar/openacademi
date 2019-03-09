@@ -22,6 +22,7 @@
                                 <div class="media-left" v-else-if="lesson.lesson_image_preview">
                                     <img :src="lesson.lesson_image_preview" style="cursor: pointer;" alt="" width="100" class="rounded">
                                 </div>
+
                                 <div class="media-body">
                                     <div class="custom-file" style="width: auto;">
                                         <input type="file" id="avatar" class="custom-file-input" v-on:change="lessonImagePreviewChanged">

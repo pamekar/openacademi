@@ -31,15 +31,15 @@
                     </div>
                 </div>
                 <div class="tab-content" id="v-pills-tabContent">
-                    <div :class="{'card tab-pane fade show active':index==0,'card tab-pane fade':index!==0}" :id="`#question_${index}`" role="tabpanel" :aria-labelledby="`#question_${index}-tab`" v-for="(question, index) in questions">
+                    <div :class="{'tab-pane fade show active':index==0,'tab-pane fade':index!==0}" :id="`question_${index}`" role="tabpanel" :aria-labelledby="`question_${index}-tab`" v-for="(question, index) in questions">
                         <div class="card-body">
                             <div class="media align-items-center">
                                 <div class="media-left">
-                                    <h4 class="mb-0"><strong>#{{index + 1}}</strong></h4>
+                                    <h4 class="mb-0 mr-3"><strong>#{{index + 1}}</strong></h4>
                                 </div>
                                 <div class="media-body">
-                                    <div v-if="question.question_image.length>0" v-viewer="{movable: false}">
-                                        <img class="img-thumbnail" :src="question.question_image">
+                                    <div v-if="question.question_image.length>0" v-viewer="{movable: false}" class="text-center">
+                                        <img class="img-thumbnail" :src="question.question_image" style="cursor: pointer; max-width:60%;">
                                     </div>
                                     <div v-html="question.question"></div>
                                 </div>
@@ -66,8 +66,8 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-white">Previous</a>
-                            <a href="#" class="btn btn-info float-right">Next<i class="material-icons btn__icon--right">send</i></a>
+                            <a href="#" :class="{'btn btn-white disabled':questionIndex===0,'btn btn-white':questionIndex>0}">Previous</a>
+                            <a href="#" :class="{'btn btn-primary float-right':questionIndex<questions.length-1,'btn btn-primary float-right disabled':questionIndex==questions.length-1}">Next<i class="material-icons btn__icon--right">send</i></a>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
             <div class="col-md-2 col-sm-3">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
-                    <a :class="{'nav-link active':index==0,'nav-link':index!==0}" :id="`#question_${index}-tab`" data-toggle="pill" :href="`#question_${index}`" role="tab" :aria-controls="`#question_${index}`" :aria-selected="index==0" v-for="(question,index) in questions">
+                    <a :class="{'nav-link active':index==0,'nav-link':index!==0}" :id="`question_${index}-tab`" data-toggle="pill" :href="`#question_${index}`" role="tab" :aria-controls="`question_${index}`" :aria-selected="index==0" v-for="(question,index) in questions" @click="questionIndex=index">
                                             <span class="media align-items-center">
                                                 <span class="media-left">
                                                     <span class="btn btn-white btn-circle">#{{index + 1}}</span>
@@ -96,9 +96,7 @@
     export default {
         data() {
             return {
-                questions:   [],
-                quiz:        [],
-                breadcrumbs: [
+                breadcrumbs:     [
                     {
                         title: "Dashboard", link: 'dashboard'
                     },
@@ -109,9 +107,12 @@
                         title: ""
                     }
                 ],
-                editor: ClassicEditor,
-                pageTitle:   "",
-                result:      []
+                questionIndex: 0,
+                editor:          ClassicEditor,
+                pageTitle:       "",
+                result:          [],
+                questions:   [],
+                quiz:        [],
             }
         },
         created() {
@@ -122,7 +123,7 @@
         },
         components: {
             'lessons-list-component': LessonsListComponent,
-            'ckeditor':    CKEditor.component,
+            'ckeditor':               CKEditor.component,
 
         },
         methods:    {

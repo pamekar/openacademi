@@ -30219,8 +30219,6 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
   data() {
     return {
-      questions: [],
-      quiz: [],
       breadcrumbs: [{
         title: "Dashboard",
         link: 'dashboard'
@@ -30230,9 +30228,12 @@ if (false) {(function () {
       }, {
         title: ""
       }],
+      questionIndex: 0,
       editor: __WEBPACK_IMPORTED_MODULE_2__ckeditor_ckeditor5_build_classic___default.a,
       pageTitle: "",
-      result: []
+      result: [],
+      questions: [],
+      quiz: []
     };
   },
 
@@ -34328,20 +34329,20 @@ var render = function() {
                 "div",
                 {
                   class: {
-                    "card tab-pane fade show active": index == 0,
-                    "card tab-pane fade": index !== 0
+                    "tab-pane fade show active": index == 0,
+                    "tab-pane fade": index !== 0
                   },
                   attrs: {
-                    id: "#question_" + index,
+                    id: "question_" + index,
                     role: "tabpanel",
-                    "aria-labelledby": "#question_" + index + "-tab"
+                    "aria-labelledby": "question_" + index + "-tab"
                   }
                 },
                 [
                   _c("div", { staticClass: "card-body" }, [
                     _c("div", { staticClass: "media align-items-center" }, [
                       _c("div", { staticClass: "media-left" }, [
-                        _c("h4", { staticClass: "mb-0" }, [
+                        _c("h4", { staticClass: "mb-0 mr-3" }, [
                           _c("strong", [_vm._v("#" + _vm._s(index + 1))])
                         ])
                       ]),
@@ -34358,11 +34359,16 @@ var render = function() {
                                     value: { movable: false },
                                     expression: "{movable: false}"
                                   }
-                                ]
+                                ],
+                                staticClass: "text-center"
                               },
                               [
                                 _c("img", {
                                   staticClass: "img-thumbnail",
+                                  staticStyle: {
+                                    cursor: "pointer",
+                                    "max-width": "60%"
+                                  },
                                   attrs: { src: question.question_image }
                                 })
                               ]
@@ -34378,7 +34384,40 @@ var render = function() {
                   _vm._v(" "),
                   _vm._m(1, true),
                   _vm._v(" "),
-                  _vm._m(2, true)
+                  _c("div", { staticClass: "card-footer" }, [
+                    _c(
+                      "a",
+                      {
+                        class: {
+                          "btn btn-white disabled": _vm.questionIndex === 0,
+                          "btn btn-white": _vm.questionIndex > 0
+                        },
+                        attrs: { href: "#" }
+                      },
+                      [_vm._v("Previous")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        class: {
+                          "btn btn-primary float-right":
+                            _vm.questionIndex < _vm.questions.length - 1,
+                          "btn btn-primary float-right disabled":
+                            _vm.questionIndex == _vm.questions.length - 1
+                        },
+                        attrs: { href: "#" }
+                      },
+                      [
+                        _vm._v("Next"),
+                        _c(
+                          "i",
+                          { staticClass: "material-icons btn__icon--right" },
+                          [_vm._v("send")]
+                        )
+                      ]
+                    )
+                  ])
                 ]
               )
             }),
@@ -34406,12 +34445,17 @@ var render = function() {
                     "nav-link": index !== 0
                   },
                   attrs: {
-                    id: "#question_" + index + "-tab",
+                    id: "question_" + index + "-tab",
                     "data-toggle": "pill",
                     href: "#question_" + index,
                     role: "tab",
-                    "aria-controls": "#question_" + index,
+                    "aria-controls": "question_" + index,
                     "aria-selected": index == 0
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.questionIndex = index
+                    }
                   }
                 },
                 [
@@ -34506,27 +34550,6 @@ var staticRenderFns = [
           )
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c("a", { staticClass: "btn btn-white", attrs: { href: "#" } }, [
-        _vm._v("Previous")
-      ]),
-      _vm._v(" "),
-      _c(
-        "a",
-        { staticClass: "btn btn-info float-right", attrs: { href: "#" } },
-        [
-          _vm._v("Next"),
-          _c("i", { staticClass: "material-icons btn__icon--right" }, [
-            _vm._v("send")
-          ])
-        ]
-      )
     ])
   }
 ]
