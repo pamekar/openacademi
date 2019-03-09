@@ -7,6 +7,7 @@ use App\Test;
 use App\TestsResult;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class QuizesController extends Controller
 {
@@ -17,8 +18,25 @@ class QuizesController extends Controller
         $purchased_course = $lesson->course->students()
                 ->where('user_id', \Auth::id())->count() > 0;
         if ($purchased_course || $lesson->free_lesson) {
-            $quiz = Test::with('instructions')->where('id', $id)->get();
-            return response()->json($quiz);
+
+            $quiz = Test::findOrFail($id);
+            /*$quiz = Test::with('instructions')->where('id', $id)->get();*/
+            $isPending = TestsResult::where('test_id', $quiz->id)
+                ->where('user_id', Auth::id())
+                ->where('status', '<>', 'completed')->first();
+            $data=[
+                'instructions' => $quiz->instructions,
+                'quiz'         => $quiz
+            ];
+            if ($quiz && !$isPending) {
+                $result = new TestsResult();
+                $result->test_id = $quiz->id;
+                $result->user_id = Auth::id();
+                $result->status = 'pending';
+                $result->save();
+                array_push($data,['questions'=>$quiz->questions]);
+            }
+            return response()->json();
         }
 
         $status = [

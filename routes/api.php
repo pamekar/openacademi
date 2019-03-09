@@ -17,6 +17,7 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
             Route::post('lesson/{slug}/test', 'LessonsController@test');
             Route::get('quizes/{id}/{slug}',
                 'QuizesController@index');
+
             Route::get('quizes/results', 'QuizesController@results');
         });
     Route::group([
