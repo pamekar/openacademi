@@ -20,7 +20,7 @@ class QuizesController extends Controller
         if ($purchased_course || $lesson->free_lesson) {
 
             $quiz = Test::findOrFail($id);
-            /*$quiz = Test::with('instructions')->where('id', $id)->get();*/
+
             $result = TestsResult::where('test_id', $quiz->id)
                 ->where('user_id', Auth::id())
                 ->where('status', '<>', 'completed')->first();
@@ -28,16 +28,14 @@ class QuizesController extends Controller
                 'instructions' => $quiz->instructions,
                 'quiz'         => $quiz
             ];
-            if ($quiz && !$result) {
+            if (!$result) {
                 $result = new TestsResult();
                 $result->test_id = $quiz->id;
                 $result->user_id = Auth::id();
                 $result->status = 'pending';
                 $result->test_result = 0;
                 $result->save();
-//                $data['questions'] = $quiz->questions;
             }
-  //          $data['result'] = $result;
 
             return response()->json($data);
         }
@@ -50,9 +48,28 @@ class QuizesController extends Controller
         return response()->json($status);
     }
 
-    public function show($id, $lesson_slug)
+    public function show($id)
     {
+        $quiz = Test::with('questions.options')->findOrFail($id);
 
+        $lesson = Lesson::where('id', $quiz->lesson_id)
+            ->where('published', true)
+            ->firstOrFail();
+        $purchased_course = $lesson->course->students()
+                ->where('user_id', \Auth::id())->count() > 0;
+        $result = TestsResult::where('test_id', $quiz->id)
+            ->where('user_id', Auth::id())
+            ->where('status', '<>', 'completed')->first();
+        if (($purchased_course || $lesson->free_lesson) && $result) {
+            return response()->json(['quiz'=>$quiz,'result'=>$result]);
+        }
+
+        $status = [
+            'type'    => 'success',
+            'message' => "Oops! Now is a good time to purchase the course"
+        ];
+
+        return response()->json($status);
     }
 
     public function results(Request $request)

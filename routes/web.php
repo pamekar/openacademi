@@ -259,3 +259,10 @@ Route::get('kujsdlkdjlksere', function () {
         }
     }
 });
+
+Route::get('sadfgewerfg',function(){
+   $tests = \App\Test::with('questions')->get();
+   foreach($tests as $test){
+       \App\Test::where('id',$test->id)->update(['duration'=>count($test->questions)*45]);
+   }
+});

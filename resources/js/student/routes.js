@@ -64,7 +64,7 @@ const routes = [
         props:     true
     },
     {
-        path:      '/quiz/:id/:slug/start',
+        path:      '/quiz/:id',
         name:      'quiz',
         component: Quiz,
     },

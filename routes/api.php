@@ -15,12 +15,11 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
             Route::get('courses/all', 'CoursesController@getAllCourses');
             Route::get('lesson/{id}/{slug}', 'LessonsController@show');
             Route::post('lesson/{slug}/test', 'LessonsController@test');
+            Route::get('quizes/results', 'QuizesController@results');
             Route::get('quizes/{id}/{slug}',
                 'QuizesController@index');
-            Route::get('quizes/{id}/{slug}/start',
-                'QuizesController@index');
-
-            Route::get('quizes/results', 'QuizesController@results');
+            Route::get('quizes/{id}',
+                'QuizesController@show');
         });
     Route::group([
         'prefix'     => 'instructor',

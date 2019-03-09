@@ -2,26 +2,18 @@
     <div>
         <vue-headful
                 :title="pageTitle + ' | OpenAcademi'"
-                :description="course.summary"
+                :description="quiz.description"
         ></vue-headful>
         <breadcrumb-component
                 :breadcrumbs="breadcrumbs"
                 :title="pageTitle"
         ></breadcrumb-component>
-
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Quiz</li>
-        </ol>
-        <div class="card">
-
-        </div>
         <div class="row">
-            <div class="col-md-9 col-sm-8">
+            <div class="col-md-10 col-sm-9">
                 <div class="card-group">
                     <div class="card">
                         <div class="card-body text-center">
-                            <h4 class="text-primary mb-0"><strong>25</strong></h4>
+                            <h4 class="text-primary mb-0"><strong>{{questions.length}}</strong></h4>
                             <small class="text-muted-light">TOTAL</small>
                         </div>
                     </div>
@@ -33,115 +25,80 @@
                     </div>
                     <div class="card">
                         <div class="card-body text-center">
-                            <div class="text-secondary mb-0"><h5 class="countdown" data-value="4" data-unit="hour"></h5></div>
+                            <div class="text-secondary mb-0"><h5 class="countdown" :data-value="timer" data-unit="seconds"></h5></div>
                             <small class="text-muted">TIME LEFT</small>
                         </div>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <div class="media align-items-center">
-                            <div class="media-left">
-                                <h4 class="mb-0"><strong>#9</strong></h4>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="card-title">
-                                    Github command to deploy comits?
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input id="customCheck01" type="checkbox" class="custom-control-input">
-                                <label for="customCheck01" class="custom-control-label">git push</label>
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div :class="{'card tab-pane fade show active':index==0,'card tab-pane fade':index!==0}" :id="`#question_${index}`" role="tabpanel" :aria-labelledby="`#question_${index}-tab`" v-for="(question, index) in questions">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <div class="media-left">
+                                    <h4 class="mb-0"><strong>#{{index + 1}}</strong></h4>
+                                </div>
+                                <div class="media-body">
+                                    <div v-if="question.question_image.length>0" v-viewer="{movable: false}">
+                                        <img class="img-thumbnail" :src="question.question_image">
+                                    </div>
+                                    <div v-html="question.question"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input id="customCheck02" type="checkbox" class="custom-control-input">
-                                <label for="customCheck02" class="custom-control-label">git commit -m "message"</label>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input id="customCheck01" type="checkbox" class="custom-control-input">
+                                    <label for="customCheck01" class="custom-control-label">git push</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input id="customCheck02" type="checkbox" class="custom-control-input">
+                                    <label for="customCheck02" class="custom-control-label">git commit -m "message"</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input id="customCheck03" type="checkbox" class="custom-control-input">
+                                    <label for="customCheck03" class="custom-control-label">git pull</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input id="customCheck03" type="checkbox" class="custom-control-input">
-                                <label for="customCheck03" class="custom-control-label">git pull</label>
-                            </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-white">Previous</a>
+                            <a href="#" class="btn btn-info float-right">Next<i class="material-icons btn__icon--right">send</i></a>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-white">Previous</a>
-                        <a href="#" class="btn btn-info float-right">Next<i class="material-icons btn__icon--right">send</i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-4">
-                <ul class="nav flex-sm-column nav-pills bg-white">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active">
+            <div class="col-md-2 col-sm-3">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+                    <a :class="{'nav-link active':index==0,'nav-link':index!==0}" :id="`#question_${index}-tab`" data-toggle="pill" :href="`#question_${index}`" role="tab" :aria-controls="`#question_${index}`" :aria-selected="index==0" v-for="(question,index) in questions">
                                             <span class="media align-items-center">
                                                 <span class="media-left">
-                                                    <span class="btn btn-white btn-circle">#9</span>
-                                                </span>
-                                                <span class="media-body">
-                                                    Github command to deploy comits?
+                                                    <span class="btn btn-white btn-circle">#{{index + 1}}</span>
                                                 </span>
                                             </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                                            <span class="media align-items-center">
-                                                <span class="media-left">
-                                                    <span class="btn btn-white btn-circle">#10</span>
-                                                </span>
-                                                <span class="media-body">
-                                                    What's the difference between private and public repos?
-                                                </span>
-                                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                                            <span class="media align-items-center">
-                                                <span class="media-left">
-                                                    <span class="btn btn-white btn-circle">#11</span>
-                                                </span>
-                                                <span class="media-body">
-                                                    What is the purpose of a branch?
-                                                </span>
-                                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                                            <span class="media align-items-center">
-                                                <span class="media-left">
-                                                    <span class="btn btn-white btn-circle">#12</span>
-                                                </span>
-                                                <span class="media-body">
-                                                    Final Question?
-                                                </span>
-                                            </span>
-                        </a>
-                    </li>
-                </ul>
+                    </a>
+
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
     import LessonsListComponent from '../components/LessonsListComponent.vue'
+    import CKEditor from '@ckeditor/ckeditor5-vue';
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
     export default {
         data() {
             return {
-                course:          [],
-                courseListWidth: "col-lg-3 col-md-4, col-sm-6",
-                breadcrumbs:     [
+                questions:   [],
+                quiz:        [],
+                breadcrumbs: [
                     {
                         title: "Dashboard", link: 'dashboard'
                     },
@@ -152,32 +109,40 @@
                         title: ""
                     }
                 ],
-                pageTitle:       "Courses",
-                purchased:       ""
+                editor: ClassicEditor,
+                pageTitle:   "",
+                result:      []
             }
         },
         created() {
-            this.getCourse();
+            this.getQuiz();
         },
         mounted() {
-            console.log('Dashboard Component mounted now.')
+            
         },
         components: {
-            'lessons-list-component': LessonsListComponent
+            'lessons-list-component': LessonsListComponent,
+            'ckeditor':    CKEditor.component,
+
         },
         methods:    {
-            getCourse() {
-                axios.get("/api/course/" + this.$route.params.slug)
+            getQuiz() {
+                axios.get(`/api/quizes/${this.$route.params.id}`)
                     .then(({data}) => {
-                        this.course = data.course;
-                        this.pageTitle = data.course.title;
-                        this.purchased = data.purchased;
-                        this.breadcrumbs[2].title = data.course.title;
+                        this.quiz = data.quiz;
+                        this.pageTitle = data.quiz.title;
+                        this.breadcrumbs[2].title = data.quiz.title;
+                        this.questions = data.quiz.questions;
+                        this.result = data.result
                     });
             },
         },
         props:      ['slug'],
-        computed:   {}
+        computed:   {
+            timer() {
+                
+            }
+        }
     }
 </script>
 <style>

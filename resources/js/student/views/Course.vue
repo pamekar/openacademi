@@ -129,7 +129,7 @@
             this.getCourse();
         },
         mounted() {
-            console.log('Dashboard Component mounted now.')
+
         },
         components: {
             'lessons-list-component': LessonsListComponent

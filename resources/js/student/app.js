@@ -8,6 +8,10 @@ import Breadcrumb from './components/BreadcrumbComponent.vue';
 import axios from 'axios';
 import router from './routes.js';
 import functions from './functions.js';
+import 'viewerjs/dist/viewer.css';
+import Viewer from 'v-viewer';
+
+Vue.use(Viewer);
 
 Vue.use(VueRouter);
 Vue.use(axios);

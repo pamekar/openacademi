@@ -19,8 +19,8 @@
                 </h4>
             </div>
             <div class="card-body" v-html="instructions"></div>
-            <div class="card-footer">
-                <button class="btn btn-lg btn-success"></button>
+            <div class="card-footer text-center">
+                <router-link :to="{name:'quiz',params:{id:quiz.id}}" class="btn btn-lg btn-success">Take Quiz</router-link>
             </div>
         </div>
     </div>

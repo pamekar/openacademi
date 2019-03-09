@@ -43231,9 +43231,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 
   },
 
-  mounted() {
-    console.log('Dashboard Component mounted now.');
-  },
+  mounted() {},
 
   components: {
     'courses-component': __WEBPACK_IMPORTED_MODULE_0__components_CoursesComponent_vue__["a" /* default */]

@@ -342,7 +342,7 @@
             },
         },
         mounted() {
-            console.log('Dashboard Component mounted now.')
+
         },
         components: {
             'courses-component': Courses,
