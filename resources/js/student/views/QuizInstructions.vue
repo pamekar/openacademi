@@ -24,8 +24,7 @@
     export default {
         data() {
             return {
-                course:          [],
-                courseListWidth: "col-lg-3 col-md-4, col-sm-6",
+                instructions:          "",
                 breadcrumbs:     [
                     {
                         title: "Dashboard", link: 'dashboard'
@@ -37,8 +36,7 @@
                         title: ""
                     }
                 ],
-                pageTitle:       "Courses",
-                purchased:       ""
+                pageTitle:       ""
             }
         },
         created() {
