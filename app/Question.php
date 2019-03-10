@@ -34,6 +34,10 @@ class Question extends Model
         return $this->tests();
     }
 
+    public function getAnswerAttribute(){
+        return "";
+    }
+
     public function options()
     {
         return $this->hasMany('App\QuestionsOption');

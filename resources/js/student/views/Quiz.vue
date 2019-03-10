@@ -38,51 +38,68 @@
                                     <h4 class="mb-0 mr-3"><strong>#{{index + 1}}</strong></h4>
                                 </div>
                                 <div class="media-body">
-                                    <div v-if="question.question_image.length>0" v-viewer="{movable: false}" class="text-center">
+                                    <div v-if="question.question_image.length>0" v-viewer="{movable: false}" class="text-center mb-4">
                                         <img class="img-thumbnail" :src="question.question_image" style="cursor: pointer; max-width:60%;">
                                     </div>
-                                    <div v-html="question.question"></div>
+                                    <div class="card" v-html="question.question"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input id="customCheck01" type="checkbox" class="custom-control-input">
-                                    <label for="customCheck01" class="custom-control-label">git push</label>
+                        <div class="card">
+                            <div class="card-body" v-if="question.type=='radio'">
+                                <div class="form-group" v-for="(option,index1) in question.options">
+                                    <div class="custom-control custom-checkbox">
+                                        <input :id="`answer-${index}${index1}`" :name="`answer-${index}`" type="radio" class="custom-control-input">
+                                        <label :for="`answer-${index}${index1}`" class="custom-control-label">{{option.option_text}}</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input id="customCheck02" type="checkbox" class="custom-control-input">
-                                    <label for="customCheck02" class="custom-control-label">git commit -m "message"</label>
+                            <div class="card-body" v-else-if="question.type=='input'">
+                                <div class="form-group">
+                                    <label class="form-label" :for="`answer-${index}`">Your Answer:</label>
+                                    <input type="text" :name="`answer-${index}`" class="form-control" :id="`answer-${index}`" placeholder="Enter your answer">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input id="customCheck03" type="checkbox" class="custom-control-input">
-                                    <label for="customCheck03" class="custom-control-label">git pull</label>
+                            <div class="card-body" v-else-if="question.type=='textarea'">
+                                <div class="form-group">
+                                    <label class="form-label" :for="`answer-${index}`">Your Answer:</label>
+                                    <textarea :name="`answer-${index}`" class="form-control" :id="`answer-${index}`" placeholder="Enter your answer"></textarea>
+                                </div>
+                            </div>
+                            <div class="card-body" v-else-if="question.type=='richtext'">
+                                <div class="form-group">
+                                    <label class="form-label" :for="`answer-${index}`">Your Answer:</label>
+                                    <ckeditor :id="`answer-${index}`" :editor="editor"></ckeditor>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="#" :class="{'btn btn-white disabled':questionIndex===0,'btn btn-white':questionIndex>0}">Previous</a>
-                            <a href="#" :class="{'btn btn-primary float-right':questionIndex<questions.length-1,'btn btn-primary float-right disabled':questionIndex==questions.length-1}">Next<i class="material-icons btn__icon--right">send</i></a>
+                            <div class="nav d-block " role="tablist">
+                                <a :class="{'btn btn-white disabled':index===0,'btn btn-white':index>0}" :href="`#question_${index-1}`" role="tab" :aria-controls="`question_${index-1}`" data-toggle="tab">Previous</a>
+                                <a :class="{'btn btn-primary float-right':index<questions.length-1,'btn btn-primary float-right disabled':index==questions.length-1}" :href="`#question_${index+1}`" role="tab" :aria-controls="`question_${index+1}`" data-toggle="tab">Next<!--<i class="material-icons btn__icon&#45;&#45;right">send</i>--></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-2 col-sm-3">
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <button class="btn btn-lg btn-success">Submit</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
-                    <a :class="{'nav-link active':index==0,'nav-link':index!==0}" :id="`question_${index}-tab`" data-toggle="pill" :href="`#question_${index}`" role="tab" :aria-controls="`question_${index}`" :aria-selected="index==0" v-for="(question,index) in questions" @click="questionIndex=index">
+                        <a :class="{'nav-link active':index==0,'nav-link':index!==0}" :id="`question_${index}-tab`" data-toggle="pill" :href="`#question_${index}`" role="tab" :aria-controls="`question_${index}`" :aria-selected="index==0" v-for="(question,index) in questions">
                                             <span class="media align-items-center">
                                                 <span class="media-left">
                                                     <span class="btn btn-white btn-circle">#{{index + 1}}</span>
                                                 </span>
                                             </span>
-                    </a>
+                        </a>
 
+                    </div>
                 </div>
             </div>
         </div>
@@ -92,11 +109,11 @@
     import LessonsListComponent from '../components/LessonsListComponent.vue'
     import CKEditor from '@ckeditor/ckeditor5-vue';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
+    
     export default {
         data() {
             return {
-                breadcrumbs:     [
+                breadcrumbs: [
                     {
                         title: "Dashboard", link: 'dashboard'
                     },
@@ -107,10 +124,9 @@
                         title: ""
                     }
                 ],
-                questionIndex: 0,
-                editor:          ClassicEditor,
-                pageTitle:       "",
-                result:          [],
+                editor:      ClassicEditor,
+                pageTitle:   "",
+                result:      [],
                 questions:   [],
                 quiz:        [],
             }
@@ -124,7 +140,7 @@
         components: {
             'lessons-list-component': LessonsListComponent,
             'ckeditor':               CKEditor.component,
-
+            
         },
         methods:    {
             getQuiz() {
