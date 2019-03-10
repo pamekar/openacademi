@@ -10,8 +10,13 @@
         ></breadcrumb-component>
 
         <div class="row">
+            <div class="alert alert-light alert-dismissible border-1 border-left-3 border-left-success col-lg-12" role="alert" v-if="purchased && lesson.test">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <div class="text-black-70">This course has a quiz. Locate it at the right sidebar.</div>
+            </div>
             <div class="col-md-8">
-
                 <div class="card">
                     <div>
                         <img :src="lesson.lesson_image" :alt="lesson.slug" width="100%" v-if="lesson.lesson_image_type == 'image'"/>

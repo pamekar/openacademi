@@ -33035,6 +33035,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -36412,6 +36417,26 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
+        _vm.purchased && _vm.lesson.test
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "alert alert-light alert-dismissible border-1 border-left-3 border-left-success col-lg-12",
+                attrs: { role: "alert" }
+              },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-black-70" }, [
+                  _vm._v(
+                    "This course has a quiz. Locate it at the right sidebar."
+                  )
+                ])
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
         _c("div", { staticClass: "col-md-8" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", [
@@ -36450,12 +36475,12 @@ var render = function() {
           _vm._v(" "),
           _vm.lesson.media.length > 0
             ? _c("div", { staticClass: "card" }, [
-                _vm._m(0),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "table-responsive" }, [
                     _c("table", { staticClass: "table" }, [
-                      _vm._m(1),
+                      _vm._m(2),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -36589,7 +36614,7 @@ var render = function() {
             _vm._v(" "),
             _vm.purchased && _vm.lesson.test
               ? _c("div", { staticClass: "card" }, [
-                  _vm._m(2),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c("div", { staticClass: "card-body" }, [
                     _c("h3", [_vm._v(_vm._s(_vm.lesson.test.title))]),
@@ -36628,7 +36653,7 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "card" }, [
-              _vm._m(3),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c(
@@ -36656,7 +36681,7 @@ var render = function() {
               _c("ul", { staticClass: "list-group list-group-fit" }, [
                 _c("li", { staticClass: "list-group-item" }, [
                   _c("div", { staticClass: "media align-items-center" }, [
-                    _vm._m(4),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("div", { staticClass: "media-body" }, [
                       _vm._v(
@@ -36670,7 +36695,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("li", { staticClass: "list-group-item" }, [
                   _c("div", { staticClass: "media align-items-center" }, [
-                    _vm._m(5),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c("div", { staticClass: "media-body" }, [
                       _vm._v(
@@ -36710,11 +36735,11 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _vm._m(6)
+                  _vm._m(7)
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(7)
+              _vm._m(8)
             ])
           ],
           1
@@ -36725,6 +36750,23 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
