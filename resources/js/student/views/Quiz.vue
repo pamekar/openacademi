@@ -75,8 +75,8 @@
                         </div>
                         <div class="card-footer">
                             <div class="nav d-block " role="tablist">
-                                <button :class="{'btn btn-white disabled':index===0,'btn btn-white':index>0}" @click="showQuestion(`question_${index+1}`)">Previous</button>
-                                <button :class="{'btn btn-primary float-right':index<questions.length-1,'btn btn-primary float-right disabled':index==questions.length-1}" @click="showQuestion(`question_${index+1}`)">Next</button>
+                                <button :class="{'btn btn-white disabled':index===0,'btn btn-white':index>0}" @click="showQuestion(index-1)">Previous</button>
+                                <button :class="{'btn btn-primary float-right':index<questions.length-1,'btn btn-primary float-right disabled':index==questions.length-1}" @click="showQuestion(index+1)">Next</button>
                             </div>
                         </div>
                     </div>
@@ -152,8 +152,13 @@
                         this.result = data.result
                     });
             },
-            showQuestion(div){
-                jQuery(div).tab('show')
+            showQuestion(index) {
+                if (index >= 0 && index < this.questions.length) {
+                    jQuery(".tab-pane").removeClass('active show');
+                    jQuery(`#question_${index}`).addClass('active show');
+                    jQuery(".nav-link").attr("aria-selected", "false").removeClass('active show');
+                    jQuery(`#question_${index}-tab`).addClass('active show').attr("aria-selected", "true");
+                }
             }
         },
         props:      ['slug'],

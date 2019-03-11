@@ -33887,8 +33887,13 @@ if (false) {(function () {
       });
     },
 
-    showQuestion(div) {
-      jQuery(div).tab('show');
+    showQuestion(index) {
+      if (index >= 0 && index < this.questions.length) {
+        jQuery(".tab-pane").removeClass('active show');
+        jQuery(`#question_${index}`).addClass('active show');
+        jQuery(".nav-link").attr("aria-selected", "false").removeClass('active show');
+        jQuery(`#question_${index}-tab`).addClass('active show').attr("aria-selected", "true");
+      }
     }
 
   },
@@ -38255,9 +38260,7 @@ var render = function() {
                             },
                             on: {
                               click: function($event) {
-                                return _vm.showQuestion(
-                                  "question_" + (index + 1)
-                                )
+                                return _vm.showQuestion(index - 1)
                               }
                             }
                           },
@@ -38275,9 +38278,7 @@ var render = function() {
                             },
                             on: {
                               click: function($event) {
-                                return _vm.showQuestion(
-                                  "question_" + (index + 1)
-                                )
+                                return _vm.showQuestion(index + 1)
                               }
                             }
                           },
