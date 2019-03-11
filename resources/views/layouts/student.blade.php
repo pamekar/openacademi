@@ -39,7 +39,7 @@
 <form id="logout-form" action="{{ url('/logout') }}"
       method="POST" style="display: none;"
 >{{ csrf_field() }}</form>
-<script src="{{asset("$public/student/js/app.js")}}"></script>
+
 <!-- jQuery -->
 <script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
 
@@ -61,6 +61,7 @@
 
     </script>
 @endif
+<script src="{{asset("$public/student/js/app.js")}}"></script>
 <!-- Perfect Scrollbar -->
 <script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
 
