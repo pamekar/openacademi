@@ -75,8 +75,8 @@
                         </div>
                         <div class="card-footer">
                             <div class="nav d-block " role="tablist">
-                                <button :class="{'btn btn-white disabled':index===0,'btn btn-white':index>0}" @click="jQuery(`#question_${index-1}`).tab('show')">Previous</button>
-                                <button :class="{'btn btn-primary float-right':index<questions.length-1,'btn btn-primary float-right disabled':index==questions.length-1}" @click="jQuery(`#question_${index+1}`).tab('show')">Next</button>
+                                <button :class="{'btn btn-white disabled':index===0,'btn btn-white':index>0}" @click="showQuestion(`question_${index+1}`)">Previous</button>
+                                <button :class="{'btn btn-primary float-right':index<questions.length-1,'btn btn-primary float-right disabled':index==questions.length-1}" @click="showQuestion(`question_${index+1}`)">Next</button>
                             </div>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
     import LessonsListComponent from '../components/LessonsListComponent.vue'
     import CKEditor from '@ckeditor/ckeditor5-vue';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-    
+
     export default {
         data() {
             return {
@@ -140,7 +140,6 @@
         components: {
             'lessons-list-component': LessonsListComponent,
             'ckeditor':               CKEditor.component,
-            
         },
         methods:    {
             getQuiz() {
@@ -153,6 +152,9 @@
                         this.result = data.result
                     });
             },
+            showQuestion(div){
+                jQuery(div).tab('show')
+            }
         },
         props:      ['slug'],
         computed:   {

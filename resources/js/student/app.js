@@ -24,7 +24,6 @@ Vue.component('breadcrumb-component', Breadcrumb);
 
 // drg >> set global variables
 Vue.prototype.public_ = window.public_;
-Vue.prototype.public_ = jQuery;
 
 let app = new Vue({
     el:     '#app',
