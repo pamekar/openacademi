@@ -25,8 +25,36 @@
                     </div>
                     <div class="card">
                         <div class="card-body text-center">
-                            <div class="text-secondary mb-0"><h5 class="countdown" :data-value="timer" data-unit="seconds"></h5></div>
-                            <small class="text-muted">TIME LEFT</small>
+                            <vue-countdown-timer
+                                    @start_callback="startCallBack('event started')"
+                                    @end_callback="endCallBack('event ended')"
+                                    :start-time="started_at"
+                                    :end-time="started_at+quiz.duration"
+                                    :interval="1000"
+                                    :start-label="'STARTS IN'"
+                                    :end-label="'TIME LEFT'"
+                                    label-position="end"
+                                    :end-text="'TIME UP!'"
+                                    :day-txt="'day'"
+                                    :hour-txt="'hrs'"
+                                    :minutes-txt="'min'"
+                                    :seconds-txt="'sec'">
+
+                                <template slot="countdown" slot-scope="scope">
+                                    <div>
+                                        <p class="pl-1 pr-1">
+                                            <span v-if="scope.props.days>0"><span class="h5 text-primary">{{scope.props.days}}</span> {{scope.props.dayTxt}} </span><span class="h5 text-primary">{{scope.props.hours}}</span> {{scope.props.hourTxt}} <span class="h5 text-primary">{{scope.props.minutes}}</span> {{scope.props.minutesTxt}} <span class="h5 text-primary">{{scope.props.seconds}}</span> {{scope.props.secondsTxt}}
+                                        </p>
+                                    </div>
+                                </template>
+                                <template slot="end-text" slot-scope="scope">
+                                    <strong class="text-danger">{{ scope.props.endText}}</strong>
+                                </template>
+                                <template slot="end-label" slot-scope="scope">
+                                    <span class="text-muted" v-if="scope.props.startLabel !== '' && scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.startLabel}}:</span>
+                                    <span class="text-muted" v-if="scope.props.endLabel !== '' && !scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.endLabel}}:</span>
+                                </template>
+                            </vue-countdown-timer>
                         </div>
                     </div>
                 </div>
@@ -129,6 +157,7 @@
                 result:      [],
                 questions:   [],
                 quiz:        [],
+                started_at:  ""
             }
         },
         created() {
@@ -151,6 +180,10 @@
                         this.questions = data.questions;
                         this.result = data.result
                     });
+                axios.get(`/api/quizes/${this.$route.params.id}/start`)
+                    .then(({data}) => {
+                        this.started_at = data;
+                    });
             },
             showQuestion(index) {
                 if (index >= 0 && index < this.questions.length) {
@@ -160,6 +193,12 @@
                     jQuery(`#question_${index}-tab`).addClass('active show').attr("aria-selected", "true");
                 }
             },
+            startCallBack: function (x) {
+                console.log(x)
+            },
+            endCallBack:   function (x) {
+                console.log(x)
+            }
         },
         props:      ['slug'],
         computed:   {

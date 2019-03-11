@@ -50,6 +50,18 @@ class QuizesController extends Controller
         return response()->json($status);
     }
 
+    public function results(Request $request)
+    {
+        $count = $request->input('count', 8);
+        $results = $request->dashboard
+            ? TestsResult::with(['test'])->where('user_id', Auth::id())
+                ->latest('updated_at')->limit($count)->get()
+            : TestsResult::with('test')->where('user_id', Auth::id())
+                ->latest('updated_at')->paginate($count);
+
+        return response()->json($results);
+    }
+
     public function show($id)
     {
         $quiz = Test::with('questions.options')->findOrFail($id);
@@ -80,16 +92,8 @@ class QuizesController extends Controller
         return response()->json($status);
     }
 
-    public function results(Request $request)
-    {
-        $count = $request->input('count', 8);
-        $results = $request->dashboard
-            ? TestsResult::with(['test'])->where('user_id', Auth::id())
-                ->latest('updated_at')->limit($count)->get()
-            : TestsResult::with('test')->where('user_id', Auth::id())
-                ->latest('updated_at')->paginate($count);
+    public function start($id){
 
-        return response()->json($results);
     }
 
     public function test($lesson_slug, Request $request)

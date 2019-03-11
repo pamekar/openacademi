@@ -20,6 +20,8 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
                 'QuizesController@index');
             Route::get('quizes/{id}',
                 'QuizesController@show');
+            Route::get('quizes/{id}/start',
+                'QuizesController@show');
         });
     Route::group([
         'prefix'     => 'instructor',

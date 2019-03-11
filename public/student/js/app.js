@@ -33841,6 +33841,34 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -33860,7 +33888,8 @@ if (false) {(function () {
       pageTitle: "",
       result: [],
       questions: [],
-      quiz: []
+      quiz: [],
+      started_at: ""
     };
   },
 
@@ -33885,6 +33914,11 @@ if (false) {(function () {
         this.questions = data.questions;
         this.result = data.result;
       });
+      axios.get(`/api/quizes/${this.$route.params.id}/start`).then(({
+        data
+      }) => {
+        this.started_at = data;
+      });
     },
 
     showQuestion(index) {
@@ -33894,8 +33928,14 @@ if (false) {(function () {
         jQuery(".nav-link").attr("aria-selected", "false").removeClass('active show');
         jQuery(`#question_${index}-tab`).addClass('active show').attr("aria-selected", "true");
       }
-    }
+    },
 
+    startCallBack: function (x) {
+      console.log(x);
+    },
+    endCallBack: function (x) {
+      console.log(x);
+    }
   },
   props: ['slug'],
   computed: {
@@ -37984,18 +38024,111 @@ var render = function() {
             _vm._m(0),
             _vm._v(" "),
             _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body text-center" }, [
-                _c("div", { staticClass: "text-secondary mb-0" }, [
-                  _c("h5", {
-                    staticClass: "countdown",
-                    attrs: { "data-value": _vm.timer, "data-unit": "seconds" }
+              _c(
+                "div",
+                { staticClass: "card-body text-center" },
+                [
+                  _c("vue-countdown-timer", {
+                    attrs: {
+                      "start-time": _vm.started_at,
+                      "end-time": _vm.started_at + _vm.quiz.duration,
+                      interval: 1000,
+                      "start-label": "STARTS IN",
+                      "end-label": "TIME LEFT",
+                      "label-position": "end",
+                      "end-text": "TIME UP!",
+                      "day-txt": "day",
+                      "hour-txt": "hrs",
+                      "minutes-txt": "min",
+                      "seconds-txt": "sec"
+                    },
+                    on: {
+                      start_callback: function($event) {
+                        return _vm.startCallBack("event started")
+                      },
+                      end_callback: function($event) {
+                        return _vm.endCallBack("event ended")
+                      }
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "countdown",
+                        fn: function(scope) {
+                          return [
+                            _c("div", [
+                              _c("p", { staticClass: "pl-1 pr-1" }, [
+                                scope.props.days > 0
+                                  ? _c("span", [
+                                      _c(
+                                        "span",
+                                        { staticClass: "h5 text-primary" },
+                                        [_vm._v(_vm._s(scope.props.days))]
+                                      ),
+                                      _vm._v(
+                                        " " + _vm._s(scope.props.dayTxt) + " "
+                                      )
+                                    ])
+                                  : _vm._e(),
+                                _c("span", { staticClass: "h5 text-primary" }, [
+                                  _vm._v(_vm._s(scope.props.hours))
+                                ]),
+                                _vm._v(" " + _vm._s(scope.props.hourTxt) + " "),
+                                _c("span", { staticClass: "h5 text-primary" }, [
+                                  _vm._v(_vm._s(scope.props.minutes))
+                                ]),
+                                _vm._v(
+                                  " " + _vm._s(scope.props.minutesTxt) + " "
+                                ),
+                                _c("span", { staticClass: "h5 text-primary" }, [
+                                  _vm._v(_vm._s(scope.props.seconds))
+                                ]),
+                                _vm._v(
+                                  " " +
+                                    _vm._s(scope.props.secondsTxt) +
+                                    "\n                                    "
+                                )
+                              ])
+                            ])
+                          ]
+                        }
+                      },
+                      {
+                        key: "end-text",
+                        fn: function(scope) {
+                          return [
+                            _c("strong", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(scope.props.endText))
+                            ])
+                          ]
+                        }
+                      },
+                      {
+                        key: "end-label",
+                        fn: function(scope) {
+                          return [
+                            scope.props.startLabel !== "" &&
+                            scope.props.tips &&
+                            scope.props.labelPosition === "end"
+                              ? _c("span", { staticClass: "text-muted" }, [
+                                  _vm._v(_vm._s(scope.props.startLabel) + ":")
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            scope.props.endLabel !== "" &&
+                            !scope.props.tips &&
+                            scope.props.labelPosition === "end"
+                              ? _c("span", { staticClass: "text-muted" }, [
+                                  _vm._v(_vm._s(scope.props.endLabel) + ":")
+                                ])
+                              : _vm._e()
+                          ]
+                        }
+                      }
+                    ])
                   })
-                ]),
-                _vm._v(" "),
-                _c("small", { staticClass: "text-muted" }, [
-                  _vm._v("TIME LEFT")
-                ])
-              ])
+                ],
+                1
+              )
             ])
           ]),
           _vm._v(" "),
