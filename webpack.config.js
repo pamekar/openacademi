@@ -87,7 +87,14 @@ module.exports.output = Mix.output();
  |
  */
 
-let plugins = [];
+let plugins = [
+    new webpack.ProvidePlugin({
+        $: 'jquery',
+        jquery: 'jquery',
+        'window.jQuery': 'jquery',
+        jQuery: 'jquery'
+    })
+];
 
 if (Mix.options.extractVueStyles) {
     var vueExtractTextPlugin = Mix.vueExtractTextPlugin();
@@ -106,7 +113,7 @@ let rules = [
                     use:      'css-loader!sass-loader',
                     fallback: 'vue-style-loader'
                 }),
-                sass:   vueExtractTextPlugin.extract({
+                 sass:   vueExtractTextPlugin.extract({
                     use:      'css-loader!sass-loader?indentedSyntax',
                     fallback: 'vue-style-loader'
                 }),

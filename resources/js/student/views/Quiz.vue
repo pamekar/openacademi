@@ -49,7 +49,7 @@
                             <div class="card-body" v-if="question.type=='radio'">
                                 <div class="form-group" v-for="(option,index1) in question.options">
                                     <div class="custom-control custom-checkbox">
-                                        <input :id="`answer-${index}${index1}`" :name="`answer-${index}`" type="radio" class="custom-control-input">
+                                        <input :id="`answer-${index}${index1}`" :name="`answer-${index}`" type="radio" class="custom-control-input" :value="option.id" v-model="questions[index].answer">
                                         <label :for="`answer-${index}${index1}`" class="custom-control-label">{{option.option_text}}</label>
                                     </div>
                                 </div>
@@ -57,26 +57,26 @@
                             <div class="card-body" v-else-if="question.type=='input'">
                                 <div class="form-group">
                                     <label class="form-label" :for="`answer-${index}`">Your Answer:</label>
-                                    <input type="text" :name="`answer-${index}`" class="form-control" :id="`answer-${index}`" placeholder="Enter your answer">
+                                    <input type="text" :name="`answer-${index}`" class="form-control" :id="`answer-${index}`" placeholder="Enter your answer" v-model="questions[index].answer">
                                 </div>
                             </div>
                             <div class="card-body" v-else-if="question.type=='textarea'">
                                 <div class="form-group">
                                     <label class="form-label" :for="`answer-${index}`">Your Answer:</label>
-                                    <textarea :name="`answer-${index}`" class="form-control" :id="`answer-${index}`" placeholder="Enter your answer"></textarea>
+                                    <textarea :name="`answer-${index}`" class="form-control" :id="`answer-${index}`" placeholder="Enter your answer" v-model="questions[index].answer"></textarea>
                                 </div>
                             </div>
                             <div class="card-body" v-else-if="question.type=='richtext'">
                                 <div class="form-group">
                                     <label class="form-label" :for="`answer-${index}`">Your Answer:</label>
-                                    <ckeditor :id="`answer-${index}`" :editor="editor"></ckeditor>
+                                    <ckeditor :id="`answer-${index}`" :editor="editor" v-model="questions[index].answer"></ckeditor>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="nav d-block " role="tablist">
-                                <a :class="{'btn btn-white disabled':index===0,'btn btn-white':index>0}" :href="`#question_${index-1}`" role="tab" :aria-controls="`question_${index-1}`" data-toggle="tab">Previous</a>
-                                <a :class="{'btn btn-primary float-right':index<questions.length-1,'btn btn-primary float-right disabled':index==questions.length-1}" :href="`#question_${index+1}`" role="tab" :aria-controls="`question_${index+1}`" data-toggle="tab">Next<!--<i class="material-icons btn__icon&#45;&#45;right">send</i>--></a>
+                                <button :class="{'btn btn-white disabled':index===0,'btn btn-white':index>0}" @click="jQuery(`#question_${index-1}`).tab('show')">Previous</button>
+                                <button :class="{'btn btn-primary float-right':index<questions.length-1,'btn btn-primary float-right disabled':index==questions.length-1}" @click="jQuery(`#question_${index+1}`).tab('show')">Next</button>
                             </div>
                         </div>
                     </div>

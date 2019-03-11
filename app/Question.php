@@ -19,7 +19,7 @@ class Question extends Model
 
     protected $fillable = ['question', 'question_image', 'score'];
 
-    protected $appends=['options'];
+    protected $appends=['options','answer'];
 
     /**
      * Set attribute to money format
@@ -35,7 +35,7 @@ class Question extends Model
     }
 
     public function getAnswerAttribute(){
-        return "";
+        return null;
     }
 
     public function options()

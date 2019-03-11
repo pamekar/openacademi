@@ -64,7 +64,7 @@
                                     <td>
                                         <div class="media align-items-center">
                                             <a href="instructor-course-edit.html" class="avatar avatar-4by3 avatar-sm mr-3">
-                                                <img :src="$public_+'/assets/images/gulp.png'" alt="course" class="avatar-img rounded">
+                                                <img :src="public_+'/assets/images/gulp.png'" alt="course" class="avatar-img rounded">
                                             </a>
                                             <div class="media-body">
                                                 <a class="text-body js-lists-values-course" href="instructor-course-edit.html"><strong>Learn Angular Fundamentals</strong></a><br>
@@ -84,7 +84,7 @@
                                     <td>
                                         <div class="media align-items-center">
                                             <a href="instructor-course-edit.html" class="avatar avatar-4by3 avatar-sm mr-3">
-                                                <img :src="$public_+'/assets/images/github.png'" alt="course" class="avatar-img rounded">
+                                                <img :src="public_+'/assets/images/github.png'" alt="course" class="avatar-img rounded">
                                             </a>
                                             <div class="media-body">
                                                 <a class="text-body js-lists-values-course" href="instructor-course-edit.html"><strong>Introduction to TypeScript</strong></a><br>
@@ -104,7 +104,7 @@
                                     <td>
                                         <div class="media align-items-center">
                                             <a href="instructor-course-edit.html" class="avatar avatar-4by3 avatar-sm mr-3">
-                                                <img :src="$public_+'/assets/images/vuejs.png'" alt="course" class="avatar-img rounded">
+                                                <img :src="public_+'/assets/images/vuejs.png'" alt="course" class="avatar-img rounded">
                                             </a>
                                             <div class="media-body">
                                                 <a class="text-body js-lists-values-course" href="instructor-course-edit.html"><strong>Angular Unit Testing</strong></a><br>
@@ -124,7 +124,7 @@
                                     <td>
                                         <div class="media align-items-center">
                                             <a href="instructor-course-edit.html" class="avatar avatar-4by3 avatar-sm mr-3">
-                                                <img :src="$public_+'/assets/images/vuejs.png'" alt="course" class="avatar-img rounded">
+                                                <img :src="public_+'/assets/images/vuejs.png'" alt="course" class="avatar-img rounded">
                                             </a>
                                             <div class="media-body">
                                                 <a class="text-body js-lists-values-course" href="instructor-course-edit.html"><strong>Angular Routing In-Depth</strong></a><br>
@@ -220,7 +220,7 @@
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#" class="avatar avatar-sm">
-                                        <img :src="$public_+'/assets/images/people/110/guy-9.jpg'" alt="Guy" class="avatar-img rounded-circle">
+                                        <img :src="public_+'/assets/images/people/110/guy-9.jpg'" alt="Guy" class="avatar-img rounded-circle">
                                     </a>
                                 </div>
                                 <div class="media-body d-flex flex-column">
@@ -236,7 +236,7 @@
                             <div class="media ml-sm-32pt mt-3 border rounded p-3 bg-light">
                                 <div class="media-left">
                                     <a href="#" class="avatar avatar-sm">
-                                        <img :src="$public_+'/assets/images/people/110/guy-6.jpg'" alt="Guy" class="avatar-img rounded-circle">
+                                        <img :src="public_+'/assets/images/people/110/guy-6.jpg'" alt="Guy" class="avatar-img rounded-circle">
                                     </a>
                                 </div>
                                 <div class="media-body">

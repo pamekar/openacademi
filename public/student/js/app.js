@@ -33488,7 +33488,7 @@ if (false) {(function () {
       let progress = completed / total * 100;
       let color = "warning";
 
-      if (progress > 100) {
+      if (progress >= 100) {
         progress = 100;
         color = "success";
       } else if (progress >= 70 && progress < 100) {
@@ -34097,7 +34097,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('star-rating', __WEBPACK_I
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vue-headful', __WEBPACK_IMPORTED_MODULE_2_vue_headful___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('breadcrumb-component', __WEBPACK_IMPORTED_MODULE_6__components_BreadcrumbComponent_vue__["a" /* default */]); // drg >> set global variables
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$public_ = window.public_;
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.public_ = window.public_;
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.public_ = jQuery;
 let app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',
   render: h => h(__WEBPACK_IMPORTED_MODULE_4__App_vue__["a" /* default */]),
@@ -34755,7 +34756,7 @@ var render = function() {
             _c("img", {
               staticClass: "mr-2",
               attrs: {
-                src: _vm.$public_ + "/assets/images/logo/white.svg",
+                src: _vm.public_ + "/assets/images/logo/white.svg",
                 alt: "OpenAcademi"
               }
             }),
@@ -34820,7 +34821,7 @@ var render = function() {
                                           "avatar-img rounded-circle",
                                         attrs: {
                                           src:
-                                            _vm.$public_ +
+                                            _vm.public_ +
                                             "/assets/images/people/110/woman-5.jpg",
                                           alt: "people"
                                         }
@@ -34853,7 +34854,7 @@ var render = function() {
                                           "avatar-img rounded-circle",
                                         attrs: {
                                           src:
-                                            _vm.$public_ +
+                                            _vm.public_ +
                                             "/assets/images/people/110/woman-5.jpg",
                                           alt: "people"
                                         }
@@ -34893,7 +34894,7 @@ var render = function() {
                   _c("img", {
                     staticClass: "rounded-circle",
                     attrs: {
-                      src: _vm.$public_ + "/assets/images/people/50/guy-6.jpg",
+                      src: _vm.public_ + "/assets/images/people/50/guy-6.jpg",
                       alt: "Avatar",
                       width: "40"
                     }
@@ -35929,7 +35930,7 @@ var render = function() {
                   _c("img", {
                     staticClass: "rounded-circle",
                     attrs: {
-                      src: _vm.$public_ + "/assets/images/people/110/guy-6.jpg",
+                      src: _vm.public_ + "/assets/images/people/110/guy-6.jpg",
                       alt: "About Adrian",
                       width: "50"
                     }
@@ -36728,7 +36729,7 @@ var render = function() {
                       staticClass: "rounded-circle",
                       attrs: {
                         src:
-                          _vm.$public_ + "/assets/images/people/110/guy-6.jpg",
+                          _vm.public_ + "/assets/images/people/110/guy-6.jpg",
                         alt: "About Adrian",
                         width: "50"
                       }
@@ -38061,11 +38062,35 @@ var render = function() {
                                 },
                                 [
                                   _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.questions[index].answer,
+                                        expression: "questions[index].answer"
+                                      }
+                                    ],
                                     staticClass: "custom-control-input",
                                     attrs: {
                                       id: "answer-" + index + index1,
                                       name: "answer-" + index,
                                       type: "radio"
+                                    },
+                                    domProps: {
+                                      value: option.id,
+                                      checked: _vm._q(
+                                        _vm.questions[index].answer,
+                                        option.id
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.questions[index],
+                                          "answer",
+                                          option.id
+                                        )
+                                      }
                                     }
                                   }),
                                   _vm._v(" "),
@@ -38096,12 +38121,33 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.questions[index].answer,
+                                  expression: "questions[index].answer"
+                                }
+                              ],
                               staticClass: "form-control",
                               attrs: {
                                 type: "text",
                                 name: "answer-" + index,
                                 id: "answer-" + index,
                                 placeholder: "Enter your answer"
+                              },
+                              domProps: { value: _vm.questions[index].answer },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.questions[index],
+                                    "answer",
+                                    $event.target.value
+                                  )
+                                }
                               }
                             })
                           ])
@@ -38119,11 +38165,32 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.questions[index].answer,
+                                  expression: "questions[index].answer"
+                                }
+                              ],
                               staticClass: "form-control",
                               attrs: {
                                 name: "answer-" + index,
                                 id: "answer-" + index,
                                 placeholder: "Enter your answer"
+                              },
+                              domProps: { value: _vm.questions[index].answer },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.questions[index],
+                                    "answer",
+                                    $event.target.value
+                                  )
+                                }
                               }
                             })
                           ])
@@ -38147,6 +38214,17 @@ var render = function() {
                                 attrs: {
                                   id: "answer-" + index,
                                   editor: _vm.editor
+                                },
+                                model: {
+                                  value: _vm.questions[index].answer,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.questions[index],
+                                      "answer",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "questions[index].answer"
                                 }
                               })
                             ],
@@ -38165,24 +38243,25 @@ var render = function() {
                       },
                       [
                         _c(
-                          "a",
+                          "button",
                           {
                             class: {
                               "btn btn-white disabled": index === 0,
                               "btn btn-white": index > 0
                             },
-                            attrs: {
-                              href: "#question_" + (index - 1),
-                              role: "tab",
-                              "aria-controls": "question_" + (index - 1),
-                              "data-toggle": "tab"
+                            on: {
+                              click: function($event) {
+                                _vm
+                                  .jQuery("#question_" + (index - 1))
+                                  .tab("show")
+                              }
                             }
                           },
                           [_vm._v("Previous")]
                         ),
                         _vm._v(" "),
                         _c(
-                          "a",
+                          "button",
                           {
                             class: {
                               "btn btn-primary float-right":
@@ -38190,11 +38269,12 @@ var render = function() {
                               "btn btn-primary float-right disabled":
                                 index == _vm.questions.length - 1
                             },
-                            attrs: {
-                              href: "#question_" + (index + 1),
-                              role: "tab",
-                              "aria-controls": "question_" + (index + 1),
-                              "data-toggle": "tab"
+                            on: {
+                              click: function($event) {
+                                _vm
+                                  .jQuery("#question_" + (index + 1))
+                                  .tab("show")
+                              }
                             }
                           },
                           [_vm._v("Next")]

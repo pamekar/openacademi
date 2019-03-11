@@ -78,7 +78,7 @@
                     <div class="card-header">
                         <div class="media align-items-center">
                             <div class="media-left">
-                                <img :src="$public_+'/assets/images/people/110/guy-6.jpg'" alt="About Adrian" width="50" class="rounded-circle">
+                                <img :src="public_+'/assets/images/people/110/guy-6.jpg'" alt="About Adrian" width="50" class="rounded-circle">
                             </div>
                             <div class="media-body">
                                 <h4 class="card-title"><a href="fixed-student-profile.html">Adrian Demian</a></h4>

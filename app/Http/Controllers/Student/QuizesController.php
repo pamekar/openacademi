@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Student;
 
 use App\Lesson;
+use App\Question;
+use App\QuestionsOption;
 use App\Test;
 use App\TestsResult;
 use Illuminate\Http\Request;
