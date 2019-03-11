@@ -10,7 +10,9 @@ import router from './routes.js';
 import functions from './functions.js';
 import 'viewerjs/dist/viewer.css';
 import Viewer from 'v-viewer';
+import VueCountdownTimer from 'vuejs-countdown-timer'
 
+Vue.use(VueCountdownTimer)
 Vue.use(Viewer);
 
 Vue.use(VueRouter);

@@ -62,8 +62,14 @@ class QuizesController extends Controller
         $result = TestsResult::where('test_id', $quiz->id)
             ->where('user_id', Auth::id())
             ->where('status', '<>', 'completed')->first();
+        $questions = $quiz->questions->toArray();
+        shuffle($questions);
         if (($purchased_course || $lesson->free_lesson) && $result) {
-            return response()->json(['quiz'=>$quiz,'result'=>$result]);
+            return response()->json([
+                'quiz'      => $quiz,
+                'questions' => $questions,
+                'result'    => $result
+            ]);
         }
 
         $status = [

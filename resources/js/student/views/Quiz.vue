@@ -139,7 +139,7 @@
         },
         components: {
             'lessons-list-component': LessonsListComponent,
-            'ckeditor':               CKEditor.component,
+            'ckeditor':               CKEditor.component
         },
         methods:    {
             getQuiz() {
@@ -148,7 +148,7 @@
                         this.quiz = data.quiz;
                         this.pageTitle = data.quiz.title;
                         this.breadcrumbs[2].title = data.quiz.title;
-                        this.questions = data.quiz.questions;
+                        this.questions = data.questions;
                         this.result = data.result
                     });
             },
@@ -159,7 +159,7 @@
                     jQuery(".nav-link").attr("aria-selected", "false").removeClass('active show');
                     jQuery(`#question_${index}-tab`).addClass('active show').attr("aria-selected", "true");
                 }
-            }
+            },
         },
         props:      ['slug'],
         computed:   {
