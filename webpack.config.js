@@ -87,14 +87,7 @@ module.exports.output = Mix.output();
  |
  */
 
-let plugins = [
-    new webpack.ProvidePlugin({
-        $: 'jquery',
-        jquery: 'jquery',
-        'window.jQuery': 'jquery',
-        jQuery: 'jquery'
-    })
-];
+let plugins = [];
 
 if (Mix.options.extractVueStyles) {
     var vueExtractTextPlugin = Mix.vueExtractTextPlugin();
