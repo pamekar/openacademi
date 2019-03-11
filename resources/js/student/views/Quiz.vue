@@ -22,14 +22,14 @@
                             <h4 class="text-warning mb-0"><strong>17</strong></h4>
                             <small class="text-muted-light">PENDING</small>
                         </div>
-                    </div>
+                        </div>
                     <div class="card">
                         <div class="card-body text-center">
                             <vue-countdown-timer
                                     @start_callback="startCallBack('event started')"
                                     @end_callback="endCallBack('event ended')"
                                     :start-time="started_at"
-                                    :end-time="started_at+quiz.duration"
+                                    :end-time="end_at"
                                     :interval="1000"
                                     :start-label="'STARTS IN'"
                                     :end-label="'TIME LEFT'"
@@ -180,9 +180,9 @@
                         this.questions = data.questions;
                         this.result = data.result
                     });
-                axios.get(`/api/quizes/${this.$route.params.id}/start`)
+                axios.get(`/api/quizes/start/${this.$route.params.id}`)
                     .then(({data}) => {
-                        this.started_at = data;
+                        this.started_at = parseInt(data);
                     });
             },
             showQuestion(index) {
@@ -202,8 +202,8 @@
         },
         props:      ['slug'],
         computed:   {
-            timer() {
-                
+            end_at() {
+                return this.started_at + parseInt(this.quiz.duration);
             }
         }
     }

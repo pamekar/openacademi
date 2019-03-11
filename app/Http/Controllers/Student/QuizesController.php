@@ -92,8 +92,23 @@ class QuizesController extends Controller
         return response()->json($status);
     }
 
-    public function start($id){
+    public function start($id)
+    {
+        $result = TestsResult::where('test_id', $id)
+            ->where('user_id', Auth::id())
+            ->where('status', 'active')->first();
+        if (is_null($result->started_at)) {
+            $setResult = TestsResult::find($result->id);
+            $setResult->status = 'active';
+            $setResult->started_at = now();
+            $setResult->save();
 
+            $startDate= new \DateTime($setResult->started_at);
+            return response()->json($startDate->format('U'));
+        }
+
+        $startDate= new \DateTime($result->started_at);
+        return response()->json($startDate->format('U'));
     }
 
     public function test($lesson_slug, Request $request)

@@ -33914,10 +33914,10 @@ if (false) {(function () {
         this.questions = data.questions;
         this.result = data.result;
       });
-      axios.get(`/api/quizes/${this.$route.params.id}/start`).then(({
+      axios.get(`/api/quizes/start/${this.$route.params.id}`).then(({
         data
       }) => {
-        this.started_at = data;
+        this.started_at = parseInt(data);
       });
     },
 
@@ -33939,7 +33939,9 @@ if (false) {(function () {
   },
   props: ['slug'],
   computed: {
-    timer() {}
+    end_at() {
+      return this.started_at + parseInt(this.quiz.duration);
+    }
 
   }
 });
@@ -38031,7 +38033,7 @@ var render = function() {
                   _c("vue-countdown-timer", {
                     attrs: {
                       "start-time": _vm.started_at,
-                      "end-time": _vm.started_at + _vm.quiz.duration,
+                      "end-time": _vm.end_at,
                       interval: 1000,
                       "start-label": "STARTS IN",
                       "end-label": "TIME LEFT",
