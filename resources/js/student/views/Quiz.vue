@@ -22,7 +22,7 @@
                             <h4 class="text-warning mb-0"><strong>17</strong></h4>
                             <small class="text-muted-light">PENDING</small>
                         </div>
-                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-body text-center">
                             <vue-countdown-timer
@@ -113,7 +113,7 @@
             <div class="col-md-2 col-sm-3">
                 <div class="card">
                     <div class="card-body text-center">
-                        <button class="btn btn-lg btn-success">Submit</button>
+                        <button class="btn btn-lg btn-success" @click="submitQuiz">Submit</button>
                     </div>
                 </div>
                 <div class="card">
@@ -193,8 +193,21 @@
                     jQuery(`#question_${index}-tab`).addClass('active show').attr("aria-selected", "true");
                 }
             },
+            submitQuiz() {
+                let questions = this.questions;
+                let form_data = [];
+                for (let i = 0; i < questions.length; i++) {
+                    form_data.push({
+                        question: questions[i].id,
+                        answer:   questions[i].answer
+                    });
+                }
+                axios.post(`/api/quizes/submit/${this.$route.params.id}`,form_data)
+                    .then(({data}) => {
+                        alert('your quiz has been submitted')
+                    });
+            },
             startCallBack: function (x) {
-                console.log(x)
             },
             endCallBack:   function (x) {
                 console.log(x)

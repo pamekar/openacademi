@@ -7,6 +7,7 @@ use App\Question;
 use App\QuestionsOption;
 use App\Test;
 use App\TestsResult;
+use App\TestsResultsAnswer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -103,47 +104,63 @@ class QuizesController extends Controller
             $setResult->started_at = now();
             $setResult->save();
 
-            $startDate= new \DateTime($setResult->started_at);
+            $startDate = new \DateTime($setResult->started_at);
             return response()->json($startDate->format('U'));
         }
 
-        $startDate= new \DateTime($result->started_at);
+        $startDate = new \DateTime($result->started_at);
         return response()->json($startDate->format('U'));
     }
 
-    public function test($lesson_slug, Request $request)
+    public function submit($id, $completed = null, Request $request)
     {
-        $lesson = Lesson::where('slug', $lesson_slug)->firstOrFail();
-        $answers = [];
-        $test_score = 0;
-        foreach ($request->get('questions') as $question_id => $answer_id) {
-            $question = Question::find($question_id);
-            $correct = QuestionsOption::where('question_id', $question_id)
-                    ->where('id', $answer_id)
-                    ->where('correct', 1)->count() > 0;
-            $answers[] = [
-                'question_id' => $question_id,
-                'option_id'   => $answer_id,
-                'correct'     => $correct
-            ];
-            if ($correct) {
-                $test_score += $question->score;
-            }
-            /*
-             * Save the answer
-             * Check if it is correct and then add points
-             * Save all test result and show the points
-             */
-        }
-        $test_result = TestsResult::create([
-            'test_id'     => $lesson->test->id,
-            'user_id'     => \Auth::id(),
-            'test_result' => $test_score
-        ]);
-        $test_result->answers()->createMany($answers);
 
-        return redirect()
-            ->route('lessons.show', [$lesson->course_id, $lesson_slug])
-            ->with('message', 'Test score: ' . $test_score);
+        $result = TestsResult::where('test_id', $id)
+            ->where('user_id', Auth::id())
+            ->where('status', 'active')->first();
+
+        $status = $completed ? 'completed' : 'active';
+        $test_score = 0;
+        foreach ($request->all() as $answer) {
+            $question = Question::find($answer['question']);
+            switch ($question->type) {
+                case 'radio':
+                    $correct = QuestionsOption::where('question_id',
+                            $question->id)
+                            ->where('id', $answer['answer'])
+                            ->where('correct', 1)->count() > 0;
+                    // drg >> save answers
+                    TestsResultsAnswer::updateOrInsert([
+                        'tests_result_id' => $result->id,
+                        'question_id'    => $question->id,
+
+                    ], [
+                        'option_id'   => $answer['answer'],
+                        'correct'     => $correct,
+                        'answer_type' => $question->type
+                    ]);
+
+                    if ($correct) {
+                        $test_score += $question->score;
+                    }
+                    break;
+                default:
+                    // drg >> save answers
+                    TestsResultsAnswer::updateOrInsert([
+                        'tests_result_id' => $result->id,
+                        'question_id'    => $question->id,
+                    ], [
+                        'answer_text' => $answer['answer'],
+                        'answer_type' => $question->type
+                    ]);
+                    break;
+            }
+        }
+        $result->update([
+            'test_result' => $test_score,
+            'completed'   => $status
+        ]);
+
+        return response()->json($test_score);
     }
 }

@@ -65,7 +65,6 @@ const actions = {
             price:                course.price,
             start_date:           course.start_date,
             course_image:         course.course_image,
-            //course_image_type:    course.course_image_type,
             course_image_preview: course.course_image_preview,
             end_date:             course.end_date,
             published:            Number(course.published),
