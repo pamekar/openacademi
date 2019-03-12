@@ -13,13 +13,13 @@
                 <div class="card-group">
                     <div class="card">
                         <div class="card-body text-center">
-                            <h4 class="text-primary mb-0"><strong>{{questions.length}}</strong></h4>
+                            <h4 class="text-primary mb-0"><strong>{{totalQuestions}}</strong></h4>
                             <small class="text-muted-light">TOTAL</small>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body text-center">
-                            <h4 class="text-warning mb-0"><strong>17</strong></h4>
+                            <h4 class="text-warning mb-0"><strong>{{pendingQuestions}}</strong></h4>
                             <small class="text-muted-light">PENDING</small>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                                 <div class="form-group" v-for="(option,index1) in question.options">
                                     <div class="custom-control custom-checkbox">
                                         <input :id="`answer-${index}${index1}`" :name="`answer-${index}`" type="radio" class="custom-control-input" :value="option.id" v-model="questions[index].answer">
-                                        <label :for="`answer-${index}${index1}`" class="custom-control-label">{{option.option_text}}</label>
+                                        <label :for="`answer-${index}${index1}`" class="custom-control-label">{{option.option_text}}<i class="fa fa-check" v-if="option.correct"></i></label>
                                     </div>
                                 </div>
                             </div>
@@ -170,6 +170,22 @@
             'lessons-list-component': LessonsListComponent,
             'ckeditor':               CKEditor.component
         },
+        computed:   {
+            end_at() {
+                return this.started_at + parseInt(this.quiz.duration);
+            },
+            pendingQuestions() {
+                let pending = 0;
+                for (let i = 0; i < this.totalQuestions; i++) {
+                    this.questions[i].answer == null ? pending++ : pending;
+                }
+                return pending;
+            },
+            totalQuestions() {
+                return this.questions.length
+            }
+
+        },
         methods:    {
             getQuiz() {
                 axios.get(`/api/quizes/${this.$route.params.id}`)
@@ -202,7 +218,7 @@
                         answer:   questions[i].answer
                     });
                 }
-                axios.post(`/api/quizes/submit/${this.$route.params.id}`,form_data)
+                axios.post(`/api/quizes/submit/${this.$route.params.id}`, form_data)
                     .then(({data}) => {
                         alert('your quiz has been submitted')
                     });
@@ -214,11 +230,6 @@
             }
         },
         props:      ['slug'],
-        computed:   {
-            end_at() {
-                return this.started_at + parseInt(this.quiz.duration);
-            }
-        }
     }
 </script>
 <style>

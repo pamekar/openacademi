@@ -1,28 +1,31 @@
 <?php
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 /**
  * Class Question
  *
  * @package App
- * @property text $question
- * @property string $question_image
+ * @property text    $question
+ * @property string  $question_image
  * @property integer $score
-*/
+ */
 class Question extends Model
 {
     use SoftDeletes;
 
     protected $fillable = ['question', 'question_image', 'score'];
 
-    protected $appends=['options','answer'];
+    protected $appends = ['answer'];
 
     /**
      * Set attribute to money format
+     *
      * @param $input
      */
     public function setScoreAttribute($input)
@@ -30,12 +33,14 @@ class Question extends Model
         $this->attributes['score'] = $input ? $input : null;
     }
 
-    public function getOptionsAttribute(){
-        return $this->tests();
-    }
-
-    public function getAnswerAttribute(){
-        return null;
+    public function getAnswerAttribute()
+    {
+        $results = TestsResult::where('user_id', Auth::id())->pluck('id');
+        $answer = TestsResultsAnswer::whereIn('tests_result_id', $results)
+            ->where('question_id', $this->id)->latest()->first();
+        $value = $answer->answer_type === 'radio' ? $answer->option_id
+            : $answer->answer_text;
+        return $answer ? $value : null;
     }
 
     public function options()

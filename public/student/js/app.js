@@ -33903,6 +33903,26 @@ if (false) {(function () {
     'lessons-list-component': __WEBPACK_IMPORTED_MODULE_0__components_LessonsListComponent_vue__["a" /* default */],
     'ckeditor': __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_vue___default.a.component
   },
+  computed: {
+    end_at() {
+      return this.started_at + parseInt(this.quiz.duration);
+    },
+
+    pendingQuestions() {
+      let pending = 0;
+
+      for (let i = 0; i < this.totalQuestions; i++) {
+        this.questions[i].answer == null ? pending++ : pending;
+      }
+
+      return pending;
+    },
+
+    totalQuestions() {
+      return this.questions.length;
+    }
+
+  },
   methods: {
     getQuiz() {
       axios.get(`/api/quizes/${this.$route.params.id}`).then(({
@@ -33953,13 +33973,7 @@ if (false) {(function () {
       console.log(x);
     }
   },
-  props: ['slug'],
-  computed: {
-    end_at() {
-      return this.started_at + parseInt(this.quiz.duration);
-    }
-
-  }
+  props: ['slug']
 });
 
 /***/ }),
@@ -38029,7 +38043,7 @@ var render = function() {
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-body text-center" }, [
                 _c("h4", { staticClass: "text-primary mb-0" }, [
-                  _c("strong", [_vm._v(_vm._s(_vm.questions.length))])
+                  _c("strong", [_vm._v(_vm._s(_vm.totalQuestions))])
                 ]),
                 _vm._v(" "),
                 _c("small", { staticClass: "text-muted-light" }, [
@@ -38038,7 +38052,17 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(0),
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body text-center" }, [
+                _c("h4", { staticClass: "text-warning mb-0" }, [
+                  _c("strong", [_vm._v(_vm._s(_vm.pendingQuestions))])
+                ]),
+                _vm._v(" "),
+                _c("small", { staticClass: "text-muted-light" }, [
+                  _vm._v("PENDING")
+                ])
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "card" }, [
               _c(
@@ -38263,7 +38287,14 @@ var render = function() {
                                       staticClass: "custom-control-label",
                                       attrs: { for: "answer-" + index + index1 }
                                     },
-                                    [_vm._v(_vm._s(option.option_text))]
+                                    [
+                                      _vm._v(_vm._s(option.option_text)),
+                                      option.correct
+                                        ? _c("i", {
+                                            staticClass: "fa fa-check"
+                                          })
+                                        : _vm._e()
+                                    ]
                                   )
                                 ]
                               )
@@ -38512,22 +38543,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body text-center" }, [
-        _c("h4", { staticClass: "text-warning mb-0" }, [
-          _c("strong", [_vm._v("17")])
-        ]),
-        _vm._v(" "),
-        _c("small", { staticClass: "text-muted-light" }, [_vm._v("PENDING")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 if (false) {
