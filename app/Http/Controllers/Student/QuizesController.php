@@ -97,14 +97,13 @@ class QuizesController extends Controller
     {
         $result = TestsResult::where('test_id', $id)
             ->where('user_id', Auth::id())
-            ->where('status', 'active')->first();
+            ->where('status','<>', 'completed')->firstOrFail();
         if (is_null($result->started_at)) {
-            $setResult = TestsResult::find($result->id);
-            $setResult->status = 'active';
-            $setResult->started_at = now();
-            $setResult->save();
+            $result->status = 'active';
+            $result->started_at = now();
+            $result->save();
 
-            $startDate = new \DateTime($setResult->started_at);
+            $startDate = new \DateTime($result->started_at);
             return response()->json($startDate->format('U'));
         }
 
@@ -121,6 +120,7 @@ class QuizesController extends Controller
 
         $status = $completed ? 'completed' : 'active';
         $test_score = 0;
+        $total_score=0;
         foreach ($request->all() as $answer) {
             $question = Question::find($answer['question']);
             switch ($question->type) {
@@ -155,10 +155,12 @@ class QuizesController extends Controller
                     ]);
                     break;
             }
+            $total_score += $question->score;
         }
         $result->update([
             'test_result' => $test_score,
-            'completed'   => $status
+            'total_score' => $total_score,
+            'status'   => $status
         ]);
 
         return response()->json($test_score);

@@ -36,10 +36,12 @@ class Question extends Model
     public function getAnswerAttribute()
     {
         $results = TestsResult::where('user_id', Auth::id())->pluck('id');
+
         $answer = TestsResultsAnswer::whereIn('tests_result_id', $results)
             ->where('question_id', $this->id)->latest()->first();
-        $value = $answer->answer_type === 'radio' ? $answer->option_id
-            : $answer->answer_text;
+        $value = !$answer
+            ?: ($answer->answer_type === 'radio' ? $answer->option_id
+                : $answer->answer_text);
         return $answer ? $value : null;
     }
 

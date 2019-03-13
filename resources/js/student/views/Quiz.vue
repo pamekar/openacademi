@@ -27,9 +27,10 @@
                         <div class="card-body text-center">
                             <vue-countdown-timer
                                     @start_callback="startCallBack('event started')"
-                                    @end_callback="endCallBack('event ended')"
-                                    :start-time="started_at"
-                                    :end-time="end_at"
+                                    @end_callback="endCallBack()"
+                                    :status="5"
+                                    :start-time="start_at"
+                                    :end-time="end_at?end_at:started_at"
                                     :interval="1000"
                                     :start-label="'STARTS IN'"
                                     :end-label="'TIME LEFT'"
@@ -113,13 +114,13 @@
             <div class="col-md-2 col-sm-3">
                 <div class="card">
                     <div class="card-body text-center">
-                        <button class="btn btn-lg btn-success" @click="submitQuiz">Submit</button>
+                        <button class="btn btn-lg btn-success" @click="completeQuiz">Submit</button>
                     </div>
                 </div>
                 <div class="card">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
-                        <a :class="{'nav-link active':index==0,'nav-link':index!==0}" :id="`question_${index}-tab`" data-toggle="pill" :href="`#question_${index}`" role="tab" :aria-controls="`question_${index}`" :aria-selected="index==0" v-for="(question,index) in questions">
+                        <a :class="{'nav-link active':index==0,'nav-link':index!==0}" :id="`question_${index}-tab`" data-toggle="pill" :href="`#question_${index}`" role="tab" :aria-controls="`question_${index}`" :aria-selected="index==0" v-for="(question,index) in questions" @click="submitQuiz">
                                             <span class="media align-items-center">
                                                 <span class="media-left">
                                                     <span class="btn btn-white btn-circle">#{{index + 1}}</span>
@@ -157,20 +158,23 @@
                 result:      [],
                 questions:   [],
                 quiz:        [],
-                started_at:  ""
+                started_at:  (new Date).getTime()+5000
             }
         },
         created() {
-            this.getQuiz();
+
         },
         mounted() {
-            
+            this.getQuiz();
         },
         components: {
             'lessons-list-component': LessonsListComponent,
             'ckeditor':               CKEditor.component
         },
         computed:   {
+            start_at(){
+                return this.started_at;
+            },
             end_at() {
                 return this.started_at + parseInt(this.quiz.duration);
             },
@@ -187,6 +191,20 @@
 
         },
         methods:    {
+            completeQuiz() {
+                let questions = this.questions;
+                let form_data = [];
+                for (let i = 0; i < questions.length; i++) {
+                    form_data.push({
+                        question: questions[i].id,
+                        answer:   questions[i].answer
+                    });
+                }
+                axios.post(`/api/quizes/submit/${this.$route.params.id}/1`, form_data)
+                    .then(({data}) => {
+                        alert('your quiz has been submitted')
+                    });
+            },
             getQuiz() {
                 axios.get(`/api/quizes/${this.$route.params.id}`)
                     .then(({data}) => {
@@ -207,7 +225,9 @@
                     jQuery(`#question_${index}`).addClass('active show');
                     jQuery(".nav-link").attr("aria-selected", "false").removeClass('active show');
                     jQuery(`#question_${index}-tab`).addClass('active show').attr("aria-selected", "true");
+
                 }
+                 this.submitQuiz();
             },
             submitQuiz() {
                 let questions = this.questions;
@@ -219,14 +239,13 @@
                     });
                 }
                 axios.post(`/api/quizes/submit/${this.$route.params.id}`, form_data)
-                    .then(({data}) => {
-                        alert('your quiz has been submitted')
-                    });
+                    .then(({data}) => {});
             },
             startCallBack: function (x) {
             },
             endCallBack:   function (x) {
-                console.log(x)
+
+                this.completeQuiz();
             }
         },
         props:      ['slug'],

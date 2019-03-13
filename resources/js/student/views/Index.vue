@@ -84,8 +84,8 @@
                                     </div>
                                 </div>
                                 <div class="media-right text-center d-flex align-items-center">
-                                    <span class="text-black-50 mr-3">Good</span>
-                                    <h4 class="mb-0">{{quiz.test_result}}</h4>
+                                    <span :class="`${getScore(quiz).color} mr-3`">{{getScore(quiz).remark}}</span>
+                                    <h4 class="mb-0">{{getScore(quiz).percentage}}</h4>
                                 </div>
                             </div>
                         </li>
@@ -138,14 +138,17 @@
                 quizes:           []
             };
         },
-
+        components: {
+            'courses-component': Courses,
+        },
+        computed:   {},
         created() {
             this.getPurchasedCourses();
             this.getAllCourses();
             this.getQuizResults();
         },
 
-        methods:    {
+        methods: {
             // drg >> fetch purchased courses
             getPurchasedCourses(page = 1) {
                 axios.get("/api/courses/purchased?count=4&dashboard=1")
@@ -185,12 +188,35 @@
 
                 return {score: Math.floor(progress), color: color};
             },
+            getScore(quiz) {
+                let score = quiz.test_result / quiz.total_score;
+                let remark = "";
+                let color = "text-muted";
+                switch (score) {
+                    case score >= 0.8:
+                        remark = "Great";
+                        color = "text-success";
+                        break;
+                    case score >= 0.6 && score < 0.8:
+                        remark = "Good";
+                        color = "text-secondary";
+                        break;
+                    case score >= 0.4 && score < 0.6:
+                        remark = "Average";
+                        color = "text-warning";
+                        break;
+                    case score < 0.4:
+                        remark = "Failed";
+                        color = "text-danger";
+                        break;
+
+                }
+
+                return {percentage: `${score * 100} %`, remark: remark, color: color}
+            }
         },
         mounted() {
 
         },
-        components: {
-            'courses-component': Courses,
-        }
     }
 </script>
