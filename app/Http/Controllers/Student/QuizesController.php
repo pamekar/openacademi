@@ -130,7 +130,7 @@ class QuizesController extends Controller
                             ->where('id', $answer['answer'])
                             ->where('correct', 1)->count() > 0;
                     // drg >> save answers
-                    TestsResultsAnswer::updateOrInsert([
+                    TestsResultsAnswer::where('created_at','>',$result->started_at)->updateOrCreate([
                         'tests_result_id' => $result->id,
                         'question_id'    => $question->id,
 
@@ -146,7 +146,7 @@ class QuizesController extends Controller
                     break;
                 default:
                     // drg >> save answers
-                    TestsResultsAnswer::updateOrInsert([
+                    TestsResultsAnswer::updateOrCreate([
                         'tests_result_id' => $result->id,
                         'question_id'    => $question->id,
                     ], [

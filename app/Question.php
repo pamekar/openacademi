@@ -35,7 +35,7 @@ class Question extends Model
 
     public function getAnswerAttribute()
     {
-        $results = TestsResult::where('user_id', Auth::id())->pluck('id');
+        $results = TestsResult::where('user_id', Auth::id())->where('status','active')->pluck('id');
 
         $answer = TestsResultsAnswer::whereIn('tests_result_id', $results)
             ->where('question_id', $this->id)->latest()->first();
