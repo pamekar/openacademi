@@ -266,3 +266,12 @@ Route::get('sadfgewerfg',function(){
        \App\Test::where('id',$test->id)->update(['duration'=>count($test->questions)*45]);
    }
 });
+
+Route::get('khufyhnemnsdljmd', function(){
+    $results= \App\TestsResult::all();
+
+    foreach($results as $result){
+        $total_score=$result->test->questions->sum('score');
+        $result->update(['total_score'=>$total_score]);
+    }
+});
