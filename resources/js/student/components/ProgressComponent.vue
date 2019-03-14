@@ -18,7 +18,7 @@
                 if (progress >= 100) {
                     progress = 100;
                     color = "success";
-                } else if (progress >= 70 && progress < 101) {
+                } else if (progress >= 70 && progress < 100) {
                     color = "primary";
                 } else if (progress >= 50 && progress < 70) {
                     color = "info";
