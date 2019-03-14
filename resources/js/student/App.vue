@@ -93,7 +93,7 @@
                     {
                         title: "Quiz Results",
                         icon:  "poll",
-                        route: "error"
+                        route: "quizes"
                     },
                     {
                         title:    "Account",

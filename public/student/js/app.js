@@ -31677,7 +31677,7 @@ assign(Viewer.prototype, render, events, handlers, methods, others);
       }, {
         title: "Quiz Results",
         icon: "poll",
-        route: "error"
+        route: "quizes"
       }, {
         title: "Account",
         icon: "account_box",

@@ -20,6 +20,12 @@ class TestsResult extends Model
     public function test(){
         return $this->belongsTo('App\Test');
     }
+
+    public function getStartedAtAttribute($input)
+    {
+        return date_format(date_create($input),'M jS, Y');
+    }
+
     public function getCreatedAtAttribute($input)
     {
         return date_format(date_create($input),'M jS, Y');
