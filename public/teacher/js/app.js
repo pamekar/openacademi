@@ -49891,6 +49891,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -73660,7 +73661,9 @@ var render = function() {
                           ? _c("strong", { staticClass: "text-danger" }, [
                               _vm._v("0")
                             ])
-                          : _vm._e()
+                          : _c("strong", { staticClass: "text-warning" }, [
+                              _vm._v("NULL")
+                            ])
                       ])
                     ])
                   ])

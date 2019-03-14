@@ -101,6 +101,7 @@
                                     <strong class="text-danger" v-else-if="answer.correct === 0 && answer.review">0</strong>
                                     <strong class="text-primary" v-else-if="answer.correct === 1 && !answer.review">{{answer.question.score}}</strong>
                                     <strong class="text-danger" v-else-if="answer.correct === 0 && !answer.review">0</strong>
+                                    <strong class="text-warning" v-else>NULL</strong>
 
                                 </div>
                             </div>

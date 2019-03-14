@@ -145,8 +145,9 @@ class QuizesController extends Controller
                     }
                     break;
                 default:
+
                     // drg >> save answers
-                    TestsResultsAnswer::updateOrCreate([
+                    TestsResultsAnswer::where('created_at','>',$result->started_at)->updateOrCreate([
                         'tests_result_id' => $result->id,
                         'question_id'    => $question->id,
                     ], [

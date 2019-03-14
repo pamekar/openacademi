@@ -21,7 +21,7 @@ class TestsResult extends Model
         return $this->belongsTo('App\Test');
     }
 
-    public function getStartedAtAttribute($input)
+    public function getStartDateAttribute($input)
     {
         return date_format(date_create($input),'M jS, Y');
     }
