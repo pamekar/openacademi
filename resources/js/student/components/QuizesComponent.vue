@@ -5,7 +5,7 @@
                 <div class="media">
                     <div class="media-body">
                         <h4 class="card-title m-0">
-                            <router-link :to="{name:'course',params:{slug:quiz.id}}">{{quiz.test.title}}</router-link>
+                            <router-link :to="{name:'quiz',params:{id:quiz.id}}">{{quiz.test.title}}</router-link>
                         </h4>
                         <small >
                             {{quiz.test.about_quiz}}
@@ -26,7 +26,8 @@
                 </div>
             </div>
             <div class="card-footer bg-white">
-                <router-link :to="{name:'quiz',params:{slug:quiz.id}}" class="btn btn-default btn-sm">View <i class="material-icons btn__icon--right">visibility</i></router-link>
+                <router-link :to="{name:'quiz',params:{id:quiz.id}}" class="btn btn-default btn-sm">View <i class="material-icons btn__icon--right">visibility</i></router-link>
+                <button class="btn btn-sm btn-outline-danger" @click="deleteResult(id)"><i class="material-icons">delete_outline</i></button>
                 <router-link :to="{name:'quiz-instructions',params:{id:quiz.test.id,slug:quiz.test.lesson.slug}}" class="btn btn-primary btn-sm float-right">Retake <i class="material-icons btn__icon--right">replay</i></router-link>
             </div>
         </div>

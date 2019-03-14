@@ -33772,6 +33772,7 @@ if (false) {(function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_build_classic__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_build_classic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_build_classic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_QuizQuestionsComponent_vue__ = __webpack_require__(448);
 //
 //
 //
@@ -33785,129 +33786,7 @@ if (false) {(function () {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -33933,105 +33812,14 @@ if (false) {(function () {
 
   created() {},
 
-  mounted() {
-    this.getQuiz();
-  },
+  mounted() {},
 
   components: {
-    'ckeditor': __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue___default.a.component
+    ckeditor: __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue___default.a.component,
+    'quiz-questions-component': __WEBPACK_IMPORTED_MODULE_2__components_QuizQuestionsComponent_vue__["a" /* default */]
   },
-  computed: {
-    start_at() {
-      return this.started_at;
-    },
-
-    end_at() {
-      return this.started_at + parseInt(this.quiz.duration);
-    },
-
-    pendingQuestions() {
-      let pending = 0;
-
-      for (let i = 0; i < this.totalQuestions; i++) {
-        this.questions[i].answer == null ? pending++ : pending;
-      }
-
-      return pending;
-    },
-
-    totalQuestions() {
-      return this.questions.length;
-    }
-
-  },
-  methods: {
-    completeQuiz() {
-      let questions = this.questions;
-      let form_data = [];
-
-      for (let i = 0; i < questions.length; i++) {
-        form_data.push({
-          question: questions[i].id,
-          answer: questions[i].answer
-        });
-      }
-
-      axios.post(`/api/quizes/submit/${this.$route.params.id}/1`, form_data).then(({
-        data
-      }) => {
-        alert('your quiz has been submitted');
-      });
-    },
-
-    getQuiz() {
-      axios.get(`/api/quizes/${this.$route.params.id}`).then(({
-        data
-      }) => {
-        this.quiz = data.quiz;
-        this.pageTitle = data.quiz.title;
-        this.breadcrumbs[2].title = data.quiz.title;
-        this.questions = data.questions;
-        this.result = data.result;
-      });
-      axios.get(`/api/quizes/start/${this.$route.params.id}`).then(({
-        data
-      }) => {
-        this.started_at = parseInt(data);
-      });
-    },
-
-    showQuestion(index) {
-      if (index >= 0 && index < this.questions.length) {
-        jQuery(".tab-pane").removeClass('active show');
-        jQuery(`#question_${index}`).addClass('active show');
-        jQuery(".nav-link").attr("aria-selected", "false").removeClass('active show');
-        jQuery(`#question_${index}-tab`).addClass('active show').attr("aria-selected", "true");
-      }
-
-      this.submitQuiz();
-    },
-
-    submitQuiz() {
-      let questions = this.questions;
-      let form_data = [];
-
-      for (let i = 0; i < questions.length; i++) {
-        form_data.push({
-          question: questions[i].id,
-          answer: questions[i].answer
-        });
-      }
-
-      axios.post(`/api/quizes/submit/${this.$route.params.id}`, form_data).then(({
-        data
-      }) => {});
-    },
-
-    startCallBack: function (x) {},
-    endCallBack: function (x) {
-      this.completeQuiz();
-    }
-  },
+  computed: {},
+  methods: {},
   props: ['slug']
 });
 
@@ -38126,510 +37914,7 @@ var render = function() {
         attrs: { breadcrumbs: _vm.breadcrumbs, title: _vm.pageTitle }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-10 col-sm-9" }, [
-          _c("div", { staticClass: "card-group" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body text-center" }, [
-                _c("h4", { staticClass: "text-primary mb-0" }, [
-                  _c("strong", [_vm._v(_vm._s(_vm.totalQuestions))])
-                ]),
-                _vm._v(" "),
-                _c("small", { staticClass: "text-muted-light" }, [
-                  _vm._v("TOTAL")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body text-center" }, [
-                _c("h4", { staticClass: "text-warning mb-0" }, [
-                  _c("strong", [_vm._v(_vm._s(_vm.pendingQuestions))])
-                ]),
-                _vm._v(" "),
-                _c("small", { staticClass: "text-muted-light" }, [
-                  _vm._v("PENDING")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card" }, [
-              _c(
-                "div",
-                { staticClass: "card-body text-center" },
-                [
-                  _c("vue-countdown-timer", {
-                    attrs: {
-                      status: 5,
-                      "start-time": _vm.start_at,
-                      "end-time": _vm.end_at ? _vm.end_at : _vm.started_at,
-                      interval: 1000,
-                      "start-label": "STARTS IN",
-                      "end-label": "TIME LEFT",
-                      "label-position": "end",
-                      "end-text": "TIME UP!",
-                      "day-txt": "day",
-                      "hour-txt": "hrs",
-                      "minutes-txt": "min",
-                      "seconds-txt": "sec"
-                    },
-                    on: {
-                      start_callback: function($event) {
-                        return _vm.startCallBack("event started")
-                      },
-                      end_callback: function($event) {
-                        return _vm.endCallBack()
-                      }
-                    },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "countdown",
-                        fn: function(scope) {
-                          return [
-                            _c("div", [
-                              _c("p", { staticClass: "pl-1 pr-1" }, [
-                                scope.props.days > 0
-                                  ? _c("span", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "h5 text-primary" },
-                                        [_vm._v(_vm._s(scope.props.days))]
-                                      ),
-                                      _vm._v(
-                                        " " + _vm._s(scope.props.dayTxt) + " "
-                                      )
-                                    ])
-                                  : _vm._e(),
-                                _c("span", { staticClass: "h5 text-primary" }, [
-                                  _vm._v(_vm._s(scope.props.hours))
-                                ]),
-                                _vm._v(" " + _vm._s(scope.props.hourTxt) + " "),
-                                _c("span", { staticClass: "h5 text-primary" }, [
-                                  _vm._v(_vm._s(scope.props.minutes))
-                                ]),
-                                _vm._v(
-                                  " " + _vm._s(scope.props.minutesTxt) + " "
-                                ),
-                                _c("span", { staticClass: "h5 text-primary" }, [
-                                  _vm._v(_vm._s(scope.props.seconds))
-                                ]),
-                                _vm._v(
-                                  " " +
-                                    _vm._s(scope.props.secondsTxt) +
-                                    "\n                                    "
-                                )
-                              ])
-                            ])
-                          ]
-                        }
-                      },
-                      {
-                        key: "end-text",
-                        fn: function(scope) {
-                          return [
-                            _c("strong", { staticClass: "text-danger" }, [
-                              _vm._v(_vm._s(scope.props.endText))
-                            ])
-                          ]
-                        }
-                      },
-                      {
-                        key: "end-label",
-                        fn: function(scope) {
-                          return [
-                            scope.props.startLabel !== "" &&
-                            scope.props.tips &&
-                            scope.props.labelPosition === "end"
-                              ? _c("span", { staticClass: "text-muted" }, [
-                                  _vm._v(_vm._s(scope.props.startLabel) + ":")
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            scope.props.endLabel !== "" &&
-                            !scope.props.tips &&
-                            scope.props.labelPosition === "end"
-                              ? _c("span", { staticClass: "text-muted" }, [
-                                  _vm._v(_vm._s(scope.props.endLabel) + ":")
-                                ])
-                              : _vm._e()
-                          ]
-                        }
-                      }
-                    ])
-                  })
-                ],
-                1
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "tab-content", attrs: { id: "v-pills-tabContent" } },
-            _vm._l(_vm.questions, function(question, index) {
-              return _c(
-                "div",
-                {
-                  class: {
-                    "tab-pane fade show active": index == 0,
-                    "tab-pane fade": index !== 0
-                  },
-                  attrs: {
-                    id: "question_" + index,
-                    role: "tabpanel",
-                    "aria-labelledby": "question_" + index + "-tab"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("div", { staticClass: "media align-items-center" }, [
-                      _c("div", { staticClass: "media-left" }, [
-                        _c("h4", { staticClass: "mb-0 mr-3" }, [
-                          _c("strong", [_vm._v("#" + _vm._s(index + 1))])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "media-body" }, [
-                        question.question_image.length > 0
-                          ? _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "viewer",
-                                    rawName: "v-viewer",
-                                    value: { movable: false },
-                                    expression: "{movable: false}"
-                                  }
-                                ],
-                                staticClass: "text-center mb-4"
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-thumbnail",
-                                  staticStyle: {
-                                    cursor: "pointer",
-                                    "max-width": "60%"
-                                  },
-                                  attrs: { src: question.question_image }
-                                })
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("div", {
-                          staticClass: "card",
-                          domProps: { innerHTML: _vm._s(question.question) }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card" }, [
-                    question.type == "radio"
-                      ? _c(
-                          "div",
-                          { staticClass: "card-body" },
-                          _vm._l(question.options, function(option, index1) {
-                            return _c("div", { staticClass: "form-group" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "custom-control custom-checkbox"
-                                },
-                                [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.questions[index].answer,
-                                        expression: "questions[index].answer"
-                                      }
-                                    ],
-                                    staticClass: "custom-control-input",
-                                    attrs: {
-                                      id: "answer-" + index + index1,
-                                      name: "answer-" + index,
-                                      type: "radio"
-                                    },
-                                    domProps: {
-                                      value: option.id,
-                                      checked: _vm._q(
-                                        _vm.questions[index].answer,
-                                        option.id
-                                      )
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        return _vm.$set(
-                                          _vm.questions[index],
-                                          "answer",
-                                          option.id
-                                        )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "custom-control-label",
-                                      attrs: { for: "answer-" + index + index1 }
-                                    },
-                                    [
-                                      _vm._v(_vm._s(option.option_text)),
-                                      option.correct
-                                        ? _c("i", {
-                                            staticClass: "fa fa-check"
-                                          })
-                                        : _vm._e()
-                                    ]
-                                  )
-                                ]
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : question.type == "input"
-                      ? _c("div", { staticClass: "card-body" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c(
-                              "label",
-                              {
-                                staticClass: "form-label",
-                                attrs: { for: "answer-" + index }
-                              },
-                              [_vm._v("Your Answer:")]
-                            ),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.questions[index].answer,
-                                  expression: "questions[index].answer"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                name: "answer-" + index,
-                                id: "answer-" + index,
-                                placeholder: "Enter your answer"
-                              },
-                              domProps: { value: _vm.questions[index].answer },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.questions[index],
-                                    "answer",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ])
-                        ])
-                      : question.type == "textarea"
-                      ? _c("div", { staticClass: "card-body" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c(
-                              "label",
-                              {
-                                staticClass: "form-label",
-                                attrs: { for: "answer-" + index }
-                              },
-                              [_vm._v("Your Answer:")]
-                            ),
-                            _vm._v(" "),
-                            _c("textarea", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.questions[index].answer,
-                                  expression: "questions[index].answer"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                name: "answer-" + index,
-                                id: "answer-" + index,
-                                placeholder: "Enter your answer"
-                              },
-                              domProps: { value: _vm.questions[index].answer },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.questions[index],
-                                    "answer",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ])
-                        ])
-                      : question.type == "richtext"
-                      ? _c("div", { staticClass: "card-body" }, [
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "form-label",
-                                  attrs: { for: "answer-" + index }
-                                },
-                                [_vm._v("Your Answer:")]
-                              ),
-                              _vm._v(" "),
-                              _c("ckeditor", {
-                                attrs: {
-                                  id: "answer-" + index,
-                                  editor: _vm.editor
-                                },
-                                model: {
-                                  value: _vm.questions[index].answer,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      _vm.questions[index],
-                                      "answer",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "questions[index].answer"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-footer" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "nav d-block ",
-                        attrs: { role: "tablist" }
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            class: {
-                              "btn btn-white disabled": index === 0,
-                              "btn btn-white": index > 0
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.showQuestion(index - 1)
-                              }
-                            }
-                          },
-                          [_vm._v("Previous")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            class: {
-                              "btn btn-primary float-right":
-                                index < _vm.questions.length - 1,
-                              "btn btn-primary float-right disabled":
-                                index == _vm.questions.length - 1
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.showQuestion(index + 1)
-                              }
-                            }
-                          },
-                          [_vm._v("Next")]
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            }),
-            0
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2 col-sm-3" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-body text-center" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-lg btn-success",
-                  on: { click: _vm.completeQuiz }
-                },
-                [_vm._v("Submit")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card" }, [
-            _c(
-              "div",
-              {
-                staticClass: "nav flex-column nav-pills",
-                attrs: {
-                  id: "v-pills-tab",
-                  role: "tablist",
-                  "aria-orientation": "vertical"
-                }
-              },
-              _vm._l(_vm.questions, function(question, index) {
-                return _c(
-                  "a",
-                  {
-                    class: {
-                      "nav-link active": index == 0,
-                      "nav-link": index !== 0
-                    },
-                    attrs: {
-                      id: "question_" + index + "-tab",
-                      "data-toggle": "pill",
-                      href: "#question_" + index,
-                      role: "tab",
-                      "aria-controls": "question_" + index,
-                      "aria-selected": index == 0
-                    },
-                    on: { click: _vm.submitQuiz }
-                  },
-                  [
-                    _c("span", { staticClass: "media align-items-center" }, [
-                      _c("span", { staticClass: "media-left" }, [
-                        _c(
-                          "span",
-                          { staticClass: "btn btn-white btn-circle" },
-                          [_vm._v("#" + _vm._s(index + 1))]
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              }),
-              0
-            )
-          ])
-        ])
-      ])
+      _c("quiz-questions-component")
     ],
     1
   )
@@ -40559,6 +39844,7 @@ if (false) {
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data() {
@@ -40745,9 +40031,7 @@ var render = function() {
                 _c(
                   "router-link",
                   {
-                    attrs: {
-                      to: { name: "course", params: { slug: _vm.quiz.id } }
-                    }
+                    attrs: { to: { name: "quiz", params: { id: _vm.quiz.id } } }
                   },
                   [_vm._v(_vm._s(_vm.quiz.test.title))]
                 )
@@ -40831,12 +40115,29 @@ var render = function() {
             "router-link",
             {
               staticClass: "btn btn-default btn-sm",
-              attrs: { to: { name: "quiz", params: { slug: _vm.quiz.id } } }
+              attrs: { to: { name: "quiz", params: { id: _vm.quiz.id } } }
             },
             [
               _vm._v("View "),
               _c("i", { staticClass: "material-icons btn__icon--right" }, [
                 _vm._v("visibility")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-sm btn-outline-danger",
+              on: {
+                click: function($event) {
+                  return _vm.deleteResult(_vm.id)
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "material-icons" }, [
+                _vm._v("delete_outline")
               ])
             ]
           ),
@@ -40940,6 +40241,830 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-e3d73514", { render: render, staticRenderFns: staticRenderFns })
+  }
+}
+
+/***/ }),
+/* 447 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_build_classic__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_build_classic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_build_classic__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  data() {
+    return {
+      breadcrumbs: [{
+        title: "Dashboard",
+        link: 'dashboard'
+      }, {
+        title: "Courses",
+        link: 'all-courses'
+      }, {
+        title: ""
+      }],
+      editor: __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_build_classic___default.a,
+      pageTitle: "",
+      result: [],
+      questions: [],
+      quiz: [],
+      started_at: new Date().getTime() + 5000
+    };
+  },
+
+  created() {},
+
+  mounted() {
+    this.getQuiz();
+  },
+
+  components: {
+    'ckeditor': __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue___default.a.component
+  },
+  computed: {
+    start_at() {
+      return this.started_at;
+    },
+
+    end_at() {
+      return this.started_at + parseInt(this.quiz.duration);
+    },
+
+    pendingQuestions() {
+      let pending = 0;
+
+      for (let i = 0; i < this.totalQuestions; i++) {
+        this.questions[i].answer == null ? pending++ : pending;
+      }
+
+      return pending;
+    },
+
+    totalQuestions() {
+      return this.questions.length;
+    }
+
+  },
+  methods: {
+    completeQuiz() {
+      let questions = this.questions;
+      let form_data = [];
+
+      for (let i = 0; i < questions.length; i++) {
+        form_data.push({
+          question: questions[i].id,
+          answer: questions[i].answer
+        });
+      }
+
+      axios.post(`/api/quizes/submit/${this.$route.params.id}/1`, form_data).then(({
+        data
+      }) => {
+        alert('your quiz has been submitted');
+      });
+    },
+
+    getQuiz() {
+      axios.get(`/api/quizes/${this.$route.params.id}`).then(({
+        data
+      }) => {
+        this.quiz = data.quiz;
+        this.pageTitle = data.quiz.title;
+        this.breadcrumbs[2].title = data.quiz.title;
+        this.questions = data.questions;
+        this.result = data.result;
+      });
+      axios.get(`/api/quizes/start/${this.$route.params.id}`).then(({
+        data
+      }) => {
+        this.started_at = parseInt(data);
+      });
+    },
+
+    showQuestion(index) {
+      if (index >= 0 && index < this.questions.length) {
+        jQuery(".tab-pane").removeClass('active show');
+        jQuery(`#question_${index}`).addClass('active show');
+        jQuery(".nav-link").attr("aria-selected", "false").removeClass('active show');
+        jQuery(`#question_${index}-tab`).addClass('active show').attr("aria-selected", "true");
+      }
+
+      this.submitQuiz();
+    },
+
+    submitQuiz() {
+      let questions = this.questions;
+      let form_data = [];
+
+      for (let i = 0; i < questions.length; i++) {
+        form_data.push({
+          question: questions[i].id,
+          answer: questions[i].answer
+        });
+      }
+
+      axios.post(`/api/quizes/submit/${this.$route.params.id}`, form_data).then(({
+        data
+      }) => {});
+    },
+
+    startCallBack: function (x) {},
+    endCallBack: function (x) {
+      this.completeQuiz();
+    }
+  },
+  props: ['slug']
+});
+
+/***/ }),
+/* 448 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_node_modules_vue_loader_lib_selector_type_script_index_0_QuizQuestionsComponent_vue__ = __webpack_require__(447);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_52ad283c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_QuizQuestionsComponent_vue__ = __webpack_require__(449);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(2);
+var disposed = false
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+
+var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_node_modules_vue_loader_lib_selector_type_script_index_0_QuizQuestionsComponent_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_52ad283c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_QuizQuestionsComponent_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_52ad283c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_QuizQuestionsComponent_vue__["b" /* staticRenderFns */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/student/components/QuizQuestionsComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-52ad283c", Component.options)
+  } else {
+    hotAPI.reload("data-v-52ad283c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 449 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-10 col-sm-9" }, [
+      _c("div", { staticClass: "card-group" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body text-center" }, [
+            _c("h4", { staticClass: "text-primary mb-0" }, [
+              _c("strong", [_vm._v(_vm._s(_vm.totalQuestions))])
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "text-muted-light" }, [_vm._v("TOTAL")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body text-center" }, [
+            _c("h4", { staticClass: "text-warning mb-0" }, [
+              _c("strong", [_vm._v(_vm._s(_vm.pendingQuestions))])
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "text-muted-light" }, [
+              _vm._v("PENDING")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c(
+            "div",
+            { staticClass: "card-body text-center" },
+            [
+              _c("vue-countdown-timer", {
+                attrs: {
+                  status: 5,
+                  "start-time": _vm.start_at,
+                  "end-time": _vm.end_at ? _vm.end_at : _vm.started_at,
+                  interval: 1000,
+                  "start-label": "STARTS IN",
+                  "end-label": "TIME LEFT",
+                  "label-position": "end",
+                  "end-text": "TIME UP!",
+                  "day-txt": "day",
+                  "hour-txt": "hrs",
+                  "minutes-txt": "min",
+                  "seconds-txt": "sec"
+                },
+                on: {
+                  start_callback: function($event) {
+                    return _vm.startCallBack("event started")
+                  },
+                  end_callback: function($event) {
+                    return _vm.endCallBack()
+                  }
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "countdown",
+                    fn: function(scope) {
+                      return [
+                        _c("div", [
+                          _c("p", { staticClass: "pl-1 pr-1" }, [
+                            scope.props.days > 0
+                              ? _c("span", [
+                                  _c(
+                                    "span",
+                                    { staticClass: "h5 text-primary" },
+                                    [_vm._v(_vm._s(scope.props.days))]
+                                  ),
+                                  _vm._v(" " + _vm._s(scope.props.dayTxt) + " ")
+                                ])
+                              : _vm._e(),
+                            _c("span", { staticClass: "h5 text-primary" }, [
+                              _vm._v(_vm._s(scope.props.hours))
+                            ]),
+                            _vm._v(" " + _vm._s(scope.props.hourTxt) + " "),
+                            _c("span", { staticClass: "h5 text-primary" }, [
+                              _vm._v(_vm._s(scope.props.minutes))
+                            ]),
+                            _vm._v(" " + _vm._s(scope.props.minutesTxt) + " "),
+                            _c("span", { staticClass: "h5 text-primary" }, [
+                              _vm._v(_vm._s(scope.props.seconds))
+                            ]),
+                            _vm._v(
+                              " " +
+                                _vm._s(scope.props.secondsTxt) +
+                                "\n                                "
+                            )
+                          ])
+                        ])
+                      ]
+                    }
+                  },
+                  {
+                    key: "end-text",
+                    fn: function(scope) {
+                      return [
+                        _c("strong", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(scope.props.endText))
+                        ])
+                      ]
+                    }
+                  },
+                  {
+                    key: "end-label",
+                    fn: function(scope) {
+                      return [
+                        scope.props.startLabel !== "" &&
+                        scope.props.tips &&
+                        scope.props.labelPosition === "end"
+                          ? _c("span", { staticClass: "text-muted" }, [
+                              _vm._v(_vm._s(scope.props.startLabel) + ":")
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        scope.props.endLabel !== "" &&
+                        !scope.props.tips &&
+                        scope.props.labelPosition === "end"
+                          ? _c("span", { staticClass: "text-muted" }, [
+                              _vm._v(_vm._s(scope.props.endLabel) + ":")
+                            ])
+                          : _vm._e()
+                      ]
+                    }
+                  }
+                ])
+              })
+            ],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "tab-content", attrs: { id: "v-pills-tabContent" } },
+        _vm._l(_vm.questions, function(question, index) {
+          return _c(
+            "div",
+            {
+              class: {
+                "tab-pane fade show active": index == 0,
+                "tab-pane fade": index !== 0
+              },
+              attrs: {
+                id: "question_" + index,
+                role: "tabpanel",
+                "aria-labelledby": "question_" + index + "-tab"
+              }
+            },
+            [
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "media align-items-center" }, [
+                  _c("div", { staticClass: "media-left" }, [
+                    _c("h4", { staticClass: "mb-0 mr-3" }, [
+                      _c("strong", [_vm._v("#" + _vm._s(index + 1))])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "media-body" }, [
+                    question.question_image.length > 0
+                      ? _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "viewer",
+                                rawName: "v-viewer",
+                                value: { movable: false },
+                                expression: "{movable: false}"
+                              }
+                            ],
+                            staticClass: "text-center mb-4"
+                          },
+                          [
+                            _c("img", {
+                              staticClass: "img-thumbnail",
+                              staticStyle: {
+                                cursor: "pointer",
+                                "max-width": "60%"
+                              },
+                              attrs: { src: question.question_image }
+                            })
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", {
+                      staticClass: "card",
+                      domProps: { innerHTML: _vm._s(question.question) }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card" }, [
+                question.type == "radio"
+                  ? _c(
+                      "div",
+                      { staticClass: "card-body" },
+                      _vm._l(question.options, function(option, index1) {
+                        return _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "div",
+                            { staticClass: "custom-control custom-checkbox" },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.questions[index].answer,
+                                    expression: "questions[index].answer"
+                                  }
+                                ],
+                                staticClass: "custom-control-input",
+                                attrs: {
+                                  id: "answer-" + index + index1,
+                                  name: "answer-" + index,
+                                  type: "radio"
+                                },
+                                domProps: {
+                                  value: option.id,
+                                  checked: _vm._q(
+                                    _vm.questions[index].answer,
+                                    option.id
+                                  )
+                                },
+                                on: {
+                                  change: function($event) {
+                                    return _vm.$set(
+                                      _vm.questions[index],
+                                      "answer",
+                                      option.id
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "custom-control-label",
+                                  attrs: { for: "answer-" + index + index1 }
+                                },
+                                [
+                                  _vm._v(_vm._s(option.option_text)),
+                                  option.correct
+                                    ? _c("i", { staticClass: "fa fa-check" })
+                                    : _vm._e()
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  : question.type == "input"
+                  ? _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-label",
+                            attrs: { for: "answer-" + index }
+                          },
+                          [_vm._v("Your Answer:")]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.questions[index].answer,
+                              expression: "questions[index].answer"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            name: "answer-" + index,
+                            id: "answer-" + index,
+                            placeholder: "Enter your answer"
+                          },
+                          domProps: { value: _vm.questions[index].answer },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.questions[index],
+                                "answer",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  : question.type == "textarea"
+                  ? _c("div", { staticClass: "card-body" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-label",
+                            attrs: { for: "answer-" + index }
+                          },
+                          [_vm._v("Your Answer:")]
+                        ),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.questions[index].answer,
+                              expression: "questions[index].answer"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            name: "answer-" + index,
+                            id: "answer-" + index,
+                            placeholder: "Enter your answer"
+                          },
+                          domProps: { value: _vm.questions[index].answer },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.questions[index],
+                                "answer",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  : question.type == "richtext"
+                  ? _c("div", { staticClass: "card-body" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-label",
+                              attrs: { for: "answer-" + index }
+                            },
+                            [_vm._v("Your Answer:")]
+                          ),
+                          _vm._v(" "),
+                          _c("ckeditor", {
+                            attrs: {
+                              id: "answer-" + index,
+                              editor: _vm.editor
+                            },
+                            model: {
+                              value: _vm.questions[index].answer,
+                              callback: function($$v) {
+                                _vm.$set(_vm.questions[index], "answer", $$v)
+                              },
+                              expression: "questions[index].answer"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" }, [
+                _c(
+                  "div",
+                  { staticClass: "nav d-block ", attrs: { role: "tablist" } },
+                  [
+                    _c(
+                      "button",
+                      {
+                        class: {
+                          "btn btn-white disabled": index === 0,
+                          "btn btn-white": index > 0
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.showQuestion(index - 1)
+                          }
+                        }
+                      },
+                      [_vm._v("Previous")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        class: {
+                          "btn btn-primary float-right":
+                            index < _vm.questions.length - 1,
+                          "btn btn-primary float-right disabled":
+                            index == _vm.questions.length - 1
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.showQuestion(index + 1)
+                          }
+                        }
+                      },
+                      [_vm._v("Next")]
+                    )
+                  ]
+                )
+              ])
+            ]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-2 col-sm-3" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body text-center" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-lg btn-success",
+              on: { click: _vm.completeQuiz }
+            },
+            [_vm._v("Submit")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
+          {
+            staticClass: "nav flex-column nav-pills",
+            attrs: {
+              id: "v-pills-tab",
+              role: "tablist",
+              "aria-orientation": "vertical"
+            }
+          },
+          _vm._l(_vm.questions, function(question, index) {
+            return _c(
+              "a",
+              {
+                class: {
+                  "nav-link active": index == 0,
+                  "nav-link": index !== 0
+                },
+                attrs: {
+                  id: "question_" + index + "-tab",
+                  "data-toggle": "pill",
+                  href: "#question_" + index,
+                  role: "tab",
+                  "aria-controls": "question_" + index,
+                  "aria-selected": index == 0
+                },
+                on: { click: _vm.submitQuiz }
+              },
+              [
+                _c("span", { staticClass: "media align-items-center" }, [
+                  _c("span", { staticClass: "media-left" }, [
+                    _c("span", { staticClass: "btn btn-white btn-circle" }, [
+                      _vm._v("#" + _vm._s(index + 1))
+                    ])
+                  ])
+                ])
+              ]
+            )
+          }),
+          0
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-52ad283c", { render: render, staticRenderFns: staticRenderFns })
   }
 }
 
