@@ -84,8 +84,8 @@
                                     </div>
                                 </div>
                                 <div class="media-right text-center d-flex align-items-center">
-                                    <span :class="`${getScore(quiz).color} mr-3`">{{getScore(quiz).remark}}</span>
-                                    <h4 class="mb-0">{{getScore(quiz).percentage}}</h4>
+                                    <span class="text-black-50 mr-3">{{getScore(quiz).remark}}</span>
+                                    <h4 :class="`${getScore(quiz).color} mb-0`">{{getScore(quiz).percentage}}</h4>
                                 </div>
                             </div>
                         </li>
@@ -189,30 +189,32 @@
                 return {score: Math.floor(progress), color: color};
             },
             getScore(quiz) {
-                let score = quiz.test_result / quiz.total_score;
+
+                let score = Math.round((quiz.test_result / quiz.total_score) * 100);
                 let remark = "";
                 let color = "text-muted";
-                switch (score) {
-                    case score >= 0.8:
+                switch (true) {
+                    case score >= 80 && score <= 100:
                         remark = "Great";
                         color = "text-success";
                         break;
-                    case score >= 0.6 && score < 0.8:
+                    case score >= 60 && score < 80:
                         remark = "Good";
                         color = "text-secondary";
                         break;
-                    case score >= 0.4 && score < 0.6:
+                    case score >= 40 && score < 60:
                         remark = "Average";
                         color = "text-warning";
                         break;
-                    case score < 0.4:
+                    case score < 40:
                         remark = "Failed";
                         color = "text-danger";
                         break;
-
+                    default:
+                        break;
                 }
 
-                return {percentage: `${score * 100} %`, remark: remark, color: color}
+                return {percentage: `${score}%`, remark: remark, color: color}
             }
         },
         mounted() {
