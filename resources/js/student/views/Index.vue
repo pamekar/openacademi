@@ -200,11 +200,11 @@
                         break;
                     case score >= 60 && score < 80:
                         remark = "Good";
-                        color = "text-secondary";
+                        color = "text-warning";
                         break;
                     case score >= 40 && score < 60:
                         remark = "Average";
-                        color = "text-warning";
+                        color = "text-secondary";
                         break;
                     case score < 40:
                         remark = "Failed";
