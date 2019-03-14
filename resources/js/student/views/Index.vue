@@ -69,7 +69,7 @@
                                 <p class="card-subtitle">Your Performance</p>
                             </div>
                             <div class="media-right">
-                                <a class="btn btn-sm btn-primary" href="#">Quiz results</a>
+                                <router-link class="btn btn-sm btn-primary" to="/quizes">Quiz results</router-link>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                         <li class="list-group-item" v-for="quiz in quizes">
                             <div class="media align-items-center">
                                 <div class="media-body">
-                                    <a class="text-body" href="#"><strong>{{quiz.test.title}}</strong></a><br>
+                                    <router-link class="text-body" :to="{name:'quiz',params:{id:quiz.test.id}}"><strong>{{quiz.test.title}}</strong></router-link><br>
                                     <div class="d-flex align-items-center">
                                         <small class="text-black-50 text-uppercase mr-2">Course</small>
                                         <router-link :to="{name:'course',params:{'slug':quiz.test.course.slug}}">{{quiz.test.course_title}}</router-link>
