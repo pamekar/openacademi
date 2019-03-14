@@ -65,7 +65,7 @@ class Test extends Model
 
     public function getLessonTitleAttribute()
     {
-        return title_case(Lesson::findOrFail($this->lesson_id)->title);
+        return title_case($this->lesson->title);
     }
 
     public function getCompletedCountAttribute()
