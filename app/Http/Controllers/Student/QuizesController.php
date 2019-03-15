@@ -97,7 +97,7 @@ class QuizesController extends Controller
     {
         $result = TestsResult::where('test_id', $id)
             ->where('user_id', Auth::id())
-            ->where('status','<>', 'completed')->firstOrFail();
+            ->where('status', '<>', 'completed')->firstOrFail();
         if (is_null($result->started_at)) {
             $result->status = 'active';
             $result->started_at = now();
@@ -120,7 +120,7 @@ class QuizesController extends Controller
 
         $status = $completed ? 'completed' : 'active';
         $test_score = 0;
-        $total_score=0;
+        $total_score = 0;
         foreach ($request->all() as $answer) {
             $question = Question::find($answer['question']);
             switch ($question->type) {
@@ -130,9 +130,10 @@ class QuizesController extends Controller
                             ->where('id', $answer['answer'])
                             ->where('correct', 1)->count() > 0;
                     // drg >> save answers
-                    TestsResultsAnswer::where('created_at','>',$result->started_at)->updateOrCreate([
+                    TestsResultsAnswer::where('created_at', '>',
+                        $result->started_at)->updateOrCreate([
                         'tests_result_id' => $result->id,
-                        'question_id'    => $question->id,
+                        'question_id'     => $question->id,
 
                     ], [
                         'option_id'   => $answer['answer'],
@@ -147,9 +148,10 @@ class QuizesController extends Controller
                 default:
 
                     // drg >> save answers
-                    TestsResultsAnswer::where('created_at','>',$result->started_at)->updateOrCreate([
+                    TestsResultsAnswer::where('created_at', '>',
+                        $result->started_at)->updateOrCreate([
                         'tests_result_id' => $result->id,
-                        'question_id'    => $question->id,
+                        'question_id'     => $question->id,
                     ], [
                         'answer_text' => $answer['answer'],
                         'answer_type' => $question->type
@@ -161,9 +163,34 @@ class QuizesController extends Controller
         $result->update([
             'test_result' => $test_score,
             'total_score' => $total_score,
-            'status'   => $status
+            'status'      => $status
         ]);
 
         return response()->json($test_score);
     }
+
+
+    /**
+     * Remove Result from storage.
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $result = TestsResult::findOrFail($id);
+        abort_if($result->user_id !== Auth::id(), 403,
+            'You cannot delete this course');
+        $result->delete();
+
+
+        $status = [
+            'type'    => 'success',
+            'message' => "Result has been deleted successfully"
+        ];
+
+        return response()->json($status);
+    }
+
 }

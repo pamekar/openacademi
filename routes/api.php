@@ -15,6 +15,7 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
             Route::get('courses/all', 'CoursesController@getAllCourses');
             Route::get('lesson/{id}/{slug}', 'LessonsController@show');
             Route::post('lesson/{slug}/test', 'LessonsController@test');
+
             Route::get('quizes/results', 'QuizesController@results');
             Route::get('quizes/start/{id}',
                 'QuizesController@start');
@@ -24,6 +25,7 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
                 'QuizesController@index');
             Route::get('quizes/{id}',
                 'QuizesController@show');
+            Route::delete('quizes/{id}', 'QuizesController@destroy');
         });
     Route::group([
         'prefix'     => 'instructor',

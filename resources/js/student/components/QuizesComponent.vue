@@ -26,9 +26,9 @@
                 </div>
             </div>
             <div class="card-footer bg-white">
-                <router-link :to="{name:'quiz',params:{id:quiz.id}}" class="btn btn-default btn-sm">View <i class="material-icons btn__icon--right">visibility</i></router-link>
-                <button class="btn btn-sm btn-outline-danger" @click="deleteResult(id)"><i class="material-icons">delete_outline</i></button>
-                <router-link :to="{name:'quiz-instructions',params:{id:quiz.test.id,slug:quiz.test.lesson.slug}}" class="btn btn-primary btn-sm float-right">Retake <i class="material-icons btn__icon--right">replay</i></router-link>
+                <router-link :to="{name:'quiz',params:{id:quiz.id}}" class="btn btn-default btn-sm" title="Review Quiz Result">View <i class="material-icons btn__icon--right">visibility</i></router-link>
+                <button class="btn btn-sm btn-outline-danger" @click="deleteResult(quiz.id)" title="Delete result"><i class="material-icons">delete_outline</i></button>
+                <router-link :to="{name:'quiz-instructions',params:{id:quiz.test.id,slug:quiz.test.lesson.slug}}" class="btn btn-primary btn-sm float-right" title="Retake Quiz">Retake <i class="material-icons btn__icon--right">replay</i></router-link>
             </div>
         </div>
 
@@ -50,8 +50,13 @@
             quiz: Object,
         },
         methods:    {
+            deleteResult(id){
+                axios.delete(`/api/quizes/${id}`)
+                    .then(({data}) => {
+                        alert('Your quiz has been deleted');
+                    });
+            },
             score(quiz) {
-                console.log(quiz)
                 let score = Math.round((quiz.test_result / quiz.total_score) * 100);
                 let remark = "";
                 let color = "text-muted";

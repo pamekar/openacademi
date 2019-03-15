@@ -9,12 +9,15 @@
                 :title="pageTitle"
         ></breadcrumb-component>
         <quiz-questions-component></quiz-questions-component>
+        <quiz-review-component></quiz-review-component>
     </div>
 </template>
 <script>
     import CKEditor from '@ckeditor/ckeditor5-vue';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-    import QuizQuestionsComponents from '../components/QuizQuestionsComponent.vue'
+    import QuizQuestionsComponent from '../components/QuizQuestionsComponent.vue'
+    import QuizReviewComponent from '../components/QuizReviewComponent.vue'
+
     export default {
         data() {
             return {
@@ -34,7 +37,7 @@
                 result:      [],
                 questions:   [],
                 quiz:        [],
-                started_at:  (new Date).getTime()+5000
+                started_at:  (new Date).getTime() + 5000
             }
         },
         created() {
@@ -44,15 +47,12 @@
 
         },
         components: {
-            ckeditor:               CKEditor.component,
-            'quiz-questions-component': QuizQuestionsComponents
+            ckeditor:                   CKEditor.component,
+            'quiz-questions-component': QuizQuestionsComponent,
+            'quiz-review-component':    QuizReviewComponent
         },
-        computed:   {
-
-        },
-        methods:    {
-
-        },
+        computed:   {},
+        methods:    {},
         props:      ['slug'],
     }
 </script>
