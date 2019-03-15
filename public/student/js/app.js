@@ -34175,6 +34175,35 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -34191,6 +34220,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
       }],
       pageTitle: "",
       pageCount: 0,
+      currentPage: 1,
       results: []
     };
   },
@@ -34213,76 +34243,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
       }) => {
         this.results = data.data;
         this.pageCount = data.last_page;
+        this.currentPage = data.current_page;
       });
-    }
+    },
 
-  },
-  props: ['slug']
-});
-
-/***/ }),
-/* 119 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProgressComponent_vue__ = __webpack_require__(77);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  data() {
-    return {};
-  },
-
-  components: {
-    'progress-component': __WEBPACK_IMPORTED_MODULE_0__ProgressComponent_vue__["a" /* default */]
-  },
-  computed: {},
-  props: {
-    quiz: Object
-  },
-  methods: {
     deleteResult(id) {
       axios.delete(`/api/quizes/${id}`).then(({
         data
       }) => {
         alert('Your quiz has been deleted');
       });
+      this.getQuizResults();
     },
 
     score(quiz) {
@@ -34322,7 +34293,34 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
       };
     }
 
-  }
+  },
+  props: ['slug']
+});
+
+/***/ }),
+/* 119 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProgressComponent_vue__ = __webpack_require__(77);
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  data() {
+    return {};
+  },
+
+  components: {
+    'progress-component': __WEBPACK_IMPORTED_MODULE_0__ProgressComponent_vue__["a" /* default */]
+  },
+  computed: {},
+  props: {
+    quiz: Object
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -39537,160 +39535,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-6" }, [
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-header" }, [
-        _c("div", { staticClass: "media" }, [
-          _c("div", { staticClass: "media-body" }, [
-            _c(
-              "h4",
-              { staticClass: "card-title m-0" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    attrs: { to: { name: "quiz", params: { id: _vm.quiz.id } } }
-                  },
-                  [_vm._v(_vm._s(_vm.quiz.test.title))]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("small", [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(_vm.quiz.test.about_quiz) +
-                  "\n                    "
-              )
-            ]),
-            _vm._v(" "),
-            _c("ul", { staticClass: "list-inline" }, [
-              _c(
-                "li",
-                { staticClass: "text-muted list-inline-item small" },
-                [
-                  _vm._v("Course\n                            "),
-                  _c(
-                    "router-link",
-                    {
-                      attrs: {
-                        to: {
-                          name: "course",
-                          params: { slug: _vm.quiz.test.course.slug }
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.quiz.test.course_title))]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                { staticClass: "text-muted list-inline-item small" },
-                [
-                  _vm._v("Lesson\n                            "),
-                  _c(
-                    "router-link",
-                    {
-                      attrs: {
-                        to: {
-                          name: "lesson",
-                          params: {
-                            slug: _vm.quiz.test.lesson.slug,
-                            id: _vm.quiz.test.course_id
-                          }
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.quiz.test.lesson_title))]
-                  )
-                ],
-                1
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "media-right text-center" }, [
-            _c("h2", { class: _vm.score(_vm.quiz).color }, [
-              _vm._v(_vm._s(_vm.score(_vm.quiz).percentage))
-            ]),
-            _vm._v(" "),
-            _c("small", { staticClass: "text-black-50" }, [
-              _vm._v(_vm._s(_vm.score(_vm.quiz).remark))
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "card-footer bg-white" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-default btn-sm",
-              attrs: {
-                to: { name: "quiz", params: { id: _vm.quiz.id } },
-                title: "Review Quiz Result"
-              }
-            },
-            [
-              _vm._v("View "),
-              _c("i", { staticClass: "material-icons btn__icon--right" }, [
-                _vm._v("visibility")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-sm btn-outline-danger",
-              attrs: { title: "Delete result" },
-              on: {
-                click: function($event) {
-                  return _vm.deleteResult(_vm.quiz.id)
-                }
-              }
-            },
-            [
-              _c("i", { staticClass: "material-icons" }, [
-                _vm._v("delete_outline")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-primary btn-sm float-right",
-              attrs: {
-                to: {
-                  name: "quiz-instructions",
-                  params: {
-                    id: _vm.quiz.test.id,
-                    slug: _vm.quiz.test.lesson.slug
-                  }
-                },
-                title: "Retake Quiz"
-              }
-            },
-            [
-              _vm._v("Retake "),
-              _c("i", { staticClass: "material-icons btn__icon--right" }, [
-                _vm._v("replay")
-              ])
-            ]
-          )
-        ],
-        1
-      )
-    ])
-  ])
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39727,13 +39572,173 @@ var render = function() {
       _c(
         "div",
         { staticClass: "row" },
-        _vm._l(_vm.results, function(result) {
-          return _c("quizes-component", {
-            key: result.id,
-            attrs: { quiz: result }
-          })
+        _vm._l(_vm.results, function(quiz) {
+          return _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _c("div", { staticClass: "media" }, [
+                  _c("div", { staticClass: "media-body" }, [
+                    _c(
+                      "h4",
+                      { staticClass: "card-title m-0" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: { name: "quiz", params: { id: quiz.id } }
+                            }
+                          },
+                          [_vm._v(_vm._s(quiz.test.title))]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("small", [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(quiz.test.about_quiz) +
+                          "\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("ul", { staticClass: "list-inline" }, [
+                      _c(
+                        "li",
+                        { staticClass: "text-muted list-inline-item small" },
+                        [
+                          _vm._v(
+                            "Course\n                                    "
+                          ),
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "course",
+                                  params: { slug: quiz.test.course.slug }
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(quiz.test.course_title))]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        { staticClass: "text-muted list-inline-item small" },
+                        [
+                          _vm._v(
+                            "Lesson\n                                    "
+                          ),
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "lesson",
+                                  params: {
+                                    slug: quiz.test.lesson.slug,
+                                    id: quiz.test.course_id
+                                  }
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(quiz.test.lesson_title))]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "media-right text-center" }, [
+                    _c("h2", { class: _vm.score(quiz).color }, [
+                      _vm._v(_vm._s(_vm.score(quiz).percentage))
+                    ]),
+                    _vm._v(" "),
+                    _c("small", { staticClass: "text-black-50" }, [
+                      _vm._v(_vm._s(_vm.score(quiz).remark))
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "card-footer bg-white" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-default btn-sm",
+                      attrs: {
+                        to: { name: "quiz", params: { id: quiz.id } },
+                        title: "Review Quiz Result"
+                      }
+                    },
+                    [
+                      _vm._v("View "),
+                      _c(
+                        "i",
+                        { staticClass: "material-icons btn__icon--right" },
+                        [_vm._v("visibility")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-outline-danger",
+                      attrs: { title: "Delete result" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteResult(quiz.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "material-icons" }, [
+                        _vm._v("delete_outline")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary btn-sm float-right",
+                      attrs: {
+                        to: {
+                          name: "quiz-instructions",
+                          params: {
+                            id: quiz.test.id,
+                            slug: quiz.test.lesson.slug
+                          }
+                        },
+                        title: "Retake Quiz"
+                      }
+                    },
+                    [
+                      _vm._v("Retake "),
+                      _c(
+                        "i",
+                        { staticClass: "material-icons btn__icon--right" },
+                        [_vm._v("replay")]
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ])
+          ])
         }),
-        1
+        0
       ),
       _vm._v(" "),
       _c("paginate", {
