@@ -148,20 +148,20 @@
                 result:      [],
                 questions:   [],
                 quiz:        [],
-                started_at:  (new Date).getTime()+5000
+                started_at:  (new Date).getTime() + 5000
             }
         },
         created() {
 
         },
         mounted() {
-            this.getQuiz();
+
         },
         components: {
-            'ckeditor':               CKEditor.component
+            'ckeditor': CKEditor.component
         },
         computed:   {
-            start_at(){
+            start_at() {
                 return this.started_at;
             },
             end_at() {
@@ -228,16 +228,22 @@
                     });
                 }
                 axios.post(`/api/quizes/submit/${this.$route.params.id}`, form_data)
-                    .then(({data}) => {});
+                    .then(({data}) => {
+                    });
             },
             startCallBack: function (x) {
             },
             endCallBack:   function (x) {
-
                 this.completeQuiz();
             }
         },
-        props:      ['slug'],
+
+        props: {
+            result:     Array,
+            questions:  Array,
+            quiz:       Array,
+            started_at: Number
+        }
     }
 </script>
 

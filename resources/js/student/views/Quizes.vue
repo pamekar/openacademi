@@ -63,7 +63,6 @@
     </div>
 </template>
 <script>
-    import QuizesComponent from '../components/QuizesComponent.vue';
     import Paginate from 'vuejs-paginate';
 
     export default {
@@ -93,7 +92,6 @@
             this.getQuizResults();
         },
         components: {
-            'quizes-component': QuizesComponent,
             paginate:           Paginate
         },
         computed:   {},

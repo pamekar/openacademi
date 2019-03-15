@@ -33768,12 +33768,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_build_classic__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_build_classic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_build_classic__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_QuizQuestionsComponent_vue__ = __webpack_require__(235);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_QuizReviewComponent_vue__ = __webpack_require__(237);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_QuizQuestionsComponent_vue__ = __webpack_require__(235);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_QuizReviewComponent_vue__ = __webpack_require__(237);
 //
 //
 //
@@ -33788,8 +33784,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 //
 //
 //
-
-
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -33804,7 +33798,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
       }, {
         title: ""
       }],
-      editor: __WEBPACK_IMPORTED_MODULE_1__ckeditor_ckeditor5_build_classic___default.a,
       pageTitle: "",
       result: [],
       questions: [],
@@ -33815,15 +33808,34 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 
   created() {},
 
-  mounted() {},
+  mounted() {
+    this.getQuiz();
+  },
 
   components: {
-    ckeditor: __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue___default.a.component,
-    'quiz-questions-component': __WEBPACK_IMPORTED_MODULE_2__components_QuizQuestionsComponent_vue__["a" /* default */],
-    'quiz-review-component': __WEBPACK_IMPORTED_MODULE_3__components_QuizReviewComponent_vue__["a" /* default */]
+    'quiz-questions-component': __WEBPACK_IMPORTED_MODULE_0__components_QuizQuestionsComponent_vue__["a" /* default */],
+    'quiz-review-component': __WEBPACK_IMPORTED_MODULE_1__components_QuizReviewComponent_vue__["a" /* default */]
   },
   computed: {},
-  methods: {},
+  methods: {
+    getQuiz() {
+      axios.get(`/api/quizes/${this.$route.params.id}`).then(({
+        data
+      }) => {
+        this.quiz = data.quiz;
+        this.pageTitle = data.quiz.title;
+        this.breadcrumbs[2].title = data.quiz.title;
+        this.questions = data.questions;
+        this.result = data.result;
+      });
+      axios.get(`/api/quizes/start/${this.$route.params.id}`).then(({
+        data
+      }) => {
+        this.started_at = parseInt(data);
+      });
+    }
+
+  },
   props: ['slug']
 });
 
@@ -33988,9 +34000,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 
   created() {},
 
-  mounted() {
-    this.getQuiz();
-  },
+  mounted() {},
 
   components: {
     'ckeditor': __WEBPACK_IMPORTED_MODULE_0__ckeditor_ckeditor5_vue___default.a.component
@@ -34087,7 +34097,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
       this.completeQuiz();
     }
   },
-  props: ['slug']
+  props: {
+    result: Array,
+    questions: Array,
+    quiz: Array,
+    started_at: Number
+  }
 });
 
 /***/ }),
@@ -34117,18 +34132,165 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["a"] = ({
-  computed: {},
+  data() {
+    return {
+      result: [],
+      questions: [],
+      quiz: []
+    };
+  },
+
+  created() {},
+
+  mounted() {},
+
+  components: {},
+  computed: {
+    pendingQuestions() {
+      let pending = 0;
+
+      for (let i = 0; i < this.totalQuestions; i++) {
+        this.questions[i].answer == null ? pending++ : pending;
+      }
+
+      return pending;
+    },
+
+    totalQuestions() {
+      return this.questions.length;
+    },
+
+    score() {
+      let result = this.result;
+      let score = Math.round(result.test_result / result.total_score * 100);
+      let remark = "";
+      let color = "text-muted";
+
+      switch (true) {
+        case score >= 80 && score <= 100:
+          remark = "Great";
+          color = "text-success";
+          break;
+
+        case score >= 60 && score < 80:
+          remark = "Good";
+          color = "text-warning";
+          break;
+
+        case score >= 40 && score < 60:
+          remark = "Average";
+          color = "text-secondary";
+          break;
+
+        case score < 40:
+          remark = "Failed";
+          color = "text-danger";
+          break;
+
+        default:
+          break;
+      }
+
+      return {
+        percentage: `${score}%`,
+        remark: remark,
+        color: color
+      };
+    }
+
+  },
   methods: {
-    deleteQuiz(id) {
-      this.$store.dispatch('courses/delete', id);
-      this.$store.dispatch('courses/fetch_all');
+    getQuiz() {
+      axios.get(`/api/quizes/${this.$route.params.id}`).then(({
+        data
+      }) => {
+        this.quiz = data.quiz;
+        this.pageTitle = data.quiz.title;
+        this.breadcrumbs[2].title = data.quiz.title;
+        this.questions = data.questions;
+        this.result = data.result;
+      });
+    },
+
+    showQuestion(index) {
+      if (index >= 0 && index < this.questions.length) {
+        jQuery(".tab-pane").removeClass('active show');
+        jQuery(`#question_${index}`).addClass('active show');
+        jQuery(".nav-link").attr("aria-selected", "false").removeClass('active show');
+        jQuery(`#question_${index}-tab`).addClass('active show').attr("aria-selected", "true");
+      }
     }
 
   },
   props: {
-    quiz: Object,
-    tags: Array
+    result: Object,
+    questions: Array,
+    quiz: Object
   }
 });
 
@@ -34137,9 +34299,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_QuizesComponent_vue__ = __webpack_require__(241);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuejs_paginate__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_paginate__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_paginate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_paginate__);
 //
 //
 //
@@ -34204,7 +34365,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data() {
@@ -34232,8 +34392,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
   },
 
   components: {
-    'quizes-component': __WEBPACK_IMPORTED_MODULE_0__components_QuizesComponent_vue__["a" /* default */],
-    paginate: __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate___default.a
+    paginate: __WEBPACK_IMPORTED_MODULE_0_vuejs_paginate___default.a
   },
   computed: {},
   methods: {
@@ -34298,32 +34457,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, 
 });
 
 /***/ }),
-/* 119 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProgressComponent_vue__ = __webpack_require__(77);
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  data() {
-    return {};
-  },
-
-  components: {
-    'progress-component': __WEBPACK_IMPORTED_MODULE_0__ProgressComponent_vue__["a" /* default */]
-  },
-  computed: {},
-  props: {
-    quiz: Object
-  },
-  methods: {}
-});
-
-/***/ }),
+/* 119 */,
 /* 120 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -39287,80 +39421,245 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-6" }, [
-    _c("div", { staticClass: "card card-sm" }, [
-      _c("div", { staticClass: "card-body media" }, [
-        _c("div", { staticClass: "media-body" }, [
-          _c(
-            "h4",
-            { staticClass: "card-title mb-0" },
-            [
-              _c(
-                "router-link",
-                {
-                  attrs: {
-                    to: { name: "view-quiz", params: { id: _vm.quiz.id } }
-                  }
-                },
-                [_vm._v(_vm._s(_vm.quiz.title))]
-              ),
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-10 col-sm-9" }, [
+      _c("div", { staticClass: "card-group" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body text-center" }, [
+            _c("h4", { staticClass: "text-primary mb-0" }, [
+              _c("strong", [_vm._v(_vm._s(_vm.totalQuestions))])
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "text-muted-light" }, [_vm._v("TOTAL")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body text-center" }, [
+            _c("h4", { staticClass: "text-warning mb-0" }, [
+              _c("strong", [_vm._v(_vm._s(_vm.pendingQuestions))])
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "text-muted-light" }, [
+              _vm._v("PENDING")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body text-center" }, [
+            _c("div", { staticClass: "card-body text-center" }, [
+              _c("h4", { class: "score.color mb-0" }, [
+                _c("strong", [_vm._v(_vm._s(_vm.score.percentage))])
+              ]),
               _vm._v(" "),
-              _c("small", { staticClass: "text-muted" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v(_vm._s(_vm.quiz.lesson_title))
-                ])
+              _c("small", { staticClass: "text-muted-light" }, [
+                _vm._v(_vm._s(_vm.score.remark))
               ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("small", { staticClass: "text-muted d-block" }, [
-            _vm._v(_vm._s(_vm.quiz.completed_count) + " Completed")
-          ]),
-          _vm._v(" "),
-          _c("small", [_vm._v(_vm._s(_vm.quiz.about_quiz))])
+            ])
+          ])
         ])
       ]),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "card-footer text-center" },
-        [
-          _c(
-            "router-link",
+        { staticClass: "tab-content", attrs: { id: "v-pills-tabContent" } },
+        _vm._l(_vm.questions, function(question, index) {
+          return _c(
+            "div",
             {
-              staticClass: "btn btn-white btn-sm float-left",
-              attrs: { to: { name: "view-quiz", params: { id: _vm.quiz.id } } }
+              class: {
+                "tab-pane fade show active": index == 0,
+                "tab-pane fade": index !== 0
+              },
+              attrs: {
+                id: "question_" + index,
+                role: "tabpanel",
+                "aria-labelledby": "question_" + index + "-tab"
+              }
             },
             [
-              _c("i", { staticClass: "material-icons btn__icon--left" }, [
-                _vm._v("playlist_add_check")
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "media align-items-center" }, [
+                  _c("div", { staticClass: "media-left" }, [
+                    _c("h4", { staticClass: "mb-0 mr-3" }, [
+                      _c("strong", [_vm._v("#" + _vm._s(index + 1))])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "media-body" }, [
+                    question.question_image.length > 0
+                      ? _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "viewer",
+                                rawName: "v-viewer",
+                                value: { movable: false },
+                                expression: "{movable: false}"
+                              }
+                            ],
+                            staticClass: "text-center mb-4"
+                          },
+                          [
+                            _c("img", {
+                              staticClass: "img-thumbnail",
+                              staticStyle: {
+                                cursor: "pointer",
+                                "max-width": "60%"
+                              },
+                              attrs: { src: question.question_image }
+                            })
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", {
+                      staticClass: "card",
+                      domProps: { innerHTML: _vm._s(question.question) }
+                    })
+                  ])
+                ])
               ]),
-              _vm._v(" Review "),
-              _c("span", { staticClass: "badge badge-dark ml-2" }, [
-                _vm._v("5")
+              _vm._v(" "),
+              _c("div", { staticClass: "card" }, [
+                question.type == "radio"
+                  ? _c("div", { staticClass: "card-body" }, [
+                      _c(
+                        "ul",
+                        { staticClass: "list-group" },
+                        _vm._l(question.options, function(option, index1) {
+                          return _c(
+                            "li",
+                            {
+                              class: {
+                                "list-group-item":
+                                  _vm.questions[index].answer !== option.id,
+                                "list-group-item list-group-item-success":
+                                  question.answer == option.id
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(option.option_text) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ])
+                  : question.type == "input"
+                  ? _c("div", { staticClass: "card-body" }, [
+                      _c("p", [_vm._v(_vm._s(question.answer))])
+                    ])
+                  : question.type == "textarea"
+                  ? _c("div", { staticClass: "card-body" }, [
+                      _c("p", [_vm._v(_vm._s(question.answer))])
+                    ])
+                  : question.type == "richtext"
+                  ? _c("div", { staticClass: "card-body" }, [
+                      _c("div", {
+                        domProps: { innerHTML: _vm._s(question.answer) }
+                      })
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" }, [
+                _c(
+                  "div",
+                  { staticClass: "nav d-block ", attrs: { role: "tablist" } },
+                  [
+                    _c(
+                      "button",
+                      {
+                        class: {
+                          "btn btn-white disabled": index === 0,
+                          "btn btn-white": index > 0
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.showQuestion(index - 1)
+                          }
+                        }
+                      },
+                      [_vm._v("Previous")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        class: {
+                          "btn btn-primary float-right":
+                            index < _vm.questions.length - 1,
+                          "btn btn-primary float-right disabled":
+                            index == _vm.questions.length - 1
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.showQuestion(index + 1)
+                          }
+                        }
+                      },
+                      [_vm._v("Next")]
+                    )
+                  ]
+                )
               ])
             ]
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-default btn-sm float-right",
-              attrs: { to: { name: "edit-quiz", params: { id: _vm.quiz.id } } }
-            },
-            [
-              _c("i", { staticClass: "material-icons btn__icon--left" }, [
-                _vm._v("edit")
-              ]),
-              _vm._v(" Edit ")
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "clearfix" })
-        ],
-        1
+          )
+        }),
+        0
       )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-2 col-sm-3" }, [
+      _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
+          {
+            staticClass: "nav flex-column nav-pills",
+            attrs: {
+              id: "v-pills-tab",
+              role: "tablist",
+              "aria-orientation": "vertical"
+            }
+          },
+          _vm._l(_vm.questions, function(question, index) {
+            return _c(
+              "a",
+              {
+                class: {
+                  "nav-link active": index == 0,
+                  "nav-link": index !== 0
+                },
+                attrs: {
+                  id: "question_" + index + "-tab",
+                  "data-toggle": "pill",
+                  href: "#question_" + index,
+                  role: "tab",
+                  "aria-controls": "question_" + index,
+                  "aria-selected": index == 0
+                }
+              },
+              [
+                _c("span", { staticClass: "media align-items-center" }, [
+                  _c("span", { staticClass: "media-left" }, [
+                    _c("span", { staticClass: "btn btn-white btn-circle" }, [
+                      _vm._v("#" + _vm._s(index + 1))
+                    ])
+                  ])
+                ])
+              ]
+            )
+          }),
+          0
+        )
+      ])
     ])
   ])
 }
@@ -39399,9 +39698,22 @@ var render = function() {
         attrs: { breadcrumbs: _vm.breadcrumbs, title: _vm.pageTitle }
       }),
       _vm._v(" "),
-      _c("quiz-questions-component"),
-      _vm._v(" "),
-      _c("quiz-review-component")
+      _vm.result.status !== "completed"
+        ? _c("quiz-questions-component", {
+            attrs: {
+              quiz: _vm.quiz,
+              questions: _vm.questions,
+              result: _vm.result,
+              started_at: _vm.started_at
+            }
+          })
+        : _c("quiz-review-component", {
+            attrs: {
+              quiz: _vm.quiz,
+              questions: _vm.questions,
+              result: _vm.result
+            }
+          })
     ],
     1
   )
@@ -39471,83 +39783,8 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 241 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_node_modules_vue_loader_lib_selector_type_script_index_0_QuizesComponent_vue__ = __webpack_require__(119);
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f9b7639a_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_QuizesComponent_vue__ = __webpack_require__(242);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(1);
-var disposed = false
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-
-var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_node_modules_vue_loader_lib_selector_type_script_index_0_QuizesComponent_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f9b7639a_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_QuizesComponent_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f9b7639a_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_QuizesComponent_vue__["b" /* staticRenderFns */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/student/components/QuizesComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f9b7639a", Component.options)
-  } else {
-    hotAPI.reload("data-v-f9b7639a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-/* 242 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div")
-}
-var staticRenderFns = []
-render._withStripped = true
-
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-f9b7639a", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
-
-/***/ }),
+/* 241 */,
+/* 242 */,
 /* 243 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
