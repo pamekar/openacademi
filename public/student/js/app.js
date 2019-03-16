@@ -34252,6 +34252,11 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["a"] = ({
   data() {
     return {
@@ -34355,6 +34360,9 @@ if (false) {(function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_paginate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_paginate__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert__ = __webpack_require__(450);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_sweetalert__);
+//
+//
+//
 //
 //
 //
@@ -39805,6 +39813,34 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c(
           "div",
+          { staticClass: "card-body text-center" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn btn-primary",
+                attrs: {
+                  to: {
+                    name: "quiz-instructions",
+                    params: { id: _vm.quiz.id, slug: _vm.quiz.lesson.slug }
+                  }
+                }
+              },
+              [
+                _vm._v("Retake "),
+                _c("i", { staticClass: "material-icons btn__icon--right" }, [
+                  _vm._v("replay")
+                ])
+              ]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
           {
             staticClass: "nav flex-column nav-pills",
             attrs: {
@@ -39931,9 +39967,9 @@ var render = function() {
         attrs: { breadcrumbs: _vm.breadcrumbs, title: _vm.pageTitle }
       }),
       _vm._v(" "),
-      _vm.status !== "completed"
-        ? _c("quiz-questions-component", { on: { completed: _vm.checkQuiz } })
-        : _c("quiz-review-component")
+      _vm.status === "completed"
+        ? _c("quiz-review-component")
+        : _c("quiz-questions-component", { on: { completed: _vm.checkQuiz } })
     ],
     1
   )
@@ -40110,15 +40146,23 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "media-right text-center" }, [
-                    _c("h2", { class: _vm.score(quiz).color }, [
-                      _vm._v(_vm._s(_vm.score(quiz).percentage))
-                    ]),
-                    _vm._v(" "),
-                    _c("small", { staticClass: "text-black-50" }, [
-                      _vm._v(_vm._s(_vm.score(quiz).remark))
-                    ])
-                  ])
+                  quiz.status === "completed"
+                    ? _c("div", { staticClass: "media-right text-center" }, [
+                        _c("h2", { class: _vm.score(quiz).color }, [
+                          _vm._v(_vm._s(_vm.score(quiz).percentage))
+                        ]),
+                        _vm._v(" "),
+                        _c("small", { staticClass: "text-black-50" }, [
+                          _vm._v(_vm._s(_vm.score(quiz).remark))
+                        ])
+                      ])
+                    : _c("div", { staticClass: "media-right text-center" }, [
+                        _vm._m(0, true),
+                        _vm._v(" "),
+                        _c("small", { staticClass: "text-black-50" }, [
+                          _vm._v("Pending")
+                        ])
+                      ])
                 ])
               ]),
               _vm._v(" "),
@@ -40217,7 +40261,16 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", { staticClass: "text-primary" }, [
+      _c("i", { staticClass: "fa fa-circle-notch fa-spin" })
+    ])
+  }
+]
 render._withStripped = true
 
 if (false) {
