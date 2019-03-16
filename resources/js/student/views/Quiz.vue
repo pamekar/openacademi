@@ -8,8 +8,8 @@
                 :breadcrumbs="breadcrumbs"
                 :title="pageTitle"
         ></breadcrumb-component>
-        <quiz-questions-component v-if="status!=='completed'" @completed="checkQuiz"></quiz-questions-component>
-        <quiz-review-component v-else></quiz-review-component>
+        <quiz-review-component  v-if="status==='completed'"></quiz-review-component>
+        <quiz-questions-component v-else @completed="checkQuiz"></quiz-questions-component>
     </div>
 </template>
 <script>
