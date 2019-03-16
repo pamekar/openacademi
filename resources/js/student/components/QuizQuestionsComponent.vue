@@ -19,7 +19,6 @@
                         <vue-countdown-timer
                                 @start_callback="startCallBack('event started')"
                                 @end_callback="endCallBack()"
-                                :status="5"
                                 :start-time="start_at"
                                 :end-time="end_at?end_at:started_at"
                                 :interval="1000"
@@ -137,7 +136,7 @@
                 answers:    [],
                 questions:  [],
                 quiz:       [],
-                started_at: (new Date).getTime() + 5000
+                started_at: (new Date).getTime() + 30000
             }
         },
         created() {
@@ -182,6 +181,7 @@
                     .then(({data}) => {
                         alert('your quiz has been submitted')
                     });
+                this.$emit('completed');
             },
             getQuiz() {
                 axios.get(`/api/quizes/${this.$route.params.id}`)
