@@ -39,7 +39,7 @@ class QuizesController extends Controller
                 $result->test_result = 0;
                 $result->save();
             }
-
+            $data['quiz_id'] = $result->id;
             return response()->json($data);
         }
 
@@ -49,6 +49,18 @@ class QuizesController extends Controller
         ];
 
         return response()->json($status);
+    }
+
+    public function check($id, Request $request)
+    {
+        // drg >> get result for the particular quiz
+        $result = TestsResult::where('user_id', Auth::id())->findOrFail($id);
+
+        return response()->json([
+            'status' => $result->status,
+            'test'   => $result->test->title,
+            'description'=>$result->test->about_quiz
+        ]);
     }
 
     public function results(Request $request)
@@ -65,19 +77,21 @@ class QuizesController extends Controller
 
     public function show($id)
     {
-        $quiz = Test::with('questions.options')->findOrFail($id);
+        // drg >> get result for the particular quiz
+        $result = TestsResult::where('user_id', Auth::id())->findOrFail($id);
 
+        // drg >> get the specified test
+        $quiz = Test::with('questions.options')->findOrFail($result->test_id);
+
+        // drg >> get the specific lesson
         $lesson = Lesson::where('id', $quiz->lesson_id)
             ->where('published', true)
             ->firstOrFail();
         $purchased_course = $lesson->course->students()
                 ->where('user_id', \Auth::id())->count() > 0;
-        $result = TestsResult::where('test_id', $quiz->id)
-            ->where('user_id', Auth::id())
-            ->where('status', '<>', 'completed')->first();
         $questions = $quiz->questions->toArray();
         shuffle($questions);
-        if (($purchased_course || $lesson->free_lesson) && $result) {
+        if (($purchased_course || $lesson->free_lesson)) {
             return response()->json([
                 'quiz'      => $quiz,
                 'questions' => $questions,
@@ -93,11 +107,26 @@ class QuizesController extends Controller
         return response()->json($status);
     }
 
+    public function review($id)
+    {
+        // drg >> get result for the particular quiz
+        $result = TestsResult::with('answers.question.options',
+            'answers.review')
+            ->where('user_id', Auth::id())->findOrFail($id);
+
+        // drg >> get the specified test
+        $quiz = Test::findOrFail($result->test_id);
+
+        return response()->json([
+            'quiz'   => $quiz,
+            'result' => $result
+        ]);
+    }
+
     public function start($id)
     {
-        $result = TestsResult::where('test_id', $id)
-            ->where('user_id', Auth::id())
-            ->where('status', '<>', 'completed')->firstOrFail();
+        $result = TestsResult::where('user_id', Auth::id())
+            ->where('status', '<>', 'completed')->findOrFail($id);
         if (is_null($result->started_at)) {
             $result->status = 'active';
             $result->started_at = now();
@@ -113,10 +142,8 @@ class QuizesController extends Controller
 
     public function submit($id, $completed = null, Request $request)
     {
-
-        $result = TestsResult::where('test_id', $id)
-            ->where('user_id', Auth::id())
-            ->where('status', 'active')->first();
+        $result = TestsResult::where('user_id', Auth::id())
+            ->where('status', 'active')->findOrFail($id);
 
         $status = $completed ? 'completed' : 'active';
         $test_score = 0;
@@ -146,7 +173,6 @@ class QuizesController extends Controller
                     }
                     break;
                 default:
-
                     // drg >> save answers
                     TestsResultsAnswer::where('created_at', '>',
                         $result->started_at)->updateOrCreate([
@@ -180,10 +206,8 @@ class QuizesController extends Controller
     public function destroy($id)
     {
         $result = TestsResult::findOrFail($id);
-        abort_if($result->user_id !== Auth::id(), 403,
-            'You cannot delete this course');
-        $result->delete();
-
+        $result->user_id !== Auth::id() ? abort(403,
+            'You cannot delete this course') : $result->delete();
 
         $status = [
             'type'    => 'success',
