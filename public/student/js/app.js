@@ -33821,14 +33821,21 @@ if (false) {(function () {
         data
       }) => {
         this.status = data.status;
-        this.pageTitle = data.title;
-        this.breadcrumbs[2].title = data.title;
+        this.pageTitle = data.test;
+        this.breadcrumbs[2].title = data.test;
         this.description = data.description;
       });
     }
 
   },
-  props: ['slug']
+  props: ['slug'],
+  watch: {
+    '$route'(to, from) {
+      // react to route changes...
+      this.checkQuiz();
+    }
+
+  }
 });
 
 /***/ }),
@@ -33966,7 +33973,6 @@ if (false) {(function () {
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -33977,7 +33983,7 @@ if (false) {(function () {
       answers: [],
       questions: [],
       quiz: [],
-      started_at: new Date().getTime() + 5000
+      started_at: new Date().getTime() + 30000
     };
   },
 
@@ -34031,6 +34037,7 @@ if (false) {(function () {
       }) => {
         alert('your quiz has been submitted');
       });
+      this.$emit('completed');
     },
 
     getQuiz() {
@@ -38915,7 +38922,6 @@ var render = function() {
             [
               _c("vue-countdown-timer", {
                 attrs: {
-                  status: 5,
                   "start-time": _vm.start_at,
                   "end-time": _vm.end_at ? _vm.end_at : _vm.started_at,
                   interval: 1000,
@@ -39890,7 +39896,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _vm.status !== "completed"
-        ? _c("quiz-questions-component")
+        ? _c("quiz-questions-component", { on: { completed: _vm.checkQuiz } })
         : _c("quiz-review-component")
     ],
     1
