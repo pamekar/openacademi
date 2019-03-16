@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js">
 
 <!-- Mirrored from bitlers.com/html/easy-edu/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Jan 2019 10:13:27 GMT -->
