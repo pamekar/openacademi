@@ -132,30 +132,19 @@
     export default {
         data() {
             return {
-                breadcrumbs: [
-                    {
-                        title: "Dashboard", link: 'dashboard'
-                    },
-                    {
-                        title: "Courses", link: 'all-courses'
-                    },
-                    {
-                        title: ""
-                    }
-                ],
-                editor:      ClassicEditor,
-                pageTitle:   "",
-                result:      [],
-                questions:   [],
-                quiz:        [],
-                started_at:  (new Date).getTime() + 5000
+                editor:     ClassicEditor,
+                result:     [],
+                answers:    [],
+                questions:  [],
+                quiz:       [],
+                started_at: (new Date).getTime() + 5000
             }
         },
         created() {
 
         },
         mounted() {
-
+            this.getQuiz();
         },
         components: {
             'ckeditor': CKEditor.component
@@ -168,11 +157,11 @@
                 return this.started_at + parseInt(this.quiz.duration);
             },
             pendingQuestions() {
-                let pending = 0;
+                let count = 0;
                 for (let i = 0; i < this.totalQuestions; i++) {
-                    this.questions[i].answer == null ? pending++ : pending;
+                    this.questions[i].answer === null ? count++ : count;
                 }
-                return pending;
+                return count;
             },
             totalQuestions() {
                 return this.questions.length
@@ -198,10 +187,8 @@
                 axios.get(`/api/quizes/${this.$route.params.id}`)
                     .then(({data}) => {
                         this.quiz = data.quiz;
-                        this.pageTitle = data.quiz.title;
-                        this.breadcrumbs[2].title = data.quiz.title;
                         this.questions = data.questions;
-                        this.result = data.result
+                        this.result = data.result;
                     });
                 axios.get(`/api/quizes/start/${this.$route.params.id}`)
                     .then(({data}) => {
@@ -236,13 +223,6 @@
             endCallBack:   function (x) {
                 this.completeQuiz();
             }
-        },
-
-        props: {
-            result:     Array,
-            questions:  Array,
-            quiz:       Array,
-            started_at: Number
         }
     }
 </script>
