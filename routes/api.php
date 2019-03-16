@@ -21,10 +21,14 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
                 'QuizesController@start');
             Route::post('quizes/submit/{id}/{completed?}',
                 'QuizesController@submit');
-            Route::get('quizes/{id}/{slug}',
-                'QuizesController@index');
             Route::get('quizes/{id}',
                 'QuizesController@show');
+            Route::get('quizes/{id}/review',
+                'QuizesController@review');
+            Route::get('quizes/{id}/check',
+                'QuizesController@check');
+            Route::get('quizes/{id}/{slug}',
+                'QuizesController@index');
             Route::delete('quizes/{id}', 'QuizesController@destroy');
         });
     Route::group([
