@@ -24,7 +24,7 @@
                         title: "Dashboard", link: 'dashboard'
                     },
                     {
-                        title: "Courses", link: 'all-courses'
+                        title: "Quizes", link: 'quizes'
                     },
                     {
                         title: ""
