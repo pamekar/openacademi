@@ -29,9 +29,12 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="media-right text-center">
+                            <div class="media-right text-center" v-if="quiz.status==='completed'">
                                 <h2 :class="score(quiz).color">{{score(quiz).percentage}}</h2>
                                 <small class="text-black-50">{{score(quiz).remark}}</small>
+                            </div>
+                            <div class="media-right text-center" v-else><h2 class="text-primary"><i class="fa fa-circle-notch fa-spin"></i></h2>
+                                <small class="text-black-50">Pending</small>
                             </div>
                         </div>
                     </div>
@@ -65,6 +68,7 @@
 <script>
     import Paginate from 'vuejs-paginate';
     import swal from 'sweetalert';
+
     export default {
         data() {
             return {
@@ -92,7 +96,7 @@
             this.getQuizResults();
         },
         components: {
-            paginate:           Paginate
+            paginate: Paginate
         },
         computed:   {},
         methods:    {
@@ -106,11 +110,11 @@
             },
             deleteResult(id) {
                 swal({
-                    title: "Are you sure?",
-                    text: "Are you sure that you want to delete this quiz?",
-                    icon: "warning",
+                    title:      "Are you sure?",
+                    text:       "Are you sure that you want to delete this quiz?",
+                    icon:       "warning",
                     dangerMode: true,
-                    buttons: ["Not sure!", "Yes I'm sure!"],
+                    buttons:    ["Not sure!", "Yes I'm sure!"],
                 })
                     .then(willDelete => {
                         if (willDelete) {
