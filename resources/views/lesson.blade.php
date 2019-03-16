@@ -1,4 +1,4 @@
-@php    $public='';    if(config('app.env') == 'production')    $public ='/public'; @endphp @extends('layouts._home')
+ @extends('layouts._home')
 
 @section('sidebar')
     <p class="lead">{{ $lesson->course->title }}</p>

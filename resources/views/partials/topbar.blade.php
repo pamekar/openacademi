@@ -1,4 +1,4 @@
-@php    $public='';    if(config('app.env') == 'production')    $public ='/public'; @endphp
+
 <header class="main-header">
     <!-- Logo -->
     <a href="{{ url('/admin/home') }}" class="logo"

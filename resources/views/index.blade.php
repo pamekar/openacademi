@@ -1,8 +1,3 @@
-@php
-    $public='';
-        if(config('app.env') == 'production')
-            $public ='/public';
-@endphp
 @extends('layouts.home')
 
 @section('main')
