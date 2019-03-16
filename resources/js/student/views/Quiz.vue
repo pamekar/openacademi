@@ -1,15 +1,15 @@
-<template>
+    <template>
     <div>
         <vue-headful
                 :title="pageTitle + ' | OpenAcademi'"
-                :description="quiz.description"
+                :description="description"
         ></vue-headful>
         <breadcrumb-component
                 :breadcrumbs="breadcrumbs"
                 :title="pageTitle"
         ></breadcrumb-component>
-        <quiz-questions-component v-if="result.status!=='completed'" :quiz="quiz" :questions="questions" :result="result" :started_at="started_at"></quiz-questions-component>
-        <quiz-review-component v-else :quiz="quiz" :questions="questions" :result="result"></quiz-review-component>
+        <quiz-questions-component v-if="status!=='completed'"></quiz-questions-component>
+        <quiz-review-component v-else></quiz-review-component>
     </div>
 </template>
 <script>
@@ -30,18 +30,16 @@
                         title: ""
                     }
                 ],
+                description:"",
                 pageTitle:   "",
-                result:      [],
-                questions:   [],
-                quiz:        [],
-                started_at:  (new Date).getTime() + 5000
+                status:""
             }
         },
         created() {
 
         },
         mounted() {
-            this.getQuiz();
+            this.checkQuiz();
         },
         components: {
             'quiz-questions-component': QuizQuestionsComponent,
@@ -49,23 +47,18 @@
         },
         computed:   {},
         methods:    {
-            getQuiz() {
-                axios.get(`/api/quizes/${this.$route.params.id}`)
+            checkQuiz() {
+                axios.get(`/api/quizes/${this.$route.params.id}/check`)
                     .then(({data}) => {
-                        this.quiz = data.quiz;
-                        this.pageTitle = data.quiz.title;
-                        this.breadcrumbs[2].title = data.quiz.title;
-                        this.questions = data.questions;
-                        this.result = data.result
-                    });
-                axios.get(`/api/quizes/start/${this.$route.params.id}`)
-                    .then(({data}) => {
-                        this.started_at = parseInt(data);
+                        this.status = data.status;
+                        this.pageTitle = data.title;
+                        this.breadcrumbs[2].title = data.title;
+                        this.description=data.description;
                     });
             },
-
         },
         props:      ['slug'],
+
     }
 </script>
 <style>
