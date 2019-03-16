@@ -127,6 +127,7 @@
 <script>
     import CKEditor from '@ckeditor/ckeditor5-vue';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+    import swal from 'sweetalert';
 
     export default {
         data() {
@@ -179,7 +180,10 @@
                 }
                 axios.post(`/api/quizes/submit/${this.$route.params.id}/1`, form_data)
                     .then(({data}) => {
-                        alert('your quiz has been submitted')
+                        swal({
+                            text: "Your quiz has been submitted successfully",
+                            icon: "success",
+                        });
                     });
                 this.$emit('completed');
             },
