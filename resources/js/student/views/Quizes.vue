@@ -64,7 +64,7 @@
 </template>
 <script>
     import Paginate from 'vuejs-paginate';
-
+    import swal from 'sweetalert';
     export default {
         data() {
             return {
@@ -105,11 +105,22 @@
                     });
             },
             deleteResult(id) {
-                axios.delete(`/api/quizes/${id}`)
-                    .then(({data}) => {
-                        alert('Your quiz has been deleted');
+                swal({
+                    title: "Are you sure?",
+                    text: "Are you sure that you want to delete this quiz?",
+                    icon: "warning",
+                    dangerMode: true,
+                    buttons: ["Not sure!", "Yes I'm sure!"],
+                })
+                    .then(willDelete => {
+                        if (willDelete) {
+                            axios.delete(`/api/quizes/${id}`)
+                                .then(({data}) => {
+                                    swal("Deleted!", "Your quiz result has been deleted ", "success");
+                                });
+                            this.getQuizResults();
+                        }
                     });
-                this.getQuizResults();
             },
             score(quiz) {
                 let score = Math.round((quiz.test_result / quiz.total_score) * 100);
