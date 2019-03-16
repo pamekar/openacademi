@@ -77,7 +77,7 @@
                         <li class="list-group-item" v-for="quiz in quizes">
                             <div class="media align-items-center">
                                 <div class="media-body">
-                                    <router-link class="text-body" :to="{name:'quiz',params:{id:quiz.test.id}}"><strong>{{quiz.test.title}}</strong></router-link><br>
+                                    <router-link class="text-body" :to="{name:'quiz',params:{id:quiz.id}}"><strong>{{quiz.test.title}}</strong></router-link><br>
                                     <div class="d-flex align-items-center">
                                         <small class="text-black-50 text-uppercase mr-2">Course</small>
                                         <router-link :to="{name:'course',params:{'slug':quiz.test.course.slug}}">{{quiz.test.course_title}}</router-link>
