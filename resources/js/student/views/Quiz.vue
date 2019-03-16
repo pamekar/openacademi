@@ -8,7 +8,7 @@
                 :breadcrumbs="breadcrumbs"
                 :title="pageTitle"
         ></breadcrumb-component>
-        <quiz-questions-component v-if="status!=='completed'"></quiz-questions-component>
+        <quiz-questions-component v-if="status!=='completed'" @completed="checkQuiz"></quiz-questions-component>
         <quiz-review-component v-else></quiz-review-component>
     </div>
 </template>
@@ -51,14 +51,19 @@
                 axios.get(`/api/quizes/${this.$route.params.id}/check`)
                     .then(({data}) => {
                         this.status = data.status;
-                        this.pageTitle = data.title;
-                        this.breadcrumbs[2].title = data.title;
+                        this.pageTitle = data.test;
+                        this.breadcrumbs[2].title = data.test;
                         this.description=data.description;
                     });
             },
         },
         props:      ['slug'],
-
+        watch:      {
+            '$route'(to, from) {
+                // react to route changes...
+                this.checkQuiz();
+            }
+        }
     }
 </script>
 <style>
