@@ -117,6 +117,11 @@
         </div>
         <div class="col-md-2 col-sm-3">
             <div class="card">
+                <div class="card-body text-center">
+                    <router-link :to="{name:'quiz-instructions',params:{id:quiz.id,slug:quiz.lesson.slug}}" class="btn btn-primary">Retake <i class="material-icons btn__icon--right">replay</i></router-link>
+                </div>
+            </div>
+            <div class="card">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
                     <a :class="{'nav-link active':index==0,'nav-link':index!==0}" :id="`question_${index}-tab`" data-toggle="pill" :href="`#question_${index}`" role="tab" :aria-controls="`question_${index}`" :aria-selected="index==0" v-for="(answer,index) in answers">
