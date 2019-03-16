@@ -20,7 +20,7 @@
             </div>
             <div class="card-body" v-html="instructions"></div>
             <div class="card-footer text-center">
-                <router-link :to="{name:'quiz',params:{id:quiz.id}}" class="btn btn-lg btn-success">Take Quiz</router-link>
+                <router-link :to="{name:'quiz',params:{id:quizID}}" class="btn btn-lg btn-success">Take Quiz</router-link>
             </div>
         </div>
     </div>
@@ -33,6 +33,7 @@
             return {
                 instructions: "",
                 quiz:         [],
+                quizID:0,
                 breadcrumbs:  [
                     {
                         title: "Dashboard", link: 'dashboard'
@@ -58,6 +59,7 @@
                 axios.get(`/api/quizes/${this.$route.params.id}/${this.$route.params.slug}`)
                     .then(({data}) => {
                         this.quiz = data.quiz;
+                        this.quizID = data.quiz_id;
                         this.pageTitle = data.quiz.title;
                         this.breadcrumbs[2].title = data.quiz.title;
                         this.instructions = data.instructions;
