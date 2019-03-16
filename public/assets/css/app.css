@@ -236,7 +236,6 @@ html {
 [dir=ltr] button, [dir=ltr] input, [dir=ltr] optgroup, [dir=ltr] select, [dir=ltr] textarea {
     margin: 0;
     font-family: inherit;
-    font-size: inherit;
     line-height: inherit
 }
 

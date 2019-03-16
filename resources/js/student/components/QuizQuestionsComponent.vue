@@ -170,6 +170,25 @@
         },
         methods:    {
             completeQuiz() {
+                let message = this.pendingQuestions > 0 ? `You have ${this.pendingQuestions} pending question(s) to answer. ` : "";
+
+                swal({
+                    title:      "Are you sure?",
+                    text:       `${message}Do you want to submit now?`,
+                    icon:       "warning",
+                    dangerMode: true,
+                    buttons:    ["No!", "Submit!"],
+                })
+                    .then(willSubmit => {
+                        if (willSubmit) {
+                            this.endQuiz();
+                        }
+                        else {
+                            this.submitQuiz();
+                        }
+                    });
+            },
+            endQuiz() {
                 let questions = this.questions;
                 let form_data = [];
                 for (let i = 0; i < questions.length; i++) {
@@ -225,7 +244,7 @@
             startCallBack: function (x) {
             },
             endCallBack:   function (x) {
-                this.completeQuiz();
+                this.endQuiz();
             }
         }
     }
