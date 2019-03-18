@@ -34,7 +34,7 @@
                         <label for="lesson_title" class="col-sm-3 col-form-label form-label">Lesson:</label>
                         <div class="col-sm-9 col-md-4">
                             <select id="lesson_title" class="custom-select form-control" v-model="quiz.lesson_id">
-                                <option :value="null" disabled>Choose to a lesson</option>
+                                <option :value="null" disabled>Attach to a lesson</option>
                                 <option :value="lesson.id" v-for="lesson in lessons" v-if="lesson.course_id == quiz.course_id">{{lesson.title}}</option>
                             </select>
                         </div>

@@ -45917,7 +45917,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -45939,9 +45938,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     'multiselect': __WEBPACK_IMPORTED_MODULE_4_vue_multiselect___default.a
   },
   computed: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
-    question: state => state.questions.question,
-    tests: state => state.questions.tests,
-    quiz: state => state.quizes.quiz
+    question: state => state.questions.question
   })),
   methods: {
     create_updateQuestion: function () {
@@ -64019,10 +64016,6 @@ var render = function() {
                         _vm._v("Richtext")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "checkbox" } }, [
-                        _vm._v("Checkbox")
-                      ]),
-                      _vm._v(" "),
                       _c("option", { attrs: { value: "radio" } }, [
                         _vm._v("Radio")
                       ])
@@ -64116,7 +64109,7 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm.question.options
+          _vm.question.options || _vm.question.type === "radio"
             ? _c("div", { staticClass: "card" }, [
                 _vm._m(2),
                 _vm._v(" "),
@@ -70966,7 +70959,7 @@ var render = function() {
                       _c(
                         "option",
                         { attrs: { disabled: "" }, domProps: { value: null } },
-                        [_vm._v("Choose to a lesson")]
+                        [_vm._v("Attach to a lesson")]
                       ),
                       _vm._v(" "),
                       _vm._l(_vm.lessons, function(lesson) {

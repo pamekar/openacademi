@@ -41,7 +41,6 @@
                                     <option value="input">Input</option>
                                     <option value="textarea">Textarea</option>
                                     <option value="richtext">Richtext</option>
-                                    <option value="checkbox">Checkbox</option>
                                     <option value="radio">Radio</option>
                                 </select>
                             </div>
@@ -65,7 +64,7 @@
                             </div>
                         </div>
                     </form>
-                    <div class="card" v-if="question.options">
+                    <div class="card" v-if="question.options || question.type==='radio'">
                         <div class="card-header"><h4 class="card-title">Options</h4></div>
 
                         <div class="card-body">
@@ -125,7 +124,7 @@
         methods:    {
             create_updateQuestion: function () {
                 // drg >> check if we're creating a new question
-                this.question.origin_id=this.$route.params.id
+                this.question.origin_id = this.$route.params.id
                 this.question.is_new ?
                     this.$store.dispatch('questions/add', this.question)
                     :
