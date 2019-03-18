@@ -45482,6 +45482,7 @@ if(false) {
 //
 //
 //
+//
 
 
 
@@ -64272,55 +64273,58 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "mdk-header-layout js-mdk-header-layout" },
     [
-      _c(
-        "div",
-        {
-          staticClass: "mdk-header js-mdk-header mb-0",
-          attrs: { id: "header", "data-fixed": "" }
-        },
-        [_c("header-component")],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "mdk-header-layout__content" }, [
+      _c("div", { staticClass: "mdk-header-layout js-mdk-header-layout" }, [
         _c(
           "div",
           {
-            staticClass: "mdk-drawer-layout js-mdk-drawer-layout",
-            attrs: { "data-push": "", "data-responsive-width": "992px" }
+            staticClass: "mdk-header js-mdk-header mb-0",
+            attrs: { id: "header", "data-fixed": "" }
           },
-          [
-            _c("div", { staticClass: "mdk-drawer-layout__content page" }, [
+          [_c("header-component")],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "mdk-header-layout__content" }, [
+          _c(
+            "div",
+            {
+              staticClass: "mdk-drawer-layout js-mdk-drawer-layout",
+              attrs: { "data-push": "", "data-responsive-width": "992px" }
+            },
+            [
+              _c("div", { staticClass: "mdk-drawer-layout__content page" }, [
+                _c(
+                  "div",
+                  { staticClass: "container-fluid page__container" },
+                  [
+                    _c(
+                      "transition",
+                      { attrs: { name: _vm.transitionName } },
+                      [_c("router-view")],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm._m(0)
+              ]),
+              _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "container-fluid page__container" },
+                {
+                  staticClass: "mdk-drawer js-mdk-drawer",
+                  attrs: { id: "default-drawer" }
+                },
                 [
-                  _c(
-                    "transition",
-                    { attrs: { name: _vm.transitionName } },
-                    [_c("router-view")],
-                    1
-                  )
+                  _c("sidebar-component", { attrs: { menu: _vm.sidebarItems } })
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _vm._m(0)
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "mdk-drawer js-mdk-drawer",
-                attrs: { id: "default-drawer" }
-              },
-              [_c("sidebar-component", { attrs: { menu: _vm.sidebarItems } })],
-              1
-            )
-          ]
-        )
+              )
+            ]
+          )
+        ])
       ]),
       _vm._v(" "),
       _c("modals-component")
@@ -64336,7 +64340,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "page" }, [
       _c("div", { staticClass: "container page__container" }, [
         _c("div", { staticClass: "footer" }, [
-          _vm._v("\n                            Copyright ©  - "),
+          _vm._v("\n                                Copyright ©  - "),
           _c("a", { attrs: { href: "/" } }, [_vm._v("OpenAcademi")])
         ])
       ])
