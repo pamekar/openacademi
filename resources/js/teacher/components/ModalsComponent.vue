@@ -120,8 +120,6 @@
             ...mapState(
                 {
                     question: state => state.questions.question,
-                    tests:    state => state.questions.tests,
-                    quiz:     state => state.quizes.quiz,
                 }),
         },
         methods:    {
