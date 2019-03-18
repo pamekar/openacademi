@@ -62,7 +62,7 @@ const actions = {
                     // settings
                     type: data.type,
                 });
-                router.push({name: 'edit-lesson', params: {id: quiz.lesson_id}});
+                router.push({name: 'edit-quiz', params: {id: data.id}});
             });
     },
     add_review({}, answer) {

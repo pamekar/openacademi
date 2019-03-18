@@ -56,8 +56,6 @@
             // settings
             type: '{{$notification->type}}',
         });
-
-
     </script>
 @endif
 <script src="{{asset("$public/teacher/js/app.js")}}"></script>

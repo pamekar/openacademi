@@ -74,6 +74,7 @@ class QuizesController extends Controller
         $test = Test::create($request->all());
 
         $status = [
+            'id'      => $test->id,
             'type'    => 'success',
             'message' => "$test->title has been created successfully"
         ];

@@ -75331,9 +75331,9 @@ const actions = {
         type: data.type
       });
       __WEBPACK_IMPORTED_MODULE_0__routes__["a" /* default */].push({
-        name: 'edit-lesson',
+        name: 'edit-quiz',
         params: {
-          id: quiz.lesson_id
+          id: data.id
         }
       });
     });
