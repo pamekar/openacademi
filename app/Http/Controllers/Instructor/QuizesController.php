@@ -31,9 +31,9 @@ class QuizesController extends Controller
             if (!Gate::allows('test_delete')) {
                 return abort(401);
             }
-            $tests = Test::onlyTrashed()->paginate($limit);
+            $tests = Test::onlyTrashed()->latest()->paginate($limit);
         } else {
-            $tests = Test::paginate($limit);
+            $tests = Test::latest()->paginate($limit);
         }
 
         return response()->json($tests);
