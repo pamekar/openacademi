@@ -13,7 +13,7 @@
                         <div class="form-group row">
                             <label class="col-form-label form-label col-md-3">Question:</label>
                             <div class="col-md-9">
-                                <ckeditor id="question_content" :editor="editor" v-model="question.question"></ckeditor>
+                                <ckeditor id="question_content" :editor="classicEditor" v-model="question.question"></ckeditor>
                             </div>
                         </div>
 
@@ -71,21 +71,33 @@
                             <div class="col-md-9" v-if="question.options.length<5">
                                 <a href="#" class="btn btn-default"><i class="material-icons">add</i> Add Options</a>
                             </div>
-                            <ul class="list-group list-group-fit nestable-list-plain mb-0">
-                                <li class="list-group-item nestable-item" v-for="option in question.options">
-                                    <div class="media align-items-center">
-
-                                        <div class="media-body">
-                                            <div :class="option.correct ? 'alert alert-success mb-0' : '' ">
-                                                {{option.option_text}}
-                                            </div>
-                                        </div>
-                                        <div class="media-right text-right">
-                                            <div style="width: 100px;"><a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-primary btn-sm"><i class="material-icons">edit</i></a></div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Option</th>
+                                    <th class="text-center">Is Correct</th>
+                                    <th class="text-center">?</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(option,index) in question.options">
+                                    <td class="text-center">{{index + 1}}</td>
+                                    <td>
+                                        <ckeditor class="card mb-0" :editor="inlineEditor" v-model="question.options[index].option_text" title="Click to edit"></ckeditor>
+                                    </td>
+                                    <td class="text-center"><input type="checkbox" v-model="question.options[index].correct"></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-danger" @click="deleteResult(quiz.id)" title="Delete result"><i class="material-icons">delete_outline</i></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group row">
+                                <div class="col-md-8 offset-md-3">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,13 +109,16 @@
     import {mapState, mapActions} from 'vuex';
     import CKEditor from '@ckeditor/ckeditor5-vue';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+    import InlineEditor from '@ckeditor/ckeditor5-build-inline';
     import InputTag from 'vue-input-tag';
     import Multiselect from 'vue-multiselect';
+    import swal from 'sweetalert';
 
     export default {
         data() {
             return {
-                editor:         ClassicEditor,
+                classicEditor:  ClassicEditor,
+                inlineEditor:   InlineEditor,
                 question_image: '',
             }
         },
@@ -141,6 +156,24 @@
                 };
                 reader.readAsDataURL(file);
             },
+            deleteResult(id) {
+                swal({
+                    title:      "Are you sure?",
+                    text:       "Are you sure that you want to delete this quiz?",
+                    icon:       "warning",
+                    dangerMode: true,
+                    buttons:    ["Not sure!", "Yes I'm sure!"],
+                })
+                    .then(willDelete => {
+                        if (willDelete) {
+                            axios.delete(`/api/quizes/${id}`)
+                                .then(({data}) => {
+                                    swal("Deleted!", "Your quiz result has been deleted ", "success");
+                                });
+                            this.getQuizResults();
+                        }
+                    });
+            },
             questionImageChanged(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
@@ -164,5 +197,9 @@
 <style>
     .dropdown-menu {
         z-index: 1060;
+    }
+
+    .ck.ck-balloon-panel {
+        z-index: 1060 !important;
     }
 </style>
