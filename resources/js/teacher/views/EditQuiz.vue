@@ -94,7 +94,7 @@
                 <h4 class="card-title">Questions</h4>
             </div>
             <div class="card-header">
-                <a href="javascript:void(0)" data-toggle="modal" data-target="#editQuiz" class="btn btn-outline-secondary" v-on:click="setQuestion(false)">Add Question <i class="material-icons">add</i></a>
+                <a href="javascript:void(0)" class="btn btn-outline-secondary" v-on:click="setQuestion(false)">Add Question <i class="material-icons">add</i></a>
             </div>
             <div class="nestable" id="nestable">
                 <ul class="list-group list-group-fit nestable-list-plain mb-0">
@@ -106,7 +106,7 @@
                             <div class="media-body" v-html="question.question"></div>
                             <div class="media-right text-right">
                                 <div style="width:100px">
-                                    <a href="#" data-toggle="modal" data-target="#editQuiz" class="btn btn-primary btn-sm" v-on:click="setQuestion(question.id)"><i class="material-icons">edit</i></a>
+                                    <a href="#" class="btn btn-primary btn-sm" v-on:click="setQuestion(question.id)"><i class="material-icons">edit</i></a>
                                 </div>
                             </div>
                         </div>
@@ -179,23 +179,22 @@
             },
             getArray(obj) {
                 // drg >> convert JSON object into array
-                let arr = Object.keys(obj).map(function (key) {
+                return Object.keys(obj).map(function (key) {
                     return [Number(key), obj[key]];
                 });
-                
-                return arr;
             },
             setQuestion(question) {
                 if (question) {
                     this.$store.dispatch('questions/fetch_edit', question);
+                    jQuery("#editQuiz").modal();
                 }
                 else {
                     this.$store.dispatch('questions/fetch_add');
+                    jQuery("#addQuiz").modal();
                 }
             },
             timePickerChanged(t) {
-                let time = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
-                this.quiz.duration = time;
+                this.quiz.duration = (Number(t.HH) * 3600) + (Number(t.mm) * 60) + (Number(t.ss));
             }
         }
     }
