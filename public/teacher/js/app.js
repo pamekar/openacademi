@@ -49169,10 +49169,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setQuestion(question) {
       if (question) {
         this.$store.dispatch('questions/fetch_edit', question);
-        jQuery("#editQuiz").modal();
       } else {
         this.$store.dispatch('questions/fetch_add');
-        jQuery("#addQuiz").modal();
       }
     },
 
@@ -64007,7 +64005,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "modal fade", attrs: { id: "editQuiz" } }, [
+    _c("div", { staticClass: "modal fade", attrs: { id: "editQuestion" } }, [
       _c(
         "div",
         { staticClass: "modal-dialog modal-dialog-centered modal-lg" },
@@ -64281,7 +64279,7 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm.question.options || _vm.question.type === "radio"
+              _vm.question.options && _vm.question.type === "radio"
                 ? _c("div", { staticClass: "card" }, [
                     _vm._m(2),
                     _vm._v(" "),
@@ -64437,7 +64435,10 @@ var render = function() {
               _c(
                 "form",
                 {
-                  attrs: { action: "javascript:void(0)" },
+                  attrs: {
+                    id: "addQuestionForm",
+                    action: "javascript:void(0)"
+                  },
                   on: { submit: _vm.create_updateQuestion }
                 },
                 [
@@ -64690,7 +64691,7 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm.question.options || _vm.question.type === "radio"
+              _vm.question.options && _vm.question.type === "radio"
                 ? _c("div", { staticClass: "card" }, [
                     _vm._m(8),
                     _vm._v(" "),
@@ -71976,7 +71977,7 @@ var render = function() {
                           "a",
                           {
                             staticClass: "btn btn-primary btn-sm",
-                            attrs: { href: "#" },
+                            attrs: { href: "javascript:void(0)" },
                             on: {
                               click: function($event) {
                                 return _vm.setQuestion(question.id)
@@ -76470,7 +76471,11 @@ const actions = {
     commit
   }) {
     // drg >> this action fetches all the questions as a list
-    axios.get(`${endpoint}/questions/create`).then(response => commit('SET_ADD', response.data)).catch();
+    axios.get(`${endpoint}/questions/create`).then(function (response) {
+      commit('SET_ADD', response.data);
+      document.getElementById("addQuestionForm").reset();
+      jQuery("#addQuestion").modal();
+    }).catch();
   },
 
   fetch_all({
@@ -76487,7 +76492,10 @@ const actions = {
     dispatch
   }, id) {
     commit('SET_EMPTY');
-    axios.get(`${endpoint}/questions/${id}/edit`).then(response => commit('SET_QUESTION_EDIT', response.data)).catch();
+    axios.get(`${endpoint}/questions/${id}/edit`).then(function (response) {
+      commit('SET_QUESTION_EDIT', response.data);
+      jQuery("#editQuestion").modal();
+    }).catch();
   },
 
   fetch_list({

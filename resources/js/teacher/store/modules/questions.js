@@ -120,7 +120,12 @@ const actions = {
     fetch_add({commit}) {
         // drg >> this action fetches all the questions as a list
         axios.get(`${endpoint}/questions/create`)
-            .then(response => commit('SET_ADD', response.data)).catch();
+            .then(function(response){
+                commit('SET_ADD', response.data);
+                document.getElementById("addQuestionForm").reset();
+                jQuery("#addQuestion").modal();
+            }).catch();
+        
     },
     fetch_all({commit, dispatch}, page = 1) {
         // drg >> this action fetches all the lessons (paginapted)
@@ -131,7 +136,10 @@ const actions = {
     fetch_edit({commit, dispatch}, id) {
         commit('SET_EMPTY');
         axios.get(`${endpoint}/questions/${id}/edit`)
-            .then(response => commit('SET_QUESTION_EDIT', response.data)).catch();
+            .then(function(response){
+                commit('SET_QUESTION_EDIT', response.data)
+                jQuery("#editQuestion").modal();
+            }).catch();
     },
     fetch_list({commit}) {
         // drg >> this action fetches all the questions as a list

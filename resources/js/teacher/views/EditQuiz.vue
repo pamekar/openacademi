@@ -106,7 +106,7 @@
                             <div class="media-body" v-html="question.question"></div>
                             <div class="media-right text-right">
                                 <div style="width:100px">
-                                    <a href="#" class="btn btn-primary btn-sm" v-on:click="setQuestion(question.id)"><i class="material-icons">edit</i></a>
+                                    <a href="javascript:void(0)" class="btn btn-primary btn-sm" v-on:click="setQuestion(question.id)"><i class="material-icons">edit</i></a>
                                 </div>
                             </div>
                         </div>
@@ -186,11 +186,9 @@
             setQuestion(question) {
                 if (question) {
                     this.$store.dispatch('questions/fetch_edit', question);
-                    jQuery("#editQuiz").modal();
                 }
                 else {
                     this.$store.dispatch('questions/fetch_add');
-                    jQuery("#addQuiz").modal();
                 }
             },
             timePickerChanged(t) {

@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="modal fade" id="editQuiz">
+    <div class="modal fade" id="editQuestion">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                     </form>
-                    <div class="card" v-if="question.options || question.type==='radio'">
+                    <div class="card" v-if="question.options && question.type==='radio'">
                         <div class="card-header"><h4 class="card-title">Options</h4></div>
 
                         <div class="card-body">
@@ -115,7 +115,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="javascript:void(0)" @submit="create_updateQuestion">
+                    <form id="addQuestionForm" action="javascript:void(0)" @submit="create_updateQuestion">
                         <div class="form-group row">
                             <label class="col-form-label form-label col-md-3">Question:</label>
                             <div class="col-md-9">
@@ -170,7 +170,7 @@
                             </div>
                         </div>
                     </form>
-                    <div class="card" v-if="question.options || question.type==='radio'">
+                    <div class="card" v-if="question.options && question.type==='radio'">
                         <div class="card-header"><h4 class="card-title">Options</h4></div>
 
                         <div class="card-body">
