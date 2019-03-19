@@ -241,6 +241,8 @@
             ...mapState(
                 {
                     question: state => state.questions.question,
+                    tests:    state => state.questions.tests,
+                    quiz:     state => state.quizes.quiz,
                 }),
         },
         methods:    {
@@ -263,7 +265,25 @@
                 };
                 reader.readAsDataURL(file);
             },
-            deleteResult(id) {
+            deleteOption(id) {
+                swal({
+                    title:      "Are you sure?",
+                    text:       "Are you sure that you want to delete this option?",
+                    icon:       "warning",
+                    dangerMode: true,
+                    buttons:    ["Not sure!", "Yes I'm sure!"],
+                })
+                    .then(willDelete => {
+                        if (willDelete) {
+                            axios.delete(`/api/quizes/${id}`)
+                                .then(({data}) => {
+                                    swal("Deleted!", "Your quiz result has been deleted ", "success");
+                                });
+                            this.getQuizResults();
+                        }
+                    });
+            },
+            deleteQuestion(id) {
                 swal({
                     title:      "Are you sure?",
                     text:       "Are you sure that you want to delete this option?",

@@ -46070,7 +46070,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     'multiselect': __WEBPACK_IMPORTED_MODULE_5_vue_multiselect___default.a
   },
   computed: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
-    question: state => state.questions.question
+    question: state => state.questions.question,
+    tests: state => state.questions.tests,
+    quiz: state => state.quizes.quiz
   })),
   methods: {
     create_updateQuestion: function () {
@@ -46091,7 +46093,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       reader.readAsDataURL(file);
     },
 
-    deleteResult(id) {
+    deleteOption(id) {
+      __WEBPACK_IMPORTED_MODULE_6_sweetalert___default()({
+        title: "Are you sure?",
+        text: "Are you sure that you want to delete this option?",
+        icon: "warning",
+        dangerMode: true,
+        buttons: ["Not sure!", "Yes I'm sure!"]
+      }).then(willDelete => {
+        if (willDelete) {
+          axios.delete(`/api/quizes/${id}`).then(({
+            data
+          }) => {
+            __WEBPACK_IMPORTED_MODULE_6_sweetalert___default()("Deleted!", "Your quiz result has been deleted ", "success");
+          });
+          this.getQuizResults();
+        }
+      });
+    },
+
+    deleteQuestion(id) {
       __WEBPACK_IMPORTED_MODULE_6_sweetalert___default()({
         title: "Are you sure?",
         text: "Are you sure that you want to delete this option?",
