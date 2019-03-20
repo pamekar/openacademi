@@ -46046,6 +46046,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -46058,7 +46062,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       classicEditor: __WEBPACK_IMPORTED_MODULE_2__ckeditor_ckeditor5_build_classic___default.a,
       inlineEditor: __WEBPACK_IMPORTED_MODULE_3__ckeditor_ckeditor5_build_inline___default.a,
-      question_image: ''
+      question_image: '',
+      disabledOptions: true
     };
   },
 
@@ -46094,41 +46099,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
 
     deleteOption(id) {
-      __WEBPACK_IMPORTED_MODULE_6_sweetalert___default()({
-        title: "Are you sure?",
-        text: "Are you sure that you want to delete this option?",
-        icon: "warning",
-        dangerMode: true,
-        buttons: ["Not sure!", "Yes I'm sure!"]
-      }).then(willDelete => {
-        if (willDelete) {
-          axios.delete(`/api/quizes/${id}`).then(({
-            data
-          }) => {
-            __WEBPACK_IMPORTED_MODULE_6_sweetalert___default()("Deleted!", "Your quiz result has been deleted ", "success");
-          });
-          this.getQuizResults();
-        }
-      });
-    },
-
-    deleteQuestion(id) {
-      __WEBPACK_IMPORTED_MODULE_6_sweetalert___default()({
-        title: "Are you sure?",
-        text: "Are you sure that you want to delete this option?",
-        icon: "warning",
-        dangerMode: true,
-        buttons: ["Not sure!", "Yes I'm sure!"]
-      }).then(willDelete => {
-        if (willDelete) {
-          axios.delete(`/api/quizes/${id}`).then(({
-            data
-          }) => {
-            __WEBPACK_IMPORTED_MODULE_6_sweetalert___default()("Deleted!", "Your quiz result has been deleted ", "success");
-          });
-          this.getQuizResults();
-        }
-      });
+      this.$store.dispatch('questions/delete_option', id);
     },
 
     questionImageChanged(e) {
@@ -46145,6 +46116,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
       this.options.push(tag);
       this.value.push(tag);
+    },
+
+    editOption(index) {
+      this.disabledOptions = !this.disabledOptions;
     }
 
   }
@@ -64305,12 +64280,43 @@ var render = function() {
                     _vm._m(2),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
-                      _vm.question.options.length < 5
-                        ? _c("div", { staticClass: "col-md-9" }, [_vm._m(3)])
+                      _vm.question.options.length > 0
+                        ? _c("div", [
+                            _vm.question.options.length < 5
+                              ? _c(
+                                  "button",
+                                  { staticClass: "btn btn-default" },
+                                  [
+                                    _c(
+                                      "i",
+                                      { staticClass: " material-icons" },
+                                      [_vm._v("add")]
+                                    ),
+                                    _vm._v(" Add Options")
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-outline-default float-right",
+                                attrs: { title: "Edit Option" },
+                                on: { click: _vm.editOption }
+                              },
+                              [
+                                _c("i", { staticClass: "material-icons" }, [
+                                  _vm._v("create")
+                                ]),
+                                _vm._v(" Toggle Edit")
+                              ]
+                            )
+                          ])
                         : _vm._e(),
                       _vm._v(" "),
                       _c("table", { staticClass: "table" }, [
-                        _vm._m(4),
+                        _vm._m(3),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -64327,6 +64333,7 @@ var render = function() {
                                     staticClass: "card mb-0",
                                     attrs: {
                                       editor: _vm.inlineEditor,
+                                      disabled: _vm.disabledOptions,
                                       title: "Click to edit"
                                     },
                                     model: {
@@ -64417,7 +64424,7 @@ var render = function() {
                                     attrs: { title: "Delete Option" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.deleteOption(_vm.quiz.id)
+                                        return _vm.deleteOption(option.id)
                                       }
                                     }
                                   },
@@ -64434,7 +64441,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._m(5)
+                      _vm._m(4)
                     ])
                   ])
                 : _vm._e()
@@ -64450,7 +64457,7 @@ var render = function() {
         { staticClass: "modal-dialog modal-dialog-centered modal-lg" },
         [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(6),
+            _vm._m(5),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c(
@@ -64708,21 +64715,21 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(7)
+                  _vm._m(6)
                 ]
               ),
               _vm._v(" "),
               _vm.question.options && _vm.question.type === "radio"
                 ? _c("div", { staticClass: "card" }, [
-                    _vm._m(8),
+                    _vm._m(7),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
                       _vm.question.options.length < 5
-                        ? _c("div", { staticClass: "col-md-9" }, [_vm._m(9)])
+                        ? _c("div", { staticClass: "col-md-9" }, [_vm._m(8)])
                         : _vm._e(),
                       _vm._v(" "),
                       _c("table", { staticClass: "table" }, [
-                        _vm._m(10),
+                        _vm._m(9),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -64829,7 +64836,7 @@ var render = function() {
                                     attrs: { title: "Delete result" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.deleteOptions(_vm.quiz.id)
+                                        return _vm.deleteOptions(option.id)
                                       }
                                     }
                                   },
@@ -64846,7 +64853,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._m(11)
+                      _vm._m(10)
                     ])
                   ])
                 : _vm._e()
@@ -64901,15 +64908,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("h4", { staticClass: "card-title" }, [_vm._v("Options")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "btn btn-default", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("add")]),
-      _vm._v(" Add Options")
     ])
   },
   function() {
@@ -76348,6 +76346,9 @@ const mutations = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__routes__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_sweetalert__);
+
 
 const endpoint = '/api/instructor';
 const state = {
@@ -76416,23 +76417,27 @@ const actions = {
     });
   },
 
-  delete_questions({}, id, course) {
-    axios.delete(`${endpoint}/questions/${id}`).then(({
-      data
-    }) => {
-      __WEBPACK_IMPORTED_MODULE_0__routes__["a" /* default */].push({
-        name: 'edit-quiz',
-        params: {
-          id: question.origin_id
-        }
-      });
-      jQuery.notify({
-        // options
-        message: data.message
-      }, {
-        // settings
-        type: data.type
-      });
+  delete_option({}, id) {
+    __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()({
+      title: "Are you sure?",
+      text: "Are you sure that you want to delete this option?",
+      icon: "warning",
+      dangerMode: true,
+      buttons: ["Not sure!", "Yes I'm sure!"]
+    }).then(willDelete => {
+      if (willDelete) {
+        axios.delete(`${endpoint}/questions_options/${id}`).then(({
+          data
+        }) => {
+          jQuery.notify({
+            // options
+            message: data.message
+          }, {
+            // settings
+            type: data.type
+          });
+        });
+      }
     });
   },
 

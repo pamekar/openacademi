@@ -1,5 +1,5 @@
 import router from '../../routes'
-
+import swal from 'sweetalert';
 
 const endpoint = '/api/instructor';
 
@@ -63,17 +63,27 @@ const actions = {
                 });
             });
     },
-    delete_questions({}, id, course) {
-        axios.delete(`${endpoint}/questions/${id}`)
-            .then(({data}) => {
-                router.push({name: 'edit-quiz', params: {id: question.origin_id}});
-                jQuery.notify({
-                    // options
-                    message: data.message,
-                }, {
-                    // settings
-                    type: data.type,
-                });
+    delete_option({}, id) {
+        swal({
+            title:      "Are you sure?",
+            text:       "Are you sure that you want to delete this option?",
+            icon:       "warning",
+            dangerMode: true,
+            buttons:    ["Not sure!", "Yes I'm sure!"],
+        })
+            .then(willDelete => {
+                if (willDelete) {
+                    axios.delete(`${endpoint}/questions_options/${id}`)
+                        .then(({data}) => {
+                            jQuery.notify({
+                                // options
+                                message: data.message,
+                            }, {
+                                // settings
+                                type: data.type,
+                            });
+                        });
+                }
             });
     },
     edit({dispatch}, question) {
@@ -99,7 +109,6 @@ const actions = {
         for (let key in questionData) {
             form_data.append(key, questionData[key]);
         }
-        
         
         axios.post(`${endpoint}/questions/${question.id}`, form_data)
             .then(({data}) => {

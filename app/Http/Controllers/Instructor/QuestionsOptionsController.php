@@ -136,10 +136,15 @@ class QuestionsOptionsController extends Controller
         if (! Gate::allows('questions_option_delete')) {
             return abort(401);
         }
+
         $questions_option = QuestionsOption::findOrFail($id);
         $questions_option->delete();
+        $status = [
+            'type'    => 'success',
+            'message' => "Option has been removed successfully"
+        ];
 
-        return redirect()->route('instructor.questions_options.index');
+        return response()->json($status);
     }
 
     /**
