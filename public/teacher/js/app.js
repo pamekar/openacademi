@@ -64511,7 +64511,7 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.addOptions
+                      _vm.addOptions && _vm.question.options.length < 5
                         ? _c("div", [
                             _c("table", { staticClass: "table" }, [
                               _vm._m(3),

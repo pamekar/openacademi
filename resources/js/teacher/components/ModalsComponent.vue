@@ -89,7 +89,7 @@
                                         <label class="form-label" for="disable-options">{{disabledOptions}}</label>
                                     </div>
                                 </div>
-                                <div v-if="addOptions">
+                                <div v-if="addOptions && question.options.length<5">
 
                                     <table class="table">
                                         <thead>
