@@ -71,15 +71,47 @@
                             </div>
 
                             <div class="card-body">
-                                <div v-if="question.options.length>0">
-                                    <button class="btn btn-default" v-if="question.options.length<5"><i class=" material-icons">add</i> Add Options</button>
-                                    <div class="form-group float-right">
+                                <div class="card-body" v-if="question.options.length>0">
+                                    <div class="form-group float-left" v-if="question.options.length<5">
+                                        <div class="form-label">Add Options</div>
                                         <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
-                                            <input type="checkbox" id="video_image" class="custom-control-input" v-model="disabledOptions" @change="mediaChanged">
-                                            <label class="custom-control-label" for="video_image">{{disabledOptions}}</label>
+                                            <input type="checkbox" class="custom-control-input" id="add-options" v-model="addOptions">
+                                            <label class="custom-control-label" for="add-options">{{addOptions}}</label>
                                         </div>
-                                        <label class="form-label" for="video_image">Toggle Edit</label>
+                                        <label class="form-label" for="add-options">{{addOptions}}</label>
                                     </div>
+                                    <div class="form-group float-right">
+                                        <div class="form-label">Disable Options</div>
+                                        <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
+                                            <input type="checkbox" class="custom-control-input" id="disable-options" v-model="disabledOptions">
+                                            <label class="custom-control-label" for="disable-options">{{disabledOptions}}</label>
+                                        </div>
+                                        <label class="form-label" for="disable-options">{{disabledOptions}}</label>
+                                    </div>
+                                </div>
+                                <div v-if="addOptions">
+
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">New Option</th>
+                                            <th class="text-center">Is Correct</th>
+                                            <th class="text-center">?</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td style="min-width:70%;">
+                                                <ckeditor class="card mb-0" :editor="inlineEditor" v-model="option.option" title="Click to edit">...</ckeditor>
+                                            </td>
+                                            <td class="text-center"><input type="checkbox" v-model="option.correct"></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-success" @click="addOption(option)" title="Update Option"><i class="material-icons">add</i> Add</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
                                 </div>
                                 <table class="table">
                                     <thead>
@@ -238,7 +270,8 @@
                 classicEditor:   ClassicEditor,
                 inlineEditor:    InlineEditor,
                 question_image:  '',
-                disabledOptions: true
+                disabledOptions: true,
+                addOptions:      true
             }
         },
         created() {
@@ -252,13 +285,21 @@
         computed:   {
             ...mapState(
                 {
+                    option:   state => state.questions.option,
                     question: state => state.questions.question,
-                    tests:    state => state.questions.tests,
                     quiz:     state => state.quizes.quiz,
+                    tests:    state => state.questions.tests,
                 }),
+            question_id() {
+                return this.question.id;
+            }
         },
         methods:    {
-            create_updateQuestion: function () {
+            addOption(option) {
+                option.question_id = this.question_id;
+                this.$store.dispatch('questions/add_option', option);
+            },
+            create_updateQuestion() {
                 // drg >> check if we're creating a new question
                 this.question.origin_id = this.$route.params.id
                 this.question.is_new ?
@@ -280,7 +321,7 @@
             deleteOption(id) {
                 this.$store.dispatch('questions/delete_option', id);
             },
-            editOption: function (option) {
+            editOption(option) {
                 this.$store.dispatch('questions/edit_option', option);
             },
             questionImageChanged(e) {

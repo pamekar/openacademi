@@ -7,6 +7,10 @@ const state = {
     courses:     [],
     lesson:      [],
     lessons:     [],
+    option:      {
+        option:  "",
+        correct: 0
+    },
     pageCount:   0,
     pageFrom:    0,
     pagePer:     0,
@@ -54,6 +58,32 @@ const actions = {
         axios.post(`${endpoint}/questions`, form_data)
             .then(({data}) => {
                 router.push({name: 'edit-quiz', params: {id: question.origin_id}});
+                jQuery.notify({
+                    // options
+                    message: data.message,
+                }, {
+                    // settings
+                    type: data.type,
+                });
+            });
+    },
+    add_option({dispatch}, option) {
+        let form_data = new FormData();
+        // drg >> set list of tests
+        
+        let optionData = {
+            // drg >> slug is not added to the list of objects, because it's auto generated
+            question_id: option.question_id,
+            option_text: option.option,
+            correct:     Number(option.correct),
+        };
+        
+        for (let key in optionData) {
+            form_data.append(key, optionData[key]);
+        }
+        
+        axios.post(`${endpoint}/questions_options`, form_data)
+            .then(({data}) => {
                 jQuery.notify({
                     // options
                     message: data.message,

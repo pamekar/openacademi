@@ -46057,6 +46057,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -46070,7 +46102,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       classicEditor: __WEBPACK_IMPORTED_MODULE_2__ckeditor_ckeditor5_build_classic___default.a,
       inlineEditor: __WEBPACK_IMPORTED_MODULE_3__ckeditor_ckeditor5_build_inline___default.a,
       question_image: '',
-      disabledOptions: true
+      disabledOptions: true,
+      addOptions: true
     };
   },
 
@@ -46082,12 +46115,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     'multiselect': __WEBPACK_IMPORTED_MODULE_5_vue_multiselect___default.a
   },
   computed: _objectSpread({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+    option: state => state.questions.option,
     question: state => state.questions.question,
-    tests: state => state.questions.tests,
-    quiz: state => state.quizes.quiz
-  })),
+    quiz: state => state.quizes.quiz,
+    tests: state => state.questions.tests
+  }), {
+    question_id() {
+      return this.question.id;
+    }
+
+  }),
   methods: {
-    create_updateQuestion: function () {
+    addOption(option) {
+      option.question_id = this.question_id;
+      this.$store.dispatch('questions/add_option', option);
+    },
+
+    create_updateQuestion() {
       // drg >> check if we're creating a new question
       this.question.origin_id = this.$route.params.id;
       this.question.is_new ? this.$store.dispatch('questions/add', this.question) : this.$store.dispatch('questions/edit', this.question, this.$route.params.id);
@@ -46109,7 +46153,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.dispatch('questions/delete_option', id);
     },
 
-    editOption: function (option) {
+    editOption(option) {
       this.$store.dispatch('questions/edit_option', option);
     },
 
@@ -64288,18 +64332,94 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
                       _vm.question.options.length > 0
-                        ? _c("div", [
+                        ? _c("div", { staticClass: "card-body" }, [
                             _vm.question.options.length < 5
                               ? _c(
-                                  "button",
-                                  { staticClass: "btn btn-default" },
+                                  "div",
+                                  { staticClass: "form-group float-left" },
                                   [
+                                    _c("div", { staticClass: "form-label" }, [
+                                      _vm._v("Add Options")
+                                    ]),
+                                    _vm._v(" "),
                                     _c(
-                                      "i",
-                                      { staticClass: " material-icons" },
-                                      [_vm._v("add")]
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "custom-control custom-checkbox-toggle custom-control-inline mr-1"
+                                      },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.addOptions,
+                                              expression: "addOptions"
+                                            }
+                                          ],
+                                          staticClass: "custom-control-input",
+                                          attrs: {
+                                            type: "checkbox",
+                                            id: "add-options"
+                                          },
+                                          domProps: {
+                                            checked: Array.isArray(
+                                              _vm.addOptions
+                                            )
+                                              ? _vm._i(_vm.addOptions, null) >
+                                                -1
+                                              : _vm.addOptions
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              var $$a = _vm.addOptions,
+                                                $$el = $event.target,
+                                                $$c = $$el.checked
+                                                  ? true
+                                                  : false
+                                              if (Array.isArray($$a)) {
+                                                var $$v = null,
+                                                  $$i = _vm._i($$a, $$v)
+                                                if ($$el.checked) {
+                                                  $$i < 0 &&
+                                                    (_vm.addOptions = $$a.concat(
+                                                      [$$v]
+                                                    ))
+                                                } else {
+                                                  $$i > -1 &&
+                                                    (_vm.addOptions = $$a
+                                                      .slice(0, $$i)
+                                                      .concat(
+                                                        $$a.slice($$i + 1)
+                                                      ))
+                                                }
+                                              } else {
+                                                _vm.addOptions = $$c
+                                              }
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-control-label",
+                                            attrs: { for: "add-options" }
+                                          },
+                                          [_vm._v(_vm._s(_vm.addOptions))]
+                                        )
+                                      ]
                                     ),
-                                    _vm._v(" Add Options")
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "form-label",
+                                        attrs: { for: "add-options" }
+                                      },
+                                      [_vm._v(_vm._s(_vm.addOptions))]
+                                    )
                                   ]
                                 )
                               : _vm._e(),
@@ -64308,6 +64428,10 @@ var render = function() {
                               "div",
                               { staticClass: "form-group float-right" },
                               [
+                                _c("div", { staticClass: "form-label" }, [
+                                  _vm._v("Disable Options")
+                                ]),
+                                _vm._v(" "),
                                 _c(
                                   "div",
                                   {
@@ -64327,7 +64451,7 @@ var render = function() {
                                       staticClass: "custom-control-input",
                                       attrs: {
                                         type: "checkbox",
-                                        id: "video_image"
+                                        id: "disable-options"
                                       },
                                       domProps: {
                                         checked: Array.isArray(
@@ -64338,31 +64462,28 @@ var render = function() {
                                           : _vm.disabledOptions
                                       },
                                       on: {
-                                        change: [
-                                          function($event) {
-                                            var $$a = _vm.disabledOptions,
-                                              $$el = $event.target,
-                                              $$c = $$el.checked ? true : false
-                                            if (Array.isArray($$a)) {
-                                              var $$v = null,
-                                                $$i = _vm._i($$a, $$v)
-                                              if ($$el.checked) {
-                                                $$i < 0 &&
-                                                  (_vm.disabledOptions = $$a.concat(
-                                                    [$$v]
-                                                  ))
-                                              } else {
-                                                $$i > -1 &&
-                                                  (_vm.disabledOptions = $$a
-                                                    .slice(0, $$i)
-                                                    .concat($$a.slice($$i + 1)))
-                                              }
+                                        change: function($event) {
+                                          var $$a = _vm.disabledOptions,
+                                            $$el = $event.target,
+                                            $$c = $$el.checked ? true : false
+                                          if (Array.isArray($$a)) {
+                                            var $$v = null,
+                                              $$i = _vm._i($$a, $$v)
+                                            if ($$el.checked) {
+                                              $$i < 0 &&
+                                                (_vm.disabledOptions = $$a.concat(
+                                                  [$$v]
+                                                ))
                                             } else {
-                                              _vm.disabledOptions = $$c
+                                              $$i > -1 &&
+                                                (_vm.disabledOptions = $$a
+                                                  .slice(0, $$i)
+                                                  .concat($$a.slice($$i + 1)))
                                             }
-                                          },
-                                          _vm.mediaChanged
-                                        ]
+                                          } else {
+                                            _vm.disabledOptions = $$c
+                                          }
+                                        }
                                       }
                                     }),
                                     _vm._v(" "),
@@ -64370,7 +64491,7 @@ var render = function() {
                                       "label",
                                       {
                                         staticClass: "custom-control-label",
-                                        attrs: { for: "video_image" }
+                                        attrs: { for: "disable-options" }
                                       },
                                       [_vm._v(_vm._s(_vm.disabledOptions))]
                                     )
@@ -64381,17 +64502,134 @@ var render = function() {
                                   "label",
                                   {
                                     staticClass: "form-label",
-                                    attrs: { for: "video_image" }
+                                    attrs: { for: "disable-options" }
                                   },
-                                  [_vm._v("Toggle Edit")]
+                                  [_vm._v(_vm._s(_vm.disabledOptions))]
                                 )
                               ]
                             )
                           ])
                         : _vm._e(),
                       _vm._v(" "),
+                      _vm.addOptions
+                        ? _c("div", [
+                            _c("table", { staticClass: "table" }, [
+                              _vm._m(3),
+                              _vm._v(" "),
+                              _c("tbody", [
+                                _c("tr", [
+                                  _c(
+                                    "td",
+                                    { staticStyle: { "min-width": "70%" } },
+                                    [
+                                      _c(
+                                        "ckeditor",
+                                        {
+                                          staticClass: "card mb-0",
+                                          attrs: {
+                                            editor: _vm.inlineEditor,
+                                            title: "Click to edit"
+                                          },
+                                          model: {
+                                            value: _vm.option.option,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.option,
+                                                "option",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "option.option"
+                                          }
+                                        },
+                                        [_vm._v("...")]
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-center" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.option.correct,
+                                          expression: "option.correct"
+                                        }
+                                      ],
+                                      attrs: { type: "checkbox" },
+                                      domProps: {
+                                        checked: Array.isArray(
+                                          _vm.option.correct
+                                        )
+                                          ? _vm._i(_vm.option.correct, null) >
+                                            -1
+                                          : _vm.option.correct
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$a = _vm.option.correct,
+                                            $$el = $event.target,
+                                            $$c = $$el.checked ? true : false
+                                          if (Array.isArray($$a)) {
+                                            var $$v = null,
+                                              $$i = _vm._i($$a, $$v)
+                                            if ($$el.checked) {
+                                              $$i < 0 &&
+                                                _vm.$set(
+                                                  _vm.option,
+                                                  "correct",
+                                                  $$a.concat([$$v])
+                                                )
+                                            } else {
+                                              $$i > -1 &&
+                                                _vm.$set(
+                                                  _vm.option,
+                                                  "correct",
+                                                  $$a
+                                                    .slice(0, $$i)
+                                                    .concat($$a.slice($$i + 1))
+                                                )
+                                            }
+                                          } else {
+                                            _vm.$set(_vm.option, "correct", $$c)
+                                          }
+                                        }
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-sm btn-success",
+                                        attrs: { title: "Update Option" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.addOption(_vm.option)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          { staticClass: "material-icons" },
+                                          [_vm._v("add")]
+                                        ),
+                                        _vm._v(" Add")
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ])
+                            ])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
                       _c("table", { staticClass: "table" }, [
-                        _vm._m(3),
+                        _vm._m(4),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -64541,7 +64779,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._m(4)
+                      _vm._m(5)
                     ])
                   ])
                 : _vm._e()
@@ -64557,7 +64795,7 @@ var render = function() {
         { staticClass: "modal-dialog modal-dialog-centered modal-lg" },
         [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(5),
+            _vm._m(6),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c(
@@ -64815,21 +65053,21 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(6)
+                  _vm._m(7)
                 ]
               ),
               _vm._v(" "),
               _vm.question.options && _vm.question.type === "radio"
                 ? _c("div", { staticClass: "card" }, [
-                    _vm._m(7),
+                    _vm._m(8),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
                       _vm.question.options.length < 5
-                        ? _c("div", { staticClass: "col-md-9" }, [_vm._m(8)])
+                        ? _c("div", { staticClass: "col-md-9" }, [_vm._m(9)])
                         : _vm._e(),
                       _vm._v(" "),
                       _c("table", { staticClass: "table" }, [
-                        _vm._m(9),
+                        _vm._m(10),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -64953,7 +65191,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._m(10)
+                      _vm._m(11)
                     ])
                   ])
                 : _vm._e()
@@ -65008,6 +65246,20 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("h4", { staticClass: "card-title" }, [_vm._v("Options")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("New Option")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Is Correct")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("?")])
+      ])
     ])
   },
   function() {
@@ -76455,6 +76707,10 @@ const state = {
   courses: [],
   lesson: [],
   lessons: [],
+  option: {
+    option: "",
+    correct: 0
+  },
   pageCount: 0,
   pageFrom: 0,
   pagePer: 0,
@@ -76507,6 +76763,35 @@ const actions = {
           id: question.origin_id
         }
       });
+      jQuery.notify({
+        // options
+        message: data.message
+      }, {
+        // settings
+        type: data.type
+      });
+    });
+  },
+
+  add_option({
+    dispatch
+  }, option) {
+    let form_data = new FormData(); // drg >> set list of tests
+
+    let optionData = {
+      // drg >> slug is not added to the list of objects, because it's auto generated
+      question_id: option.question_id,
+      option_text: option.option,
+      correct: Number(option.correct)
+    };
+
+    for (let key in optionData) {
+      form_data.append(key, optionData[key]);
+    }
+
+    axios.post(`${endpoint}/questions_options`, form_data).then(({
+      data
+    }) => {
       jQuery.notify({
         // options
         message: data.message

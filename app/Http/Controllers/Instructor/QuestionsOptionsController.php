@@ -67,7 +67,12 @@ class QuestionsOptionsController extends Controller
         }
         $questions_option = QuestionsOption::create($request->all());
 
-        return redirect()->route('instructor.questions_options.index');
+        $status = [
+            'type'    => 'success',
+            'message' => "Option has been added successfully"
+        ];
+
+        return response()->json($status);
     }
 
 
