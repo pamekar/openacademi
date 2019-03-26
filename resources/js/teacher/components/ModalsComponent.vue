@@ -73,7 +73,13 @@
                             <div class="card-body">
                                 <div v-if="question.options.length>0">
                                     <button class="btn btn-default" v-if="question.options.length<5"><i class=" material-icons">add</i> Add Options</button>
-                                    <button class="btn btn-outline-default float-right" @click="editOption" title="Edit Option"><i class="material-icons">create</i> Toggle Edit</button>
+                                    <div class="form-group float-right">
+                                        <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1">
+                                            <input type="checkbox" id="video_image" class="custom-control-input" v-model="disabledOptions" @change="mediaChanged">
+                                            <label class="custom-control-label" for="video_image">{{disabledOptions}}</label>
+                                        </div>
+                                        <label class="form-label" for="video_image">Toggle Edit</label>
+                                    </div>
                                 </div>
                                 <table class="table">
                                     <thead>
@@ -93,6 +99,7 @@
                                         <td class="text-center"><input type="checkbox" v-model="question.options[index].correct"></td>
                                         <td>
                                             <button class="btn btn-sm btn-outline-danger" @click="deleteOption(option.id)" title="Delete Option"><i class="material-icons">delete_outline</i></button>
+                                            <button class="btn btn-sm btn-outline-success" @click="editOption(question.options[index])" title="Update Option" v-if="!disabledOptions"><i class="material-icons">check</i></button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -273,6 +280,9 @@
             deleteOption(id) {
                 this.$store.dispatch('questions/delete_option', id);
             },
+            editOption: function (option) {
+                this.$store.dispatch('questions/edit_option', option);
+            },
             questionImageChanged(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
@@ -288,10 +298,6 @@
                 this.options.push(tag);
                 this.value.push(tag);
             },
-            editOption(index) {
-                this.disabledOptions = !this.disabledOptions;
-            }
-            
         }
     }
 </script>

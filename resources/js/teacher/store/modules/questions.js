@@ -122,6 +122,32 @@ const actions = {
                 });
             });
     },
+    edit_option({dispatch}, option) {
+        let form_data = new FormData();
+        // drg >> set list of tests
+        
+        let optionData = {
+            // drg >> slug is not added to the list of objects, because it's auto generated
+            option_text: option.option_text,
+            corret:      Number(option.correct),
+            _method:     'PUT'
+        };
+        
+        for (let key in optionData) {
+            form_data.append(key, optionData[key]);
+        }
+        
+        axios.post(`${endpoint}/questions_options/${option.id}`, form_data)
+            .then(({data}) => {
+                jQuery.notify({
+                    // options
+                    message: data.message,
+                }, {
+                    // settings
+                    type: data.type,
+                });
+            });
+    },
     fetch({commit, dispatch}, id) {
         axios.get(`${endpoint}/questions/${id}`)
             .then(response => commit('SET_QUESTION', response.data)).catch();
@@ -129,7 +155,7 @@ const actions = {
     fetch_add({commit}) {
         // drg >> this action fetches all the questions as a list
         axios.get(`${endpoint}/questions/create`)
-            .then(function(response){
+            .then(function (response) {
                 commit('SET_ADD', response.data);
                 document.getElementById("addQuestionForm").reset();
                 jQuery("#addQuestion").modal();
@@ -145,7 +171,7 @@ const actions = {
     fetch_edit({commit, dispatch}, id) {
         commit('SET_EMPTY');
         axios.get(`${endpoint}/questions/${id}/edit`)
-            .then(function(response){
+            .then(function (response) {
                 commit('SET_QUESTION_EDIT', response.data)
                 jQuery("#editQuestion").modal();
             }).catch();

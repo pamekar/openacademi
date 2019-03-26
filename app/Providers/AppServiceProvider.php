@@ -19,9 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-
         $public = config('app.env') == 'production' ? '/main/public' : '';
-
 
         $categories = CourseCategory::select('id', 'title', 'icon', 'slug')
             ->get();

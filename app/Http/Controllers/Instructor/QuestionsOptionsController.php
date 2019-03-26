@@ -18,13 +18,13 @@ class QuestionsOptionsController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('questions_option_access')) {
+        if (!Gate::allows('questions_option_access')) {
             return abort(401);
         }
 
 
         if (request('show_deleted') == 1) {
-            if (! Gate::allows('questions_option_delete')) {
+            if (!Gate::allows('questions_option_delete')) {
                 return abort(401);
             }
             $questions_options = QuestionsOption::onlyTrashed()->get();
@@ -43,10 +43,11 @@ class QuestionsOptionsController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('questions_option_create')) {
+        if (!Gate::allows('questions_option_create')) {
             return abort(401);
         }
-        $questions = \App\Question::get()->pluck('question', 'id')->prepend('Please select', '');
+        $questions = \App\Question::get()->pluck('question', 'id')
+            ->prepend('Please select', '');
 
         return response()->json($questions);
 
@@ -55,12 +56,13 @@ class QuestionsOptionsController extends Controller
     /**
      * Store a newly created QuestionsOption in storage.
      *
-     * @param  \App\Http\Requests\StoreQuestionsOptionsRequest  $request
+     * @param  \App\Http\Requests\StoreQuestionsOptionsRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreQuestionsOptionsRequest $request)
     {
-        if (! Gate::allows('questions_option_create')) {
+        if (!Gate::allows('questions_option_create')) {
             return abort(401);
         }
         $questions_option = QuestionsOption::create($request->all());
@@ -72,50 +74,61 @@ class QuestionsOptionsController extends Controller
     /**
      * Show the form for editing QuestionsOption.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        if (! Gate::allows('questions_option_edit')) {
+        if (!Gate::allows('questions_option_edit')) {
             return abort(401);
         }
-        $questions = \App\Question::get()->pluck('question', 'id')->prepend('Please select', '');
+        $questions = \App\Question::get()->pluck('question', 'id')
+            ->prepend('Please select', '');
 
         $questions_option = QuestionsOption::findOrFail($id);
 
-        return response()->json(['questions'=>$questions,'questions_options'=>$questions_option]);
+        return response()->json(['questions'         => $questions,
+                                 'questions_options' => $questions_option
+        ]);
 
     }
 
     /**
      * Update QuestionsOption in storage.
      *
-     * @param  \App\Http\Requests\UpdateQuestionsOptionsRequest  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateQuestionsOptionsRequest $request
+     * @param  int                                              $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateQuestionsOptionsRequest $request, $id)
     {
-        if (! Gate::allows('questions_option_edit')) {
+        if (!Gate::allows('questions_option_edit')) {
             return abort(401);
         }
         $questions_option = QuestionsOption::findOrFail($id);
         $questions_option->update($request->all());
 
-        return redirect()->route('instructor.questions_options.index');
+        $status = [
+            'type'    => 'success',
+            'message' => "Option has been updated successfully"
+        ];
+
+        return response()->json($status);
     }
 
 
     /**
      * Display QuestionsOption.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        if (! Gate::allows('questions_option_view')) {
+        if (!Gate::allows('questions_option_view')) {
             return abort(401);
         }
         $questions_option = QuestionsOption::findOrFail($id);
@@ -128,12 +141,13 @@ class QuestionsOptionsController extends Controller
     /**
      * Remove QuestionsOption from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        if (! Gate::allows('questions_option_delete')) {
+        if (!Gate::allows('questions_option_delete')) {
             return abort(401);
         }
 
@@ -154,11 +168,12 @@ class QuestionsOptionsController extends Controller
      */
     public function massDestroy(Request $request)
     {
-        if (! Gate::allows('questions_option_delete')) {
+        if (!Gate::allows('questions_option_delete')) {
             return abort(401);
         }
         if ($request->input('ids')) {
-            $entries = QuestionsOption::whereIn('id', $request->input('ids'))->get();
+            $entries = QuestionsOption::whereIn('id', $request->input('ids'))
+                ->get();
 
             foreach ($entries as $entry) {
                 $entry->delete();
@@ -170,12 +185,13 @@ class QuestionsOptionsController extends Controller
     /**
      * Restore QuestionsOption from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        if (! Gate::allows('questions_option_delete')) {
+        if (!Gate::allows('questions_option_delete')) {
             return abort(401);
         }
         $questions_option = QuestionsOption::onlyTrashed()->findOrFail($id);
@@ -187,12 +203,13 @@ class QuestionsOptionsController extends Controller
     /**
      * Permanently delete QuestionsOption from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function perma_del($id)
     {
-        if (! Gate::allows('questions_option_delete')) {
+        if (!Gate::allows('questions_option_delete')) {
             return abort(401);
         }
         $questions_option = QuestionsOption::onlyTrashed()->findOrFail($id);
