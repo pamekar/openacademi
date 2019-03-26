@@ -84,6 +84,7 @@ const actions = {
         
         axios.post(`${endpoint}/questions_options`, form_data)
             .then(({data}) => {
+                jQuery("#editQuestion").modal('hide');
                 jQuery.notify({
                     // options
                     message: data.message,
@@ -105,7 +106,8 @@ const actions = {
                 if (willDelete) {
                     axios.delete(`${endpoint}/questions_options/${id}`)
                         .then(({data}) => {
-                            jQuery.notify({
+                            jQuery("#editQuestion").modal('hide');
+                        jQuery.notify({
                                 // options
                                 message: data.message,
                             }, {
@@ -169,6 +171,7 @@ const actions = {
         
         axios.post(`${endpoint}/questions_options/${option.id}`, form_data)
             .then(({data}) => {
+                jQuery("#editQuestion").modal('hide');
                 jQuery.notify({
                     // options
                     message: data.message,
