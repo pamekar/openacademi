@@ -36,14 +36,14 @@ Route::patch('change_password', 'Auth\ChangePasswordController@changePassword')
 Route::get('faq', 'HomeController@faq')->name('faq');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/user/{all}', function () {
+    Route::get('/user/{all?}', function () {
         if (\Illuminate\Support\Facades\Auth::user()->isStudent()) {
             return view('dashboard.student.index');
         } elseif (\Illuminate\Support\Facades\Auth::user()->isInstructor()) {
             return view('dashboard.instructor.index');
         }
         return redirect('/');
-    })->where(['all' => '.*']);
+    })->where(['all' => '.*'])->name('user');
 
 });
 
