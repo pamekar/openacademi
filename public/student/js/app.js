@@ -36480,6 +36480,7 @@ const routes = [{
   redirect: '/error404'
 }];
 const router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
+  mode: 'history',
   routes
 }); // drg >> start progress bar before route request
 
