@@ -23,7 +23,7 @@ import Account from './views/Account.vue';
 
 const Error404 = {
     beforeRouteEnter(to, from, next) {
-        window.location('/error/404');
+        window.location('/user/error/404');
     },
 };
 const routes = [
@@ -32,87 +32,87 @@ const routes = [
         name:      'home',
         component: {
             beforeRouteEnter(to, from, next) {
-                window.location = '/home';
+                window.location = '/user/home';
             }
         }
     },
     {
-        path:      '/',
+        path:      '/user/',
         name:      'dashboard',
         component: Index
     },
     {
-        path:      '/course/add',
+        path:      '/user/course/add',
         name:      'add-course',
         component: AddCourse
     },
     {
-        path:      '/course/:id',
+        path:      '/user/course/:id',
         name:      'view-course',
         component: Course
     },
     {
-        path:      '/courses',
+        path:      '/user/courses',
         name:      'show-courses',
         component: Courses
     },
     {
-        path:      '/course/:id/edit',
+        path:      '/user/course/:id/edit',
         name:      'edit-course',
         component: EditCourse
     },
     {
-        path:      '/lesson/add/:id?',
+        path:      '/user/lesson/add/:id?',
         name:      'add-lesson',
         component: AddLesson
     },
     {
-        path:      '/lesson/:id',
+        path:      '/user/lesson/:id',
         name:      'view-lesson',
         component: Lesson
     },
     {
-        path:      '/lessons',
+        path:      '/user/lessons',
         name:      'show-lessons',
         component: Lessons
     },
     {
-        path:      '/lesson/:id/edit',
+        path:      '/user/lesson/:id/edit',
         name:      'edit-lesson',
         component: EditLesson
     },
     {
-        path:      '/quiz/add',
+        path:      '/user/quiz/add',
         name:      'add-quiz',
         component: AddQuiz
     },
     {
-        path:      '/quiz/:id',
+        path:      '/user/quiz/:id',
         name:      'view-quiz',
         component: Quiz
     },
     {
-        path:      '/quizes',
+        path:      '/user/quizes',
         name:      'show-quizes',
         component: Quizes
     },
     {
-        path:      '/quiz/:id/edit',
+        path:      '/user/quiz/:id/edit',
         name:      'edit-quiz',
         component: EditQuiz
     },
     {
-        path:      '/question/:id',
+        path:      '/user/question/:id',
         name:      'view-question',
         component: Question
     },
     {
-        path:      '/question/add',
+        path:      '/user/question/add',
         name:      'add-question',
         component: AddQuestion
     },
     {
-        path:      '/questions',
+        path:      '/user/questions',
         name:      'show-questions',
         component: Questions
     },
@@ -122,26 +122,31 @@ const routes = [
         component: Account
     },
     {
-        path:      '/dashboard',
+        path:      '/user/dashboard',
         component: Index
     },
     {
-        path:      '/404',
+        path:      '/user/404',
         name:      'error',
         component: Error404
     },
     {
-        path:      '/logout',
-        name:      'logout',
-        component: Error404
+        path: '/user/logout',
+        name: 'logout',
+        component: {
+            beforeRouteEnter(to, from, next) {
+                document.getElementById('logout-form').submit();
+            }
+        }
     },
     {
         path:     '*',
-        redirect: '/404'
+        redirect: '/user/404'
     },
 ];
 
 const router = new VueRouter({
+    mode: 'history',
     routes
 });
 
