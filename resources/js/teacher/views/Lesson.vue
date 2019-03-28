@@ -20,9 +20,7 @@
                     <div class="embed-responsive embed-responsive-16by9" v-if="lesson.lesson_image_type == 'video'">
                         <iframe class="embed-responsive-item" :src="lesson.lesson_image" allowfullscreen=""></iframe>
                     </div>
-                    <div class="card-body">
-                        {{lesson.full_text}}
-                    </div>
+                    <div class="card-body" v-html="lesson.full_text"></div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -92,8 +90,7 @@
         components: {
             'lessons-list-component': LessonsListComponent,
         },
-        methods:    {
-        },
+        methods:    {},
         computed:   {
             ...mapState(
                 {
