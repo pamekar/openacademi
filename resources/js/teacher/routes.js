@@ -32,7 +32,7 @@ const routes = [
         name:      'home',
         component: {
             beforeRouteEnter(to, from, next) {
-                window.location = '/user/home';
+                window.location = '/home';
             }
         }
     },

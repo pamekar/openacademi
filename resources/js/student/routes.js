@@ -15,7 +15,7 @@ import QuizResult from './views/QuizResult.vue';
 const Error404 = {
     template: "",
     beforeRouteEnter(to, from, next) {
-        window.location('/error/404');
+        window.location('/user/error/404');
     },
 };
 const routes = [
@@ -29,74 +29,74 @@ const routes = [
         }
     },
     {
-        path:      '/',
+        path:      '/user/',
         name:      'dashboard',
         component: Index
     },
     {
-        path:      '/course/:slug',
+        path:      '/user/course/:slug',
         name:      'course',
         component: Course
     },
     {
-        path:      '/courses/all',
+        path:      '/user/courses/all',
         name:      'all-courses',
         component: Courses
     },
     {
-        path:      '/courses/categories/:slug',
+        path:      '/user/courses/categories/:slug',
         name:      'category-courses',
         component: CategoryCourses,
         props:     true
     },
     {
-        path:      '/lesson/:id/:slug',
+        path:      '/user/lesson/:id/:slug',
         name:      'lesson',
         component: Lesson
     },
     {
-        path:      '/courses/purchased',
+        path:      '/user/courses/purchased',
         name:      'purchased-courses',
         component: PurchasedCourses
     },
     {
-        path:      '/courses/tags/:tag',
+        path:      '/user/courses/tags/:tag',
         name:      'tag-courses',
         component: TagCourses,
         props:     true
     },
     {
-        path:      '/quiz/:id',
+        path:      '/user/quiz/:id',
         name:      'quiz',
         component: Quiz,
     },
     {
-        path:      '/quizes',
+        path:      '/user/quizes',
         name:      'quizes',
         component: Quizes,
     },
     {
-        path:      '/quiz/result/:id',
+        path:      '/user/quiz/result/:id',
         name:      'quiz-result',
         component: QuizResult,
     },
     {
-        path:      '/quiz/:id/:slug',
+        path:      '/user/quiz/:id/:slug',
         name:      'quiz-instructions',
         component: QuizInstructions,
     },
     {
-        path:      '/dashboard',
+        path:      '/user/dashboard',
         component: Index
     },
     {
-        path:      '/404',
+        path:      '/user/404',
         name:      'error',
         component: Error404
     },
     {
         path:     '*',
-        redirect: '/error404'
+        redirect: '/user/error404'
     },
 ];
 
