@@ -52,7 +52,7 @@ class Course extends Model
             'completed_lessons',
             'rating',
             'course_cat',
-            'instructor'
+            'instructor',
         ];
 
     /**
