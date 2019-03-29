@@ -11,6 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.js('resources/js/app.js', 'public/js')
 mix.js('resources/js/student/app.js', 'public/student/js')
     .sass('resources/sass/student/app.scss', 'public/student/css');
 mix.js('resources/js/teacher/app.js', 'public/teacher/js')
