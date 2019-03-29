@@ -5,7 +5,7 @@
         <img src="{{asset("$public/jpg/pagetop.jpg")}}" alt=""/>
         <div class="pagetop-inner">
             <div class="container">
-                <h1>All Courses</h1>
+                <h1>Education Courses</h1>
                 <ul class="breadcrumbs">
                     <li><a href="#" title=""><i class="fa fa-home"></i> Home</a></li>
                     <li>Courses</li>
