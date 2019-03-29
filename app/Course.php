@@ -51,7 +51,8 @@ class Course extends Model
             'total_lessons',
             'completed_lessons',
             'rating',
-            'course_cat'
+            'course_cat',
+            'instructor'
         ];
 
     /**
@@ -78,6 +79,11 @@ class Course extends Model
     public function getTagsAttribute($tags)
     {
         return explode(';', $tags);
+    }
+
+    public function getInstructorAttribute()
+    {
+        return Instructor::where('user_id', $this->user_id)->first();
     }
 
     public function course_category()
