@@ -13,14 +13,13 @@ class CoursesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index','show']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     public function index($category = null)
     {
-
+        $isCategory = false;
         if (isset($category)) {
-
             $isCategory = CourseCategory::where('slug', $category)->first();
             if ($isCategory) {
                 $courses = Course::where('published', 1)
@@ -34,7 +33,7 @@ class CoursesController extends Controller
                 ->get();
         }
 
-        return view('courses', compact('courses', 'categories'));
+        return view('courses', compact('courses', 'categories','isCategory'));
     }
 
     public function show($course_slug)
