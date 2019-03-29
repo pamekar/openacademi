@@ -1,326 +1,472 @@
 <!DOCTYPE html>
-<html class="no-js">
+<!--[if IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
 
-<!-- Mirrored from bitlers.com/html/easy-edu/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Jan 2019 10:13:27 GMT -->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
     <title>@yield('pageTitle') | {{setting('site.title')}}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content=""/>
-    <meta name="keywords" content=""/>
 
-    <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/bootstrap.min.css")}}"/>
-    <link rel="stylesheet" href="{{asset("$public/css/icons.css")}}">
-    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/style.css")}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/responsive.css")}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/color.css")}}"/>
+    <meta name="author" content="themesflat.com">
 
-    <!-- REVOLUTION STYLE SHEETS -->
-    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/settings.css")}}">
-    <link rel="stylesheet" type="text/css" href="{{asset("$public/css/navigation.css")}}">
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" type="text/css" href="{{$public}}/css/bootstrap.css">
+
+    <!-- Theme Style -->
+    <link rel="stylesheet" type="text/css" href="{{$public}}/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{$public}}/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="{{$public}}/css/color1.css" id="colors">
+
+    <link rel="shortcut icon" href="png/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="png/favicon-apple.png">
+
+
 </head>
-<body>
-<div class="theme-layout">
-    <header>
+<body class="bg-body3">
+<div class="boxed" id="app">
+    <div class="preloader">
+                <span class="loader">
+                    <span class="loader-inner"></span>
+                </span>
+    </div> <!-- /.preloader -->
+
+    <div id="header" class="bg-fff style1">
         <div class="container">
-            <div class="logo"><a href="{{route('home')}}" title=""><img src="{{asset("$public/png/logo.png")}}" alt=""/></a>
-            </div><!-- Logo -->
-            <div class="header-wrap">
-                <div class="topbar">
-                    <span>
-							Stay Connected: 
-							<span class="socials">
-								<a href="#" title=""><i class="fa fa-facebook"></i></a>
-								<a href="#" title=""><i class="fa fa-twitter"></i></a>
-								<a href="#" title=""><i class="fa fa-linkedin"></i></a>
-							</span>
-						</span>
-
-                    <div class="registration">
-                        @guest
-                            <a href="{{route('register')}}" title="">Register</a>
-                            <a href="{{route('login')}}" title="">Sign in</a>
-                        @endguest
-                        @auth
-                            <a href="{{route('user')}}" title="">Dashboard</a>
-                            <a href="{{route('logout')}}" title=""
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                        @endauth
+            <div class="header-wrap clearfix">
+                <div id="logo">
+                    <a href="{{url('')}}"><img src="{{$public}}/png/logo.png" alt="bookflare" width="157" height="29"
+                                                data-retina="images/logo/logo@2x.png" data-width="157" data-height="29"></a>
+                </div>
+                <div class="extra-menu float-left flat-text-left clearfix">
+                    <div class="wrap-search-header">
+                        <div class="search-header">
+                            <form>
+                                <input type="search" name="key" placeholder="Search for Courses">
+                                <button class="btn-search"><span class="icon-search"></span></button>
+                            </form>
+                        </div>
                     </div>
-                </div><!-- Top Bar -->
-
-                <div class="menubar">
-                    <nav>
-                        <ul>
-                            <li><a href="{{route('home')}}" title="">Home</a></li>
-                            <li><a href="{{route('courses.all')}}" title="">Courses</a></li>
+                </div>
+                <div class="nav-wrap flat-text-left style1">
+                    <nav id="main-nav">
+                        <ul class="menu">
+                            <li class="active">
+                                <a href="#">COURSES</a>
+                                <ul class="submenu">
+                                    <li class="active"><a href="{{route('courses.all')}}">Browse Course</a></li>
+                                    <li><a href="{{route('courses.all')}}">My Courses</a></li>
+                                </ul>
+                            </li>
                             <li>
-                                <a href="javascript:void(0)" title="">Categories</a>
-                                <ul style="min-width: 290px;">
-                                    <li><a href="{{route('courses.all')}}"><i class="icon-list"></i> All Courses</a>
-                                    </li>
+                                <a href="#">CATEGORIES</a>
+                                <ul class="submenu">
                                     @foreach($categories as $category)
                                         <li>
                                             <a href="{{route('courses.all',['category'=>$category->slug])}}">
-                                                <i class="{{$category->icon}}"></i> {{$category->title}}
+                                                <i class="mr-3 {{$category->icon}}"></i> {{$category->title}}
                                             </a>
                                         </li>
                                     @endforeach
                                 </ul>
                             </li>
-                            <li><a href="{{route('faq')}}" title="">FAQ</a></li>
+                            @guest
+                                <li class="d-md-none d-block"><a href="{{route('register')}}">Register</a></li>
+                                <li class="d-md-none d-block"><a href="{{route('login')}}">Login</a></li>
+                            @endguest
+                            @auth
+                                <li class="d-md-none d-block"><a href="{{route('user')}}">Dashboard</a></li>
+                                <li class="d-md-none d-block"><a href="{{route('logout')}}" title=""
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                </li>
+                            @endauth
                         </ul>
                     </nav>
-
-                    <div class="header-search-bar">
-                        <form action="google.com" class="form-inline">
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Search for Courses" type="text">
+                </div>
+                <div class="nav-wrap flat-text-left float-right style1 d-none d-lg-block">
+                    <nav id="main-nav">
+                        <ul class="menu">
+                            @guest
+                                <li><a href="{{route('register')}}">Register</a></li>
+                                <li><a href="{{route('login')}}">Login</a></li>
+                            @endguest
+                            @auth
+                                <li><a href="{{route('user')}}">Dashboard</a></li>
+                                <li><a href="{{route('logout')}}" title=""
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                </li>
+                            @endauth
+                        </ul>
+                    </nav>
+                </div>
+                <div class="extra-menu flat-text-left clearfix">
+                    <div class="cart nav-top-cart-wrapper">
+                        <a href="#"><span class="bf-icon icon-cart"></span></a> <span class="count-cart">0</span>
+                        <div class="nav-shop-cart">
+                            <div class="widget_shopping_cart_content">
+                                <div class="woocommerce-min-cart-wrap">
+                                    <ul class="woocommerce-mini-cart cart_list product_list_widget flat-text-center">
+                                        <li class="woocommerce-mini-cart-item mini_cart_item">
+                                            <span>No Items in Shopping Cart</span>
+                                        </li>
+                                    </ul>
+                                </div><!-- /.widget_shopping_cart_content -->
                             </div>
-                            <button class="btn btn-info"><i class="icon-magnifier"></i></button>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div><!-- Header Wrap -->
-        </div>
-    </header><!-- Header -->
+                <div class="mobile-button">
+                    <span></span>
+                </div>
 
-    <div class="responsive-header">
-        <div class="topbar">
-            <span>For Free Consultation: <i>+(011) 345 6789</i></span>
-            <span>
-					Stay Connected: 
-					<span class="socials">
-						<a href="#" title=""><i class="fa fa-facebook"></i></a>
-						<a href="#" title=""><i class="fa fa-twitter"></i></a>
-						<a href="#" title=""><i class="fa fa-linkedin"></i></a>
-					</span>
-				</span>
-
-            <div class="registration">
-                <a href="login-registration.html" title="">Register</a> <a href="login-registration.html" title="">Sign
-                    in</a>
             </div>
-        </div><!-- Top Bar -->
-
-        <div class="responsive-logobar">
-            <div class="responsive-logo"><a href="index-2.html" title=""><img src="{{asset("$public/png/logo.png")}}"
-                                                                              alt=""/></a></div>
-            <a class="menu-button" href="#" title=""><i class="fa fa-bars"></i></a>
-        </div><!-- Responsive Logbar -->
-        <div class="responsive-menu">
-            <a class="close-menu" href="#" title=""><i class="fa fa-remove"></i></a>
-            <ul>
-                <li><a href="index-2.html" title="">Home</a>
-                    <ul>
-                        <li><a href="index-2.html" title="">Homepage Style 1</a></li>
-                        <li><a href="index2.html" title="">Homepage Style 2</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" title="">Pages</a>
-                    <ul>
-                        <li><a href="blog.html" title="">Blog</a>
-                            <ul>
-                                <li><a href="blog.html" title="">Blog Page</a></li>
-                                <li><a href="blog-details.html" title="">Blog Detail Page</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="events.html" title="">Events</a>
-                            <ul>
-                                <li><a href="events.html" title="">Events Page</a></li>
-                                <li><a href="event-detail.html" title="">Event Detail Page</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="team.html" title="">Team</a>
-                            <ul>
-                                <li><a href="team.html" title="">Team Page</a></li>
-                                <li><a href="team-detail.html" title="">Team Detail Page</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="faqs.html" title="">FAQ'S Page</a></li>
-                        <li><a href="404.html" title="">Error 404 Page</a></li>
-                        <li><a href="search-found.html" title="">Search Found Page</a></li>
-                        <li><a href="search-not-found.html" title="">Search Not Found Page</a></li>
-                        <li><a href="login-registration.html" title="">Login / Registration Page</a></li>
-                    </ul>
-                </li>
-                <li><a href="courses.html" title="">Courses</a>
-                    <ul>
-                        <li><a href="courses.html" title="">Courses Page Style 1</a></li>
-                        <li><a href="courses2.html" title="">Courses Page Style 2</a></li>
-                        <li><a href="course-detail.html" title="">Courses Detail</a></li>
-                    </ul>
-                </li>
-                <li><a href="gallery1.html" title="">Gallery Styles</a>
-                    <ul>
-                        <li><a href="gallery1.html" title="">Gallery Style 1</a></li>
-                        <li><a href="gallery2.html" title="">Gallery Style 2</a></li>
-                        <li><a href="gallery3.html" title="">Gallery Style 3</a></li>
-                    </ul>
-                </li>
-                <li><a href="about.html" title="">About Us</a></li>
-                <li><a href="contact.html" title="">Contact Us</a></li>
-            </ul>
         </div>
-    </div><!-- Responsive Header -->
+    </div> <!-- #header -->
 
     @yield('main')
-    <footer>
-        <div class="container">
-            <div class="footer-widgets">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="widget">
-                            <div class="about-widget">
-                                <div class="widget-logo"><a href="index-2.html" title=""><img
-                                                src="{{asset("$public/png/logo2-2.png")}}" alt=""/></a></div>
-                                <p>Rem iplsum dolor sit amet, consectetuer adipiscin gelit, sed diam nonummy nibh
-                                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat euimod....</p>
-                                <ul>
-                                    <li><span><i class="fa fa-map-marker"></i></span> Washington NY, United States.</li>
-                                    <li><span><i class="fa fa-envelope"></i></span> Support@domain.com</li>
-                                    <li><span><i class="fa fa-phone"></i></span> (123)+ 124 45 67 678</li>
-                                </ul>
-                            </div>
-                        </div><!-- Widget -->
-                    </div>
-                    <div class="col-md-2">
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h5><i>EDU</i> Information</h5>
-                                <span>Our Programs</span>
-                            </div>
-                            <ul>
-                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Arts & Social Sciences</a></li>
-                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Sciences</a></li>
-                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Studies & Language</a></li>
-                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Pharmacy</a></li>
-                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Veterinary Science</a></li>
-                                <li><a href="#" title=""><i class="fa fa-bookmark"></i> Engineering</a></li>
-                            </ul>
-                        </div><!-- Widget -->
-                    </div>
-                    <div class="col-md-3">
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h5><i>EDU</i> Gallery Posts</h5>
-                                <span>Education Images</span>
-                            </div>
-                            <div class="edu-gallery">
-                                <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="{{asset("$public/images/resource/gallery1.jpg")}}"
-                                                         data-group="set1" title="Gallery 1"
-                                                         href="{{asset("$public/jpg/gallery1.jpg")}}"
-                                    ><img src="{{asset("$public/jpg/gallery1.jpg")}}" alt=""/></a></div>
-                                <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="{{asset("$public/images/resource/gallery2.jpg")}}"
-                                                         data-group="set1" title="Gallery 2"
-                                                         href="{{asset("$public/jpg/gallery2.jpg")}}"
-                                    ><img src="{{asset("$public/jpg/gallery2.jpg")}}" alt=""/></a></div>
-                                <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="{{asset("$public/images/resource/gallery3.jpg")}}"
-                                                         data-group="set1" title="Gallery 3"
-                                                         href="{{asset("$public/jpg/gallery3.jpg")}}"
-                                    ><img src="{{asset("$public/jpg/gallery3.jpg")}}" alt=""/></a></div>
-                                <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="{{asset("$public/images/resource/gallery4.jpg")}}"
-                                                         data-group="set1" title="Gallery 4"
-                                                         href="{{asset("$public/jpg/gallery4.jpg")}}"
-                                    ><img src="{{asset("$public/jpg/gallery4.jpg")}}" alt=""/></a></div>
-                                <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="{{asset("$public/images/resource/gallery5.jpg")}}"
-                                                         data-group="set1" title="Gallery 5"
-                                                         href="{{asset("$public/jpg/gallery5.jpg")}}"
-                                    ><img src="{{asset("$public/jpg/gallery5.jpg")}}" alt=""/></a></div>
-                                <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="{{asset("$public/images/resource/gallery6.jpg")}}"
-                                                         data-group="set1" title="Gallery 6"
-                                                         href="{{asset("$public/jpg/gallery6.jpg")}}"
-                                    ><img src="{{asset("$public/jpg/gallery6.jpg")}}" alt=""/></a></div>
-                                <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="{{asset("$public/images/resource/gallery7.jpg")}}"
-                                                         data-group="set1" title="Gallery 7"
-                                                         href="{{asset("$public/jpg/gallery7.jpg")}}"
-                                    ><img src="{{asset("$public/jpg/gallery7.jpg")}}" alt=""/></a></div>
-                                <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="{{asset("$public/images/resource/gallery8.jpg")}}"
-                                                         data-group="set1" title="Gallery 8"
-                                                         href="{{asset("$public/jpg/gallery8.jpg")}}"
-                                    ><img src="{{asset("$public/jpg/gallery8.jpg")}}" alt=""/></a></div>
-                                <div class="col-md-4"><a class="html5lightbox"
-                                                         data-thumbnail="{{asset("$public/images/resource/gallery9.jpg")}}"
-                                                         data-group="set1" title="Gallery 9"
-                                                         href="{{asset("$public/jpg/gallery9.jpg")}}"
-                                    ><img src="{{asset("$public/jpg/gallery9.jpg")}}" alt=""/></a></div>
-                            </div>
 
-                        </div><!-- Widget -->
+    <section class="flat-feature parallax parallax2">
+        <!-- <div class="overlay"></div> -->
+        <div class="container">
+            <div class="row flat-iconbox style1">
+                <div class="col-lg-4 col-md-4">
+                    <div class="iconbox style1 left">
+                        <div class="iconbox-icon">
+                            <span class="icon-book"></span>
+                        </div>
+                        <div class="iconbox-content">
+                            <h5 class="title">80,000 ONLINE COURSES</h5>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h5><i>EDU</i> Newsletter</h5>
-                                <span>For any updates</span>
-                            </div>
-                            <div class="newsletter-widget">
-                                <p>Rem iplsum dolor sit amet, consectetuer sed diam nonummy nibh euismod.</p>
-                                <form>
-                                    <input type="text" placeholder="Your Email Address"/>
-                                    <button class="button active small">Submit Now</button>
-                                </form>
-                            </div>
-                        </div><!-- Widget -->
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="iconbox style1 center">
+                        <div class="iconbox-icon">
+                            <span class="icon-people"></span>
+                        </div>
+                        <div class="iconbox-content">
+                            <h5 class="title">EXPERT INSTRUCTION</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="iconbox style1 right">
+                        <div class="iconbox-icon">
+                            <span class="icon-key"></span>
+                        </div>
+                        <div class="iconbox-content">
+                            <h5 class="title">LIFETIME ACCESS</h5>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </footer><!-- Footer -->
+    </section> <!-- /.flat-feature -->
 
-    <div class="bottom-footer">
+    <footer id="footer">
         <div class="container">
-            <p>COPYRIGHT © 2016 - <a href="#" title="">Easy EDU</a>. ALL RIGHTS RESERVED </p>
-            <ul>
-                <li><a href="index-2.html" title="">Home</a></li>
-                <li><a href="courses.html" title="">Courses</a></li>
-                <li><a href="events.html" title="">Events</a></li>
-                <li><a href="gallery1.html" title="">Gallery</a></li>
-                <li><a href="blog.html" title="">Blog</a></li>
-                <li><a href="contact.html" title="">Contact Us</a></li>
-            </ul>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="widget-about">
+                        <div id="logo-ft">
+                            <a href="index-2.html"><img src="{{$public}}/png/logo-ft.png" alt="bookflare" width="157"
+                                                        height="29" data-retina="images/logo/logo-ft@2x.png"
+                                                        data-width="157" data-height="29"></a>
+                        </div>
+                        <p class="description">We are a new design studio based in USA. We have over 20 years of
+                            combined experience, and know a thing or two about designing websites and mobile apps.</p>
+                        <div class="list-info">
+                            <ul>
+                                <li class="address"><a href="#">1107 Wood Street Saginaw, MI New York 48607</a></li>
+                                <li class="phone"><a href="#">+123 345 678 000</a></li>
+                                <li class="mail"><a href="#">info@example.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="socails">
+                            <ul class="list">
+                                <li><a href="#"><span class="fa fa-twitter"></span></a></li>
+                                <li><a href="#"><span class="fa fa-linkedin-square"></span></a></li>
+                                <li><a href="#"><span class="fa fa-facebook-official"></span></a></li>
+                                <li><a href="#"><span class="fa fa-skype"></span></a></li>
+                                <li><a href="#"><span class="fa fa-pinterest-square"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="widget-link widget-ft">
+                        <h6 class=" widget-title">USEFUL LINK</h6>
+                        <div class="list-wrap clearfix">
+                            <ul class="one-of-two">
+                                <li><a href="#">Register Activation Key</a></li>
+                                <li><a href="#"> Our Plans</a></li>
+                                <li><a href="#"> Government Solutions</a></li>
+                                <li><a href="#">Academic Solutions</a></li>
+                                <li><a href="#">Intellectual Property</a></li>
+                            </ul>
+                            <ul class="one-of-two">
+                                <li><a href="#">Free Trial</a></li>
+                                <li><a href="#"> Support</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="widget-recent-work widget-ft">
+                        <h6 class="widget-title">RECENT WORK</h6>
+                        <div class="flat-recentOwl" data-column="4" data-column2="3" data-loop="true" data-column3="2"
+                             data-gap="0" data-dots="false" data-nav="true">
+                            <div class="flat-imgbox style1 clearfix owl-carousel">
+                                <div class="column">
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-1.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-5.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-2.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-6.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-3.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-7.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-4.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-8.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-1.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-2.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-3.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-4.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-5.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-6.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-7.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-8.png" alt="bookflare">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrap-btn">
+                            <a href="#" class="btn-view-more">VIEW MORE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div><!-- Bottom Footer -->
+    </footer> <!-- #footer -->
+
+    <div class="bottom bg-15222e">
+        <div class="container">
+            <div class="row">
+                <div class="  col-md-6">
+                    <div class="copyright flat-text-left">
+                        <p>© Copyright 2018 <a href="#">tophive</a>. All Rights Reserved.</p>
+                    </div>
+                </div>
+                <div class="  col-md-6">
+                    <div class="widget flat-text-right no-border">
+                        <ul class="list">
+                            <li><a href="#">Privacy</a></li>
+                            <li><a href="#">Terms</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                            <li><a href="#">Sitemap</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.bottom -->
+
+    <a id="scroll-top"></a>
 </div>
 
 <form id="logout-form" action="{{ url('/logout') }}"
       method="POST" style="display: none;"
 >{{ csrf_field() }}</form>
-<script src="{{asset("$public/js/jquery.min.js")}}" type="text/javascript"></script>
 
-<!-- REVOLUTION JS FILES -->
-<script type="text/javascript" src="{{asset("$public/js/jquery.themepunch.tools.min.js")}}"></script>
-<script type="text/javascript" src="{{asset("$public/js/jquery.themepunch.revolution.min.js")}}"></script>
-
-<!-- SLIDER REVOLUTION 5.0 EXTENSIONS -->
-<script type="text/javascript" src="{{asset("$public/js/revolution.extension.actions.min.js")}}"></script>
-<script type="text/javascript" src="{{asset("$public/js/revolution.extension.carousel.min.js")}}"></script>
-<script type="text/javascript" src="{{asset("$public/js/revolution.extension.kenburn.min.js")}}"></script>
-<script type="text/javascript" src="{{asset("$public/js/revolution.extension.layeranimation.min.js")}}"></script>
-<script type="text/javascript" src="{{asset("$public/js/revolution.extension.migration.min.js")}}"></script>
-<script type="text/javascript" src="{{asset("$public/js/revolution.extension.navigation.min.js")}}"></script>
-<script type="text/javascript" src="{{asset("$public/js/revolution.extension.parallax.min.js")}}"></script>
-<script type="text/javascript" src="{{asset("$public/js/revolution.extension.slideanims.min.js")}}"></script>
-<script type="text/javascript" src="{{asset("$public/js/revolution.extension.video.min.js")}}"></script>
-<script type="text/javascript" src="{{asset("$public/js/revolution.initialize.js")}}"></script>
-
-<script src="{{asset("$public/js/owl.carousel.min.js")}}"></script>
-<script src="{{asset("$public/js/html5lightbox.js")}}"></script>
-<script src="{{asset("$public/js/counter.js")}}"></script>
-<script src="{{asset("$public/js/isotope.js")}}" type="text/javascript"></script>
-<script src="{{asset("$public/js/script.js")}}" type="text/javascript"></script>
-<script src="{{asset("$public/js/bootstrap.min.js")}}" type="text/javascript"></script>
-
-</body>
-<!-- Mirrored from bitlers.com/html/easy-edu/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Jan 2019 10:28:39 GMT -->
+<script src="{{$public}}/js/jquery.min.js"></script>
+<script src="{{$public}}/js/parallax.js"></script>
+<script src="{{$public}}/js/owl.carousel.min.js"></script>
+<script src="{{$public}}/js/jquery-fancybox.js"></script>
+<script src="{{$public}}/js/imagesloaded.min.js"></script>
+<script src="{{$public}}/js/jquery-isotope.js"></script>
+<script src="{{$public}}/js/waypoints.min.js"></script>
+<script src="{{$public}}/js/jquery.easing.js"></script>
+<script src="{{$public}}/js/jquery.cookie.js"></script>
+<script src="{{$public}}/js/smoothscroll.js"></script>
+<script src="{{$public}}/js/main.js"></script>
 </html>
-
