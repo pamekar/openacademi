@@ -16,7 +16,7 @@
     </section> <!-- /.flat-title-page -->
 
     <section class="flat-popular-courses style2 v2">
-        <div class="container">
+        <div class="container-fluid">
             <div class="flat-title flat-text-center">
                 <h2 class="title">Discover Our Popular Courses</h2>
                 <p class="description">Smply dummy text of the printing and typesetting industry. Lorem Ipsum has been
@@ -62,6 +62,9 @@
                     </div> <!-- /.course -->
                 @endforeach
             </div> <!-- /.flat-courses -->
+            <div class="wrap-btn flat-text-center">
+                <a href="{{route('courses.all')}}" class="flat-button btn-all-sourses font-Poppins font-weight-700 border-ra4">BROWSE ALL COURSES</a>
+            </div>
         </div>
     </section> <!-- /.flat-popular-courses -->
 
@@ -132,6 +135,9 @@
                                             </div>
                                         </div>
                                     </div> <!-- /.flat-courses -->
+                                    <div class="wrap-btn flat-text-center">
+                                        <a href="{{route('courses.all',['category'=>$category->slug])}}" class="flat-button btn-all-sourses font-Poppins font-weight-700 border-ra4">BROWSE {{strtoupper($category->title)}} COURSES</a>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
