@@ -13,27 +13,42 @@ class CoursesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index', 'getAllCourses', 'show']);
     }
 
     public function index($category = null)
     {
-        $isCategory = false;
+
+        $isCategory = $category ? CourseCategory::where('slug', $category)
+            ->first() : false;
+
+        return view('courses',
+            compact('isCategory'));
+    }
+
+    public function getAllCourses($category = null, Request $request)
+    {
+        $count = $request->input('count', 8);
+
+        $count = $request->input('count', 12);
+        $isCategory = CourseCategory::where('slug', $category)->first();
+        $courses = [];
         if (isset($category)) {
-            $isCategory = CourseCategory::where('slug', $category)->first();
+
             if ($isCategory) {
                 $courses = Course::where('published', 1)
                     ->where('category', $isCategory->id)->orderBy('id', 'desc')
-                    ->get();
+                    ->paginate($count);
             } else {
                 abort(404);
             }
         } else {
             $courses = Course::where('published', 1)->orderBy('id', 'desc')
-                ->get();
+                ->paginate($count);
         }
 
-        return view('courses', compact('courses', 'categories','isCategory'));
+
+        return response()->json($courses);
     }
 
     public function show($course_slug)

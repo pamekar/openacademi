@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+Route::get('courses/{category?}','CoursesController@getAllCourses');
 
 Route::group(['middleware' => 'checkLoggedIn'], function () {
     Route::group(['namespace' => 'Student', 'middleware' => 'jwt.auth'],
