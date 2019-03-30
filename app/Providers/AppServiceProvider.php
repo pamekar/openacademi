@@ -24,7 +24,23 @@ class AppServiceProvider extends ServiceProvider
         $categories = CourseCategory::select('id', 'title', 'icon', 'slug')
             ->get();
 
-        View::share(['categories' => $categories, 'public'=> $public]);
+        $colors = [
+            '2ebd59',
+            'fb868f',
+            '00dcea',
+            '005eea',
+            '1cd566',
+            '37adff',
+            '3b42ff',
+            'ec5252',
+            'ff562f',
+            'ffbf13',
+            '536dfe',
+            '0dacff',
+            '8828ff'
+        ];
+
+        View::share(['categories' => $categories, 'public' => $public, 'colors'=>$colors]);
 
     }
 
