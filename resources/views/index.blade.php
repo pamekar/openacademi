@@ -1,9 +1,6 @@
 @extends('layouts.home')
 @section('title','Home')
 @section('main')
-    @php
-        $colors=['2ebd59','fb868f','00dcea','005eea','1cd566','37adff','3b42ff','ec5252','ff562f','ffbf13','536dfe','0dacff','8828ff'];
-    @endphp
     <section class="flat-title-page parallax parallax12 undescription">
         <div class="overlay"></div>
         <div class="container wrap-title-page bg-img ">
@@ -14,8 +11,61 @@
             </div>
         </div>
     </section> <!-- /.flat-title-page -->
+    <div class="flat-counter style2">
+        <div class="wrap-counter">
+            <div class="container">
+                <div class="counters clear-sub-columns style2">
+                    <div class="counter style2 one-of-three">
+                        <div class="overlay">
+                            <img src="png/img-hover-1.png" alt="bookflare" class="img-hover-1">
+                            <img src="png/img-hover-2.png" alt="Bookflare" class="img-hover-2">
+                        </div>
+                        <div class="icon">
+                                    <span class="icon-online-learning">
+                                        <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span><span class="path14"></span><span class="path15"></span><span class="path16"></span><span class="path17"></span><span class="path18"></span><span class="path19"></span><span class="path20"></span><span class="path21"></span><span class="path22"></span><span class="path23"></span><span class="path24"></span><span class="path25"></span><span class="path26"></span><span class="path27"></span><span class="path28"></span>
+                                    </span>
+                        </div>
+                        <div class="content">
+                            <p class="numb color-2ba2db"  data-from="0" data-to="1400" data-speed="2000" data-inviewport="yes">1400</p>
+                            <h6 class="title color-2ba2db">ONLINE COURSES</h6>
+                        </div>
+                    </div>
+                    <div class="counter style2  one-of-three active">
+                        <div class="overlay">
+                            <img src="png/img-hover-1.png" alt="bookflare" class="img-hover-1">
+                            <img src="png/img-hover-2.png" alt="Bookflare" class="img-hover-2">
+                        </div>
+                        <div class="icon">
+                                    <span class="icon-teacher">
+                                        <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span><span class="path14"></span><span class="path15"></span><span class="path16"></span><span class="path17"></span><span class="path18"></span><span class="path19"></span><span class="path20"></span><span class="path21"></span><span class="path22"></span><span class="path23"></span><span class="path24"></span><span class="path25"></span><span class="path26"></span><span class="path27"></span><span class="path28"></span><span class="path29"></span><span class="path30"></span><span class="path31"></span><span class="path32"></span><span class="path33"></span><span class="path34"></span><span class="path35"></span><span class="path36"></span><span class="path37"></span><span class="path38"></span><span class="path39"></span><span class="path40"></span><span class="path41"></span><span class="path42"></span><span class="path43"></span><span class="path44"></span><span class="path45"></span><span class="path46"></span><span class="path47"></span><span class="path48"></span><span class="path49"></span><span class="path50"></span>
+                                    </span>
+                        </div>
+                        <div class="content">
+                            <p class="numb color-0dc9ac"  data-from="0" data-to="1200" data-speed="2000" data-inviewport="yes">1200</p>
+                            <h6 class="title color-0dc9ac">EXPERT INSTRUCTORS</h6>
+                        </div>
+                    </div>
+                    <div class="counter style2  one-of-three">
+                        <div class="overlay">
+                            <img src="png/img-hover-1.png" alt="bookflare" class="img-hover-1">
+                            <img src="png/img-hover-2.png" alt="Bookflare" class="img-hover-2">
+                        </div>
+                        <div class="icon">
+                                    <span class="icon-education">
+                                        <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span><span class="path14"></span><span class="path15"></span><span class="path16"></span><span class="path17"></span><span class="path18"></span><span class="path19"></span><span class="path20"></span><span class="path21"></span><span class="path22"></span><span class="path23"></span><span class="path24"></span><span class="path25"></span><span class="path26"></span>
+                                    </span>
+                        </div>
+                        <div class="content">
+                            <p class="numb color-f05455"  data-from="0" data-to="1000" data-speed="2000" data-inviewport="yes">1000</p>
+                            <h6 class="title color-f05455">SUCCESS STORIES</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.flat-counter -->
 
-    <section class="flat-popular-courses style2 v2">
+    <section class="flat-popular-courses style3">
         <div class="container-fluid">
             <div class="flat-title flat-text-center">
                 <h2 class="title">Discover Our Popular Courses</h2>
@@ -50,7 +100,7 @@
                                 <div class="wrap-rating-price">
                                     <div class="wrap-rating">
                                         <star-rating :rating="{{explode(';',$course->rating)[0]}}"
-                                                     :increment="0.01" :read-only="true" :star-size="18"
+                                                     :increment="0.01" :read-only="true" :star-size="14"
                                                      :show-rating="false"></star-rating>
                                         <span>{{explode(';',$course->rating)[0]}} ({{explode(';',$course->rating)[1]}}
                                             )</span>
@@ -89,7 +139,7 @@
                                         <div class="flat-carousel" data-column="4" data-column2="2" data-loop="false"
                                              data-column3="1" data-gap="0" data-dots="false" data-nav="true">
                                             <div class="flat-courses clearfix owl-carousel">
-                                                @foreach(\App\Course::where('published', 1)->where('category',$category->id)->inRandomOrder()->limit(  8)->get() as $course)
+                                                @foreach(\App\Course::where('published', 1)->where('category',$category->id)->inRandomOrder()->limit(8)->get() as $course)
                                                     <div class="course  text-{{$colors[array_rand($colors)]}}">
                                                         <div class="course-border border-f-e6f3ff border-ra4 transition-vline">
                                                             <div class="course-img img-vline">
@@ -109,11 +159,7 @@
                                                                     <p class="teacher"><a
                                                                                 href="#">{{$course->instructor->full_name}}</a>
                                                                     </p>
-                                                                    @php
-
-                                                                            @endphp
-                                                                    <p class="description">{{$course->summary}}
-                                                                    </p>
+                                                                    <p class="description">{{$course->summary}}</p>
                                                                 </div>
                                                                 <div class="wrap-rating-price">
                                                                     <div class="wrap-rating">
