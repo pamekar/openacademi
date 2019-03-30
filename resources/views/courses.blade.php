@@ -12,8 +12,11 @@
             </div>
             <div class="breadcrumbs ">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Courses</a></li>
+                    <li><a href="{{url('')}}">Home</a></li>
+                    <li><a href="{{route('courses.all')}}">Courses</a></li>
+                    @if($isCategory)
+                        <li><a href="{{route('courses.all',['category'=>$isCategory->slug])}}">{{$isCategory->title}}</a></li>
+                    @endif
                 </ul>
             </div>
             <img src="{{$public}}/png/bg-white.png" alt="bookflare" class="bg-breadcrumbs">
