@@ -13027,9 +13027,6 @@ module.exports = Cancel;
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -13139,8 +13136,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content-wrap  courses-grid-v1-page" }, [
     _c("div", { staticClass: "container-fluid" }, [
-      _vm._m(0),
-      _vm._v(" "),
       _c("div", { staticClass: "content-page-wrap" }, [
         _c(
           "div",
@@ -13167,7 +13162,7 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _vm._m(1, true)
+                      _vm._m(0, true)
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "course-content" }, [
@@ -13259,14 +13254,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flat-title flat-text-center" }, [
-      _c("h2", { staticClass: "title" }, [_vm._v("Our Courses")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

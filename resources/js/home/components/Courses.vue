@@ -1,9 +1,6 @@
 <template>
     <div class="content-wrap  courses-grid-v1-page">
         <div class="container-fluid">
-            <div class="flat-title flat-text-center">
-                <h2 class="title">Our Courses</h2>
-            </div>
             <div class="content-page-wrap">
                 <div class="flat-courses clearfix isotope-courses">
                     <div :class="'course one-of-four text-'+color(colors)" v-for="course in courses">
