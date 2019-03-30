@@ -156,8 +156,10 @@ class Course extends Model
 
     public function getCompletedLessonsAttribute()
     {
-        $count = Auth::user()->lessons()->where('course_id', $this->id)
-            ->count();
+        $count = Auth::user() ? Auth::user()->lessons()
+            ->where('course_id', $this->id)
+        ->
+        count() : null;
         return $count;
     }
 
