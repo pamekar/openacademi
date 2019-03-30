@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
     <title>@yield('pageTitle') | {{setting('site.title')}}</title>
 
-    <meta name="author" content="themesflat.com">
+    <meta name="author" content="openacademi.com">
 
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -32,18 +32,12 @@
 </head>
 <body class="bg-body3">
 <div class="boxed" id="app">
-    <div class="preloader">
-                <span class="loader">
-                    <span class="loader-inner"></span>
-                </span>
-    </div> <!-- /.preloader -->
-
     <div id="header" class="bg-fff style1">
         <div class="container">
             <div class="header-wrap clearfix">
                 <div id="logo">
-                    <a href="{{url('')}}"><img src="{{$public}}/png/logo.png" alt="bookflare" width="157" height="29"
-                                                data-retina="images/logo/logo@2x.png" data-width="157" data-height="29"></a>
+                    <a href="{{url('')}}"><img src="{{$public}}/png/logo.png" alt="openacademi" width="157" height="29"
+                                               data-retina="images/logo/logo@2x.png" data-width="157" data-height="29"></a>
                 </div>
                 <div class="extra-menu float-left flat-text-left clearfix">
                     <div class="wrap-search-header">
@@ -84,7 +78,7 @@
                             @auth
                                 <li class="d-md-none d-block"><a href="{{route('user')}}">Dashboard</a></li>
                                 <li class="d-md-none d-block"><a href="{{route('logout')}}" title=""
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                 </li>
                             @endauth
                         </ul>
@@ -176,12 +170,13 @@
                 <div class="col-md-4">
                     <div class="widget-about">
                         <div id="logo-ft">
-                            <a href="index-2.html"><img src="{{$public}}/png/logo-ft.png" alt="bookflare" width="157"
-                                                        height="29" data-retina="images/logo/logo-ft@2x.png"
-                                                        data-width="157" data-height="29"></a>
+                            <a href="{{url('')}}"><img src="{{$public}}/png/logo-ft.png" alt="openacademi" width="157"
+                                                       height="29" data-retina="images/logo/logo-ft@2x.png"
+                                                       data-width="157" data-height="29"></a>
                         </div>
-                        <p class="description">We are a new design studio based in USA. We have over 20 years of
-                            combined experience, and know a thing or two about designing websites and mobile apps.</p>
+                        <p class="description">
+                            {{setting('site.description')}}
+                        </p>
                         <div class="list-info">
                             <ul>
                                 <li class="address"><a href="#">1107 Wood Street Saginaw, MI New York 48607</a></li>
@@ -230,7 +225,7 @@
                                     <div class="imgbox style1 transition-vline">
                                         <a href="#">
                                             <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-1.png" alt="bookflare">
+                                                <img src="{{$public}}/png/work-1.png" alt="openacademi">
                                                 <div class="overlay">
                                                     <span class="vline"></span>
                                                     <span class="vline vline-bottom"></span>
@@ -241,31 +236,7 @@
                                     <div class="imgbox style1 transition-vline">
                                         <a href="#">
                                             <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-5.png" alt="bookflare">
-                                                <div class="overlay">
-                                                    <span class="vline"></span>
-                                                    <span class="vline vline-bottom"></span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="column">
-                                    <div class="imgbox style1 transition-vline">
-                                        <a href="#">
-                                            <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-2.png" alt="bookflare">
-                                                <div class="overlay">
-                                                    <span class="vline"></span>
-                                                    <span class="vline vline-bottom"></span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="imgbox style1 transition-vline">
-                                        <a href="#">
-                                            <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-6.png" alt="bookflare">
+                                                <img src="{{$public}}/png/work-5.png" alt="openacademi">
                                                 <div class="overlay">
                                                     <span class="vline"></span>
                                                     <span class="vline vline-bottom"></span>
@@ -278,7 +249,7 @@
                                     <div class="imgbox style1 transition-vline">
                                         <a href="#">
                                             <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-3.png" alt="bookflare">
+                                                <img src="{{$public}}/png/work-2.png" alt="openacademi">
                                                 <div class="overlay">
                                                     <span class="vline"></span>
                                                     <span class="vline vline-bottom"></span>
@@ -289,31 +260,7 @@
                                     <div class="imgbox style1 transition-vline">
                                         <a href="#">
                                             <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-7.png" alt="bookflare">
-                                                <div class="overlay">
-                                                    <span class="vline"></span>
-                                                    <span class="vline vline-bottom"></span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="column">
-                                    <div class="imgbox style1 transition-vline">
-                                        <a href="#">
-                                            <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-4.png" alt="bookflare">
-                                                <div class="overlay">
-                                                    <span class="vline"></span>
-                                                    <span class="vline vline-bottom"></span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="imgbox style1 transition-vline">
-                                        <a href="#">
-                                            <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-8.png" alt="bookflare">
+                                                <img src="{{$public}}/png/work-6.png" alt="openacademi">
                                                 <div class="overlay">
                                                     <span class="vline"></span>
                                                     <span class="vline vline-bottom"></span>
@@ -326,7 +273,7 @@
                                     <div class="imgbox style1 transition-vline">
                                         <a href="#">
                                             <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-1.png" alt="bookflare">
+                                                <img src="{{$public}}/png/work-3.png" alt="openacademi">
                                                 <div class="overlay">
                                                     <span class="vline"></span>
                                                     <span class="vline vline-bottom"></span>
@@ -337,31 +284,7 @@
                                     <div class="imgbox style1 transition-vline">
                                         <a href="#">
                                             <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-2.png" alt="bookflare">
-                                                <div class="overlay">
-                                                    <span class="vline"></span>
-                                                    <span class="vline vline-bottom"></span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="column">
-                                    <div class="imgbox style1 transition-vline">
-                                        <a href="#">
-                                            <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-3.png" alt="bookflare">
-                                                <div class="overlay">
-                                                    <span class="vline"></span>
-                                                    <span class="vline vline-bottom"></span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="imgbox style1 transition-vline">
-                                        <a href="#">
-                                            <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-4.png" alt="bookflare">
+                                                <img src="{{$public}}/png/work-7.png" alt="openacademi">
                                                 <div class="overlay">
                                                     <span class="vline"></span>
                                                     <span class="vline vline-bottom"></span>
@@ -374,7 +297,7 @@
                                     <div class="imgbox style1 transition-vline">
                                         <a href="#">
                                             <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-5.png" alt="bookflare">
+                                                <img src="{{$public}}/png/work-4.png" alt="openacademi">
                                                 <div class="overlay">
                                                     <span class="vline"></span>
                                                     <span class="vline vline-bottom"></span>
@@ -385,7 +308,7 @@
                                     <div class="imgbox style1 transition-vline">
                                         <a href="#">
                                             <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-6.png" alt="bookflare">
+                                                <img src="{{$public}}/png/work-8.png" alt="openacademi">
                                                 <div class="overlay">
                                                     <span class="vline"></span>
                                                     <span class="vline vline-bottom"></span>
@@ -398,7 +321,7 @@
                                     <div class="imgbox style1 transition-vline">
                                         <a href="#">
                                             <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-7.png" alt="bookflare">
+                                                <img src="{{$public}}/png/work-1.png" alt="openacademi">
                                                 <div class="overlay">
                                                     <span class="vline"></span>
                                                     <span class="vline vline-bottom"></span>
@@ -409,7 +332,79 @@
                                     <div class="imgbox style1 transition-vline">
                                         <a href="#">
                                             <div class="imgbox-img img-vline">
-                                                <img src="{{$public}}/png/work-8.png" alt="bookflare">
+                                                <img src="{{$public}}/png/work-2.png" alt="openacademi">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-3.png" alt="openacademi">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-4.png" alt="openacademi">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-5.png" alt="openacademi">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-6.png" alt="openacademi">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-7.png" alt="openacademi">
+                                                <div class="overlay">
+                                                    <span class="vline"></span>
+                                                    <span class="vline vline-bottom"></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="imgbox style1 transition-vline">
+                                        <a href="#">
+                                            <div class="imgbox-img img-vline">
+                                                <img src="{{$public}}/png/work-8.png" alt="openacademi">
                                                 <div class="overlay">
                                                     <span class="vline"></span>
                                                     <span class="vline vline-bottom"></span>
@@ -469,4 +464,6 @@
 <script src="{{$public}}/js/jquery.cookie.js"></script>
 <script src="{{$public}}/js/smoothscroll.js"></script>
 <script src="{{$public}}/js/main.js"></script>
+<script src="{{$public}}/js/app.js"></script>
+</body>
 </html>
