@@ -25,13 +25,11 @@ class HomeController extends Controller
                 ->get();
         }
 
-        $categories = CourseCategory::select('id', 'title','icon')->get();
-
         $courses = Course::where('published', 1)
             ->orderBy('created_at', 'desc')->inRandomOrder()->limit(8)->get();
 
         return view('index',
-            compact('courses', 'purchased_courses', 'categories'));
+            compact('courses', 'purchased_courses'));
     }
 
     public function faq()
