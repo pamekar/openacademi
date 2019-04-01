@@ -69,7 +69,7 @@
                                 <p class="card-subtitle">Your Performance</p>
                             </div>
                             <div class="media-right">
-                                <router-link class="btn btn-sm btn-primary" to="/quizes">Quiz results</router-link>
+                                <router-link class="btn btn-sm btn-primary" :to="{name:'quizes'}">Quiz results</router-link>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                                     <div class="d-flex align-items-center">
                                         <small class="text-black-50 text-uppercase mr-2">Course</small>
                                         <router-link :to="{name:'course',params:{'slug':quiz.test.course.slug}}">{{quiz.test.course_title}}</router-link>
-                                    </div>
+                                     </div>
                                 </div>
                                 <div class="media-right text-center d-flex align-items-center">
                                     <span class="text-black-50 mr-3">{{getScore(quiz).remark}}</span>

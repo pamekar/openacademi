@@ -6,7 +6,7 @@
                     <div :class="'course one-of-four text-'+color(colors)" v-for="course in courses">
                         <div class="course-border border-f-e6f3ff border-ra4 transition-vline">
                             <div class="course-img img-vline">
-                                <a href="#"><img :src="course.course_image_preview"
+                                <a :href="`/course/${course.slug}`"><img :src="course.course_image_preview"
                                                  alt="bookflare"></a>
                                 <div class="overlay">
                                     <span class="vline"></span>
@@ -15,7 +15,7 @@
                             </div>
                             <div class="course-content">
                                 <div class="text-wrap border-bt-e6f3ff">
-                                    <h6 class="title"><a href="#">{{course.title}}</a></h6>
+                                    <h6 class="title"><a :href="`/course/${course.slug}`">{{course.title}}</a></h6>
                                     <p class="teacher"><a href="#">{{course.instructor.full_name}}</a></p>
                                     <p class="description">{{course.summary}}</p>
                                 </div>
@@ -73,7 +73,7 @@
                 return this.colors[Math.floor(Math.random() * colors.length)];
             },
             getAllCourses(page = 1) {
-                axios.get(`/api/courses/${this.category}?count=8&page=${page}`)
+                axios.get(`/api/home/courses/${this.category}?count=8&page=${page}`)
                     .then(({data}) => {
                         this.courses = data.data;
                         this.pageCount = data.last_page;
