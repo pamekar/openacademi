@@ -210,10 +210,10 @@ Route::get('kujsdlkdjlksere', function () {
                         break;
                     case 'richtext':
                         $review = $faker->realText(100);
-                        $answerReview = "<p>".$faker->paragraph(4) . "</p><p>"
+                        $answerReview = "<p>" . $faker->paragraph(4) . "</p><p>"
                             . $faker->paragraph(5) . "</p><p>"
                             . $faker->paragraph(3) . "</p><p>"
-                            . $faker->paragraph(7)."</p>";
+                            . $faker->paragraph(7) . "</p>";
                         break;
                     default:
                         $option = null;
@@ -260,18 +260,31 @@ Route::get('kujsdlkdjlksere', function () {
     }
 });
 
-Route::get('sadfgewerfg',function(){
-   $tests = \App\Test::with('questions')->get();
-   foreach($tests as $test){
-       \App\Test::where('id',$test->id)->update(['duration'=>count($test->questions)*45]);
-   }
+Route::get('sadfgewerfg', function () {
+    $tests = \App\Test::with('questions')->get();
+    foreach ($tests as $test) {
+        \App\Test::where('id', $test->id)
+            ->update(['duration' => count($test->questions) * 45]);
+    }
 });
 
-Route::get('khufyhnemnsdljmd', function(){
-    $results= \App\TestsResult::all();
+Route::get('khufyhnemnsdljmd', function () {
+    $results = \App\TestsResult::all();
 
-    foreach($results as $result){
-        $total_score=$result->test->questions->sum('score');
-        $result->update(['total_score'=>$total_score]);
+    foreach ($results as $result) {
+        $total_score = $result->test->questions->sum('score');
+        $result->update(['total_score' => $total_score]);
+    }
+});
+
+Route::get('lksdjkslkkdsm', function () {
+    $users = \App\User::all();
+    foreach ($users as $user) {
+        switch ($user->type) {
+            case 'student':
+                \App\Student::where('user_id', $user->id)
+                    ->update(['avatar' => $user->avatar]);
+                break;
+        }
     }
 });
