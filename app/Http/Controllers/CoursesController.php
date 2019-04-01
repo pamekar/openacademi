@@ -19,7 +19,7 @@ class CoursesController extends Controller
     public function index($category = null)
     {
 
-        $isCategory = $category ? CourseCategory::where('slug', $category)
+        $isCategory = $category ? CourseCategory::where('slug', $category)->orWhere('id',$category)
             ->first() : false;
 
         return view('courses',
@@ -28,10 +28,8 @@ class CoursesController extends Controller
 
     public function getAllCourses($category = null, Request $request)
     {
-        $count = $request->input('count', 8);
-
         $count = $request->input('count', 12);
-        $isCategory = CourseCategory::where('slug', $category)->first();
+        $isCategory = CourseCategory::where('slug', $category)->orWhere('id',$category)->first();
         $courses = [];
         if (isset($category)) {
 
@@ -55,11 +53,14 @@ class CoursesController extends Controller
     {
         $course = Course::where('slug', $course_slug)->with('publishedLessons')
             ->firstOrFail();
+        $featuredCourses = Course::where('category', $course->category)
+            ->inRandomOrder()->limit(3)->get();
         $purchased_course = \Auth::check()
             && $course->students()->where('user_id', \Auth::id())->count() > 0;
 
 
-        return view('course', compact('course', 'purchased_course'));
+        return view('course',
+            compact('course', 'purchased_course', 'featuredCourses'));
     }
 
     public function payment($course_id)

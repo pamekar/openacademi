@@ -16,8 +16,7 @@ class CoursesController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('auth');
-        //$this->user = JWTAuth::parseToken()->toUser();
+
     }
 
     public function index($category = null)
