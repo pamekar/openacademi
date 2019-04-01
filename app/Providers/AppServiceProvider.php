@@ -40,7 +40,19 @@ class AppServiceProvider extends ServiceProvider
             '8828ff'
         ];
 
-        View::share(['categories' => $categories, 'public' => $public, 'colors'=>$colors]);
+        $background = [
+            '536dfe',
+            'fe5367',
+            '7ffe53'
+        ];
+
+        View::share([
+            'categories' => $categories,
+            'public'     => $public,
+            'colors'     => $colors,
+            'background' => $background
+
+        ]);
 
     }
 
