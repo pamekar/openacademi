@@ -158,8 +158,7 @@ class Course extends Model
     {
         $count = Auth::user() ? Auth::user()->lessons()
             ->where('course_id', $this->id)
-        ->
-        count() : null;
+            ->count() : null;
         return $count;
     }
 
@@ -210,6 +209,19 @@ class Course extends Model
         }
     }
 
+    public function getCreatedAtAttribute($input)
+    {
+        $zeroDate = str_replace(['Y', 'm', 'd'], ['0000', '00', '00'],
+            config('app.date_format'));
+
+        if ($input != $zeroDate && $input != null) {
+            return date(config('app.date_format'), strtotime($input));
+        } else {
+            return '';
+        }
+    }
+
+
     public function teachers()
     {
         return $this->belongsToMany(User::class, 'course_user');
@@ -258,5 +270,36 @@ class Course extends Model
         $average = $count !== 0 && $sum !== 0 ? number_format($sum / $count, 2)
             : 0;
         return "$average;$count";
+    }
+
+    function getLastUpdatedAttribute()
+    {
+        $now = new \DateTime();
+        $ago = new \DateTime($this->updated_at);
+        $diff = $now->diff($ago);
+
+        $diff->w = floor($diff->d / 7);
+        $diff->d -= $diff->w * 7;
+
+        $string = array(
+            'y' => 'year',
+            'm' => 'month',
+            'w' => 'week',
+            'd' => 'day',
+            'h' => 'hour',
+            'i' => 'minute',
+            's' => 'second',
+        );
+        foreach ($string as $k => &$v) {
+            if ($diff->$k) {
+                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+            } else {
+                unset($string[$k]);
+            }
+        }
+
+        //  if (!$full)
+        $string = array_slice($string, 0, 1);
+        return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 }
