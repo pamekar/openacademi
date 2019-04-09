@@ -53,6 +53,7 @@ class Course extends Model
             'rating',
             'course_cat',
             'instructor',
+            'last_updated'
         ];
 
     /**
