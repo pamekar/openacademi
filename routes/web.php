@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 
+
+Route::get('courses/search',
+    ['uses' => 'CoursesController@search', 'as' => 'courses.search']);
 Route::get('courses/{category?}',
     ['uses' => 'CoursesController@index', 'as' => 'courses.all']);
 Route::get('course/{slug}',

@@ -42,8 +42,8 @@
                 <div class="extra-menu float-left flat-text-left clearfix">
                     <div class="wrap-search-header">
                         <div class="search-header">
-                            <form>
-                                <input type="search" name="key" placeholder="Search for Courses">
+                            <form action="{{route('courses.search')}}" method="get">
+                                <input type="search" name="q" placeholder="Search for Courses">
                                 <button class="btn-search"><span class="icon-search"></span></button>
                             </form>
                         </div>
