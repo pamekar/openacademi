@@ -13,12 +13,13 @@ class CoursesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'getAllCourses', 'show']);
+        $this->middleware('auth')->only(['payment','rating']);
     }
 
     public function index($category = null)
     {
-        $isCategory = $category ? CourseCategory::where('slug', $category)->orWhere('id',$category)
+        $isCategory = $category ? CourseCategory::where('slug', $category)
+            ->orWhere('id', $category)
             ->first() : false;
 
         return view('courses',
@@ -28,7 +29,8 @@ class CoursesController extends Controller
     public function getAllCourses($category = null, Request $request)
     {
         $count = $request->input('count', 12);
-        $isCategory = CourseCategory::where('slug', $category)->orWhere('id',$category)->first();
+        $isCategory = CourseCategory::where('slug', $category)
+            ->orWhere('id', $category)->first();
         $courses = [];
         if (isset($category)) {
 
