@@ -18,7 +18,6 @@ class CoursesController extends Controller
 
     public function index($category = null)
     {
-
         $isCategory = $category ? CourseCategory::where('slug', $category)->orWhere('id',$category)
             ->first() : false;
 
@@ -47,6 +46,34 @@ class CoursesController extends Controller
 
 
         return response()->json($courses);
+    }
+
+
+    public function search(Request $request)
+    {
+        return view('search',['search'=>$request->q]);
+    }
+
+    public function searchCourses(Request $request)
+    {
+        $search = explode(',', $request->input('q', []));
+        $count = $request->input('count', 12);
+
+
+        $courses = Course::where('published', 1)->where(function ($query) use (
+            $search
+        ) {
+            foreach ($search as $item) {
+                $query->where('tags', 'like', "%$item%")
+                    ->orWhere('title', 'like', "%$item%");
+            }
+        })
+            ->paginate($count);
+
+        return response()->json([
+            'courses' => $courses,
+            'search'  => $request->input('q', [])
+        ]);
     }
 
     public function show($course_slug)
@@ -78,7 +105,7 @@ class CoursesController extends Controller
 
         try {
             $customer = Customer::create([
-                'email'  => $request->get('stripeEmail'),
+                'email' => $request->get('stripeEmail'),
                 'source' => $request->get('stripeToken')
             ]);
 
