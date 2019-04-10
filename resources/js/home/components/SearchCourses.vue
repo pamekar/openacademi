@@ -12,11 +12,21 @@
         <div class="content-page-fullwidth-wrap clearfix pd-top-45">
             <div class="container-fluid ">
                 <!-- /.sidebar-left -->
+                <div class="sidebar-left">
+                    <div class="widget-categories border-f-e6f3ff">
+                        <h6 class="title-widget">Categories</h6>
+                        <div class="content">
+                            <ul>
+                                <li v-for="category in categories"><a href="javascript:void(0)" @click="setCategory(category.id)">{{category.title}} <span>({{category.count}})</span></a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /.widget-categories -->
+                </div>
                 <div class="content-page">
                     <div class="heading clearfix border-f-e6f3ff border-ra4">
                         <div class="taskbar">
                             <ul class="list">
-                                <li><span class="color-f3728b font-Poppins font-weight-700"> {{courses.length}}</span>Courses</li>
+                                <li><span class="color-f3728b font-Poppins font-weight-700"> {{totalCourses}}</span> Courses</li>
                             </ul>
                         </div>
                         <div class="select-order flat-text-right">
@@ -95,9 +105,12 @@
     export default {
         data() {
             return {
-                pageCount:  1,
+                category:   0,
+                categories: [],
                 courses:    [],
-                searchText: null
+                pageCount:  1,
+                searchText: null,
+                totalCourses:      0
             }
         },
         components: {
@@ -105,25 +118,41 @@
         },
         computed:   {},
         created() {
+            this.getCategories();
             this.searchCourses();
         },
         methods:    {
             color(colors) {
                 return this.colors[Math.floor(Math.random() * colors.length)];
             },
+            getCategories() {
+                let count = 0;
+                let query = this.searchText ? this.searchText : this.searching;
+                axios.get(`/api/home/courses/search/categories?q=${query}`)
+                    .then(({data}) => {
+                        this.categories = data;
+                    });
+
+            },
             searchCourses(page = 1) {
                 let query = this.searchText ? this.searchText : this.searching;
-                axios.get(`/api/home/courses/search?q=${query}&count=8&page=${page}`)
+                let courses = [];
+                axios.get(`/api/home/courses/search?q=${query}&count=8&page=${page}&category=${this.category}`)
                     .then(({data}) => {
+                        courses = data.courses.data;
                         this.courses = data.courses.data;
                         this.pageCount = data.courses.last_page;
                         this.searchText = data.search;
+                        this.totalCourses = data.courses.total;
                     });
+            },
+            setCategory(id) {
+                this.category = id;
+                this.searchCourses();
             }
         },
         props:      {
             colors:    Array,
-            category:  String,
             searching: String
         }
     }

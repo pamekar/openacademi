@@ -642,6 +642,40 @@ var render = function() {
       { staticClass: "content-page-fullwidth-wrap clearfix pd-top-45" },
       [
         _c("div", { staticClass: "container-fluid " }, [
+          _c("div", { staticClass: "sidebar-left" }, [
+            _c("div", { staticClass: "widget-categories border-f-e6f3ff" }, [
+              _c("h6", { staticClass: "title-widget" }, [_vm._v("Categories")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "content" }, [
+                _c(
+                  "ul",
+                  _vm._l(_vm.categories, function(category) {
+                    return _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "javascript:void(0)" },
+                          on: {
+                            click: function($event) {
+                              return _vm.setCategory(category.id)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(_vm._s(category.title) + " "),
+                          _c("span", [
+                            _vm._v("(" + _vm._s(category.count) + ")")
+                          ])
+                        ]
+                      )
+                    ])
+                  }),
+                  0
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
           _c("div", { staticClass: "content-page" }, [
             _c(
               "div",
@@ -656,9 +690,9 @@ var render = function() {
                           staticClass:
                             "color-f3728b font-Poppins font-weight-700"
                         },
-                        [_vm._v(" " + _vm._s(_vm.courses.length))]
+                        [_vm._v(" " + _vm._s(_vm.totalCourses))]
                       ),
-                      _vm._v("Courses")
+                      _vm._v(" Courses")
                     ])
                   ])
                 ]),
@@ -14831,14 +14865,27 @@ module.exports = function spread(callback) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data() {
     return {
-      pageCount: 1,
+      category: 0,
+      categories: [],
       courses: [],
-      searchText: null
+      pageCount: 1,
+      searchText: null,
+      totalCourses: 0
     };
   },
 
@@ -14848,6 +14895,7 @@ module.exports = function spread(callback) {
   computed: {},
 
   created() {
+    this.getCategories();
     this.searchCourses();
   },
 
@@ -14856,21 +14904,38 @@ module.exports = function spread(callback) {
       return this.colors[Math.floor(Math.random() * colors.length)];
     },
 
-    searchCourses(page = 1) {
+    getCategories() {
+      let count = 0;
       let query = this.searchText ? this.searchText : this.searching;
-      __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(`/api/home/courses/search?q=${query}&count=8&page=${page}`).then(({
+      __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(`/api/home/courses/search/categories?q=${query}`).then(({
         data
       }) => {
+        this.categories = data;
+      });
+    },
+
+    searchCourses(page = 1) {
+      let query = this.searchText ? this.searchText : this.searching;
+      let courses = [];
+      __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(`/api/home/courses/search?q=${query}&count=8&page=${page}&category=${this.category}`).then(({
+        data
+      }) => {
+        courses = data.courses.data;
         this.courses = data.courses.data;
         this.pageCount = data.courses.last_page;
         this.searchText = data.search;
+        this.totalCourses = data.courses.total;
       });
+    },
+
+    setCategory(id) {
+      this.category = id;
+      this.searchCourses();
     }
 
   },
   props: {
     colors: Array,
-    category: String,
     searching: String
   }
 });

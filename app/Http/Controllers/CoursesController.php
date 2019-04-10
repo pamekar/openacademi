@@ -13,7 +13,7 @@ class CoursesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['payment','rating']);
+        $this->middleware('auth')->only(['payment', 'rating']);
     }
 
     public function index($category = null)
@@ -53,21 +53,51 @@ class CoursesController extends Controller
 
     public function search(Request $request)
     {
-        return view('search',['search'=>$request->q]);
+        return view('search', ['search' => $request->q]);
+    }
+
+    public function searchCategories(Request $request)
+    {
+        $categories = CourseCategory::select('id', 'title')
+            ->get();
+
+        $search = explode(',', $request->input('q', []));
+        $courses = Course::where('published', 1)->where(function ($query) use (
+            $search
+        ) {
+            foreach ($search as $item) {
+                $query->where('tags', 'like', "%$item%")
+                    ->orWhere('summary', 'like', "%$item%")
+                    ->orWhere('summary', 'like', "%$item%")
+                    ->orWhere('title', 'like', "%$item%");
+            }
+        })->select('category')->get();
+
+        foreach ($categories as $category) {
+            $category['count'] = $courses->where('category', $category->id)
+                ->count();
+        }
+        return response()->json($categories);
     }
 
     public function searchCourses(Request $request)
     {
         $search = explode(',', $request->input('q', []));
         $count = $request->input('count', 12);
-
-
+        $category = $request->input('category', null);
         $courses = Course::where('published', 1)->where(function ($query) use (
-            $search
+            $search,
+            $category
         ) {
             foreach ($search as $item) {
                 $query->where('tags', 'like', "%$item%")
+                    ->orWhere('summary', 'like', "%$item%")
+                    ->orWhere('summary', 'like', "%$item%")
                     ->orWhere('title', 'like', "%$item%");
+            }
+        })->where(function ($query) use ($category) {
+            if ($category) {
+                $query->where('category', $category);
             }
         })
             ->paginate($count);
@@ -107,7 +137,7 @@ class CoursesController extends Controller
 
         try {
             $customer = Customer::create([
-                'email' => $request->get('stripeEmail'),
+                'email'  => $request->get('stripeEmail'),
                 'source' => $request->get('stripeToken')
             ]);
 
