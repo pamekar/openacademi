@@ -18,10 +18,13 @@
 
     <!-- Font Awesome Icons -->
     <link type="text/css" href="{{asset("$public/assets/css/fontawesome.css")}}" rel="stylesheet">
-
-
     <!-- App CSS -->
     <link type="text/css" href="{{asset("$public/assets/css/app.css")}}" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{$public}}/png/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{$public}}/png/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{$public}}/png/favicon-16x16.png">
+    <link rel="manifest" href="{{$public}}/site.webmanifest">
     <script>
         window.public_= "{{$public}}";
     </script>
