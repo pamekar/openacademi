@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar bg-dark navbar-dark navbar-expand-sm d-none2 d-md-flex2">
+    <div class="navbar bg-primary navbar-dark navbar-expand-sm d-none2 d-md-flex2">
         <div class="container">
 
             <div class="navbar-collapse collapse" id="navbarMenu">
