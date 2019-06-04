@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <!--[if IE]>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
-    <title>@yield('pageTitle') | {{setting('site.title')}}</title>
+    <title>@yield('title') | {{setting('site.title')}}</title>
 
     <meta name="author" content="openacademi.com">
 
@@ -25,8 +25,10 @@
     <link rel="stylesheet" type="text/css" href="{{$public}}/css/responsive.css">
     <link rel="stylesheet" type="text/css" href="{{$public}}/css/color1.css" id="colors">
 
-    <link rel="shortcut icon" href="png/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="png/favicon-apple.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{$public}}/png/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{$public}}/png/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{$public}}/png/favicon-16x16.png">
+    <link rel="manifest" href="{{$public}}/site.webmanifest">
 
 
 </head>
@@ -125,52 +127,14 @@
     </div> <!-- #header -->
 
     @yield('main')
-
-    <section class="flat-feature parallax parallax2">
-        <!-- <div class="overlay"></div> -->
-        <div class="container">
-            <div class="row flat-iconbox style1">
-                <div class="col-lg-4 col-md-4">
-                    <div class="iconbox style1 left">
-                        <div class="iconbox-icon">
-                            <span class="icon-book"></span>
-                        </div>
-                        <div class="iconbox-content">
-                            <h5 class="title">80,000 ONLINE COURSES</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="iconbox style1 center">
-                        <div class="iconbox-icon">
-                            <span class="icon-people"></span>
-                        </div>
-                        <div class="iconbox-content">
-                            <h5 class="title">EXPERT INSTRUCTION</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="iconbox style1 right">
-                        <div class="iconbox-icon">
-                            <span class="icon-key"></span>
-                        </div>
-                        <div class="iconbox-content">
-                            <h5 class="title">LIFETIME ACCESS</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> <!-- /.flat-feature -->
-
+    <hr>
     <footer id="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div class="widget-about">
                         <div id="logo-ft">
-                            <a href="{{url('')}}"><img src="{{$public}}/png/logo-ft.png" alt="openacademi" width="157"
+                            <a href="{{url('')}}"><img src="{{$public}}/png/logo.png" alt="openacademi" width="157"
                                                        height="29" data-retina="images/logo/logo-ft@2x.png"
                                                        data-width="157" data-height="29"></a>
                         </div>
@@ -429,7 +393,7 @@
             <div class="row">
                 <div class="  col-md-6">
                     <div class="copyright flat-text-left">
-                        <p>© Copyright 2018 <a href="#">tophive</a>. All Rights Reserved.</p>
+                        <p>© Copyright {{date('Y')}} <a href="#">{{config('app.name')}}</a>. All Rights Reserved.</p>
                     </div>
                 </div>
                 <div class="  col-md-6">
