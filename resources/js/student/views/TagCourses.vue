@@ -16,7 +16,7 @@
                     :course="course"
                     :courseWidth="courseListWidth"
                     :key="course.id"
-                    :tags="course.tags.split(';',2)"
+                    :tags="course.tags"
             ></courses-component>
         </div>
         <paginate
