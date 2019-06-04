@@ -32048,7 +32048,6 @@ assign(Viewer.prototype, render, events, handlers, methods, others);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["a"] = ({});
 
 /***/ }),
@@ -35225,7 +35224,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "navbar bg-dark navbar-dark navbar-expand-sm d-none2 d-md-flex2"
+        "navbar bg-primary navbar-dark navbar-expand-sm d-none2 d-md-flex2"
     },
     [
       _c("div", { staticClass: "container" }, [
@@ -35671,7 +35670,7 @@ var render = function() {
     _c(
       "nav",
       {
-        staticClass: "navbar navbar-expand navbar-dark bg-primary m-0",
+        staticClass: "navbar navbar-expand navbar-light bg-light m-0",
         attrs: { id: "default-navbar" }
       },
       [
@@ -35682,14 +35681,12 @@ var render = function() {
             _c("img", {
               staticClass: "mr-2",
               attrs: {
-                src: _vm.public_ + "/assets/images/logo/white.svg",
+                src: _vm.public_ + "/png/logo.png",
+                width: "157",
+                height: "29",
                 alt: "OpenAcademi"
               }
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "d-none d-xs-md-block" }, [
-              _vm._v("OpenAcademi")
-            ])
+            })
           ]),
           _vm._v(" "),
           _vm._m(1),
@@ -37071,7 +37068,7 @@ var render = function() {
       [
         _c("div", { staticClass: "card-header text-center" }, [
           _c(
-            "h4",
+            "h5",
             { staticClass: "card-title mb-0" },
             [
               _c(
@@ -38755,7 +38752,7 @@ var render = function() {
             attrs: {
               course: course,
               courseWidth: _vm.courseListWidth,
-              tags: course.tags.split(";", 2)
+              tags: course.tags
             }
           })
         }),

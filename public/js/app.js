@@ -416,11 +416,15 @@ var render = function() {
       _c("div", { staticClass: "content-page-wrap" }, [
         _c(
           "div",
-          { staticClass: "flat-courses clearfix isotope-courses" },
+          { staticClass: "flat-courses clearfix isotope-courses row" },
           _vm._l(_vm.courses, function(course) {
             return _c(
               "div",
-              { class: "course one-of-four text-" + _vm.color(_vm.colors) },
+              {
+                class:
+                  "course col-lg-3 col-md-4 col-sm-6 text-" +
+                  _vm.color(_vm.colors)
+              },
               [
                 _c(
                   "div",
@@ -434,7 +438,7 @@ var render = function() {
                         _c("img", {
                           attrs: {
                             src: course.course_image_preview,
-                            alt: "bookflare"
+                            alt: "openacademi"
                           }
                         })
                       ]),
@@ -723,7 +727,7 @@ var render = function() {
                                 staticStyle: { "max-height": "213px" },
                                 attrs: {
                                   src: course.course_image_preview,
-                                  alt: "bookflare"
+                                  alt: "openacademi"
                                 }
                               })
                             ]),
