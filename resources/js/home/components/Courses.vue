@@ -2,8 +2,8 @@
     <div class="content-wrap  courses-grid-v1-page">
         <div class="container-fluid">
             <div class="content-page-wrap">
-                <div class="flat-courses clearfix isotope-courses">
-                    <div :class="'course one-of-four text-'+color(colors)" v-for="course in courses">
+                <div class="flat-courses clearfix isotope-courses row">
+                    <div :class="'course col-lg-3 col-md-4 col-sm-6 text-'+color(colors)" v-for="course in courses">
                         <div class="course-border border-f-e6f3ff border-ra4 transition-vline">
                             <div class="course-img img-vline">
                                 <a :href="`/course/${course.slug}`"><img :src="course.course_image_preview"
@@ -45,7 +45,7 @@
                     active-class=" active"
                     disabled-class="disabled"
             >
-            </paginate>
+               </paginate>
         </div>
     </div> <!-- /.container -->
     <!-- /.content-wrap -->
