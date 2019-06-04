@@ -2,9 +2,9 @@
     <div :class="courseWidth">
         <div class="card ">
             <div class="card-header text-center">
-                <h4 class="card-title mb-0">
+                <h5 class="card-title mb-0">
                     <router-link :to="{name:'course',params:{'slug':course.slug}}">{{ course.title }}</router-link>
-                </h4>
+                </h5>
                 <div class="text-center">
                     <star-rating :rating="Number(course.rating.split(';')[0])" :increment="0.01" :read-only="true" :star-size="18"></star-rating>
                 </div>
@@ -20,7 +20,7 @@
                 <br>
                 {{ course.summary }}<br>
                 <router-link :to="{name:'tag-courses',params:{'tag':tag}}" v-for="tag in course.tags" :key="tag">
-                    <span class="badge badge-primary mr-1" >
+                    <span class="badge badge-primary mr-1">
                     {{tag}}</span>
                 </router-link>
             </div>
