@@ -19,7 +19,6 @@
                     @endif
                 </ul>
             </div>
-            <img src="{{$public}}/png/bg-white.png" alt="bookflare" class="bg-breadcrumbs">
         </div>
     </section> <!-- /.flat-title-page -->
     <courses :colors="{{json_encode($colors)}}" category="{{$isCategory ? $isCategory->slug : ''}}"></courses>

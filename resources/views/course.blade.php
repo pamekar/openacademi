@@ -17,7 +17,7 @@
                     <li><a href="{{ route('courses.show', [$course->slug]) }}">{{$course->title}}</a></li>
                 </ul>
             </div>
-            <img src="{{$public}}/png/bg-white.png" alt="bookflare" class="bg-breadcrumbs style2">
+            <img src="{{$public}}/png/bg-white.png" alt="openacademi" class="bg-breadcrumbs style2">
         </div>
     </section> <!-- /.flat-title-page -->
 
@@ -28,7 +28,7 @@
                     <div class="content-page-wrap">
                         <div class="course-single">
                             <div class="img-single">
-                                <a href="#"><img src="{{$course->course_image}}" alt="bookflare"></a>
+                                <a href="#"><img src="{{$course->course_image}}" alt="openacademi"></a>
                             </div>
                             <div class="content">
                                 <div class="heading">
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="author border-t-e6f3ff">
                                     <div class="author-avata">
-                                        <img src="{{$public}}/png/author-teacher.png" alt="bookflare">
+                                        <img src="{{$public}}/png/author-teacher.png" alt="openacademi">
                                     </div>
                                     <div class="author-info">
                                         <h6 class="name"><a href="#">{{$course->instructor->full_name}}</a></h6>
@@ -106,7 +106,7 @@
                                     <div class="item-content">
                                         <div class="text-wrap img-right clearfix">
                                             <div class="img-single-small flat-text-center">
-                                                <img src="{{$course->course_image_preview}}" class="img img-thumbnail" alt="bookflare" style="max-width:200px;">
+                                                <img src="{{$course->course_image_preview}}" class="img img-thumbnail" alt="openacademi" style="max-width:200px;">
                                             </div>
                                             <h6 class="title"><a href="#">About This Course</a></h6>
                                             <p class="text">                                            {!! $course->description !!}
@@ -114,7 +114,7 @@
                                         </div>
                                         <div class="text-wrap img-left clearfix">
                                             <div class="img-single-small flat-text-center">
-                                                <img src="{{$smallImages[array_rand($smallImages)]}}" alt="bookflare">
+                                                <img src="{{$smallImages[array_rand($smallImages)]}}" alt="openacademi">
                                             </div>
                                             <h6 class="title"> Here some of the things you will Learn: </h6>
                                             <p class="text">Lorem Ipsn gravida nibh vel velit auctor aliquet sollic
@@ -147,7 +147,7 @@
                                 <div class="tab-content">
                                     <div class="item-content">
                                         <div class="img-single-small flat-text-center">
-                                            <img src="{{$public}}/png/img-small.png" alt="bookflare">
+                                            <img src="{{$public}}/png/img-small.png" alt="openacademi">
                                         </div>
                                         <div class="text-wrap">
                                             <h6 class="title"><a href="#">Limitless Learning, Limitless
@@ -186,7 +186,7 @@
                                     <div class="course-border border-f-e6f3ff border-ra4 transition-vline">
                                         <div class="course-img img-vline">
                                             <a href="{{route('courses.show',['slug'=>$course->slug])}}"><img
-                                                        src="{{$course->course_image_preview}}" alt="bookflare"></a>
+                                                        src="{{$course->course_image_preview}}" alt="openacademi"></a>
                                             <div class="overlay">
                                                 <span class="vline"></span>
                                                 <span class="vline vline-bottom"></span>
