@@ -411,10 +411,8 @@
 
             $(window).on('load scroll', function(){
                 if ( $(window).scrollTop() > offsetTop  ) {
-                    $('#header').addClass('fixed-header');
                     buffer.show();
                 } else {
-                    $('#header').removeClass('fixed-header');
                     buffer.hide();
                 }
             });
