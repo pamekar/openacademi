@@ -42,7 +42,7 @@
                             <div class="course-border border-f-e6f3ff border-ra4 clear-sub-columns transition-vline">
                                 <div class="course-img-box">
                                     <div class="course-img img-vline">
-                                        <a href="#"><img :src="course.course_image_preview" style="max-height: 213px;" alt="bookflare"></a>
+                                        <a href="#"><img :src="course.course_image_preview" style="max-height: 213px;" alt="openacademi"></a>
                                         <div class="overlay">
                                             <span class="vline"></span>
                                             <span class="vline vline-bottom"></span>
