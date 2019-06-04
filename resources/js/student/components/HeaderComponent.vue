@@ -11,8 +11,7 @@
 
                 <!-- Brand -->
                 <a href="home" class="navbar-brand">
-                    <img :src="public_+'/assets/images/logo/white.svg'" class="mr-2" alt="OpenAcademi"/>
-                    <span class="d-none d-xs-md-block">OpenAcademi</span>
+                    <img :src="public_+'/png/logo.png'" class="mr-2" width="157" height="29" alt="OpenAcademi"/>
                 </a>
 
                 <!-- Search -->
