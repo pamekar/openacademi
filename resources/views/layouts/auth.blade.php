@@ -1,42 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
-<!-- Mirrored from brandio.io/envato/iofrm/html/login16.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Jan 2019 20:31:11 GMT -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title','Authentication')</title>
-    <link rel="stylesheet" type="text/css" href="{{asset("$public/auth/css/bootstrap.min.css")}}">
-    <link rel="stylesheet" type="text/css" href="{{asset("$public/auth/css/fontawesome-all.min.css")}}">
-    <link rel="stylesheet" type="text/css" href="{{asset("$public/auth/css/iofrm-style.css")}}">
-    <link rel="stylesheet" type="text/css" href="{{asset("$public/auth/css/iofrm-theme16.css")}}">
-</head>
-<body>
-    <div class="form-body without-side">
-        <div class="website-logo">
-            <a href="{{url('')}}">
-                <div class="logo">
-                    <img class="logo-size" src="{{asset("$public/auth/svg/logo-light.svg")}}" alt="">
-                </div>
-            </a>
-        </div>
-        <div class="row">
-            <div class="img-holder">
-                <div class="bg"></div>
-                <div class="info-holder">
-                    <img src="{{asset("$public/auth/svg/graphic3.svg")}}" alt="">
-                </div>
-            </div>
-            <div class="form-holder">
-                @yield('content')
-            </div>
-        </div>
-    </div>
-<script src="{{asset("$public/auth/js/jquery.min.js")}}"></script>
-<script src="{{asset("$public/auth/js/popper.min.js")}}"></script>
-<script src="{{asset("$public/auth/js/bootstrap.min.js")}}"></script>
-<script src="{{asset("$public/auth/js/main.js")}}"></script>
-</body>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@yield('title') | {{config('app.name')}}</title>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{$public}}/png/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{$public}}/png/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{$public}}/png/favicon-16x16.png">
+    <link rel="manifest" href="{{$public}}/site.webmanifest">
+
+    <link type="text/css" href="{{$public}}/assets/vendor/perfect-scrollbar.css" rel="stylesheet">
+    <!-- Material Design Icons -->
+    <link type="text/css" href="{{$public}}/assets/css/material-icons.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link type="text/css" href="{{$public}}/assets/css/fontawesome.css" rel="stylesheet">
+
+    <!-- App CSS -->
+    <link type="text/css" href="{{$public}}/assets/css/app.css" rel="stylesheet">
+</head>
+
+<body class="login">
+
+@yield('content')
+
+<!-- jQuery -->
+<script src="{{$public}}/assets/vendor/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="{{$public}}/assets/vendor/popper.min.js"></script>
+<script src="{{$public}}/assets/vendor/bootstrap.min.js"></script>
+
+<!-- Perfect Scrollbar -->
+<script src="{{$public}}/assets/vendor/perfect-scrollbar.min.js"></script>
+
+<!-- MDK -->
+<script src="{{$public}}/assets/vendor/dom-factory.js"></script>
+<script src="{{$public}}/assets/vendor/material-design-kit.js"></script>
+
+<!-- App JS -->
+<script src="{{$public}}/assets/js/app.js"></script>
+
+<!-- Highlight.js -->
+<script src="{{$public}}/assets/js/hljs.js"></script>
+
+<script src="{{$public}}/assets/js/jquery.validate.min.js"></script>
+
+@yield('scripts')
+</body>
 
 </html>
