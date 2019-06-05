@@ -1,61 +1,60 @@
-@extends('layouts._auth')
-
+@extends('layouts.auth')
+@section('title','Reset Password')
 @section('content')
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset password</div>
-                <div class="panel-body">
-
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> There were problems with input:
-                            <br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <form class="form-horizontal"
-                          role="form"
-                          method="POST"
-                          action="{{ url('password/email') }}">
-                        <input type="hidden"
-                               name="_token"
-                               value="{{ csrf_token() }}">
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Email</label>
-
-                            <div class="col-md-6">
-                                <input type="email"
-                                       class="form-control"
-                                       name="email"
-                                       value="{{ old('email') }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit"
-                                        class="btn btn-primary"
-                                        style="margin-right: 15px;">
-                                    Reset password
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <div class="d-flex align-items-center" style="min-height: 100vh">
+        <div class="col-sm-8 col-md-6 col-lg-4 mx-auto" style="min-width: 300px;">
+            <div class="d-flex justify-content-center my-3 navbar-light">
+                <!-- Brand -->
+                <a href="/" class="navbar-brand m-0">
+                    <img src="{{$public}}/png/logo-alt.png" alt="openacademi" width="157">
+                </a>
+            </div>
+            <div class="card navbar-shadow">
+                <div class="card-header text-center">
+                    <h4 class="card-title">Reset Password</h4>
+                    <p class="card-subtitle">Provide us with yout email</p>
                 </div>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-light border-1 border-left-3 border-left-primary d-flex" role="alert">
+                            <i class="material-icons text-success mr-3">check_circle</i>
+                            <div class="text-body">{{session('status')}}</div>
+                        </div>
+                    @endif
+
+                <form action="{{route('password.email')}}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label class="form-label" for="email">Your email address:</label>
+                        <div class="input-group input-group-merge">
+                            <input id="email" name="email" type="email" required=""
+                                   class="form-control form-control-prepended {{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                   value="{{ old('email') }}" autofocus placeholder="Your email address">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <span class="far fa-envelope"></span>
+                                </div>
+                            </div>
+                            @if ($errors->has('email'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('email') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <button type="submit" class="btn btn-primary btn-block">Send Reset Link</button>
+                    </div>
+                    <div class="text-center">
+                        <a href="{{route('login')}}" class="text-black-70"
+                           style="text-decoration: underline;">Login?</a>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center text-black-50">
+                Not yet a student? <a href="{{route('register')}}">Sign up</a>
             </div>
         </div>
+    </div>
     </div>
 @endsection
