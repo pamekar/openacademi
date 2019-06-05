@@ -24,9 +24,11 @@
 </head>
 
 <body class="login">
-
-@yield('content')
-
+<div class="bg-image" style="background-image: url('{{$public}}/assets/images/auth-bg.jpg');">
+    <div class="hero-static bg-white-95">
+    @yield('content')
+    </div>
+</div>
 <!-- jQuery -->
 <script src="{{$public}}/assets/vendor/jquery.min.js"></script>
 
