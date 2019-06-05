@@ -10,7 +10,7 @@
                 </button>
 
                 <!-- Brand -->
-                <a href="home" class="navbar-brand">
+                <a href="/home" class="navbar-brand">
                     <img :src="public_+'/png/logo.png'" class="mr-2" width="157" height="29" alt="OpenAcademi"/>
                 </a>
 
