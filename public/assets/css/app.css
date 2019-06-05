@@ -66,6 +66,7 @@ html {
     min-height: 100vh;
 }
 
+
 @-ms-viewport {
     width: device-width
 }
@@ -76,13 +77,12 @@ html {
 
 [dir=ltr] body {
     margin: 0;
-    font-family: Roboto, Helvetica Neue, Arial, sans-serif;
+    font-family: "Open Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     font-size: .9375rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #383b3d;
+    color: #515e6f;;
     text-align: left;
-    background-color: #fdfdfd
 }
 
 [dir=ltr] [tabindex="-1"]:focus {
@@ -5447,11 +5447,11 @@ html {
 }
 
 [dir=ltr] .navbar-light .navbar-nav .nav-link {
-    color: #b8c2cc
+    color: #505763;
 }
 
 [dir=ltr] .navbar-light .navbar-nav .nav-link:focus, [dir=ltr] .navbar-light .navbar-nav .nav-link:hover {
-    color: rgba(184, 194, 204, .7)
+    color: #39a2d2;
 }
 
 [dir=ltr] .navbar-light .navbar-nav .nav-link.disabled {
@@ -19348,7 +19348,7 @@ html {
     min-height: 64px;
     padding-top: 0;
     padding-bottom: 0;
-    font-size: 1rem
+    font-size: 0.875rem
 }
 
 @media (max-width: 373.98px) {
@@ -20697,4 +20697,14 @@ html {
 
 [dir=ltr] .forum-thread-user:hover img {
     opacity: .7
+}
+
+/*Custom Styling*/
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1.375rem;
+    font-family: "Source Sans Pro","Open Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-weight: 600;
+    line-height: 1.25;
+    color: #373737;
 }
