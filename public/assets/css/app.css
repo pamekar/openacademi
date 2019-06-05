@@ -17670,13 +17670,19 @@ html {
 }
 
 [dir=ltr] .search-form .form-control {
-    background-color: transparent
+    background-color: #eff0f1;
+    border: 1px solid rgba(25,40,54,0.07);
+}
+
+[dir=ltr] .search-form {
+    background-color: transparent;
 }
 
 [dir=ltr] .search-form .form-control, [dir=ltr] .search-form .form-control:focus {
     border-color: transparent;
     -webkit-box-shadow: none;
-    box-shadow: none
+    box-shadow: none;
+    min-width: 258px
 }
 
 [dir=ltr] .search-form .btn {
