@@ -428,6 +428,6 @@
 <script src="{{$public}}/js/jquery.cookie.js"></script>
 <script src="{{$public}}/js/smoothscroll.js"></script>
 <script src="{{$public}}/js/main.js"></script>
-<script src="{{$public}}/js/app.js"></script>
+<script src="{{$public}}{{mix('/js/app.js')}}"></script>
 </body>
 </html>

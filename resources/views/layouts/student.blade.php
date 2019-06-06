@@ -63,7 +63,7 @@
 
     </script>
 @endif
-<script src="{{asset("$public/student/js/app.js")}}"></script>
+<script src="{{$public.mix('student/js/app.js')}}"></script>
 <!-- Perfect Scrollbar -->
 <script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
 

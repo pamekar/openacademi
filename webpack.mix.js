@@ -11,9 +11,12 @@ const mix = require('laravel-mix');
  |e
  */
 
-mix.js('resources/js/home/app.js', 'public/js')
+mix.js('resources/js/home/app.js', 'public/js');
 mix.js('resources/js/student/app.js', 'public/student/js')
     .sass('resources/sass/student/app.scss', 'public/student/css');
 mix.js('resources/js/teacher/app.js', 'public/teacher/js')
     .sass('resources/sass/teacher/app.scss', 'public/teacher/css');
 
+if (mix.inProduction()) {
+    mix.version();
+}
