@@ -1,12 +1,7 @@
 {
-  "/js/app.js": "/js/app.js",
-  "/css/app.css": "/css/app.css",
-  "/student/js/app.js": "/student/js/app.js",
+  "/teacher/js/app.js": "/teacher/js/app.bc05936a351523f5b1a6.js",
+  "/student/js/app.js": "/student/js/app.9f584f23c4c643f8fefe.js",
+  "/js/app.js": "/js/app.73bc064e54386ca70dfa.js",
   "/student/css/app.css": "/student/css/app.css",
-  "/instructor/css/iapp.css": "/instructor/css/iapp.css",
-  "/instructor/js/iapp.js": "/instructor/js/iapp.js",
-  "/instructor/css/app.css": "/instructor/css/app.css",
-  "/instructor/js/app.js": "/instructor/js/app.js",
-  "/teacher/js/app.js": "/teacher/js/app.js",
   "/teacher/css/app.css": "/teacher/css/app.css"
 }
