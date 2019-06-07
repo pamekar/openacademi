@@ -65,7 +65,6 @@
                                     <i class="material-icons text-muted-light">schedule</i>
                                 </div>
                                 <div class="media-body">
-
                                     {{Math.floor(course.duration / 3600)}}
                                     <small class="text-muted">hrs</small> &nbsp; {{course.duration % 60}}
                                     <small class="text-muted">min</small>
@@ -81,20 +80,23 @@
                                 <img :src="public_+'/assets/images/people/110/guy-6.jpg'" alt="About Adrian" width="50" class="rounded-circle">
                             </div>
                             <div class="media-body">
-                                <h4 class="card-title"><a href="fixed-student-profile.html">Adrian Demian</a></h4>
-                                <p class="card-subtitle">Instructor</p>
+                                <h4 class="card-title"><a href="javascript:void(0)">{{course.instructor.first_name+" "+course.instructor.last_name}}</a></h4>
+                                <p class="card-subtitle">INSTRUCTOR</p>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <p>Having over 12 years exp. Adrian is one of the lead UI designers in the industry Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, aut.</p>
-                        <a href="" class="btn btn-default">
+                        <p>{{course.instructor.description}}</p>
+                        <a :href="'http://facebook.com/'+course.instructor.facebook" class="btn btn-default">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="" class="btn btn-default">
+                        <a :href="'http://instagram.com/'+course.instructor.instagram" class="btn btn-default">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a :href="'http://twitter.com/'+course.instructor.twitter" class="btn btn-default">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="" class="btn btn-default"><i class="fab fa-github"></i></a>
+                        <a :href="'http://linkein.com/in/'+course.instructor.linkedin" class="btn btn-default"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
 

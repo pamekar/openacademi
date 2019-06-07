@@ -35,14 +35,13 @@
                         title: "My Courses"
                     }
                 ],
-                pageTitle:       "My Courses"
+                pageTitle:        "My Courses"
             }
         },
         created() {
             this.getPurchasedCourses();
         },
         mounted() {
-            console.log('Purchased Courses Component mounted now.')
         },
         components: {
             'purchased-courses-component': PurchasedCourses
