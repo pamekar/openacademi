@@ -1,3 +1,4 @@
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 let path = require('path');
 let glob = require('glob');
 let webpack = require('webpack');
@@ -429,7 +430,7 @@ if (Mix.options.purifyCss) {
 
 if (Mix.inProduction && Mix.options.uglify) {
     plugins.push(
-        new webpack.optimize.UglifyJsPlugin(Mix.options.uglify)
+        new UglifyJSPlugin(),
     );
 }
 
