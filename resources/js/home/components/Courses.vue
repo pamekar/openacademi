@@ -7,7 +7,7 @@
                         <div class="course-border border-f-e6f3ff border-ra4 transition-vline">
                             <div class="course-img img-vline">
                                 <a :href="`/course/${course.slug}`"><img :src="course.course_image_preview"
-                                                 alt="openacademi"></a>
+                                                                         alt="openacademi"></a>
                                 <div class="overlay">
                                     <span class="vline"></span>
                                     <span class="vline vline-bottom"></span>
@@ -45,7 +45,7 @@
                     active-class=" active"
                     disabled-class="disabled"
             >
-               </paginate>
+            </paginate>
         </div>
     </div> <!-- /.container -->
     <!-- /.content-wrap -->
@@ -58,6 +58,7 @@
         data() {
             return {
                 pageCount: 1,
+                last_page: 1,
                 courses:   []
             }
         },
