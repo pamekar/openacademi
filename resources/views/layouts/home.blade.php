@@ -39,7 +39,7 @@
             <div class="header-wrap clearfix">
                 <div id="logo">
                     <a href="{{url('')}}"><img src="{{$public}}/png/logo.png" alt="openacademi" width="157" height="29"
-                                               data-retina="images/logo/logo@2x.png" data-width="157" data-height="29"></a>
+                                               data-width="157" data-height="29"></a>
                 </div>
                 <div class="extra-menu float-left flat-text-left clearfix">
                     <div class="wrap-search-header">
