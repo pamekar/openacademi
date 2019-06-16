@@ -2,12 +2,12 @@
   "private": true,
   "scripts": {
     "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js",
-    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=webpack.config.js",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
     "watch-poll": "npm run watch -- --watch-poll",
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js"
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
@@ -16,13 +16,16 @@
     "@babel/runtime": "^7.3.1",
     "@voerro/vue-tagsinput": "^1.11.1",
     "axios": "^0.15.3",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bootstrap-sass": "^3.4.1",
-    "cross-env": "^3.2.3",
-    "jquery": "^3.1.1",
-    "laravel-mix": "0.*",
+    "cross-env": "^5.1",
+    "jquery": "^3.2",
+    "laravel-mix": "^4.0.16",
+    "laravel-mix-purgecss": "^4.1.0",
     "lodash": "^4.17.4",
-    "vue": "^2.6.6"
+    "resolve-url-loader": "^2.3.1",
+    "sass": "^1.15.2",
+    "sass-loader": "^7.1.0",
+    "vue": "^2.5.17"
   },
   "dependencies": {
     "@babel/cli": "^7.2.3",
@@ -54,6 +57,6 @@
     "vuejs-countdown-timer": "^2.1.1",
     "vuejs-paginate": "^2.1.0",
     "vuex": "^3.1.0",
-    "webpack": "^3.12.0"
+    "webpack": "^4.34.0"
   }
 }
