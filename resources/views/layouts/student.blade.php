@@ -15,17 +15,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{$public}}/png/favicon-16x16.png">
     <link rel="manifest" href="{{$public}}/site.webmanifest">
 
-    <link type="text/css" href="{{$public}}/assets/vendor/perfect-scrollbar.css" rel="stylesheet">
-    <!-- Material Design Icons -->
-    <link type="text/css" href="{{$public}}/assets/css/material-icons.css" rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
-    <link type="text/css" href="{{$public}}/assets/css/fontawesome.css" rel="stylesheet">
-
-    <!-- App CSS -->
-    <link type="text/css" href="{{$public}}/assets/css/app.css" rel="stylesheet">
+    <link type="text/css" href="{{$public.mix('assets/css/academi-styles.css')}}" rel="stylesheet">
     <script>
-        window.public_= "{{$public}}";
+        window.public_ = "{{$public}}";
     </script>
 </head>
 
@@ -43,14 +35,8 @@
 >{{ csrf_field() }}</form>
 
 <!-- jQuery -->
-<script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
-
-<!-- Bootstrap -->
-<script src="{{asset("$public/assets/vendor/popper.min.js")}}"></script>
-<script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"></script>
-
+<script src="{{$public.mix("/assets/js/academi-scripts-student-1.js")}}"></script>
 @if(isset($notification))
-    <script src="{{asset("$public/js/bootstrap-notify.min.js")}}"></script>
     <script>
         $.notify({
             // options
@@ -59,31 +45,10 @@
             // settings
             type: '{{$notification->type}}',
         });
-
-
     </script>
 @endif
 <script src="{{$public.mix('student/js/app.js')}}"></script>
 <!-- Perfect Scrollbar -->
-<script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
-
-<!-- MDK -->
-<script src="{{asset("$public/assets/vendor/dom-factory.js")}}"></script>
-<script src="{{asset("$public/assets/vendor/material-design-kit.js")}}"></script>
-
-<!-- App JS -->
-<script src="{{asset("$public/assets/js/app.js")}}"></script>
-
-<!-- Required by countdown -->
-<script src="{{asset("$public/assets/vendor/moment.min.js")}}"></script>
-
-<!-- Easy Countdown -->
-<script src="{{asset("$public/assets/vendor/jquery.countdown.min.js")}}"></script>
-
-<!-- Init -->
-<script src="{{asset("$public/assets/js/countdown.js")}}"></script>
-
-
+<script src="{{$public.mix("assets/js/academi-scripts-student-2.js")}}"></script>
 </body>
-
 </html>

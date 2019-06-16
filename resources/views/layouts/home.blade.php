@@ -417,17 +417,7 @@
       method="POST" style="display: none;"
 >{{ csrf_field() }}</form>
 
-<script src="{{$public}}/js/jquery.min.js"></script>
-<script src="{{$public}}/js/parallax.js"></script>
-<script src="{{$public}}/js/owl.carousel.min.js"></script>
-<script src="{{$public}}/js/jquery-fancybox.js"></script>
-<script src="{{$public}}/js/imagesloaded.min.js"></script>
-<script src="{{$public}}/js/jquery-isotope.js"></script>
-<script src="{{$public}}/js/waypoints.min.js"></script>
-<script src="{{$public}}/js/jquery.easing.js"></script>
-<script src="{{$public}}/js/jquery.cookie.js"></script>
-<script src="{{$public}}/js/smoothscroll.js"></script>
-<script src="{{$public}}/js/main.js"></script>
-<script src="{{$public}}{{mix('/js/app.js')}}"></script>
+<script src="{{$public.mix('js/academi-scripts-home.js')}}"></script>
+<script src="{{$public.mix('js/app.js')}}"></script>
 </body>
 </html>
