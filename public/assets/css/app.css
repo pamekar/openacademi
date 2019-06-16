@@ -17674,6 +17674,10 @@ html {
     border: 1px solid rgba(25,40,54,0.07);
 }
 
+[dir=ltr] .i-search-form .form-control {
+    background-color: transparent
+}
+
 [dir=ltr] .search-form {
     background-color: transparent;
 }
