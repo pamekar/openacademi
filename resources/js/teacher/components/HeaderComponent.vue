@@ -9,9 +9,8 @@
                 </button>
 
                 <!-- Brand -->
-                <a href="instructor-dashboard.html" class="navbar-brand">
-                    <img :src="public_+'/assets/images/logo/white.svg'" class="mr-2" alt="OpenAcademi" />
-                    <span class="d-none d-xs-md-block">OpenAcademi</span>
+                <a href="/home" class="navbar-brand bg-light p-1" style="border-radius:5px;">
+                    <img :src="public_+'/png/logo.png'" class="mr-2"  width="157" height="29" alt="OpenAcademi"/>
                 </a>
 
                 <ul class="nav navbar-nav navbar-nav-stats d-none d-md-flex flex-nowrap">
@@ -27,7 +26,7 @@
                 </ul>
 
                 <!-- Search -->
-                <form class="search-form d-none d-md-flex">
+                <form class="search-form i-search-form d-none d-md-flex">
                     <input type="text" class="form-control" placeholder="Search">
                     <button class="btn" type="button"><i class="material-icons font-size-24pt">search</i></button>
                 </form>
@@ -36,20 +35,17 @@
                 <div class="flex"></div>
 
                 <!-- Menu -->
+<!--
                 <ul class="nav navbar-nav flex-nowrap d-none d-lg-flex">
                     <li class="nav-item">
                         <a class="nav-link" href="instructor-forum.html">Forum</a>
                     </li>
                 </ul>
-
+-->
                 <!-- Menu -->
                 <ul class="nav navbar-nav flex-nowrap">
-
-
-
-
                     <!-- Notifications dropdown -->
-                    <li class="nav-item dropdown dropdown-notifications dropdown-menu-sm-full">
+                    <!--<li class="nav-item dropdown dropdown-notifications dropdown-menu-sm-full">
                         <button class="nav-link btn-flush dropdown-toggle" type="button" data-toggle="dropdown" data-dropdown-disable-document-scroll data-caret="false">
                             <i class="material-icons">notifications</i>
                             <span class="badge badge-notifications badge-danger">2</span>
@@ -157,7 +153,7 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li>-->
                     <!-- // END Notifications dropdown -->
                     <!-- User dropdown -->
                     <li class="nav-item dropdown ml-1 ml-md-3">
