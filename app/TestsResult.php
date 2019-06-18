@@ -3,12 +3,13 @@
 namespace App;
 
 use Carbon\Carbon;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TestsResult extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Cachable;
 
     protected $fillable = ['test_id', 'user_id', 'test_result','total_score','status'];
 

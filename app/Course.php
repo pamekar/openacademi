@@ -2,6 +2,8 @@
 
 namespace App;
 
+
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,8 +27,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
  */
 class Course extends Model
 {
-    use SoftDeletes;
-
+    use SoftDeletes, Cachable;
 
     protected $fillable
         = [

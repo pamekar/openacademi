@@ -2,6 +2,7 @@
 
 namespace App;
 
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
  */
 class Lesson extends Model implements HasMedia
 {
-    use SoftDeletes, HasMediaTrait;
+    use SoftDeletes, HasMediaTrait, Cachable;
 
     protected $fillable
         = [

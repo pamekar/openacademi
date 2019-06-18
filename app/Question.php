@@ -2,6 +2,7 @@
 
 namespace App;
 
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class Question extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Cachable;
 
     protected $fillable = ['question', 'question_image', 'score'];
 
