@@ -10,14 +10,6 @@
                 <h2 class="title font-weight-700"><a href="#">{{$course->title}}</a></h2>
                 <p class="text">{{$course->summary}}</p>
             </div>
-            <div class="breadcrumbs">
-                <ul>
-                    <li><a href="{{route('home')}}">Home</a></li>
-                    <li><a href="{{route('courses.all')}}">Courses</a></li>
-                    <li><a href="{{ route('courses.show', [$course->slug]) }}">{{$course->title}}</a></li>
-                </ul>
-            </div>
-            <img src="{{$public}}/png/bg-white.png" alt="openacademi" class="bg-breadcrumbs style2">
         </div>
     </section> <!-- /.flat-title-page -->
 
@@ -91,9 +83,6 @@
                                 <li class="item-title  overview">
                                     <span class="inner">OVERVIEW</span>
                                 </li>
-                                <li class="item-title event">
-                                    <span class="inner">DESCRIPTION</span>
-                                </li>
                                 <li class="item-title requirements">
                                     <span class="inner">REQUIREMENTS</span>
                                 </li>
@@ -106,10 +95,12 @@
                                     <div class="item-content">
                                         <div class="text-wrap img-right clearfix">
                                             <div class="img-single-small flat-text-center">
-                                                <img src="{{$course->course_image_preview}}" class="img img-thumbnail" alt="openacademi" style="max-width:200px;">
+                                                <img src="{{$course->course_image_preview}}" class="img img-thumbnail"
+                                                     alt="openacademi" style="max-width:200px;">
                                             </div>
                                             <h6 class="title"><a href="#">About This Course</a></h6>
-                                            <p class="text">                                            {!! $course->description !!}
+                                            <p class="text">
+                                                {!! $course->description !!}
                                             </p>
                                         </div>
                                         <div class="text-wrap img-left clearfix">
@@ -196,7 +187,9 @@
                                             <div class="text-wrap border-bt-e6f3ff">
                                                 <p class="teacher"><a href="#">{{$course->instructor->full_name}}</a>
                                                 </p>
-                                                <h6 class="title"><a href="{{route('courses.show',['slug'=>$course->slug])}}">{{$course->title}}</a></h6>
+                                                <h6 class="title"><a
+                                                            href="{{route('courses.show',['slug'=>$course->slug])}}">{{$course->title}}</a>
+                                                </h6>
                                                 <div class="wrap-rating">
                                                     <star-rating
                                                             :rating="{{explode(';',$course->rating)[0]}}"
