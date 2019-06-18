@@ -276,6 +276,11 @@ textarea:focus,
         opacity: 1;
     }
 
+    .text{
+        font-weight:normal;
+        line-height: 1.4;
+    }
+
 /* Extra Class
 -------------------------------------------------- */
     /* Backgrounds */
