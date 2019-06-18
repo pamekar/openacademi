@@ -9,13 +9,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{setting('site.title')}}</title>
+    <meta name="theme-color" content="#39a2d2">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{$public}}/png/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{$public}}/png/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{$public}}/png/favicon-16x16.png">
-    <link rel="manifest" href="{{$public}}/site.webmanifest">
+    <!-- Perfect Scrollbar -->
+    <link type="text/css" href="{{asset("$public/assets/vendor/perfect-scrollbar.css")}}" rel="stylesheet">
 
-    <link type="text/css" href="{{$public.mix('assets/css/academi-styles.css')}}" rel="stylesheet">
+    <!-- Material Design Icons -->
+    <link type="text/css" href="{{asset("$public/assets/css/material-icons.css")}}" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link type="text/css" href="{{asset("$public/assets/css/fontawesome.css")}}" rel="stylesheet">
+
+
+    <!-- App CSS -->
+    <link type="text/css" href="{{asset("$public/assets/css/app.css")}}" rel="stylesheet">
     <script>
         window.public_ = "{{$public}}";
     </script>
@@ -35,7 +42,13 @@
 >{{ csrf_field() }}</form>
 
 <!-- jQuery -->
-<script src="{{$public.mix("/assets/js/academi-scripts-student-1.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
+
+<!-- Bootstrap -->
+<script src="{{asset("$public/assets/vendor/popper.min.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"></script>
+<script src="{{asset("$public/js/bootstrap-notify.min.js")}}"></script>
+
 @if(isset($notification))
     <script>
         $.notify({
@@ -47,8 +60,26 @@
         });
     </script>
 @endif
-<script src="{{$public.mix('student/js/app.js')}}"></script>
+<script src="{{asset("$public/student/js/app.js")}}"></script>
 <!-- Perfect Scrollbar -->
-<script src="{{$public.mix("assets/js/academi-scripts-student-2.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
+
+<!-- MDK -->
+<script src="{{asset("$public/assets/vendor/dom-factory.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/material-design-kit.js")}}"></script>
+
+<!-- App JS -->
+<script src="{{asset("$public/assets/js/app.js")}}"></script>
+
+<!-- Required by countdown -->
+<script src="{{asset("$public/assets/vendor/moment.min.js")}}"></script>
+
+<!-- Easy Countdown -->
+<script src="{{asset("$public/assets/vendor/jquery.countdown.min.js")}}"></script>
+
+<!-- Init -->
+<script src="{{asset("$public/assets/js/countdown.js")}}"></script>
+
+
 </body>
 </html>

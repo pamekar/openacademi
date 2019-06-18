@@ -16,7 +16,11 @@
 
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+    <meta name="theme-color" content="#39a2d2">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{$public}}/png/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{$public}}/png/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{$public}}/png/favicon-16x16.png">
+    <link rel="manifest" href="{{$public}}/site.webmanifest">
     <!-- Bootstrap  -->
     <link rel="stylesheet" type="text/css" href="{{$public}}/css/bootstrap.css">
 
@@ -24,13 +28,6 @@
     <link rel="stylesheet" type="text/css" href="{{$public}}/css/style.css">
     <link rel="stylesheet" type="text/css" href="{{$public}}/css/responsive.css">
     <link rel="stylesheet" type="text/css" href="{{$public}}/css/color1.css" id="colors">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="{{$public}}/png/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{$public}}/png/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{$public}}/png/favicon-16x16.png">
-    <link rel="manifest" href="{{$public}}/site.webmanifest">
-
-
 </head>
 <body class="bg-body3">
 <div class="boxed" id="app">
@@ -417,7 +414,17 @@
       method="POST" style="display: none;"
 >{{ csrf_field() }}</form>
 
-<script src="{{$public.mix('js/academi-scripts-home.js')}}"></script>
+<script src="{{$public}}/js/jquery.min.js"></script>
+<script src="{{$public}}/js/parallax.js"></script>
+<script src="{{$public}}/js/owl.carousel.min.js"></script>
+<script src="{{$public}}/js/jquery-fancybox.js"></script>
+<script src="{{$public}}/js/imagesloaded.min.js"></script>
+<script src="{{$public}}/js/jquery-isotope.js"></script>
+<script src="{{$public}}/js/waypoints.min.js"></script>
+<script src="{{$public}}/js/jquery.easing.js"></script>
+<script src="{{$public}}/js/jquery.cookie.js"></script>
+<script src="{{$public}}/js/smoothscroll.js"></script>
+<script src="{{$public}}/js/main.js"></script>
 <script src="{{$public.mix('js/app.js')}}"></script>
 </body>
 </html>

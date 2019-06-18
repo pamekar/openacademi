@@ -8,13 +8,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>{{setting('site.title')}}</title>
+    <meta name="theme-color" content="#39a2d2">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Styles -->
-    <link type="text/css" href="{{asset("$public/assets/css/academi-styles.css")}}" rel="stylesheet">
+    <!-- Perfect Scrollbar -->
+    <link type="text/css" href="{{asset("$public/assets/vendor/perfect-scrollbar.css")}}" rel="stylesheet">
 
+    <!-- Material Design Icons -->
+    <link type="text/css" href="{{asset("$public/assets/css/material-icons.css")}}" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link type="text/css" href="{{asset("$public/assets/css/fontawesome.css")}}" rel="stylesheet">
+
+    <!-- App CSS -->
+    <link type="text/css" href="{{asset("$public/assets/css/app.css")}}" rel="stylesheet">
+    <link type="text/css" href="{{asset("$public/assets/css/nestable.css")}}" rel="stylesheet">
     <script>
         window.public_ = "{{$public}}";
     </script>
@@ -33,7 +42,11 @@
 >{{ csrf_field() }}</form>
 
 <!-- Bootstrap -->
-<script src="{{$public.mix("/assets/js/academi-scripts-instructor-1.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/jquery.min.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/popper.min.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/bootstrap.min.js")}}"></script>
+
+<script src="{{asset("$public/js/bootstrap-notify.min.js")}}"></script>
 @if(isset($notification))
     <script>
         $.notify({
@@ -45,8 +58,19 @@
         });
     </script>
 @endif
-<script src="{{$public.mix('/teacher/js/app.js')}}"></script>
-<script src="{{$public.mix("/assets/js/academi-scripts-instructor-2.js")}}"></script>
+<script src="{{asset("$public/teacher/js/app.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/jquery.nestable.js")}}"></script>
+<script src="{{asset("$public/assets/js/nestable.js")}}"></script>
+
+<!-- Perfect Scrollbar -->
+<script src="{{asset("$public/assets/vendor/perfect-scrollbar.min.js")}}"></script>
+
+<!-- MDK -->
+<script src="{{asset("$public/assets/vendor/dom-factory.js")}}"></script>
+<script src="{{asset("$public/assets/vendor/material-design-kit.js")}}"></script>
+<!-- App JS -->
+<script src="{{asset("$public/assets/js/app.js")}}"></script>
+
 </body>
 
 </html>
