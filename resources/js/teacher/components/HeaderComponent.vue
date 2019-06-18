@@ -10,24 +10,30 @@
 
                 <!-- Brand -->
                 <a href="/home" class="navbar-brand bg-light p-1" style="border-radius:5px;">
-                    <img :src="public_+'/png/logo.png'" class="mr-2"  width="157" height="29" alt="OpenAcademi"/>
+                    <img :src="public_+'/png/logo.png'" class="mr-2" width="157" height="29" alt="OpenAcademi"/>
                 </a>
 
                 <ul class="nav navbar-nav navbar-nav-stats d-none d-md-flex flex-nowrap">
                     <li class="nav-item">
-                        <div class="nav-stats">$591 <small>GROSS</small></div>
+                        <div class="nav-stats">$591
+                            <small>GROSS</small>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <div class="nav-stats">$31 <small>TAXES</small></div>
+                        <div class="nav-stats">$31
+                            <small>TAXES</small>
+                        </div>
                     </li>
                     <li class="nav-item mr-3">
-                        <div class="nav-stats">$560 <small>NET</small></div>
+                        <div class="nav-stats">$560
+                            <small>NET</small>
+                        </div>
                     </li>
                 </ul>
 
                 <!-- Search -->
-                <form class="search-form i-search-form d-none d-md-flex">
-                    <input type="text" class="form-control" placeholder="Search">
+                <form class="search-form i-search-form d-none d-md-flex" @submit.prevent="search">
+                    <input type="text" class="form-control" placeholder="Search" v-model="searchText">
                     <button class="btn" type="button"><i class="material-icons font-size-24pt">search</i></button>
                 </form>
                 <!-- // END Search -->
@@ -35,13 +41,13 @@
                 <div class="flex"></div>
 
                 <!-- Menu -->
-<!--
-                <ul class="nav navbar-nav flex-nowrap d-none d-lg-flex">
-                    <li class="nav-item">
-                        <a class="nav-link" href="instructor-forum.html">Forum</a>
-                    </li>
-                </ul>
--->
+                <!--
+                                <ul class="nav navbar-nav flex-nowrap d-none d-lg-flex">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="instructor-forum.html">Forum</a>
+                                    </li>
+                                </ul>
+                -->
                 <!-- Menu -->
                 <ul class="nav navbar-nav flex-nowrap">
                     <!-- Notifications dropdown -->
@@ -159,13 +165,13 @@
                     <li class="nav-item dropdown ml-1 ml-md-3">
                         <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button"><img :src="public_+'/assets/images/people/50/guy-6.jpg'" alt="Avatar" class="rounded-circle" width="40"></a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="instructor-account-edit.html">
+                            <a class="dropdown-item" href="#">
                                 <i class="material-icons">edit</i> Edit Account
                             </a>
-                            <a class="dropdown-item" href="instructor-profile.html">
+                            <a class="dropdown-item" href="#">
                                 <i class="material-icons">person</i> Public Profile
                             </a>
-                            <a class="dropdown-item" href="guest-login.html">
+                            <a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="material-icons">lock</i> Logout
                             </a>
                         </div>
@@ -179,7 +185,19 @@
     </div>
 </template>
 <script>
-    export default{
+    import {mapState, mapActions} from 'vuex';
 
+    export default {
+        data() {
+            return {
+                searchText: ""
+            }
+        },
+        methods:  {
+            search() {
+                this.$router.push({name: 'search', params: {q: this.searchText}})
+            }
+        },
+        computed: {}
     }
 </script>

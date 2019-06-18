@@ -11,6 +11,7 @@ import EditQuiz from './views/EditQuiz.vue';
 import EditQuestion from './views/EditQuestion.vue';
 import Course from './views/Course.vue';
 import Courses from './views/Courses.vue';
+import Search from './views/Search.vue';
 import Lesson from './views/Lesson.vue';
 import Lessons from './views/Lessons.vue';
 import Options from './views/Options.vue';
@@ -82,6 +83,11 @@ const routes = [
         component: EditLesson
     },
     {
+        path:      '/user/search/:q',
+        name:      'search',
+        component: Search
+    },
+    {
         path:      '/user/quiz/add',
         name:      'add-quiz',
         component: AddQuiz
@@ -131,8 +137,8 @@ const routes = [
         component: Error404
     },
     {
-        path: '/user/logout',
-        name: 'logout',
+        path:      '/user/logout',
+        name:      'logout',
         component: {
             beforeRouteEnter(to, from, next) {
                 document.getElementById('logout-form').submit();

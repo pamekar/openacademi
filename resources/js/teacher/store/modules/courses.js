@@ -1,5 +1,5 @@
 import router from '../../routes'
-
+import axios from 'axios'
 
 const endpoint = '/api/instructor';
 
@@ -15,6 +15,7 @@ const state = {
     pageTotal:  0,
     pageTitle:  '',
     purchased:  '',
+    search:     ''
 };
 
 // actions
@@ -22,7 +23,6 @@ const actions = {
     delete_courses({}, id) {
         axios.delete(`${endpoint}/courses/${id}`)
             .then(({data}) => {
-        
                 jQuery.notify({
                     // options
                     message: data.message,
@@ -41,7 +41,7 @@ const actions = {
     fetch_empty({commit}) {
         commit('SET_EMPTY', []);
     },
-    fetch_all({commit, dispatch}, page = 1) {
+    fetch_all({commit, dispatch}, page) {
         // drg >> this action fetches all the courses (paginated)
         axios.get(`${endpoint}/courses?page=${page}`)
             .then(response => commit('SET_COURSES', response.data)).catch();
@@ -51,6 +51,12 @@ const actions = {
         // drg >> this action fetches all the categories
         axios.get(`${endpoint}/course/categories`)
             .then(response => commit('SET_CATEGORIES', response.data));
+    },
+    fetch_search({commit, dispatch}, params) {
+        // drg >> this action fetches all the courses (paginated)
+        axios.get(`${endpoint}/search?q=${params.q}&page=${params.page}`)
+            .then(response => commit('SET_SEARCH', response.data)).catch();
+        dispatch('fetch_categories');
     },
     add({}, course) {
         let form_data = new FormData();
@@ -142,6 +148,16 @@ const mutations = {
         state.pagePer = courses.per_page;
         state.pageTo = courses.to;
         state.pageTotal = courses.total;
+    },
+    SET_SEARCH(state, results) {
+        let courses = results.courses;
+        state.courses = courses.data;
+        state.pageCount = courses.last_page;
+        state.pageFrom = courses.from;
+        state.pagePer = courses.per_page;
+        state.pageTo = courses.to;
+        state.pageTotal = courses.total;
+        state.pageTitle = results.search;
     },
     SET_EMPTY(state, courses) {
         state.course = [];
