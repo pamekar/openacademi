@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="course-content">
                                     <div class="text-wrap border-bt-e6f3ff">
-                                        <h6 class="title"><a href="#">{{course.title}}</a></h6>
+                                        <h6 class="title"><a :href="'/course/'+course.slug">{{course.title}}</a></h6>
                                         <p class="teacher"><a href="#">{{course.instructor.full_name}}</a></p>
                                         <p class="description">{{course.summary}}</p>
                                     </div>
@@ -105,12 +105,12 @@
     export default {
         data() {
             return {
-                category:   0,
-                categories: [],
-                courses:    [],
-                pageCount:  1,
-                searchText: null,
-                totalCourses:      0
+                category:     0,
+                categories:   [],
+                courses:      [],
+                pageCount:    1,
+                searchText:   null,
+                totalCourses: 0
             }
         },
         components: {
