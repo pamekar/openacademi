@@ -7,9 +7,11 @@ use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Scout\Searchable;
 use phpDocumentor\Reflection\Types\Boolean;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -27,7 +29,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
  */
 class Course extends Model
 {
-    use SoftDeletes, Cachable;
+    use SoftDeletes, Searchable;
 
     protected $fillable
         = [
@@ -303,5 +305,46 @@ class Course extends Model
         //  if (!$full)
         $string = array_slice($string, 0, 1);
         return $string ? implode(', ', $string) . ' ago' : 'just now';
+    }
+
+    public function isPublished()
+    {
+        return boolval($this->published);
+    }
+
+    public function shouldBeSearchable()
+    {
+        return $this->isPublished();
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        $search = Arr::only($array, [
+            'id',
+            'title',
+            'slug',
+            'tags',
+            'summary',
+            'description',
+        ]);
+        $searchable = array_replace($search, [
+            'id'          => $this->id,
+            'title'       => $this->title,
+            'slug'        => $this->slug,
+            'tags'        => implode(";",$this->tags),
+            'summary'     => $this->summary,
+            'description' => $this->description,
+            'category'    => $this->course_cat,
+            'instructor' =>$this->instructor->full_name
+        ]);
+
+        return $searchable;
     }
 }
