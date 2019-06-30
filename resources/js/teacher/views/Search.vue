@@ -111,7 +111,7 @@
             }
         },
         mounted() {
-            this.$store.dispatch('courses/fetch_all');
+            this.searchCourses();
         },
         methods:    {
             searchCourses(page = 1) {

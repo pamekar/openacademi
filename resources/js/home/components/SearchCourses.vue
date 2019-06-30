@@ -4,12 +4,13 @@
             <div class="overlay style2"></div>
             <div class="container wrap-title-page bg-img ">
                 <div class="title-page">
-                    <h3 class="title font-weight-700">{{searchText}}</h3>
+                    <h3 class="title color-fff font-weight-700" v-if="totalCourses>0">Search results for <span class="font-italic">"{{searchText}}"</span></h3>
+                    <h3 class="title color-fff font-weight-700 text-center" v-else>No results found for <span class="font-italic">"{{searchText}}"</span></h3>
                 </div>
             </div>
         </section>
 
-        <div class="content-page-fullwidth-wrap clearfix pd-top-45">
+        <div class="content-page-fullwidth-wrap clearfix pd-top-45" v-if="totalCourses>0">
             <div class="container-fluid ">
                 <!-- /.sidebar-left -->
                 <div class="sidebar-left">
