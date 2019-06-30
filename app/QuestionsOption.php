@@ -1,7 +1,7 @@
 <?php
 namespace App;
 
-use GeneaLabs\LaravelModelCaching\Traits\Cachable;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 */
 class QuestionsOption extends Model
 {
-    use SoftDeletes, Cachable;
+    use SoftDeletes;
 
     protected $fillable = ['option_text', 'correct', 'question_id'];
     
