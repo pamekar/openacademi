@@ -7415,7 +7415,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
 
   mounted() {
-    this.$store.dispatch('courses/fetch_all');
+    this.searchCourses();
   },
 
   methods: {

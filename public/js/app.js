@@ -1944,6 +1944,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2618,224 +2619,264 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "container wrap-title-page bg-img " }, [
           _c("div", { staticClass: "title-page" }, [
-            _c("h3", { staticClass: "title font-weight-700" }, [
-              _vm._v(_vm._s(_vm.searchText))
-            ])
+            _vm.totalCourses > 0
+              ? _c("h3", { staticClass: "title color-fff font-weight-700" }, [
+                  _vm._v("Search results for "),
+                  _c("span", { staticClass: "font-italic" }, [
+                    _vm._v('"' + _vm._s(_vm.searchText) + '"')
+                  ])
+                ])
+              : _c(
+                  "h3",
+                  {
+                    staticClass: "title color-fff font-weight-700 text-center"
+                  },
+                  [
+                    _vm._v("No results found for "),
+                    _c("span", { staticClass: "font-italic" }, [
+                      _vm._v('"' + _vm._s(_vm.searchText) + '"')
+                    ])
+                  ]
+                )
           ])
         ])
       ]
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "content-page-fullwidth-wrap clearfix pd-top-45" },
-      [
-        _c("div", { staticClass: "container-fluid " }, [
-          _c("div", { staticClass: "sidebar-left" }, [
-            _c("div", { staticClass: "widget-categories border-f-e6f3ff" }, [
-              _c("h6", { staticClass: "title-widget" }, [_vm._v("Categories")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "content" }, [
+    _vm.totalCourses > 0
+      ? _c(
+          "div",
+          { staticClass: "content-page-fullwidth-wrap clearfix pd-top-45" },
+          [
+            _c("div", { staticClass: "container-fluid " }, [
+              _c("div", { staticClass: "sidebar-left" }, [
                 _c(
-                  "ul",
-                  _vm._l(_vm.categories, function(category) {
-                    return _c("li", [
+                  "div",
+                  { staticClass: "widget-categories border-f-e6f3ff" },
+                  [
+                    _c("h6", { staticClass: "title-widget" }, [
+                      _vm._v("Categories")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "content" }, [
                       _c(
-                        "a",
-                        {
-                          attrs: { href: "javascript:void(0)" },
-                          on: {
-                            click: function($event) {
-                              return _vm.setCategory(category.id)
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(_vm._s(category.title) + " "),
-                          _c("span", [
-                            _vm._v("(" + _vm._s(category.count) + ")")
+                        "ul",
+                        _vm._l(_vm.categories, function(category) {
+                          return _c("li", [
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "javascript:void(0)" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.setCategory(category.id)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(_vm._s(category.title) + " "),
+                                _c("span", [
+                                  _vm._v("(" + _vm._s(category.count) + ")")
+                                ])
+                              ]
+                            )
                           ])
-                        ]
+                        }),
+                        0
                       )
                     ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "content-page" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "heading clearfix border-f-e6f3ff border-ra4"
+                  },
+                  [
+                    _c("div", { staticClass: "taskbar" }, [
+                      _c("ul", { staticClass: "list" }, [
+                        _c("li", [
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "color-f3728b font-Poppins font-weight-700"
+                            },
+                            [_vm._v(" " + _vm._s(_vm.totalCourses))]
+                          ),
+                          _vm._v(" Courses")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(0)
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "flat-courses style4" },
+                  _vm._l(_vm.courses, function(course) {
+                    return _c(
+                      "div",
+                      { class: "course style4 text-" + _vm.color(_vm.colors) },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "course-border border-f-e6f3ff border-ra4 clear-sub-columns transition-vline"
+                          },
+                          [
+                            _c("div", { staticClass: "course-img-box" }, [
+                              _c(
+                                "div",
+                                { staticClass: "course-img img-vline" },
+                                [
+                                  _c("a", { attrs: { href: "#" } }, [
+                                    _c("img", {
+                                      staticStyle: { "max-height": "213px" },
+                                      attrs: {
+                                        src: course.course_image_preview,
+                                        alt: "openacademi"
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(1, true)
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "course-content" }, [
+                              _c(
+                                "div",
+                                { staticClass: "text-wrap border-bt-e6f3ff" },
+                                [
+                                  _c("h6", { staticClass: "title" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: {
+                                          href: "/course/" + course.slug
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(course.title))]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "teacher" }, [
+                                    _c("a", { attrs: { href: "#" } }, [
+                                      _vm._v(
+                                        _vm._s(course.instructor.full_name)
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "description" }, [
+                                    _vm._v(_vm._s(course.summary))
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "wrap-rating-price" }, [
+                                _c("ul", { staticClass: "list meta-rate" }, [
+                                  _c(
+                                    "li",
+                                    [
+                                      _c("star-rating", {
+                                        attrs: {
+                                          rating: Number(
+                                            course.rating.split(";")[0]
+                                          ),
+                                          increment: 0.01,
+                                          "read-only": true,
+                                          "star-size": 13,
+                                          "show-rating": false
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("span", [
+                                        _vm._v(
+                                          _vm._s(
+                                            Number(course.rating.split(";")[0])
+                                          ) +
+                                            "\n                                            (" +
+                                            _vm._s(
+                                              Number(
+                                                course.rating.split(";")[1]
+                                              )
+                                            ) +
+                                            ")"
+                                        )
+                                      ])
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("span", [
+                                      _vm._v(" " + _vm._s(course.course_cat))
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("span", [
+                                      _vm._v(
+                                        " Updated " +
+                                          _vm._s(course.last_updated)
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "price" }, [
+                                  _vm._v(
+                                    "₦" +
+                                      _vm._s(
+                                        course.price.toLocaleString("en", {
+                                          maximumSignificantDigits: 2
+                                        })
+                                      )
+                                  )
+                                ])
+                              ])
+                            ])
+                          ]
+                        )
+                      ]
+                    )
                   }),
                   0
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "flat-paginations style2" },
+                  [
+                    _c("paginate", {
+                      attrs: {
+                        "page-count": _vm.pageCount,
+                        "click-handler": _vm.searchCourses,
+                        "prev-text": "Prev",
+                        "next-text": "Next",
+                        "container-class":
+                          "list flat-text-center pagination-wrap",
+                        "active-class": " active",
+                        "disabled-class": "disabled"
+                      }
+                    })
+                  ],
+                  1
                 )
               ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "content-page" }, [
-            _c(
-              "div",
-              { staticClass: "heading clearfix border-f-e6f3ff border-ra4" },
-              [
-                _c("div", { staticClass: "taskbar" }, [
-                  _c("ul", { staticClass: "list" }, [
-                    _c("li", [
-                      _c(
-                        "span",
-                        {
-                          staticClass:
-                            "color-f3728b font-Poppins font-weight-700"
-                        },
-                        [_vm._v(" " + _vm._s(_vm.totalCourses))]
-                      ),
-                      _vm._v(" Courses")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm._m(0)
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "flat-courses style4" },
-              _vm._l(_vm.courses, function(course) {
-                return _c(
-                  "div",
-                  { class: "course style4 text-" + _vm.color(_vm.colors) },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "course-border border-f-e6f3ff border-ra4 clear-sub-columns transition-vline"
-                      },
-                      [
-                        _c("div", { staticClass: "course-img-box" }, [
-                          _c("div", { staticClass: "course-img img-vline" }, [
-                            _c("a", { attrs: { href: "#" } }, [
-                              _c("img", {
-                                staticStyle: { "max-height": "213px" },
-                                attrs: {
-                                  src: course.course_image_preview,
-                                  alt: "openacademi"
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _vm._m(1, true)
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "course-content" }, [
-                          _c(
-                            "div",
-                            { staticClass: "text-wrap border-bt-e6f3ff" },
-                            [
-                              _c("h6", { staticClass: "title" }, [
-                                _c(
-                                  "a",
-                                  { attrs: { href: "/course/" + course.slug } },
-                                  [_vm._v(_vm._s(course.title))]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "teacher" }, [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _vm._v(_vm._s(course.instructor.full_name))
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "description" }, [
-                                _vm._v(_vm._s(course.summary))
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "wrap-rating-price" }, [
-                            _c("ul", { staticClass: "list meta-rate" }, [
-                              _c(
-                                "li",
-                                [
-                                  _c("star-rating", {
-                                    attrs: {
-                                      rating: Number(
-                                        course.rating.split(";")[0]
-                                      ),
-                                      increment: 0.01,
-                                      "read-only": true,
-                                      "star-size": 13,
-                                      "show-rating": false
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("span", [
-                                    _vm._v(
-                                      _vm._s(
-                                        Number(course.rating.split(";")[0])
-                                      ) +
-                                        "\n                                            (" +
-                                        _vm._s(
-                                          Number(course.rating.split(";")[1])
-                                        ) +
-                                        ")"
-                                    )
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("li", [
-                                _c("span", [
-                                  _vm._v(" " + _vm._s(course.course_cat))
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("li", [
-                                _c("span", [
-                                  _vm._v(
-                                    " Updated " + _vm._s(course.last_updated)
-                                  )
-                                ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "price" }, [
-                              _vm._v(
-                                "₦" +
-                                  _vm._s(
-                                    course.price.toLocaleString("en", {
-                                      maximumSignificantDigits: 2
-                                    })
-                                  )
-                              )
-                            ])
-                          ])
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "flat-paginations style2" },
-              [
-                _c("paginate", {
-                  attrs: {
-                    "page-count": _vm.pageCount,
-                    "click-handler": _vm.searchCourses,
-                    "prev-text": "Prev",
-                    "next-text": "Next",
-                    "container-class": "list flat-text-center pagination-wrap",
-                    "active-class": " active",
-                    "disabled-class": "disabled"
-                  }
-                })
-              ],
-              1
-            )
-          ])
-        ])
-      ]
-    )
+          ]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
