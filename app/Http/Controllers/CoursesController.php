@@ -82,25 +82,13 @@ class CoursesController extends Controller
 
     public function searchCourses(Request $request)
     {
-        $search = explode(',', $request->input('q', []));
+        $query = $request->input('q', []);
         $count = $request->input('count', 12);
         $category = $request->input('category', null);
-        $courses = Course::where('published', 1)->where(function ($query) use (
-            $search,
-            $category
-        ) {
-            foreach ($search as $item) {
-                $query->where('tags', 'like', "%$item%")
-                    ->orWhere('summary', 'like', "%$item%")
-                    ->orWhere('summary', 'like', "%$item%")
-                    ->orWhere('title', 'like', "%$item%");
-            }
-        })->where(function ($query) use ($category) {
-            if ($category) {
-                $query->where('category', $category);
-            }
-        })
-            ->paginate($count);
+        $courses = empty($category)
+            ? Course::search($query)->paginate($count)
+            : Course::search($query)
+                ->where('category', $category)->paginate($count);
 
         return response()->json([
             'courses' => $courses,
