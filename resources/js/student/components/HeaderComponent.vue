@@ -15,8 +15,8 @@
                 </a>
 
                 <!-- Search -->
-                <form class="search-form d-none d-md-flex">
-                    <input type="text" class="form-control" placeholder="Search">
+                <form class="search-form i-search-form d-none d-md-flex" @submit.prevent="search">
+                    <input type="text" class="form-control" placeholder="Search" v-model="searchText">
                     <button class="btn" type="button"><i class="material-icons font-size-24pt">search</i></button>
                 </form>
                 <!-- // END Search -->
@@ -194,7 +194,17 @@
     </div>
 </template>
 <script>
-    export default{
-
+    export default {
+        data() {
+            return {
+                searchText: ""
+            }
+        },
+        methods:  {
+            search() {
+                this.$router.push({name: 'search', params: {query: this.searchText}})
+            }
+        },
+        computed: {}
     }
 </script>

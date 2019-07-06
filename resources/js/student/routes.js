@@ -11,6 +11,7 @@ import Quiz from './views/Quiz.vue';
 import Quizes from './views/Quizes.vue';
 import QuizInstructions from './views/QuizInstructions.vue';
 import QuizResult from './views/QuizResult.vue';
+import Search from './views/Search.vue';
 
 const Error404 = {
     template: "",
@@ -84,6 +85,11 @@ const routes = [
         path:      '/user/quiz/:id/:slug',
         name:      'quiz-instructions',
         component: QuizInstructions,
+    },
+    {
+        path:      '/user/search/:query',
+        name:      'search',
+        component: Search,
     },
     {
         path:      '/user/dashboard',
