@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,24 +15,39 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string $email
  * @property string $password
  * @property string $remember_token
-*/
-
+ */
 class User extends \TCG\Voyager\Models\User implements JWTSubject
 {
     use Notifiable;
-    protected $fillable = ['name', 'email', 'password','categories', 'remember_token','role_id'];
+    protected $fillable
+        = [
+            'name',
+            'email',
+            'password',
+            'categories',
+            'remember_token',
+            'role_id',
+            'provider',
+            'provider_id',
+            'password',
+            'remember_token',
+        ];
 
     /**
      * Hash password
+     *
      * @param $input
      */
     public function setPasswordAttribute($input)
     {
-        if ($input)
-            $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
+        if ($input) {
+            $this->attributes['password'] = app('hash')->needsRehash($input)
+                ? Hash::make($input) : $input;
+        }
     }
 
-    public function setRoleIDAttribute(){
+    public function setRoleIDAttribute()
+    {
 
     }
 
@@ -55,13 +71,16 @@ class User extends \TCG\Voyager\Models\User implements JWTSubject
         return $this->hasMany('App\TestsResult');
     }
 
-    public function payments(){
+    public function payments()
+    {
         return $this->hasMany('App\Payment');
     }
 
-    public function student(){
+    public function student()
+    {
         return $this->hasOne('App\Student');
     }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -71,6 +90,7 @@ class User extends \TCG\Voyager\Models\User implements JWTSubject
     {
         return $this->getKey();
     }
+
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *

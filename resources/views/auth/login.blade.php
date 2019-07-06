@@ -15,16 +15,14 @@
                     <p class="card-subtitle">Access your account</p>
                 </div>
                 <div class="card-body">
-
-                    {{--<a href="" class="btn btn-light btn-block">
-                        <span class="fab fa-google mr-2"></span>
-                        Continue with Google
+                    <a href="{{route('login.social',['provider'=>'facebook'])}}" class="btn btn-light btn-block"
+                       style="color:#4266b2">
+                        <span class="fab fa-facebook-square  mr-2"></span>
+                        Continue with Facebook
                     </a>
-
                     <div class="page-separator">
                         <div class="page-separator__text">or</div>
                     </div>
---}}
                     <form action="{{route('login')}}" method="POST" src="">
                         @csrf
                         <div class="form-group">

@@ -35,6 +35,10 @@ return [
         'secret'          => env('STRIPE_SECRET'),
         'publishable_key' => env('PUB_STRIPE_API_KEY'),
     ],
-
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT'),
+    ],
 
 ];
