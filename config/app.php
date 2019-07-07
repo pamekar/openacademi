@@ -197,6 +197,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         TCG\Voyager\VoyagerServiceProvider::class,
         \Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
         Vimeo\Laravel\VimeoServiceProvider::class
 
     ],
