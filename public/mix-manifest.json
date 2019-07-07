@@ -1,10 +1,10 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/student/js/app.js": "/student/js/app.js",
-    "/teacher/js/app.js": "/teacher/js/app.js",
-    "/assets/css/academi-styles.css": "/assets/css/academi-styles.css",
-    "/assets/js/academi-scripts-instructor-1.js": "/assets/js/academi-scripts-instructor-1.js",
-    "/assets/js/academi-scripts-instructor-2.js": "/assets/js/academi-scripts-instructor-2.js",
-    "/assets/js/academi-scripts-student-1.js": "/assets/js/academi-scripts-student-1.js",
-    "/assets/js/academi-scripts-student-2.js": "/assets/js/academi-scripts-student-2.js"
+    "/js/app.js": "/js/app.js?id=d2794a60062bcb1ddeb1",
+    "/student/js/app.js": "/student/js/app.js?id=b325309deff78e4e1d79",
+    "/teacher/js/app.js": "/teacher/js/app.js?id=50756327060e93ea7212",
+    "/assets/css/academi-styles.css": "/assets/css/academi-styles.css?id=79f3de28c5390b16faf6",
+    "/assets/js/academi-scripts-instructor-1.js": "/assets/js/academi-scripts-instructor-1.js?id=ebb9ce5b26bda2a61423",
+    "/assets/js/academi-scripts-instructor-2.js": "/assets/js/academi-scripts-instructor-2.js?id=0111b8d0cdcd24a3eb65",
+    "/assets/js/academi-scripts-student-1.js": "/assets/js/academi-scripts-student-1.js?id=75984a17ef0e2dc13228",
+    "/assets/js/academi-scripts-student-2.js": "/assets/js/academi-scripts-student-2.js?id=a66bd08dc40a1d10157b"
 }
