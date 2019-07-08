@@ -171,16 +171,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.103.1",
+            "version": "3.104.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "2f6b31befa14d26a31dc8ce0adeac5f383db35d2"
+                "reference": "295706ab2134bf842837fa0b0162ff3aef8b0aa4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2f6b31befa14d26a31dc8ce0adeac5f383db35d2",
-                "reference": "2f6b31befa14d26a31dc8ce0adeac5f383db35d2",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/295706ab2134bf842837fa0b0162ff3aef8b0aa4",
+                "reference": "295706ab2134bf842837fa0b0162ff3aef8b0aa4",
                 "shasum": ""
             },
             "require": {
@@ -250,7 +250,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-06-28T18:43:32+00:00"
+            "time": "2019-07-03T18:08:50+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1403,16 +1403,16 @@
         },
         {
             "name": "graham-campbell/manager",
-            "version": "v4.2.1",
+            "version": "v4.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GrahamCampbell/Laravel-Manager.git",
-                "reference": "ba3e236392665425723b2b967196aeeabc7f929f"
+                "reference": "b2e003d5b2064d013888ca8594f31a7991a4cc7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Manager/zipball/ba3e236392665425723b2b967196aeeabc7f929f",
-                "reference": "ba3e236392665425723b2b967196aeeabc7f929f",
+                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Manager/zipball/b2e003d5b2064d013888ca8594f31a7991a4cc7a",
+                "reference": "b2e003d5b2064d013888ca8594f31a7991a4cc7a",
                 "shasum": ""
             },
             "require": {
@@ -1459,7 +1459,7 @@
                 "laravel",
                 "manager"
             ],
-            "time": "2019-02-16T14:23:38+00:00"
+            "time": "2019-06-30T12:22:27+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1579,16 +1579,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "dc784032a3f6f4e7a4b882e272b771f6fe4c37cf"
+                "reference": "239400de7a173fe9901b9ac7c06497751f00727a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/dc784032a3f6f4e7a4b882e272b771f6fe4c37cf",
-                "reference": "dc784032a3f6f4e7a4b882e272b771f6fe4c37cf",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/239400de7a173fe9901b9ac7c06497751f00727a",
+                "reference": "239400de7a173fe9901b9ac7c06497751f00727a",
                 "shasum": ""
             },
             "require": {
@@ -1646,7 +1646,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2019-06-30T00:37:05+00:00"
+            "time": "2019-07-01T23:21:34+00:00"
         },
         {
             "name": "hashids/hashids",
@@ -2075,16 +2075,16 @@
         },
         {
             "name": "larapack/voyager-hooks",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/larapack/voyager-hooks.git",
-                "reference": "5de5a5f06c8359c7f09fb1bb9acd84b3f5379506"
+                "reference": "33beee3c68d858f5e7a33c82a670e01dcdcae392"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/larapack/voyager-hooks/zipball/5de5a5f06c8359c7f09fb1bb9acd84b3f5379506",
-                "reference": "5de5a5f06c8359c7f09fb1bb9acd84b3f5379506",
+                "url": "https://api.github.com/repos/larapack/voyager-hooks/zipball/33beee3c68d858f5e7a33c82a670e01dcdcae392",
+                "reference": "33beee3c68d858f5e7a33c82a670e01dcdcae392",
                 "shasum": ""
             },
             "require": {
@@ -2123,7 +2123,7 @@
                 "laravel",
                 "voyager"
             ],
-            "time": "2019-02-06T10:23:10+00:00"
+            "time": "2019-07-06T00:05:24+00:00"
         },
         {
             "name": "laravel/framework",
@@ -6231,16 +6231,16 @@
         },
         {
             "name": "teamtnt/laravel-scout-tntsearch-driver",
-            "version": "v7.0.0",
+            "version": "v7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/teamtnt/laravel-scout-tntsearch-driver.git",
-                "reference": "fe638e0269533d37a6eabb5845039d5f3226b157"
+                "reference": "2a379a947979cc46076be06b67b0781d7606d94a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/teamtnt/laravel-scout-tntsearch-driver/zipball/fe638e0269533d37a6eabb5845039d5f3226b157",
-                "reference": "fe638e0269533d37a6eabb5845039d5f3226b157",
+                "url": "https://api.github.com/repos/teamtnt/laravel-scout-tntsearch-driver/zipball/2a379a947979cc46076be06b67b0781d7606d94a",
+                "reference": "2a379a947979cc46076be06b67b0781d7606d94a",
                 "shasum": ""
             },
             "require": {
@@ -6294,7 +6294,7 @@
                 "search",
                 "tntsearch"
             ],
-            "time": "2019-02-11T13:44:35+00:00"
+            "time": "2019-07-03T09:37:10+00:00"
         },
         {
             "name": "teamtnt/tntsearch",
@@ -6480,12 +6480,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/UniSharp/laravel-filemanager.git",
-                "reference": "5635aaad9f766b71117db71f2b7ea32c93e4faeb"
+                "reference": "bb74261aedaa13c0bbe85f778583de60fe4e71da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/5635aaad9f766b71117db71f2b7ea32c93e4faeb",
-                "reference": "5635aaad9f766b71117db71f2b7ea32c93e4faeb",
+                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/bb74261aedaa13c0bbe85f778583de60fe4e71da",
+                "reference": "bb74261aedaa13c0bbe85f778583de60fe4e71da",
                 "shasum": ""
             },
             "require": {
@@ -6547,7 +6547,7 @@
                 "tinymce",
                 "upload"
             ],
-            "time": "2019-05-06T03:30:51+00:00"
+            "time": "2019-07-08T01:42:18+00:00"
         },
         {
             "name": "vimeo/laravel",
@@ -7074,16 +7074,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.4.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "1a1a1044ad00e285bd2825fac4c3a0443d90ad33"
+                "reference": "6fb502c23885701a991b0bba974b1a8eb6673577"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/1a1a1044ad00e285bd2825fac4c3a0443d90ad33",
-                "reference": "1a1a1044ad00e285bd2825fac4c3a0443d90ad33",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/6fb502c23885701a991b0bba974b1a8eb6673577",
+                "reference": "6fb502c23885701a991b0bba974b1a8eb6673577",
                 "shasum": ""
             },
             "require": {
@@ -7131,7 +7131,7 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2019-06-23T09:00:00+00:00"
+            "time": "2019-07-04T09:00:00+00:00"
         },
         {
             "name": "fzaninotto/faker",
@@ -7930,16 +7930,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "c99e3be9d3e85f60646f152f9002d46ed7770d18"
+                "reference": "c4a66b97f040e3e20b3aa2a243230a1c3a9f7c8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/c99e3be9d3e85f60646f152f9002d46ed7770d18",
-                "reference": "c99e3be9d3e85f60646f152f9002d46ed7770d18",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/c4a66b97f040e3e20b3aa2a243230a1c3a9f7c8c",
+                "reference": "c4a66b97f040e3e20b3aa2a243230a1c3a9f7c8c",
                 "shasum": ""
             },
             "require": {
@@ -7975,7 +7975,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2018-10-30T05:52:18+00:00"
+            "time": "2019-07-08T05:24:54+00:00"
         },
         {
             "name": "phpunit/phpunit",
