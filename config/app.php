@@ -185,6 +185,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -196,8 +197,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         TCG\Voyager\VoyagerServiceProvider::class,
-        \Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
-        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Vimeo\Laravel\VimeoServiceProvider::class
 
     ],
