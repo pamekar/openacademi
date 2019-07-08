@@ -49,7 +49,7 @@ class APIController extends Controller
     public function login(Request $request): void
     {
         $credentials = $request->only('email', 'password');
-        if (!$token = JWTAuth::attempt($credentials)) {
+        if ($token = JWTAuth::attempt($credentials)) {
             $expire = $request->remember ? 12 * 30 * 24 * 3600 : 0;
 
             Cookie::queue('jwt_token', $token, $expire, '', '',
@@ -63,7 +63,7 @@ class APIController extends Controller
      */
     public function socialLogin($user): void
     {
-        if (!$token = JWTAuth::fromUser($user)) {
+        if ($token = JWTAuth::fromUser($user)) {
             $expire = 12 * 30 * 24 * 3600;
             Cookie::queue('jwt_token', $token, $expire, '', '',
                 false, false);
