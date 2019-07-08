@@ -29,14 +29,15 @@ class SocialController extends Controller
         return redirect()->to($this->redirectTo);
     }
 
-    function createUser($getInfo,$provider){
+    function createUser($getInfo, $provider)
+    {
         $user = User::where('provider_id', $getInfo->id)->first();
         if (!$user) {
             $user = User::create([
-                'name'     => $getInfo->name,
-                'email'    => $getInfo->email,
-                'provider' => $provider,
-                'provider_id' => $getInfo->id
+                'name'          => $getInfo->name,
+                'email'         => $getInfo->email,
+                'provider_name' => $provider,
+                'provider_id'   => $getInfo->id
             ]);
         }
         return $user;
