@@ -63,6 +63,25 @@ class APIController extends Controller
     }
 
     /**
+     * Get a JWT via given credentials.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function socialLogin()
+    {
+        if (!$token = JWTAuth::fromUser(Auth::user())) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+
+        $expire = $request->remember ? 12 * 30 * 24 * 3600 : 0;
+
+        Cookie::queue('jwt_token', $token, $expire, '', '',
+            false, false);
+        return true;
+    }
+
+    /**
      * Get the authenticated User.
      *
      * @return \Illuminate\Http\JsonResponse

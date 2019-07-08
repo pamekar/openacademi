@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ use App\User;
 
 class SocialController extends Controller
 {
-    protected $redirectTo='/user';
+    protected $redirectTo = '/user';
+
     public function redirect($provider)
     {
         return Socialite::driver($provider)->redirect();
@@ -23,8 +25,10 @@ class SocialController extends Controller
     public function callback($provider)
     {
         $getInfo = Socialite::driver($provider)->user();
-        $user = $this->createUser($getInfo,$provider);
-        Auth::login($user, true);
+        $user = $this->createUser($getInfo, $provider);
+        $frontend = new APIController();
+        $frontend->socialLogin();
+
 
         return redirect()->to($this->redirectTo);
     }
