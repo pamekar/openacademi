@@ -50,14 +50,11 @@ class APIController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (!$token = JWTAuth::attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            $expire = $request->remember ? 12 * 30 * 24 * 3600 : 0;
+
+            Cookie::queue('jwt_token', $token, $expire, '', '',
+                false, false);
         }
-
-
-        $expire = $request->remember ? 12 * 30 * 24 * 3600 : 0;
-
-        Cookie::queue('jwt_token', $token, $expire, '', '',
-            false, false);
     }
 
     /**
@@ -67,12 +64,10 @@ class APIController extends Controller
     public function socialLogin($user): void
     {
         if (!$token = JWTAuth::fromUser($user)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            $expire = 12 * 30 * 24 * 3600;
+            Cookie::queue('jwt_token', $token, $expire, '', '',
+                false, false);
         }
-        $expire = 12 * 30 * 24 * 3600;
-
-        Cookie::queue('jwt_token', $token, $expire, '', '',
-            false, false);
     }
 
     /**
