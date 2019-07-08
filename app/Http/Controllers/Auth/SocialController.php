@@ -27,7 +27,7 @@ class SocialController extends Controller
         $getInfo = Socialite::driver($provider)->user();
         $user = $this->createUser($getInfo, $provider);
         $frontend = new APIController();
-        $frontend->socialLogin();
+        $frontend->socialLogin($user);
 
 
         return redirect()->to($this->redirectTo);

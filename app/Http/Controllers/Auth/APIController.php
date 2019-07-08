@@ -43,11 +43,10 @@ class APIController extends Controller
     }
 
     /**
+     * @param Request $request
      * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
+    public function login(Request $request): void
     {
         $credentials = $request->only('email', 'password');
         if (!$token = JWTAuth::attempt($credentials)) {
@@ -59,26 +58,21 @@ class APIController extends Controller
 
         Cookie::queue('jwt_token', $token, $expire, '', '',
             false, false);
-        return true;
     }
 
     /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * @param $user
+     * Get a JWT via given user.
      */
-    public function socialLogin()
+    public function socialLogin($user): void
     {
-        if (!$token = JWTAuth::fromUser(Auth::user())) {
+        if (!$token = JWTAuth::fromUser($user)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-
-        $expire = $request->remember ? 12 * 30 * 24 * 3600 : 0;
+        $expire = 12 * 30 * 24 * 3600;
 
         Cookie::queue('jwt_token', $token, $expire, '', '',
             false, false);
-        return true;
     }
 
     /**
