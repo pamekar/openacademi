@@ -10,16 +10,33 @@
                 </a>
             </div>
             <div class="card navbar-shadow">
-                <div class="card-header text-center">
-                    <h4 class="card-title">Login</h4>
-                    <p class="card-subtitle">Access your account</p>
-                </div>
                 <div class="card-body">
-                    <a href="{{route('login.social',['provider'=>'facebook'])}}" class="btn btn-light btn-block"
-                       style="color:#4266b2">
-                        <span class="fab fa-facebook-square  mr-2"></span>
-                        Continue with Facebook
-                    </a>
+                    <div class="list-inline text-center">
+                        <div class="list-inline-item">
+                            <a href="{{route('login.social',['provider'=>'google'])}}" class=""
+                               style="color:#ea4535" title="Login via Google">
+                                <span class="fab fa-google-plus fa-3x"></span>
+                            </a>
+                        </div>
+                        <div class="list-inline-item">
+                            <a href="{{route('login.social',['provider'=>'facebook'])}}" class=""
+                               style="color:#4266b2" title="Login via Facebook">
+                                <span class="fab fa-facebook fa-3x"></span>
+                            </a>
+                        </div>
+                        <div class="list-inline-item">
+                            <a href="{{route('login.social',['provider'=>'twitter'])}}" class=""
+                               style="color:#1da1f2" title="Login via Twitter">
+                                <span class="fab fa-twitter fa-3x"></span>
+                            </a>
+                        </div>
+                        <div class="list-inline-item">
+                            <a href="{{route('login.social',['provider'=>'linkedin'])}}" class=""
+                               style="color:#0073b1" title="Login via Linkedin">
+                                <span class="fab fa-linkedin fa-3x"></span>
+                            </a>
+                        </div>
+                    </div>
                     <div class="page-separator">
                         <div class="page-separator__text">or</div>
                     </div>
