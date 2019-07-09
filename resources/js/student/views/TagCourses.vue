@@ -1,13 +1,13 @@
 <template>
     <div>
         <vue-headful
-                :title="tag + ' Courses | OpenAcademi'"
+                :title="tag + ' - Courses | OpenAcademi'"
                 :description="pageTitle"
         ></vue-headful>
 
         <breadcrumb-component
                 :breadcrumbs="breadcrumbs"
-                :title="pageTitle"
+                :title="`Courses <span class='badge badge-primary badge-lg'>${tag}</span>`"
         ></breadcrumb-component>
 
         <div class="row">
@@ -46,8 +46,9 @@
             return {
                 allCourses:      [],
                 courseListWidth: "col-lg-3 col-md-4, col-sm-6",
-                pageTitle:       'Courses <span class="badge badge-primary badge-lg">' + this.tag + '</span>',
+                pageTitle:       'Courses <span class="badge badge-primary badge-lg"></span>',
                 pageCount:       1,
+                tag:             "",
                 breadcrumbs:     [
                     {
                         title: "Dashboard", link: "dashboard"
@@ -56,7 +57,7 @@
                         title: "Courses", link: "all-courses"
                     },
                     {
-                        title: this.tag
+                        title: ""
                     }
                 ],
             }
@@ -73,15 +74,17 @@
         },
         methods:    {
             getTagCourses(page = 1) {
-                axios.get("/api/courses/tags/" + this.$route.params.tag + "?count=12&page=" + page)
+                let tag = this.$route.params.tag;
+                axios.get("/api/courses/tags/" + tag + "?count=12&page=" + page)
                     .then(({data}) => {
                         this.allCourses = data.data;
                         this.pageCount = data.last_page;
+                        this.breadcrumbs[2].title = tag;
+                        this.tag = tag;
                     });
             },
 
         },
-        props:      ['tag'],
         watch:      {
             '$route'(to, from) {
                 // react to route changes...
