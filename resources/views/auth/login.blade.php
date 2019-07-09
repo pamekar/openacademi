@@ -24,12 +24,12 @@
                                 <span class="fab fa-facebook fa-3x"></span>
                             </a>
                         </div>
-                        <div class="list-inline-item">
+                        {{--<div class="list-inline-item">
                             <a href="{{route('login.social',['provider'=>'twitter'])}}" class=""
                                style="color:#1da1f2" title="Login via Twitter">
                                 <span class="fab fa-twitter fa-3x"></span>
                             </a>
-                        </div>
+                        </div>--}}
                         <div class="list-inline-item">
                             <a href="{{route('login.social',['provider'=>'linkedin'])}}" class=""
                                style="color:#0073b1" title="Login via Linkedin">
