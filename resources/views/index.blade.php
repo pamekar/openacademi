@@ -17,8 +17,8 @@
                 <div class="counters clear-sub-columns style2">
                     <div class="counter style2 one-of-three">
                         <div class="overlay">
-                            <img src="png/img-hover-1.png" alt="openacademi" class="img-hover-1">
-                            <img src="png/img-hover-2.png" alt="openacademi" class="img-hover-2">
+                            <img src="{{$public}}/png/img-hover-1.png" alt="openacademi" class="img-hover-1">
+                            <img src="{{$public}}/png/img-hover-2.png" alt="openacademi" class="img-hover-2">
                         </div>
                         <div class="icon">
                                     <span class="icon-online-learning">
@@ -32,8 +32,8 @@
                     </div>
                     <div class="counter style2  one-of-three active">
                         <div class="overlay">
-                            <img src="png/img-hover-1.png" alt="openacademi" class="img-hover-1">
-                            <img src="png/img-hover-2.png" alt="openacademi" class="img-hover-2">
+                            <img src="{{$public}}/png/img-hover-1.png" alt="openacademi" class="img-hover-1">
+                            <img src="{{$public}}/png/img-hover-2.png" alt="openacademi" class="img-hover-2">
                         </div>
                         <div class="icon">
                                     <span class="icon-teacher">
@@ -47,8 +47,8 @@
                     </div>
                     <div class="counter style2  one-of-three">
                         <div class="overlay">
-                            <img src="png/img-hover-1.png" alt="openacademi" class="img-hover-1">
-                            <img src="png/img-hover-2.png" alt="openacademi" class="img-hover-2">
+                            <img src="{{$public}}/png/img-hover-1.png" alt="openacademi" class="img-hover-1">
+                            <img src="{{$public}}/png/img-hover-2.png" alt="openacademi" class="img-hover-2">
                         </div>
                         <div class="icon">
                                     <span class="icon-education">
