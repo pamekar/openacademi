@@ -3,15 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\File;
-use Laravel\Socialite\Facades\Socialite;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class SocialController extends Controller
 {
@@ -43,10 +37,11 @@ class SocialController extends Controller
         $user = User::where('provider_id', $getInfo->id)->first();
         if (!$user) {
             $user = User::create([
-                'name'          => $getInfo->name,
-                'email'         => $getInfo->email,
+                'name'          => $getInfo->getName(),
+                'email'         => $getInfo->getEmail(),
                 'provider_name' => $provider,
-                'provider_id'   => $getInfo->id
+                'provider_id'   => $getInfo->getId(),
+                'avatar'        => $getInfo->getAvatar()
             ]);
         }
         return $user;
