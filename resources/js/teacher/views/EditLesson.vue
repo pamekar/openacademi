@@ -235,9 +235,11 @@
         computed:   {
             ...mapState(
                 {
-                    lesson:    state => state.lessons.lesson,
-                    courses:   state => state.lessons.courses,
-                    pageTitle: state => state.lessons.pageTitle,
+                    media:            state => state.lessons.media,
+                    lesson:           state => state.lessons.lesson,
+                    courses:          state => state.lessons.courses,
+                    pageTitle:        state => state.lessons.pageTitle,
+                    uploadFileParams: state => state.lessons.uploadFileParams
                 })
             ,
             timePicker: {

@@ -4,10 +4,11 @@ import router from '../../routes'
 const endpoint = '/api/instructor';
 
 const state = {
-    lesson:               [],
     course:               [],
     courses:              [],
     categories:           [],
+    lesson:               [],
+    media:                [],
     pageCount:            0,
     pageFrom:             0,
     pagePer:              0,
@@ -24,12 +25,18 @@ const state = {
         HH: "",
         mm: "",
         ss: ""
-    }
+    },
+    uploadFileParams:     {
+        id:         0,
+        model_name: 'Lesson',
+        file_key:   'resource_files',
+        bucket:     'resource_files'
+    },
 };
 
 // actions
 const actions = {
-    delete_lessons({},id,course){
+    delete_lessons({}, id, course) {
         axios.delete(`${endpoint}/lessons/${id}`)
             .then(({data}) => {
     
@@ -151,6 +158,7 @@ const mutations = {
         state.lesson = lesson.lesson;
         state.courses = lesson.courses;
         state.pageTitle = lesson.lesson.title;
+        state.uploadFileParams.id = lesson.lesson.id;
         // drg >> set timepicker
         let duration = lesson.lesson.duration;
         state.timePicker.HH = Math.floor(duration / 3600);
