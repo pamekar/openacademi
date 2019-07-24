@@ -128,16 +128,6 @@
                 </form>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Files</h4>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <v-uploader language="en" :multiple="true" :itemLimit="0" :fileParams="uploadFileParams" uploadFileObjName="downloadable_files" fileTypeExts="jpeg,jpg,gif,png,aac,svg,html,css,js,php,mp3,mp4,doc,docx,xls,xlsx,pdf,ppt,pptx,zip,7z" fileSizeLimit="25MB" @done="fileUploaded"></v-uploader>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
