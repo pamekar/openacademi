@@ -12,8 +12,8 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME'),
-
+    'name'        => env('APP_NAME'),
+    'public_path' => env('PUBLIC_PATH', '/main/public'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment

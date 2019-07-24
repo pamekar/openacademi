@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use App\CourseCategory;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        $public = config('app.env') == 'production' ? '/main/public' : '';
+        $public = config('app.public_path');
 
         $categories = CourseCategory::select('id', 'title', 'icon', 'slug')
             ->get();
