@@ -13,15 +13,15 @@
                 <div class="card-body">
                     <div class="list-inline text-center">
                         <div class="list-inline-item">
-                            <a href="{{route('login.social',['provider'=>'google'])}}" class=""
-                               style="color:#ea4535" title="Login via Google">
-                                <span class="fab fa-google-plus fa-3x"></span>
-                            </a>
-                        </div>
-                        <div class="list-inline-item">
                             <a href="{{route('login.social',['provider'=>'facebook'])}}" class=""
                                style="color:#4266b2" title="Login via Facebook">
                                 <span class="fab fa-facebook fa-3x"></span>
+                            </a>
+                        </div>
+                        <div class="list-inline-item">
+                            <a href="{{route('login.social',['provider'=>'google'])}}" class=""
+                               style="color:#ea4535" title="Login via Google">
+                                <span class="fab fa-google-plus fa-3x"></span>
                             </a>
                         </div>
                         {{--<div class="list-inline-item">
