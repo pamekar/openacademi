@@ -6,6 +6,7 @@ use App\Course;
 use App\Http\Controllers\Controller;
 use App\Lesson;
 use App\TestsResult;
+use Illuminate\Http\Request;
 
 /**
  * Class LessonsController
@@ -14,7 +15,14 @@ use App\TestsResult;
  */
 class LessonsController extends Controller
 {
-
+    /**
+     * Show a lesson to a user
+     *
+     * @param $course_id
+     * @param $lesson_slug
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($course_id, $lesson_slug)
     {
         $lesson = Lesson::where('slug', $lesson_slug)->where('published', true)
