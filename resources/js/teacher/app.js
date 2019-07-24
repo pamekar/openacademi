@@ -23,10 +23,6 @@ const uploaderConfig = {
     uploadHeaders: {
             Authorization:  'Bearer ' + functions.readCookie('jwt_token')
     },
-    // file uploader service url
-    uploadFileUrl:       '/api/instructor/spatie/media/upload',
-    // file delete service url
-    deleteFileUrl:       '/api/instructor/spatie/media/remove',
     // set the way to show upload message(upload fail message)
     showMessage:   (vue, message) => {
         //using v-dialogs to show message

@@ -172,6 +172,7 @@
                 </div>
             </div>
         </div>
+
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Upload Files</h4>
@@ -207,7 +208,8 @@
                         title: ""
                     }
                 ],
-                editor:               ClassicEditor,
+                editor:      ClassicEditor,
+
                 lesson_video_image:   null,
                 lesson_image_preview: null,
                 lesson_image:         null,
