@@ -15,8 +15,11 @@
                     :course="course"
                     :courseWidth="courseListWidth"
                     :key="course.id"
-
+                    v-if="courses.length>0"
             ></courses-component>
+            <div class="alert alert-warning col-12 text-center" v-else>
+                <h3 class="alert-heading">We couldn't find any documents matching <strong>{{$route.params.query}}</strong></h3>
+            </div>
         </div>
         <paginate
                 :page-count="pageCount"
