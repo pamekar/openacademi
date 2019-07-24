@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Instructor;
 
 use App\Course;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\FileUploadTrait;
+use App\Http\Requests\Instructor\StoreLessonsRequest;
+use App\Http\Requests\Instructor\UpdateLessonsRequest;
 use App\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Instructor\StoreLessonsRequest;
-use App\Http\Requests\Instructor\UpdateLessonsRequest;
-use App\Http\Controllers\Traits\FileUploadTrait;
+use Spatie\MediaLibrary\Models\Media;
 
 class LessonsController extends Controller
 {
@@ -62,7 +63,7 @@ class LessonsController extends Controller
     /**
      * Store a newly created Lesson in storage.
      *
-     * @param  \App\Http\Requests\StoreLessonsRequest $request
+     * @param \App\Http\Requests\StoreLessonsRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -82,7 +83,7 @@ class LessonsController extends Controller
 
 
         foreach (
-            explode(',', $request->input('downloadable_files_id', [])) as $id
+            explode(',', $request->input('resource_files_id', [])) as $id
         ) {
             $model = config('laravel-medialibrary.media_model');
             $file = $model::find($id);
@@ -103,7 +104,7 @@ class LessonsController extends Controller
     /**
      * Show the form for editing Lesson.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -124,8 +125,8 @@ class LessonsController extends Controller
     /**
      * Update Lesson in storage.
      *
-     * @param  \App\Http\Requests\UpdateLessonsRequest $request
-     * @param  int                                     $id
+     * @param \App\Http\Requests\UpdateLessonsRequest $request
+     * @param int                                     $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -140,19 +141,23 @@ class LessonsController extends Controller
 
         $media = [];
 
-        if (!empty($request->input('downloadable_files_id', []))) {
-            foreach (
-                explode(',', $request->input('downloadable_files_id', [])) as
-                $id
-            ) {
-                $model = config('laravel-medialibrary.media_model');
-                $file = $model::find($id);
-                $file->model_id = $lesson->id;
-                $file->save();
-                $media[] = $file;
+        $resourceFiles = $request->input('resource_files_id', null);
+
+        if (!empty($resourceFiles)) {
+            $resourceFilesArr = explode(',', $resourceFiles);
+            $deleted = array_diff($lesson->resource_files_id,
+                $resourceFilesArr);
+            // check if resource files have been updated
+            if ($deleted) {
+                foreach ($deleted as $id) {
+                    Media::where([
+                        ['id', $id],
+                        ['model_type', 'App\Lesson'],
+                        ['model_id', $lesson->id]
+                    ])->delete();
+                }
             }
         }
-        $lesson->updateMedia($media, 'downloadable_files');
 
         $status = [
             'type'    => 'success',
@@ -166,7 +171,7 @@ class LessonsController extends Controller
     /**
      * Display Lesson.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -195,7 +200,7 @@ class LessonsController extends Controller
     /**
      * Remove Lesson from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -239,7 +244,7 @@ class LessonsController extends Controller
     /**
      * Restore Lesson from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -257,7 +262,7 @@ class LessonsController extends Controller
     /**
      * Permanently delete Lesson from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
