@@ -188,4 +188,8 @@ class Lesson extends Model implements HasMedia
         return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('resource-files');
+    }
 }
