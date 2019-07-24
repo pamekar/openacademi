@@ -143,7 +143,7 @@
 
 
 <script>
-    import {mapState, mapActions} from 'vuex';
+    import {mapState} from 'vuex';
     import CKEditor from '@ckeditor/ckeditor5-vue';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     import Timepicker from 'vue2-timepicker'
@@ -165,13 +165,13 @@
                 editor:                ClassicEditor,
                 uploadFileParams:      {
                     model_name: 'Lesson',
-                    file_key:   'downloadable_files',
-                    bucket:     'downloadable_files'
+                    file_key:   'resource_files',
+                    bucket:     'resource_files'
                 },
                 lesson:                {
                     title:                '',
                     course_id:            null,
-                    downloadable_files_id: [],
+                    resource_files_id:    [],
                     short_text:           '',
                     full_text:            "<h3>Lesson content</h3><p>Write Content ...</p><h3>Sample List</h3><ul><li>Item</li><li>Item</li><li>Item</li></ul>",
                     free_lesson:          false,
@@ -206,12 +206,12 @@
                 {
                     courses: state => state.lessons.courses,
                 }),
-            downloadable_files: {
+            resource_files: {
                 get: function () {
-                    return this.downloadable_files_id;
+                    return this.resource_files_id;
                 },
                 set: function (id) {
-                    this.downloadable_files_id.push(id);
+                    this.resource_files_id.push(id);
                 }
             }
 
@@ -240,9 +240,9 @@
                     let file = files[i].files;
                     if (file && Array.isArray(file) && file.length) {
                         for (let j = 0; j < file.length; j++) {
-                            let downloadableFiles= this.lesson.downloadable_files_id;
-                            downloadableFiles.push(file[j].id);
-                            this.lesson.downloadable_files_id=[...new Set(downloadableFiles)];
+                            let resourceFiles = this.lesson.resource_files_id;
+                            resourceFiles.push(file[j].id);
+                            this.lesson.resource_files_id = [...new Set(resourceFiles)];
                         }
                     }
 
