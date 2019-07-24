@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Student;
 use App\Course;
 use App\Http\Controllers\Controller;
 use App\Lesson;
-use App\Question;
-use App\QuestionsOption;
 use App\TestsResult;
-use Illuminate\Http\Request;
 
+/**
+ * Class LessonsController
+ *
+ * @package App\Http\Controllers\Student
+ */
 class LessonsController extends Controller
 {
 
@@ -17,10 +19,10 @@ class LessonsController extends Controller
     {
         $lesson = Lesson::where('slug', $lesson_slug)->where('published', true)
             ->where('course_id', $course_id)->firstOrFail();
-        //dd($lesson); exit;
-        $purchased_course = $lesson->course->students()
-                ->where('user_id', \Auth::id())->count() > 0;
-        if ($purchased_course || $lesson->free_lesson) {
+
+        $canAccess = $this->canAccess($lesson);
+
+        if ($canAccess) {
             if (\Auth::check()) {
                 if ($lesson->students()->where('id', \Auth::id())->count()
                     == 0
@@ -48,7 +50,7 @@ class LessonsController extends Controller
                 'lesson'           => $lesson,
                 'course'           => $course,
                 'test_result'      => $test_result,
-                'purchased_course' => $purchased_course,
+                'purchased_course' => $canAccess,
                 'test_exists'      => $test_exists
             ]);
         }
@@ -59,4 +61,22 @@ class LessonsController extends Controller
 
         return response()->json($status);
     }
+
+    /**
+     * Check if user can access course
+     *
+     * @param Lesson $lesson
+     *
+     * @return bool
+     */
+    public function canAccess(Lesson $lesson)
+    {
+        $purchased_course = $lesson->course->students()
+                ->where('user_id', \Auth::id())->count() > 0;
+        if ($purchased_course || $lesson->free_lesson) {
+            return true;
+        }
+        return false;
+    }
+
 }
