@@ -44,10 +44,10 @@
                                 <tbody>
                                 <tr v-for="(file,index) in lesson.media">
                                     <td class="text-muted">{{index + 1}}</td>
-                                    <td><a :href="'/uploads/'+file.id+'/'+file.file_name">{{file.file_name}}</a></td>
+                                    <td><a :href="`/lesson/${$route.params.id}/${$route.params.slug}/download/?i=${index}`">{{file.file_name}}</a></td>
                                     <td class="text-muted">{{file.size}} KB</td>
                                     <td class="text-center">
-                                        <a :href="'/uploads/'+file.id+'/'+file.file_name" class="btn btn-sm btn-outline-primary" :title="`Download ${file.file_name}`"><i class="material-icons">file_download</i>
+                                        <a :href="`/lesson/${$route.params.id}/${$route.params.slug}/download/?i=${index}`" :title="`Download ${file.file_name}`" class="btn btn-sm btn-outline-primary"><i class="material-icons">file_download</i>
                                         </a>
                                     </td>
                                 </tr>

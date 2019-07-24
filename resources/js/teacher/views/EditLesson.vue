@@ -155,11 +155,12 @@
                         <tbody>
                         <tr :class="{ 'table-warning': !lesson.resource_files_id.includes(file.id) }" v-for="(file,index) in lesson.media">
                             <td class="text-muted">{{index + 1}}</td>
-                            <td><a :href="'/uploads/'+file.id+'/'+file.file_name">{{file.file_name}}</a></td>
+                            <td><a :href="`/instructor/media/${lesson.id}?i=${index}`">{{file.file_name}}</a></td>
                             <td class="text-muted">{{file.size}} KB</td>
                             <td class="text-center">
-                                <a :href="'/uploads/'+file.id+'/'+file.file_name" class="btn btn-sm btn-outline-primary" :title="`Download ${file.file_name}`"><i class="material-icons">file_download</i></a>
-                                <button class="btn btn-sm btn-outline-danger font-weight-bolder" :title="`Remove ${file.name}`" @click="removeDownload(file.id,file.name)" v-if="lesson.downloadable_files_id.includes(file.id)"><i class="material-icons">close</i></button>
+                                <a :href="`/instructor/media/${lesson.id}?i=${index}`" :title="`
+                                wnload ${file.file_name}`" class="btn btn-sm btn-outline-primary"><i class="material-icons">file_download</i></a>
+                                <button :title="`Remove ${file.name}`" @click="removeDownload(file.id,file.name)" class="btn btn-sm btn-outline-danger font-weight-bolder" v-if="lesson.resource_files_id.includes(file.id)"><i class="material-icons">close</i></button>
                                 <button class="btn btn-sm btn-outline-success font-weight-bolder" :title="`Include ${file.name}`" @click="includeDownload(file.id,file.name)" v-else><i class="material-icons">add</i></button>
                             </td>
                         </tr>
