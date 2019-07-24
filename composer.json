@@ -23,7 +23,7 @@
         "laravelcollective/html": "^5.3",
         "league/flysystem-aws-s3-v3": "~1.0",
         "nuwave/lighthouse": "^3.7",
-        "spatie/laravel-medialibrary": "^3.0",
+      "spatie/laravel-medialibrary": "^7.0.0",
         "stripe/stripe-php": "^3.21",
         "tcg/voyager": "^1.1",
         "teamtnt/laravel-scout-tntsearch-driver": "^7.0",
