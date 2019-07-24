@@ -197,7 +197,7 @@
     export default {
         data() {
             return {
-                breadcrumbs:          [
+                breadcrumbs: [
                     {
                         title: "Dashboard", link: 'dashboard'
                     },
@@ -215,12 +215,6 @@
                 lesson_image:         null,
                 lesson_video:         '',
                 media_title:          '',
-                uploadFileParams:     {
-                    model_name: 'Lesson',
-                    file_key:   'downloadable_files',
-                    bucket:     'downloadable_files'
-                },
-
             }
         },
         created() {
@@ -262,6 +256,7 @@
 
                 reader.onload = (e) => {
                     this.lesson_image = e.target.result;
+
                 };
                 reader.readAsDataURL(file);
             },
@@ -275,14 +270,47 @@
             editLesson: function () {
                 this.$store.dispatch('lessons/edit', this.lesson);
             },
+            fileDeleted(files) {
+                for (let i = 0; i < files.length; i++) {
+                    let file = files[i].files;
+                    if (file && Array.isArray(file) && file.length) {
+                        for (let j = 0; j < file.length; j++) {
+                            let resourceFiles = this.lesson.resource_files_id;
+                            let index = resourceFiles.indexOf(file[j].id);
+
+                            // remove file from resource files
+                            if (index > -1) {
+                                resourceFiles.splice(index, 1);
+                            }
+
+                            this.lesson.resource_files_id = [...new Set(resourceFiles)];
+                            jQuery.notify({
+                                // options
+                                message: `${file[j].file_name} has been deleted.`,
+                            }, {
+                                // settings
+                                type: 'warning',
+                            });
+                        }
+                    }
+                }
+            },
             fileUploaded(files) {
                 for (let i = 0; i < files.length; i++) {
                     let file = files[i].files;
                     if (file && Array.isArray(file) && file.length) {
                         for (let j = 0; j < file.length; j++) {
-                            let downloadableFiles = this.lesson.downloadable_files_id;
-                            downloadableFiles.push(file[j].id);
-                            this.lesson.downloadable_files_id = [...new Set(downloadableFiles)];
+                            let resourceFiles = this.lesson.resource_files_id;
+
+                            resourceFiles.push(file[j].id);
+                            this.lesson.resource_files_id = [...new Set(resourceFiles)];
+                            jQuery.notify({
+                                // options
+                                message: `${file[j].file_name} has been uploaded.`,
+                            }, {
+                                // settings
+                                type: 'success',
+                            });
                         }
                     }
                 }
@@ -325,7 +353,7 @@
                 if (!files.length)
                     return;
                 this.lesson.lesson_image = files[0];
-                var source = jQuery('#lesson_video');
+                let source = document.getElementById('lesson_video');
                 this.lesson_video = URL.createObjectURL(files[0]);
                 source.parent()[0].load();
             },
