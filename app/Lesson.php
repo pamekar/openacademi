@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
+
 
 /**
  * Class Lesson
@@ -21,7 +22,7 @@ use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
  * @property text        $short_text
  * @property text        $full_text
  * @property integer     $position
- * @property string      $downloadable_files
+ * @property string      $resource_files
  * @property tinyInteger $free_lesson
  * @property tinyInteger $published
  */
@@ -38,7 +39,7 @@ class Lesson extends Model implements HasMedia
             'short_text',
             'full_text',
             'position',
-            'downloadable_files',
+            'resource_files',
             'free_lesson',
             'lesson_image_type',
             'lesson_image_preview',
@@ -50,7 +51,7 @@ class Lesson extends Model implements HasMedia
         = [
             'is_completed',
             'last_updated',
-            'downloadable_files_id'
+            'resource_files_id'
         ];
 
     /**
@@ -60,7 +61,7 @@ class Lesson extends Model implements HasMedia
      */
     protected $casts
         = [
-            'published' => 'boolean',
+            'published'   => 'boolean',
             'free_lesson' => 'boolean',
         ];
 
@@ -69,12 +70,13 @@ class Lesson extends Model implements HasMedia
         return title_case(Course::findOrFail($this->course_id)->title);
     }
 
-    public function getDownloadableFilesIdAttribute()
+
+    public function getResourceFilesIdAttribute()
     {
-        $downloadables = $this->getMedia('downloadable_files');
+        $downloads = $this->getMedia('resource_files');
         $fileIds = [];
-        foreach ($downloadables as $downloadable) {
-            array_push($fileIds, $downloadable->id);
+        foreach ($downloads as $key => $download) {
+            array_push($fileIds, $download->id);
         }
         return $fileIds;
     }

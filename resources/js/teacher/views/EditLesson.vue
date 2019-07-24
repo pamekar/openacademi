@@ -139,7 +139,7 @@
 
         <div class="card" v-if="lesson.media.length>0">
             <div class="card-header">
-                <h4 class="card-title">Downloadable Files</h4>
+                <h4 class="card-title">Resource Files</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -153,7 +153,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(file,index) in lesson.media" :class="{ 'table-warning': !lesson.downloadable_files_id.includes(file.id) }">
+                        <tr :class="{ 'table-warning': !lesson.resource_files_id.includes(file.id) }" v-for="(file,index) in lesson.media">
                             <td class="text-muted">{{index + 1}}</td>
                             <td><a :href="'/uploads/'+file.id+'/'+file.file_name">{{file.file_name}}</a></td>
                             <td class="text-muted">{{file.size}} KB</td>
@@ -176,7 +176,7 @@
                 <h4 class="card-title">Upload Files</h4>
             </div>
             <div class="card-body">
-                <v-uploader language="en" :multiple="true" :itemLimit="0" :fileParams="uploadFileParams" uploadFileObjName="downloadable_files" fileTypeExts="jpeg,jpg,gif,png,aac,svg,html,css,js,php,mp3,mp4,doc,docx,xls,xlsx,pdf,ppt,pptx,zip,7z" fileSizeLimit="25MB" @done="fileUploaded"></v-uploader>
+                <v-uploader :delete-file-url="`/api/instructor/media/${lesson.id}`" :fileParams="uploadFileParams" :itemLimit="0" :multiple="true" @deleted="fileDeleted" @done="fileUploaded" fileSizeLimit="25MB" fileTypeExts="jpeg,jpg,gif,png,aac,svg,html,css,js,php,mp3,mp4,doc,docx,xls,xlsx,pdf,ppt,pptx,zip,7z" language="en" upload-file-url="/api/instructor/media" uploadFileObjName="resource_files"></v-uploader>
             </div>
         </div>
         <div class="form-group">
@@ -187,7 +187,7 @@
 </template>
 
 <script>
-    import {mapState, mapActions} from 'vuex';
+    import {mapState} from 'vuex';
     import CKEditor from '@ckeditor/ckeditor5-vue';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     import Timepicker from 'vue2-timepicker';
@@ -290,9 +290,9 @@
                 return arr;
             },
             includeDownload(id, name) {
-                let downloadableFiles = this.lesson.downloadable_files_id;
-                downloadableFiles.push(id);
-                this.lesson.downloadable_files_id = [...new Set(downloadableFiles)];
+                let resourceFiles = this.lesson.resource_files_id;
+                resourceFiles.push(id);
+                this.lesson.resource_files_id = [...new Set(resourceFiles)];
                 jQuery.notify({
                     // options
                     message: `${name} has been included.`,
@@ -328,9 +328,9 @@
 
             },
             removeDownload(id, name) {
-                let downloadableFiles = this.lesson.downloadable_files_id;
-                downloadableFiles.splice(downloadableFiles.indexOf(id), 1);
-                this.lesson.downloadable_files_id = [...new Set(downloadableFiles)];
+                let resourceFiles = this.lesson.resource_files_id;
+                resourceFiles.splice(resourceFiles.indexOf(id), 1);
+                this.lesson.resource_files_id = [...new Set(resourceFiles)];
                 jQuery.notify({
                     // options
                     message: `${name} has been removed.`,
