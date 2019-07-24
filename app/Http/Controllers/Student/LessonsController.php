@@ -87,4 +87,27 @@ class LessonsController extends Controller
         return false;
     }
 
+    /**
+     * Download lesson resources
+     *
+     * @param Request $request
+     * @param         $course_id
+     * @param         $slug
+     */
+    public function download(Request $request, $course_id, $slug)
+    {
+        if ($request->has('i')) {
+
+            $lesson = Lesson::where('slug', $slug)->where('published', true)
+                ->where('course_id', $course_id)->firstOrFail();
+
+            if ($this->canAccess($lesson)) {
+                $media = $lesson->getMedia('resource_files');
+                $i = $request->input('i');
+                return $media[$i];
+            }
+            return abort(401);
+        }
+        return abort(404);
+    }
 }
