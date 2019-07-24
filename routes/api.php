@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 Route::get('/home/courses/search','CoursesController@searchCourses');
 Route::get('/home/courses/search/categories','CoursesController@searchCategories');
 Route::get('/home/courses/{category?}','CoursesController@getAllCourses');
@@ -125,12 +126,12 @@ Route::group(['middleware' => 'checkLoggedIn'], function () {
                 'uses' => 'QuizesController@perma_del',
                 'as'   => 'quizes.perma_del'
             ]);
-            Route::post('/spatie/media/upload',
-                'SpatieMediaController@create')
-                ->name('media.upload');
-            Route::post('/spatie/media/remove',
-                'SpatieMediaController@destroy')
-                ->name('media.remove');
-
+        });
+    Route::group([
+        'prefix'    => 'instructor',
+        'namespace' => 'Instructor',
+    ],
+        function () {
+            Route::resource('media', 'MediaController');
         });
 });
