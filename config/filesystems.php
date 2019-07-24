@@ -42,17 +42,21 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+        ],
+
+        'lessons' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/lessons'),
         ],
 
         'media' => [
             'driver'     => 'local',
             'root'       => public_path('uploads'),
             'url'        => env('APP_URL') . '/uploads',
-            'visibility' => 'public',
+            'visibility' => 'private',
         ],
 
         'public' => [
@@ -70,6 +74,13 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
+        's3lessons' => [
+            'driver' => 's3',
+            'key'    => env('AWS_LESSONS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_LESSONS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_LESSONS_DEFAULT_REGION'),
+            'bucket' => env('AWS_LESSONS_BUCKET'),
+        ],
     ],
 
 ];
